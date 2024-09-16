@@ -15,15 +15,15 @@ export default [
 	...tseslint.configs.recommended,
 	pluginReact.configs.flat.recommended,
 	{
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-uses-react": "off",
+      "react/prop-types": "off",
+      "@typescript-eslint/ban-types": "off"
+    },
 		plugins: {
 			react: pluginReact,
 			"typescript-eslint": tseslint
-		},
-		rules: {
-			"react/react-in-jsx-scope": "off",
-			"react/jsx-uses-react": "off",
-			"react/prop-types": "off",
-			"@typescript-eslint/ban-types": "off"
 		}
 	}
 ];
