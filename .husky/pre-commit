@@ -1,5 +1,5 @@
 
-npx npx eslint .
+npx lint-staged
 
 staged_files=$(git diff --cached --name-only --diff-filter=d)
 
