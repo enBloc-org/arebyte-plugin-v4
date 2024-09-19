@@ -16,7 +16,8 @@ function IndexPopup() {
         display: "flex",
         flexDirection: "column",
         padding: 16
-      }}>
+      }}
+    >
       <a target="_blank" href="https://docs.plasmo.com/framework/env">
         with-env example extension
       </a>
