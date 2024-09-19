@@ -1,0 +1,16 @@
+.layout {
+  min-height: 100vh;
+  width: 300px;
+  display: grid;
+  grid-template-rows: auto, 1fr, auto;
+}
+
+.layout header {
+  grid-row: 1;
+  border: 2px solid pink;
+}
+
+.layout footer {
+  grid-row: 3;
+  border: 2px solid red;
+}
