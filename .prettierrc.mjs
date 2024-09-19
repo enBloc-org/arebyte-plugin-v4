@@ -6,6 +6,8 @@ export default {
   tabWidth: 2,
   useTabs: true,
   semi: true,
+  arrowParens: "avoid",
+  bracketSpacing: true,
   singleQuote: false,
   jsxSingleQuote: false,
   trailingComma: "none",
