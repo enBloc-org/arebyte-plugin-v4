@@ -2,8 +2,11 @@
  * @type {import('prettier').Options}
  */
 export default {
-  printWidth: 80,
+  printWidth: 70,
   tabWidth: 2,
+  arrowParens: 'avoid',
+  bracketSpacing: true,
+  bracketSameLine: false,
   useTabs: false,
   semi: false,
   singleQuote: false,

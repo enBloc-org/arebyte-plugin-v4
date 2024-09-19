@@ -6,8 +6,8 @@ function IndexPopup() {
 
   useEffect(() => {
     fetch(testDataURL)
-      .then((res) => res.json())
-      .then((data) => setData(data))
+      .then(res => res.json())
+      .then(data => setData(data))
   })
 
   return (
