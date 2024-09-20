@@ -1,13 +1,15 @@
 import { create } from "zustand"
 
-const useStore = create(set => ({
-  message: "initial message",
-  updateMessage: () =>
-    set(state =>
-      state.message === "initial message"
-        ? { message: "updated message" }
-        : { message: "initial message" }
-    )
-}))
+import { sendToBackground } from "@plasmohq/messaging"
+
+const useStore = create(set => {
+  return {
+    message: "initial message",
+    updateMessage: async () => {
+      const update = await sendToBackground({ name: "set_context" })
+      set(update)
+    }
+  }
+})
 
 export default useStore

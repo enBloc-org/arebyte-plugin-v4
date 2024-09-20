@@ -13,6 +13,7 @@ function IndexPopup() {
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center"
         }}
