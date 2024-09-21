@@ -8,8 +8,6 @@ First, run the development server:
 
 ```bash
 pnpm dev
-# or
-npm run dev
 ```
 
 Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
@@ -24,8 +22,6 @@ Run the following:
 
 ```bash
 pnpm build
-# or
-npm run build
 ```
 
 This should create a production bundle for your extension, ready to be zipped and published to the stores.
@@ -33,3 +29,9 @@ This should create a production bundle for your extension, ready to be zipped an
 ## Submit to the webstores
 
 The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+
+## Further Guidance
+
+For more detail on how to contribute to the maintenance of this repo see the below:
+
+- [common patterns and conventions in this code base](./.github/documentation/PATTERNS.md)
