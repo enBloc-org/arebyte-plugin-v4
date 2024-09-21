@@ -6,6 +6,7 @@ import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
   const message = useStore.use.message()
+  const number = useStore.use.number()
   const updateMessage = useStore.use.updateMessage()
 
   return (
@@ -18,7 +19,8 @@ function IndexPopup() {
           justifyContent: "center"
         }}
       >
-        <h1>{message}</h1>
+        <h2>{message}</h2>
+        <h3>{number}</h3>
         <button onClick={updateMessage}>click me</button>
       </div>
     </Layout>
