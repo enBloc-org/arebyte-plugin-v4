@@ -1,20 +1,24 @@
 import { create } from "zustand"
 
-import { sendToBackground } from "@plasmohq/messaging"
+import updateMessage from "~utils/updateMessage"
 
 import createSelectors from "./createSelectors"
 
-interface storeBase {
+type baseStore = {
   message: string
+  number: number
   updateMessage: () => void
 }
 
-const store = create<storeBase>(set => {
+const store = create<baseStore>(set => {
   return {
     message: "initial message",
+    number: 1,
     updateMessage: async () => {
-      const update = await sendToBackground({ name: "set_context" })
-      set(update)
+      const updatedValue = await updateMessage()
+      set(() => ({
+        message: updatedValue
+      }))
     }
   }
 })
