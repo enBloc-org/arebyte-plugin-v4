@@ -5,8 +5,8 @@ import "./components/normalize.css"
 import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
-  const message = useStore(state => state.message)
-  const updateMessage = useStore(state => state.updateMessage)
+  const message = useStore.use.message()
+  const updateMessage = useStore.use.updateMessage()
 
   return (
     <Layout>
