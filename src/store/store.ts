@@ -4,13 +4,13 @@ import updateMessage from "~utils/updateMessage"
 
 import createSelectors from "./createSelectors"
 
-type baseStore = {
+type store = {
   message: string
   number: number
   updateMessage: () => void
 }
 
-const store = create<baseStore>(set => {
+const baseStore = create<store>(set => {
   return {
     message: "initial message",
     number: 1,
@@ -23,6 +23,6 @@ const store = create<baseStore>(set => {
   }
 })
 
-const useStore = createSelectors(store)
+const useStore = createSelectors(baseStore)
 
 export default useStore
