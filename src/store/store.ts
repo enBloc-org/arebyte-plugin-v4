@@ -2,7 +2,14 @@ import { create } from "zustand"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-const useStore = create(set => {
+import createSelectors from "./createSelectors"
+
+interface storeBase {
+  message: string
+  updateMessage: () => void
+}
+
+const store = create<storeBase>(set => {
   return {
     message: "initial message",
     updateMessage: async () => {
@@ -11,5 +18,7 @@ const useStore = create(set => {
     }
   }
 })
+
+const useStore = createSelectors(store)
 
 export default useStore
