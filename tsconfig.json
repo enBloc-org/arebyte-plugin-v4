@@ -6,6 +6,8 @@
     "paths": {
       "~*": ["./src/*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "verbatimModuleSyntax": false,
+    "jsx": "react-jsx"
   }
 }
