@@ -1,27 +1,45 @@
 // dependencies
 import { create } from "zustand"
 
-// utils
-import updateMessage from "~utils/updateMessage"
-
 import createSelectors from "./createSelectors"
 
-type store = {
-  message: string
-  number: number
-  updateMessage: () => void
+export type PlayList = typeof baseStore<State["user"]["playList"]>
+export type User = typeof baseStore<State["user"]>
+
+type State = {
+  user: {
+    username?: string
+    firstName?: string
+    lastName?: string
+    email?: string
+    isQuietMode: boolean
+    isPaused: boolean
+    eventTime: string
+    playList: number[]
+  }
+  currentProject?: number
 }
 
-const baseStore = create<store>(set => {
+type Actions = {
+  updateCurrentProject: (id: State["currentProject"]) => void
+}
+
+const baseStore = create<State & Actions>(set => {
   return {
-    message: "initial message",
-    number: 1,
-    updateMessage: async () => {
-      const updatedValue = await updateMessage()
-      set(() => ({
-        message: updatedValue
-      }))
-    }
+    user: {
+      username: undefined,
+      firstName: undefined,
+      lastName: undefined,
+      email: undefined,
+      isQuietMode: false,
+      isPaused: false,
+      eventTime: new Date(new Date().setHours(12, 0, 0, 0))
+        .getTime()
+        .toString(),
+      playList: []
+    },
+    currentProject: undefined,
+    updateCurrentProject: id => set(() => ({ currentProject: id }))
   }
 })
 

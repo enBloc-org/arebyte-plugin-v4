@@ -8,9 +8,7 @@ import "./components/normalize.css"
 import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
-  const message = useStore.use.message()
-  const number = useStore.use.number()
-  const updateMessage = useStore.use.updateMessage()
+  const currentProject = useStore.use.currentProject()
 
   return (
     <Layout>
@@ -22,9 +20,7 @@ function IndexPopup() {
           justifyContent: "center"
         }}
       >
-        <h2>{message}</h2>
-        <h3>{number}</h3>
-        <button onClick={updateMessage}>click me</button>
+        <h2>{currentProject}</h2>
       </div>
     </Layout>
   )
