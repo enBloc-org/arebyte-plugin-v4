@@ -1,3 +1,4 @@
+// dependencies
 import { sendToBackground } from "@plasmohq/messaging"
 
 export default async function updateMessage(): Promise<string> {

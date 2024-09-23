@@ -1,5 +1,7 @@
+// dependencies
 import { create } from "zustand"
 
+// utils
 import updateMessage from "~utils/updateMessage"
 
 import createSelectors from "./createSelectors"

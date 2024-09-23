@@ -1,7 +1,10 @@
+// utils
 import useStore from "~store/store"
 
+// styles
 import "./components/normalize.css"
 
+// components
 import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
