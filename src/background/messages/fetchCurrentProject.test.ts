@@ -3,8 +3,6 @@ import fetchMock from "jest-fetch-mock"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
-import { ProjectResponse } from "~types/projectTypes"
-
 import * as testData from "../../../test-data.json"
 import handler from "./fetchCurrentProject"
 
