@@ -1,16 +1,26 @@
-// utils
-import useStore from "~store/store"
+import { useEffect } from "react"
 
-// styles
+import { sendToBackground } from "@plasmohq/messaging"
+
 import "./components/normalize.css"
 
-// components
+import useStore from "~store/store"
+
 import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
-  const message = useStore.use.message()
-  const number = useStore.use.number()
-  const updateMessage = useStore.use.updateMessage()
+  const currentProject = useStore.use.active_project()
+  const setCurrentProject = useStore.use.updateCurrentProject()
+
+  useEffect(() => {
+    const updateCurrentProject = async () => {
+      const response = await sendToBackground({
+        name: "fetchCurrentProject"
+      })
+      setCurrentProject(response)
+    }
+    updateCurrentProject()
+  }, [])
 
   return (
     <Layout>
@@ -22,9 +32,19 @@ function IndexPopup() {
           justifyContent: "center"
         }}
       >
-        <h2>{message}</h2>
-        <h3>{number}</h3>
-        <button onClick={updateMessage}>click me</button>
+        {currentProject && (
+          <div>
+            <h2>{currentProject.data.project.title}</h2>
+            <img
+              src={
+                process.env.PLASMO_PUBLIC_API_URL +
+                currentProject.data.project.cover_image.formats
+                  .thumbnail.url
+              }
+              alt=""
+            />
+          </div>
+        )}
       </div>
     </Layout>
   )
