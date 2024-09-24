@@ -1,7 +1,7 @@
 pnpm test:changed
 status=$?
 if [ $status -ne 0 ]; then
-  echo "Warning: Some tests are failing. Please check your code."
+  echo "\033[1;31mBREAKING CHANGE - check your tests"
 fi
 exit 0
 
