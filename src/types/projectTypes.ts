@@ -1,3 +1,5 @@
+import type { ImageResponse } from "./imageTypes"
+
 export interface ProjectDescription {
   type: string
   children: Array<{
@@ -9,6 +11,7 @@ export interface ProjectData {
   id: number
   title: string
   description: ProjectDescription[]
+  cover_image: ImageResponse
   launch_date: string
   createdAt: string
   updatedAt: string
