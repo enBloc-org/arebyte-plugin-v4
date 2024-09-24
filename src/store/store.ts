@@ -12,6 +12,7 @@ type store = {
   number: number
   updateMessage: () => void
 }
+
 const initialState: Omit<store, "updateMessage"> = fetchInitialState()
 
 const baseStore = create<store>(set => {
