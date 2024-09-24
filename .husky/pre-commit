@@ -1,5 +1,4 @@
+pnpm test:changed
 npx lint-staged
-
 staged_files=$(git diff --cached --name-only --diff-filter=d)
-
 git add $staged_files

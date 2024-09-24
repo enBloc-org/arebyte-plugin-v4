@@ -10,7 +10,8 @@
     "build": "plasmo build",
     "package": "plasmo package",
     "prepare": "husky",
-    "test": "NODE_OPTIONS='--experimental-vm-modules' pnpm jest"
+    "test": "NODE_OPTIONS='--experimental-vm-modules' pnpm jest",
+    "test:changed": "NODE_OPTIONS='--experimental-vm-modules' pnpm jest -o"
   },
   "dependencies": {
     "@plasmohq/messaging": "^0.6.2",
