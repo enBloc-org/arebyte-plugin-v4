@@ -1,45 +1,43 @@
-// dependencies
 import { create } from "zustand"
+
+import type { ProjectResponse } from "~types/projectTypes"
+import type { User } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
 
-export type PlayList = typeof baseStore<State["user"]["playList"]>
-export type User = typeof baseStore<State["user"]>
+export type PlayList = typeof baseStore<
+  State["user"]["audience_member"]["playlist"]
+>
 
 type State = {
-  user: {
-    username?: string
-    firstName?: string
-    lastName?: string
-    email?: string
-    isQuietMode: boolean
-    isPaused: boolean
-    eventTime: string
-    playList: number[]
-  }
-  currentProject?: number
+  user: User
+  active_project?: ProjectResponse
 }
 
 type Actions = {
-  updateCurrentProject: (id: State["currentProject"]) => void
+  updateCurrentProject: (project: ProjectResponse) => void
 }
 
 const baseStore = create<State & Actions>(set => {
   return {
     user: {
+      id: undefined,
       username: undefined,
-      firstName: undefined,
-      lastName: undefined,
       email: undefined,
-      isQuietMode: false,
-      isPaused: false,
-      eventTime: new Date(new Date().setHours(12, 0, 0, 0))
-        .getTime()
-        .toString(),
-      playList: []
+      audience_member: {
+        is_quiet: false,
+        is_paused: false,
+        project_id: undefined,
+        current_index: 0,
+        event_time: new Date(new Date().setHours(12, 0, 0, 0))
+          .getTime()
+          .toString(),
+        playlist: []
+      }
     },
-    currentProject: undefined,
-    updateCurrentProject: id => set(() => ({ currentProject: id }))
+    active_project: undefined,
+    updateCurrentProject: project =>
+      set(() => ({ active_project: project }))
   }
 })
 
