@@ -12,13 +12,16 @@ const config = {
   setupFiles: ["jest-webextension-mock"],
   extensionsToTreatAsEsm: [".ts", ".tsx"],
   testRegex: ["^.+\\.test.tsx?$"],
-  moduleNameMapper: pathsToModuleNameMapper(tsconfig.compilerOptions.paths, {
-    prefix: "<rootDir>/"
-  }),
+  moduleNameMapper: pathsToModuleNameMapper(
+    tsconfig.compilerOptions.paths,
+    {
+      prefix: "<rootDir>/"
+    }
+  ),
   testEnvironment: "jsdom",
   transform: {
-    "^.+.tsx?$": ["ts-jest", {}],
-  },
+    "^.+.(tsx|js)?$": ["ts-jest", { useESM: true }]
+  }
 }
 
 export default config
