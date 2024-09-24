@@ -9,4 +9,3 @@ if (process.env.NODE_ENV === "production") {
 }
 
 console.log("SITE_URL:", process.env.PLASMO_PUBLIC_SITE_URL)
-console.log("Hi from Background!")
