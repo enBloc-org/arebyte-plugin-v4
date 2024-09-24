@@ -5,8 +5,8 @@ export interface ProjectDescription {
     text: string
   }>
 }
-
-export interface ProjectAttributes {
+export interface ProjectData {
+  id: number
   title: string
   description: ProjectDescription[]
   launch_date: string
@@ -15,21 +15,12 @@ export interface ProjectAttributes {
   publishedAt: string
 }
 
-export interface ProjectData {
-  id: number
-  attributes: ProjectAttributes
-}
-
 export interface Data {
   id: number
-  attributes: {
-    createdAt: string
-    updatedAt: string
-    publishedAt: string
-    project: {
-      data: ProjectData
-    }
-  }
+  createdAt: string
+  updatedAt: string
+  publishedAt: string
+  project: ProjectData
 }
 
 export interface ProjectResponse {
