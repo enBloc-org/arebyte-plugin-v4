@@ -1,14 +1,31 @@
 export async function fetchStrapiContent<T>(
-  endPoint: string
+  endPoint: string,
+  method: "GET" | "POST" = "GET",
+  bearer?: string
 ): Promise<T> {
   try {
-    const res = await fetch(
-      `${process.env.PLASMO_PUBLIC_API_URL}/${endPoint}`
+    const headers: HeadersInit = {
+      "Content-Type": "application/json",
+      ...(bearer ? { Authorization: `Bear ${bearer}` } : {})
+    }
+
+    const response = await fetch(
+      `${process.env.PLASMO_PUBLIC_API_URL}/${endPoint}`,
+      {
+        method: method,
+        headers: headers
+      }
     )
-    const data = await res.json()
-    if (!data) throw new Error("Problem fetching data")
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(
+        errorData.message || "Network response was not ok"
+      )
+    }
+
+    const data = await response.json()
     return data as T
   } catch (error) {
-    console.error(error)
+    console.error("Error", error)
   }
 }
