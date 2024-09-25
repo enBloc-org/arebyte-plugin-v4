@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 
 browser.alarms.create("test-alarm", {
   periodInMinutes: 1440,
-  when: Date.now() + calculateCountDown(17, 26)
+  when: calculateCountDown(12, 0)
 })
 
 browser.alarms.onAlarm.addListener(alarm => {
