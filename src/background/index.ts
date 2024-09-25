@@ -14,13 +14,13 @@ if (process.env.NODE_ENV === "production") {
 
 browser.alarms.create("test-alarm", {
   periodInMinutes: 1440,
-  when: Date.now() + calculateCountDown(17, 9)
+  when: Date.now() + calculateCountDown(17, 26)
 })
 
 browser.alarms.onAlarm.addListener(alarm => {
   if (alarm.name === "test-alarm") {
     browser.windows.create({
-      url: "popup.html",
+      url: "https://media.4-paws.org/f/b/9/e/fb9eaf496f739315766331e91bddde8936375550/VP0113037-1927x1333.jpg",
       type: "popup",
       top: Math.floor(Math.random() * 1000),
       left: Math.floor(Math.random() * 1000)
