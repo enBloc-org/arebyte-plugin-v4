@@ -25,6 +25,7 @@
     "@types/node": "20.11.5",
     "@types/react": "18.2.48",
     "@types/react-dom": "18.2.18",
+    "@types/webextension-polyfill": "^0.12.1",
     "eslint": "^9.10.0",
     "eslint-plugin-react": "^7.36.1",
     "globals": "^15.9.0",
@@ -32,7 +33,8 @@
     "lint-staged": "^15.2.10",
     "prettier": "3.2.4",
     "typescript": "5.3.3",
-    "typescript-eslint": "^8.6.0"
+    "typescript-eslint": "^8.6.0",
+    "webextension-polyfill": "^0.12.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -43,7 +45,11 @@
   "manifest": {
     "homepage_url": "$PLASMO_PUBLIC_SITE_URL",
     "host_permissions": [
-      "https://*/*"
+      "https://*/*",
+      "alarms"
+    ],
+    "permissions": [
+      "alarms"
     ]
   }
 }
