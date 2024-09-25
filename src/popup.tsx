@@ -4,6 +4,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import "./components/normalize.css"
 
+import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
 import useStore from "~store/store"
 
 import Layout from "./components/Layout/Layout"
@@ -32,6 +33,7 @@ function IndexPopup() {
           justifyContent: "center"
         }}
       >
+        <CountDownTimer />
         {currentProject && (
           <div>
             <h2>{currentProject.data.project.title}</h2>
