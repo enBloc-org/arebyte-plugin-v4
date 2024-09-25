@@ -1,10 +1,10 @@
-import { describe, expect, it, jest } from "@jest/globals"
+import { describe, expect, it, jest, beforeEach } from "@jest/globals"
 import fetchMock from "jest-fetch-mock"
 
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
-import * as testData from "../../../test-data.json"
-import handler from "./fetchCurrentProject"
+import * as testData from "../../test-data.json"
+import handler from "../background/messages/fetchCurrentProject"
 
 fetchMock.enableMocks()
 
