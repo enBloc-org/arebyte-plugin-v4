@@ -1,3 +1,9 @@
+/**
+ *
+ * @param hours
+ * @param minutes
+ * @returns the UTC value of the target time adjusted for the following day if the time stamp has already passed in the present day
+ */
 export default function calculateCountDown(
   hours: number,
   minutes: number
@@ -10,5 +16,5 @@ export default function calculateCountDown(
     targetTime.setDate(targetTime.getDate() + 1)
   }
 
-  return targetTime.valueOf() - rightNow.valueOf()
+  return targetTime.valueOf()
 }
