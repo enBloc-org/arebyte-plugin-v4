@@ -12,7 +12,7 @@ export default function setEventAlarm(
   eventHour: number,
   eventMinute: number
 ) {
-  console.log("SETTING THE A L A R M")
+  browser.alarms.clear("test-alarm")
 
   browser.alarms.create("test-alarm", {
     periodInMinutes: 1440,
