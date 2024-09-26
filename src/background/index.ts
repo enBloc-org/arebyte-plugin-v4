@@ -13,6 +13,5 @@ if (process.env.NODE_ENV === "production") {
 }
 
 browser.runtime.onInstalled.addListener(async () => {
-  console.log("I N S T A L L E D")
   setEventAlarm(12, 0)
 })
