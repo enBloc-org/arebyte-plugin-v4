@@ -44,6 +44,16 @@
     "homepage_url": "$PLASMO_PUBLIC_SITE_URL",
     "host_permissions": [
       "https://*/*"
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "public/event.html", "src/components/Event/Event.tsx"
+        ],
+        "matches": [
+          "<all_urls>"
+        ]
+      }
     ]
   }
 }

@@ -9,3 +9,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 console.log("SITE_URL:", process.env.PLASMO_PUBLIC_SITE_URL)
+
+chrome.windows.create({
+  url: chrome.runtime.getURL("public/event.html"),
+  type: "popup"
+})
