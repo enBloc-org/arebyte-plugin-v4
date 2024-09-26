@@ -1,7 +1,7 @@
 import qs from "qs"
 
 const currentProjectQuery = {
-  fields: ["id"],
+  fields: ["id", "event_time"],
   populate: {
     project: {
       fields: ["id", "title", "launch_date", "description"],

@@ -30,3 +30,8 @@ export interface ProjectResponse {
   data: Data
   meta: object
 }
+
+export interface CurrentProjectResponse {
+  data: Data & { event_time: string }
+  meta: object
+}
