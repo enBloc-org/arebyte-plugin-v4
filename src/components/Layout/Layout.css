@@ -19,3 +19,50 @@ body {
   height: 600px;
   width: 300px;
 }
+
+.page {
+  width: 100dvw;
+  height: 300px;
+  position: absolute;
+  top: 0;
+  transition:
+    transform 0.3s ease-in-out,
+    opacity 0.3s ease-out;
+  animation: slideInBounce 0.3s ease-in-out;
+
+}
+
+.page-enter-active {
+  opacity: 3;
+  transform: translateX(100);
+}
+
+.page-enter {
+  opacity: 0;
+  transform: translateX(0);
+}
+
+.page-exit-active {
+  opacity: 0;
+}
+
+.page-exit {
+  opacity: 1;
+}
+
+@keyframes slideInBounce {
+  0% {
+    transform: translateX(100);
+    opacity: 0;
+  }
+  70% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  85% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
