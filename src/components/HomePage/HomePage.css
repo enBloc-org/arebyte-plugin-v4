@@ -1,0 +1,33 @@
+.home-page {
+  width: 100dvw;
+  height: 500px;
+  background-color: pink;
+  animation: slideUp 0.5s ease-out;
+  position: absolute;
+}
+
+.home-page-enter {
+  z-index: 3;
+}
+
+.home-page-enter-active {
+  z-index: 3;
+}
+
+.home-page-exit {
+  z-index: 1;
+}
+
+.home-page-exit-active {
+  z-index: 1;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(200);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}

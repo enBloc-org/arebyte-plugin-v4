@@ -2,11 +2,14 @@ import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import "./HomePage.css"
+
 import useStore from "~store/store"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
+  const navigateTo = useStore.use.navigateTo()
 
   useEffect(() => {
     const fetchCurrentProject = async () => {
@@ -20,7 +23,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="page">
+    <div className="home-page">
       <h1>Home Page</h1>
       {active_project && (
         <div>
@@ -33,6 +36,9 @@ export default function HomePage() {
             }
             alt=""
           />
+          <button type="button" onClick={() => navigateTo("profile")}>
+            p r o f i l e
+          </button>
         </div>
       )}
     </div>
