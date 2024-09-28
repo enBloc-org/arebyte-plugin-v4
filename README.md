@@ -35,3 +35,4 @@ The easiest way to deploy your Plasmo extension is to use the built-in [bpp](htt
 For more detail on how to contribute to the maintenance of this repo see the below:
 
 - [common patterns and conventions in this code base](./.github/documentation/PATTERNS.md)
+- [testing patterns](./.github/documentation/TESTING.md)
