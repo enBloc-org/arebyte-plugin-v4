@@ -1,9 +1,3 @@
-.burger button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
 .burger--modal {
   height: 100%;
   width: 100%;
@@ -37,13 +31,8 @@
   justify-content: space-evenly;
 }
 
-.burger--navigation p {
-  margin: -45px;
-  cursor: pointer;
-}
-
-.burger--navigation p:hover {
-  text-decoration: underline;
+.burger--navigation * {
+  margin: -35px;
 }
 
 .burger--contact {

@@ -5,14 +5,29 @@ import "./BurgerMenu.css"
 import useStore from "~store/store"
 
 export default function BurgerMenu() {
-  const [isOpen, setIsOpen] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const navigateTo = useStore.use.navigateTo()
+  const currentPage = useStore.use.currentPage()
 
-  const clickHandler = () => setIsOpen(!isOpen)
+  const handleModal = () => setIsOpen(!isOpen)
 
+  const handleNavigateHome = () =>
+    currentPage === "home" ? setIsOpen(false) : navigateTo("home")
+
+  const handleNavigateExplore = () =>
+    currentPage === "explore"
+      ? setIsOpen(false)
+      : navigateTo("explore")
+
+  const handleNavigateLogin = () =>
+    currentPage === "login" ? setIsOpen(false) : navigateTo("login")
   return (
     <div className="burger">
-      <button type="button" onClick={clickHandler}>
+      <button
+        type="button"
+        className="button--secondary"
+        onClick={handleModal}
+      >
         <svg
           viewBox="0 0 100 80"
           width="40"
@@ -27,23 +42,31 @@ export default function BurgerMenu() {
       {isOpen && (
         <div className="burger--modal grid">
           <button
-            className="burger--close-button"
+            className="burger--close-button button--secondary bold"
             type="button"
-            onClick={clickHandler}
+            onClick={handleModal}
           >
             X
           </button>
           <div className="burger--navigation content-box shadow__public">
-            <p className="text-lg" onClick={() => setIsOpen(!isOpen)}>
+            <button
+              className="text-xl button--secondary"
+              onClick={handleNavigateHome}
+            >
               HOME
-            </p>
-            <p
-              className="text-lg"
-              onClick={() => navigateTo("explore")}
+            </button>
+            <button
+              className="text-xl button--secondary"
+              onClick={handleNavigateExplore}
             >
               EXPLORE
-            </p>
-            <p className="text-lg">LOGIN</p>
+            </button>
+            <button
+              className="text-xl button--secondary"
+              onClick={handleNavigateLogin}
+            >
+              LOGIN
+            </button>
           </div>
           <div className="burger--contact">
             <div>
@@ -52,8 +75,12 @@ export default function BurgerMenu() {
               <p>📺</p>
             </div>
             <div>
-              <button>About</button>
-              <button>Contact</button>
+              <button className="button--secondary bold">
+                ABOUT
+              </button>
+              <button className="button--secondary bold">
+                CONTACT
+              </button>
             </div>
           </div>
         </div>
