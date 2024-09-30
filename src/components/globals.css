@@ -50,6 +50,17 @@
   color: var(--base);
 }
 
+.button--secondary {
+  background: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+}
+
+.button--secondary:hover {
+  text-decoration: underline;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -58,6 +69,14 @@
   padding: 25px;
 }
 
+.text-xl {
+  font-size: 1.8rem;
+}
+
 .text-lg {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: bold;
 }
