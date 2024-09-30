@@ -1,6 +1,27 @@
+.burger {
+}
+
+.burger button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .burger--modal {
   height: 100dvh;
   width: 100dvw;
-  background-color: white;
+  background-color: var(--base);
   position: absolute;
+  top: 0;
+  left: 0;
+  animation: slideLeft 0.5s ease-out;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(200%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }

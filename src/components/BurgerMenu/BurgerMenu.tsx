@@ -8,9 +8,14 @@ export default function BurgerMenu() {
   const clickHandler = () => setIsOpen(!isOpen)
 
   return (
-    <div>
+    <div className="burger">
       <button type="button" onClick={clickHandler}>
-        <svg viewBox="0 0 100 80" width="40" height="40" fill="blue">
+        <svg
+          viewBox="0 0 100 80"
+          width="40"
+          height="40"
+          fill="var(--highlight)"
+        >
           <rect width="100" height="20"></rect>
           <rect y="30" width="100" height="20"></rect>
           <rect y="60" width="100" height="20"></rect>
@@ -18,6 +23,7 @@ export default function BurgerMenu() {
       </button>
       {isOpen && (
         <div className="burger--modal">
+          <button type="button" onClick={clickHandler}>X</button>
           <h1>OPEN</h1>
         </div>
       )}
