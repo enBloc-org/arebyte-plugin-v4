@@ -2,6 +2,8 @@ import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
+
 import "./HomePage.css"
 
 import useStore from "~store/store"
@@ -25,6 +27,7 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <h1>Home Page</h1>
+      <CountDownTimer />
       {active_project && (
         <div className="content-box shadow__public">
           <h2>{active_project.data.project.title}</h2>

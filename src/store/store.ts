@@ -31,9 +31,7 @@ const baseStore = create<State & Actions>(set => {
         is_paused: false,
         project_id: undefined,
         current_index: 0,
-        event_time: new Date(new Date().setHours(12, 0, 0, 0))
-          .getTime()
-          .toString(),
+        event_time: "12:00:00.000",
         playlist: []
       }
     },
