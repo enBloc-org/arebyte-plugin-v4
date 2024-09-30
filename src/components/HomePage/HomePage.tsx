@@ -2,6 +2,8 @@ import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
+
 import "./HomePage.css"
 
 import useStore from "~store/store"
@@ -27,6 +29,7 @@ export default function HomePage() {
       <h1>Home Page</h1>
       {active_project && (
         <div>
+          <CountDownTimer />
           <h2>{active_project.data.project.title}</h2>
           <img
             src={
