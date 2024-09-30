@@ -13,9 +13,7 @@ export interface ProjectData {
   description: ProjectDescription[]
   cover_image: ImageResponse
   launch_date: string
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
+  events: Event[]
 }
 
 export interface Data {

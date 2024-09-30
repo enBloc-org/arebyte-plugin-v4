@@ -8,6 +8,9 @@ const currentProjectQuery = {
       populate: {
         cover_image: {
           fields: ["*"]
+        },
+        events: {
+          fields: ["*"]
         }
       }
     }
