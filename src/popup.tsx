@@ -7,36 +7,6 @@ import "~components/normalize.css"
 import Layout from "~components/Layout/Layout"
 import useStore from "~store/store"
 
-type image = {
-  url: string
-  width: number
-  height: number
-  alt: string
-  left?: number
-  top?: number
-  right?: number
-  bottom?: number
-}
-
-const images: image[] = [
-  {
-    url: "https://picsum.photos/200/300",
-    width: 200,
-    height: 300,
-    alt: "Alt text 1",
-    left: 0,
-    top: 0
-  },
-  {
-    url: "https://picsum.photos/500/700",
-    width: 500,
-    height: 700,
-    alt: "Alt text 2",
-    top: 0,
-    right: 0
-  }
-]
-
 function IndexPopup() {
   const currentProject = useStore.use.active_project()
   const setCurrentProject = useStore.use.updateCurrentProject()
@@ -55,7 +25,7 @@ function IndexPopup() {
     const resp = await sendToBackground({
       name: "triggerPopup",
       body: {
-        images: images
+        id: 1
       }
     })
     console.log(resp)
