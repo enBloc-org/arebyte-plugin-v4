@@ -1,27 +1,16 @@
-import { useEffect } from "react"
-
-import { sendToBackground } from "@plasmohq/messaging"
-
 import "./components/normalize.css"
 
+import { CSSTransition } from "react-transition-group"
+
+import ExplorePage from "~components/ExplorePage/ExplorePage"
+import HomePage from "~components/HomePage/HomePage"
+import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 
 import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
-  const currentProject = useStore.use.active_project()
-  const setCurrentProject = useStore.use.updateCurrentProject()
-
-  useEffect(() => {
-    const updateCurrentProject = async () => {
-      const response = await sendToBackground({
-        name: "fetchCurrentProject"
-      })
-      setCurrentProject(response)
-    }
-    updateCurrentProject()
-  }, [])
-
+  const currentPage = useStore.use.currentPage()
   return (
     <Layout>
       <div
@@ -29,22 +18,36 @@ function IndexPopup() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          position: "relative"
         }}
       >
-        {currentProject && (
-          <div>
-            <h2>{currentProject.data.project.title}</h2>
-            <img
-              src={
-                process.env.PLASMO_PUBLIC_API_URL +
-                currentProject.data.project.cover_image.formats
-                  .thumbnail.url
-              }
-              alt=""
-            />
-          </div>
-        )}
+        <CSSTransition
+          in={currentPage === "home"}
+          timeout={500}
+          classNames="home-page"
+          unmountOnExit
+        >
+          <HomePage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "profile"}
+          timeout={500}
+          classNames="profile-page"
+          unmountOnExit
+        >
+          <ProfilePage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "explore"}
+          timeout={500}
+          classNames="explore-page"
+          unmountOnExit
+        >
+          <ExplorePage />
+        </CSSTransition>
       </div>
     </Layout>
   )
