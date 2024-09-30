@@ -41,7 +41,11 @@ export default function HomePage() {
             }
             alt=""
           />
-          <button className="button--primary" type="button" onClick={() => navigateTo("profile")}>
+          <button
+            className="button--primary"
+            type="button"
+            onClick={() => navigateTo("profile")}
+          >
             p r o f i l e
           </button>
         </div>
