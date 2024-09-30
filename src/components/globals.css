@@ -2,15 +2,49 @@
   --base: #ffffff;
   --highlight: #0017f8;
   --accent__public: #e35ae4;
+  --accent__registered: #4fe737;
+}
+
+* {
+  font-family:
+    Futura,
+    Trebuchet MS,
+    Arial,
+    sans-serif;
+  color: var(--highlight);
+  box-sizing: border-box;
 }
 
 .content-box {
-  border: 1px solid var(--hightlight);
+  border: 2px solid var(--highlight);
   padding: 5px;
   border-radius: 7px;
-  color: var(--highlight);
 }
 
 .shadow__public {
-  box-shadow: 0 0 4px 0 var(--accent__public);
+  box-shadow: 4px 4px 4px 0 var(--accent__public);
+}
+
+.shadow__audience {
+  box-shadow: 4px 4px 4px 0 var(--accent__registered);
+}
+
+.button--primary {
+  background-color: var(--base);
+  border: 2px solid var(--highlight);
+  border-radius: 7px;
+  padding: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button--primary:hover {
+  background-color: var(--highlight);
+  color: var(--base);
+}
+
+.button--primary__clicked {
+  background-color: var(--highlight);
+  color: var(--base);
 }
