@@ -1,0 +1,16 @@
+:root {
+  --base: #ffffff;
+  --highlight: #0017f8;
+  --accent__public: #e35ae4;
+}
+
+.content-box {
+  border: 1px solid var(--hightlight);
+  padding: 5px;
+  border-radius: 7px;
+  color: var(--highlight);
+}
+
+.shadow__public {
+  box-shadow: 0 0 4px 0 var(--accent__public);
+}
