@@ -17,7 +17,7 @@ type State = {
 
 type Actions = {
   updateCurrentProject: (project: ProjectResponse) => void
-  navigateTo: (nextPage: "home" | "profile" | "explore") => void
+  navigateTo: (nextPage: "home" | "profile" | "explore" | "login") => void
 }
 
 const baseStore = create<State & Actions>(set => {
