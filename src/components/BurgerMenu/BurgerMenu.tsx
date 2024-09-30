@@ -2,8 +2,11 @@ import { useState } from "react"
 
 import "./BurgerMenu.css"
 
+import useStore from "~store/store"
+
 export default function BurgerMenu() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
+  const navigateTo = useStore.use.navigateTo()
 
   const clickHandler = () => setIsOpen(!isOpen)
 
@@ -22,9 +25,37 @@ export default function BurgerMenu() {
         </svg>
       </button>
       {isOpen && (
-        <div className="burger--modal">
-          <button type="button" onClick={clickHandler}>X</button>
-          <h1>OPEN</h1>
+        <div className="burger--modal grid">
+          <button
+            className="burger--close-button"
+            type="button"
+            onClick={clickHandler}
+          >
+            X
+          </button>
+          <div className="burger--navigation content-box shadow__public">
+            <p className="text-lg" onClick={() => setIsOpen(!isOpen)}>
+              HOME
+            </p>
+            <p
+              className="text-lg"
+              onClick={() => navigateTo("explore")}
+            >
+              EXPLORE
+            </p>
+            <p className="text-lg">LOGIN</p>
+          </div>
+          <div className="burger--contact">
+            <div>
+              <p>⚔️</p>
+              <p>📸</p>
+              <p>📺</p>
+            </div>
+            <div>
+              <button>About</button>
+              <button>Contact</button>
+            </div>
+          </div>
         </div>
       )}
     </div>
