@@ -1,3 +1,4 @@
+import type { EventResponse } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 
 export interface ProjectDescription {
@@ -13,7 +14,7 @@ export interface ProjectData {
   description: ProjectDescription[]
   cover_image: ImageResponse
   launch_date: string
-  events: Event[]
+  events: EventResponse[]
 }
 
 export interface Data {
