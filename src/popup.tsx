@@ -2,7 +2,8 @@ import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import "./components/normalize.css"
+import "~components/normalize.css"
+import "~components/globals.css"
 
 import useStore from "~store/store"
 
@@ -35,14 +36,16 @@ function IndexPopup() {
         {currentProject && (
           <div>
             <h2>{currentProject.data.project.title}</h2>
-            <img
-              src={
-                process.env.PLASMO_PUBLIC_API_URL +
-                currentProject.data.project.cover_image.formats
-                  .thumbnail.url
-              }
-              alt=""
-            />
+            <div className="content-box shadow__public">
+              <img
+                src={
+                  process.env.PLASMO_PUBLIC_API_URL +
+                  currentProject.data.project.cover_image.formats
+                    .thumbnail.url
+                }
+                alt=""
+              />
+            </div>
           </div>
         )}
       </div>
