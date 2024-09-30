@@ -1,13 +1,13 @@
 import "./components/normalize.css"
+import "~components/globals.css"
 
 import { CSSTransition } from "react-transition-group"
 
 import ExplorePage from "~components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
+import Layout from "~components/Layout/Layout"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
-
-import Layout from "./components/Layout/Layout"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()

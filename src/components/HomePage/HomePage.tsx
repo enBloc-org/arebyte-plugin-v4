@@ -27,9 +27,9 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <h1>Home Page</h1>
+      <CountDownTimer />
       {active_project && (
-        <div>
-          <CountDownTimer />
+        <div className="content-box shadow__public">
           <h2>{active_project.data.project.title}</h2>
           <img
             src={
@@ -39,7 +39,7 @@ export default function HomePage() {
             }
             alt=""
           />
-          <button type="button" onClick={() => navigateTo("profile")}>
+          <button className="button--primary" type="button" onClick={() => navigateTo("profile")}>
             p r o f i l e
           </button>
         </div>
