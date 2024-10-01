@@ -24,6 +24,16 @@ export default function HomePage() {
     fetchCurrentProject()
   }, [])
 
+  const triggerPopups = async () => {
+    const resp = await sendToBackground({
+      name: "triggerPopup",
+      body: {
+        id: 1
+      }
+    })
+    console.log(resp)
+  }
+
   return (
     <div className="home-page">
       <h1>Home Page</h1>
@@ -39,11 +49,18 @@ export default function HomePage() {
             }
             alt=""
           />
-          <button className="button--primary" type="button" onClick={() => navigateTo("profile")}>
+          <button
+            className="button--primary"
+            type="button"
+            onClick={() => navigateTo("profile")}
+          >
             p r o f i l e
           </button>
         </div>
       )}
+      <button style={{ marginTop: '40px' }} onClick={triggerPopups}>
+        Trigger Popups
+      </button>
     </div>
   )
 }
