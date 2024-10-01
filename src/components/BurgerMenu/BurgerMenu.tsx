@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import "./BurgerMenu.css"
 
+import arebyte from "src/images/arebyte-Plugin-blue.png"
+
 import useStore from "~store/store"
 
 export default function BurgerMenu() {
@@ -24,7 +26,7 @@ export default function BurgerMenu() {
   return (
     <div className="burger">
       <div className="burger--heading">
-        <p>@ r e b y t e</p>
+        <img src={arebyte} />
         <button
           type="button"
           className="button--secondary"
