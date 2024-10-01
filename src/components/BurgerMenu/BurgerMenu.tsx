@@ -29,7 +29,7 @@ export default function BurgerMenu() {
         <img src={arebyte} />
         <button
           type="button"
-          className="button--secondary"
+          className={`button--secondary burger--logo ${isOpen ? "burger--logo__active" : ""}`}
           onClick={handleModal}
         >
           <svg
@@ -46,13 +46,13 @@ export default function BurgerMenu() {
       </div>
       {isOpen && (
         <div className="burger--modal grid background__stripped">
-          <button
+          {/* <button
             className="burger--close-button button--secondary bold"
             type="button"
             onClick={handleModal}
           >
             X
-          </button>
+          </button> */}
           <div className="burger--navigation content-box shadow__public">
             <button
               className="text-xl button--secondary"

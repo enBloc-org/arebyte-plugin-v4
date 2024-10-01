@@ -9,6 +9,31 @@
   height: 25px;
 }
 
+.burger--logo {
+  z-index: 2;
+}
+
+.burger--logo * {
+  transition: all 0.3s ease-in-out;
+}
+
+.burger--logo__active * {
+  transition: all 0.3s ease-in-out;
+}
+
+.burger--logo__active rect:nth-child(1) {
+  transform: rotate(45deg) translateY(-15%) translateX(5%);
+}
+
+.burger--logo__active rect:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.burger--logo__active rect:nth-child(3) {
+  transform: rotate(-45deg) translateX(-45%);
+}
+
 .burger--modal {
   height: 100%;
   width: 100%;
