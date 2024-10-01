@@ -1,0 +1,472 @@
+{
+  "data": {
+    "id": 1,
+    "title": "Minimal Rituals - day 1",
+    "createdAt": "2024-09-27T13:03:27.264Z",
+    "updatedAt": "2024-09-27T13:03:27.264Z",
+    "pop_ups": [
+      {
+        "id": 1,
+        "work_title": "Agua de látex",
+        "popup_size": "Small",
+        "popup_position": "Top Left",
+        "artist_name": "Kira Xonorika",
+        "creation_date": "2023",
+        "medium": "AI, still image",
+        "createdAt": "2024-09-27T12:52:51.966Z",
+        "updatedAt": "2024-09-30T17:30:21.378Z",
+        "external_link": null,
+        "popup_content": [
+          {
+            "id": 1,
+            "__component": "piece.piece",
+            "description": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "In this series, Xonorika ventures beyond conventional constructs, expanding the realm of artistic expression and pushing the boundaries of possibility in the digital landscape. Our visions of the future have been shaped by Western science fiction literature, often portraying it as a distant and linear concepts that perpetuate a binary paradigm. However, Xonorika embraces protopianism, a fresh perspective that emphasizes collaboration, experimentation, and regeneration—an inspiring vision that flourishes through co-creation and co-authorship between human and non-human intelligences. Within this series, Xonorika draws inspiration from mythological figures that emerge from the depths of water, embodying supernatural abilities and archetypes of femininity. Her intention is to forge a connection with the profound depth of these narratives, reimagining their bodies and stories, and infusing them with renewed meaning. Through her vibrant visual language, Xonorika's artworks become a powerful catalyst for dialogue and introspection, encouraging us to reimagine and embrace a more inclusive understanding of identity, culture, and the boundless potential of artistic expression in the digital age."
+                  }
+                ]
+              }
+            ],
+            "media": {
+              "id": 5,
+              "name": "minimal-ritual-1.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 2350,
+              "height": 1762,
+              "formats": {
+                "thumbnail": {
+                  "name": "thumbnail_minimal-ritual-1.png",
+                  "hash": "thumbnail_minimal_ritual_1_067306f271",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 208,
+                  "height": 156,
+                  "size": 89.36,
+                  "sizeInBytes": 89358,
+                  "url": "/uploads/thumbnail_minimal_ritual_1_067306f271.png"
+                },
+                "small": {
+                  "name": "small_minimal-ritual-1.png",
+                  "hash": "small_minimal_ritual_1_067306f271",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 500,
+                  "height": 375,
+                  "size": 467.72,
+                  "sizeInBytes": 467715,
+                  "url": "/uploads/small_minimal_ritual_1_067306f271.png"
+                },
+                "medium": {
+                  "name": "medium_minimal-ritual-1.png",
+                  "hash": "medium_minimal_ritual_1_067306f271",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 750,
+                  "height": 562,
+                  "size": 995.45,
+                  "sizeInBytes": 995445,
+                  "url": "/uploads/medium_minimal_ritual_1_067306f271.png"
+                },
+                "large": {
+                  "name": "large_minimal-ritual-1.png",
+                  "hash": "large_minimal_ritual_1_067306f271",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 1000,
+                  "height": 750,
+                  "size": 1727.84,
+                  "sizeInBytes": 1727838,
+                  "url": "/uploads/large_minimal_ritual_1_067306f271.png"
+                }
+              },
+              "hash": "minimal_ritual_1_067306f271",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1565.5,
+              "url": "/uploads/minimal_ritual_1_067306f271.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2024-09-27T12:09:52.289Z",
+              "updatedAt": "2024-09-27T12:09:52.289Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "work_title": "Liquidez Y2K",
+        "popup_size": "Medium",
+        "popup_position": "Top right",
+        "artist_name": "Kira Xonorika",
+        "creation_date": "2023",
+        "medium": "AI, still image",
+        "createdAt": "2024-09-27T12:54:40.114Z",
+        "updatedAt": "2024-09-30T17:28:17.976Z",
+        "external_link": null,
+        "popup_content": [
+          {
+            "id": 2,
+            "__component": "piece.piece",
+            "description": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "In this series, Xonorika ventures beyond conventional constructs, expanding the realm of artistic expression and pushing the boundaries of possibility in the digital landscape. Our visions of the future have been shaped by Western science fiction literature, often portraying it as a distant and linear concepts that perpetuate a binary paradigm. However, Xonorika embraces protopianism, a fresh perspective that emphasizes collaboration, experimentation, and regeneration—an inspiring vision that flourishes through co-creation and co-authorship between human and non-human intelligences. Within this series, Xonorika draws inspiration from mythological figures that emerge from the depths of water, embodying supernatural abilities and archetypes of femininity. Her intention is to forge a connection with the profound depth of these narratives, reimagining their bodies and stories, and infusing them with renewed meaning. Through her vibrant visual language, Xonorika's artworks become a powerful catalyst for dialogue and introspection, encouraging us to reimagine and embrace a more inclusive understanding of identity, culture, and the boundless potential of artistic expression in the digital age."
+                  }
+                ]
+              }
+            ],
+            "media": {
+              "id": 1,
+              "name": "minimal-ritual-2.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 640,
+              "height": 512,
+              "formats": {
+                "thumbnail": {
+                  "name": "thumbnail_minimal-ritual-2.png",
+                  "hash": "thumbnail_minimal_ritual_2_0e24ed9835",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 195,
+                  "height": 156,
+                  "size": 87.31,
+                  "sizeInBytes": 87312,
+                  "url": "/uploads/thumbnail_minimal_ritual_2_0e24ed9835.png"
+                },
+                "small": {
+                  "name": "small_minimal-ritual-2.png",
+                  "hash": "small_minimal_ritual_2_0e24ed9835",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 500,
+                  "height": 400,
+                  "size": 542.89,
+                  "sizeInBytes": 542891,
+                  "url": "/uploads/small_minimal_ritual_2_0e24ed9835.png"
+                }
+              },
+              "hash": "minimal_ritual_2_0e24ed9835",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 190.36,
+              "url": "/uploads/minimal_ritual_2_0e24ed9835.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2024-09-27T12:09:48.980Z",
+              "updatedAt": "2024-09-27T12:09:48.980Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "work_title": "Majestic",
+        "popup_size": "Large",
+        "popup_position": "Center",
+        "artist_name": "Kira Xonorika",
+        "creation_date": "2023",
+        "medium": "AI, still image",
+        "createdAt": "2024-09-27T12:55:37.225Z",
+        "updatedAt": "2024-09-30T17:30:28.092Z",
+        "external_link": null,
+        "popup_content": [
+          {
+            "id": 3,
+            "__component": "piece.piece",
+            "description": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "In this series, Xonorika ventures beyond conventional constructs, expanding the realm of artistic expression and pushing the boundaries of possibility in the digital landscape. Our visions of the future have been shaped by Western science fiction literature, often portraying it as a distant and linear concepts that perpetuate a binary paradigm. However, Xonorika embraces protopianism, a fresh perspective that emphasizes collaboration, experimentation, and regeneration—an inspiring vision that flourishes through co-creation and co-authorship between human and non-human intelligences. Within this series, Xonorika draws inspiration from mythological figures that emerge from the depths of water, embodying supernatural abilities and archetypes of femininity. Her intention is to forge a connection with the profound depth of these narratives, reimagining their bodies and stories, and infusing them with renewed meaning. Through her vibrant visual language, Xonorika's artworks become a powerful catalyst for dialogue and introspection, encouraging us to reimagine and embrace a more inclusive understanding of identity, culture, and the boundless potential of artistic expression in the digital age."
+                  }
+                ]
+              }
+            ],
+            "media": {
+              "id": 8,
+              "name": "minimai-ritual-3.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 2500,
+              "height": 2291,
+              "formats": {
+                "thumbnail": {
+                  "name": "thumbnail_minimai-ritual-3.png",
+                  "hash": "thumbnail_minimai_ritual_3_98eae96a5f",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 170,
+                  "height": 156,
+                  "size": 68.47,
+                  "sizeInBytes": 68465,
+                  "url": "/uploads/thumbnail_minimai_ritual_3_98eae96a5f.png"
+                },
+                "small": {
+                  "name": "small_minimai-ritual-3.png",
+                  "hash": "small_minimai_ritual_3_98eae96a5f",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 500,
+                  "height": 458,
+                  "size": 579.59,
+                  "sizeInBytes": 579585,
+                  "url": "/uploads/small_minimai_ritual_3_98eae96a5f.png"
+                },
+                "medium": {
+                  "name": "medium_minimai-ritual-3.png",
+                  "hash": "medium_minimai_ritual_3_98eae96a5f",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 750,
+                  "height": 687,
+                  "size": 1297.85,
+                  "sizeInBytes": 1297846,
+                  "url": "/uploads/medium_minimai_ritual_3_98eae96a5f.png"
+                },
+                "large": {
+                  "name": "large_minimai-ritual-3.png",
+                  "hash": "large_minimai_ritual_3_98eae96a5f",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 1000,
+                  "height": 916,
+                  "size": 2295.07,
+                  "sizeInBytes": 2295067,
+                  "url": "/uploads/large_minimai_ritual_3_98eae96a5f.png"
+                }
+              },
+              "hash": "minimai_ritual_3_98eae96a5f",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 2907.04,
+              "url": "/uploads/minimai_ritual_3_98eae96a5f.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2024-09-27T12:09:56.235Z",
+              "updatedAt": "2024-09-27T12:09:56.235Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "work_title": "Christine",
+        "popup_size": "Small",
+        "popup_position": "Bottom Right",
+        "artist_name": "Kira Xonorika",
+        "creation_date": "2023",
+        "medium": "AI, still image",
+        "createdAt": "2024-09-27T12:57:24.339Z",
+        "updatedAt": "2024-09-30T17:30:46.230Z",
+        "external_link": null,
+        "popup_content": [
+          {
+            "id": 5,
+            "__component": "piece.piece",
+            "description": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "In this series, Xonorika ventures beyond conventional constructs, expanding the realm of artistic expression and pushing the boundaries of possibility in the digital landscape. Our visions of the future have been shaped by Western science fiction literature, often portraying it as a distant and linear concepts that perpetuate a binary paradigm. However, Xonorika embraces protopianism, a fresh perspective that emphasizes collaboration, experimentation, and regeneration—an inspiring vision that flourishes through co-creation and co-authorship between human and non-human intelligences. Within this series, Xonorika draws inspiration from mythological figures that emerge from the depths of water, embodying supernatural abilities and archetypes of femininity. Her intention is to forge a connection with the profound depth of these narratives, reimagining their bodies and stories, and infusing them with renewed meaning. Through her vibrant visual language, Xonorika's artworks become a powerful catalyst for dialogue and introspection, encouraging us to reimagine and embrace a more inclusive understanding of identity, culture, and the boundless potential of artistic expression in the digital age."
+                  }
+                ]
+              }
+            ],
+            "media": {
+              "id": 6,
+              "name": "minimai-ritual-5.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 2500,
+              "height": 2292,
+              "formats": {
+                "thumbnail": {
+                  "name": "thumbnail_minimai-ritual-5.png",
+                  "hash": "thumbnail_minimai_ritual_5_bcbdc48ba2",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 170,
+                  "height": 156,
+                  "size": 71.08,
+                  "sizeInBytes": 71082,
+                  "url": "/uploads/thumbnail_minimai_ritual_5_bcbdc48ba2.png"
+                },
+                "small": {
+                  "name": "small_minimai-ritual-5.png",
+                  "hash": "small_minimai_ritual_5_bcbdc48ba2",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 500,
+                  "height": 458,
+                  "size": 533.07,
+                  "sizeInBytes": 533072,
+                  "url": "/uploads/small_minimai_ritual_5_bcbdc48ba2.png"
+                },
+                "medium": {
+                  "name": "medium_minimai-ritual-5.png",
+                  "hash": "medium_minimai_ritual_5_bcbdc48ba2",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 750,
+                  "height": 688,
+                  "size": 1136.99,
+                  "sizeInBytes": 1136994,
+                  "url": "/uploads/medium_minimai_ritual_5_bcbdc48ba2.png"
+                },
+                "large": {
+                  "name": "large_minimai-ritual-5.png",
+                  "hash": "large_minimai_ritual_5_bcbdc48ba2",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 1000,
+                  "height": 917,
+                  "size": 1980.21,
+                  "sizeInBytes": 1980206,
+                  "url": "/uploads/large_minimai_ritual_5_bcbdc48ba2.png"
+                }
+              },
+              "hash": "minimai_ritual_5_bcbdc48ba2",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 2470.66,
+              "url": "/uploads/minimai_ritual_5_bcbdc48ba2.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2024-09-27T12:09:52.647Z",
+              "updatedAt": "2024-09-27T12:09:52.647Z"
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "work_title": "Sun Bathing",
+        "popup_size": "Small",
+        "popup_position": "Bottom left",
+        "artist_name": "Kira Xonorika",
+        "creation_date": "2023",
+        "medium": "AI, still image",
+        "createdAt": "2024-09-27T12:56:39.155Z",
+        "updatedAt": "2024-09-30T17:30:55.455Z",
+        "external_link": null,
+        "popup_content": [
+          {
+            "id": 4,
+            "__component": "piece.piece",
+            "description": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "type": "text",
+                    "text": "In this series, Xonorika ventures beyond conventional constructs, expanding the realm of artistic expression and pushing the boundaries of possibility in the digital landscape. Our visions of the future have been shaped by Western science fiction literature, often portraying it as a distant and linear concepts that perpetuate a binary paradigm. However, Xonorika embraces protopianism, a fresh perspective that emphasizes collaboration, experimentation, and regeneration—an inspiring vision that flourishes through co-creation and co-authorship between human and non-human intelligences. Within this series, Xonorika draws inspiration from mythological figures that emerge from the depths of water, embodying supernatural abilities and archetypes of femininity. Her intention is to forge a connection with the profound depth of these narratives, reimagining their bodies and stories, and infusing them with renewed meaning. Through her vibrant visual language, Xonorika's artworks become a powerful catalyst for dialogue and introspection, encouraging us to reimagine and embrace a more inclusive understanding of identity, culture, and the boundless potential of artistic expression in the digital age."
+                  }
+                ]
+              }
+            ],
+            "media": {
+              "id": 3,
+              "name": "minimai-ritual-4.png",
+              "alternativeText": null,
+              "caption": null,
+              "width": 2035,
+              "height": 1356,
+              "formats": {
+                "thumbnail": {
+                  "name": "thumbnail_minimai-ritual-4.png",
+                  "hash": "thumbnail_minimai_ritual_4_1f708a131c",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 234,
+                  "height": 156,
+                  "size": 98.06,
+                  "sizeInBytes": 98057,
+                  "url": "/uploads/thumbnail_minimai_ritual_4_1f708a131c.png"
+                },
+                "small": {
+                  "name": "small_minimai-ritual-4.png",
+                  "hash": "small_minimai_ritual_4_1f708a131c",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 500,
+                  "height": 333,
+                  "size": 424.76,
+                  "sizeInBytes": 424763,
+                  "url": "/uploads/small_minimai_ritual_4_1f708a131c.png"
+                },
+                "medium": {
+                  "name": "medium_minimai-ritual-4.png",
+                  "hash": "medium_minimai_ritual_4_1f708a131c",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 750,
+                  "height": 500,
+                  "size": 931.91,
+                  "sizeInBytes": 931907,
+                  "url": "/uploads/medium_minimai_ritual_4_1f708a131c.png"
+                },
+                "large": {
+                  "name": "large_minimai-ritual-4.png",
+                  "hash": "large_minimai_ritual_4_1f708a131c",
+                  "ext": ".png",
+                  "mime": "image/png",
+                  "path": null,
+                  "width": 1000,
+                  "height": 666,
+                  "size": 1634.52,
+                  "sizeInBytes": 1634519,
+                  "url": "/uploads/large_minimai_ritual_4_1f708a131c.png"
+                }
+              },
+              "hash": "minimai_ritual_4_1f708a131c",
+              "ext": ".png",
+              "mime": "image/png",
+              "size": 1518.38,
+              "url": "/uploads/minimai_ritual_4_1f708a131c.png",
+              "previewUrl": null,
+              "provider": "local",
+              "provider_metadata": null,
+              "createdAt": "2024-09-27T12:09:52.264Z",
+              "updatedAt": "2024-09-27T12:09:52.264Z"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {}
+}

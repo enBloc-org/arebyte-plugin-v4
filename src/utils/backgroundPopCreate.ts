@@ -1,5 +1,6 @@
 import Browser from "webextension-polyfill"
 
+import calculatePopupCoordinates from "./calculatePopupCoordinates"
 import parseImageSize from "./parseImageSize"
 
 const backgroundPopupCreate = async popups => {
@@ -8,56 +9,15 @@ const backgroundPopupCreate = async popups => {
   const screenWidth = currentWindow.width
 
   popups.forEach((popup, index) => {
-    let top: number, left: number
-
     const { height, width, url } = parseImageSize(popup)
 
-    console.log({ height, width, url })
-
-    switch (true) {
-      case /^\s*top\s*right\s*$/i.test(popup.popup_position):
-        top = 0
-        left = screenWidth - width
-        break
-      case /^\s*top\s*center\s*$/i.test(popup.popup_position):
-        top = 0
-        left = (screenWidth - width) / 2
-        break
-      case /^\s*top\s*left\s*$/i.test(popup.popup_position):
-        top = 0
-        left = 0
-        break
-      case /^\s*center\s*right\s*$/i.test(popup.popup_position):
-        top = (screenHeight - height) / 2
-        left = screenWidth - width
-        break
-      case /^\s*center\s*$/i.test(popup.popup_position):
-        top = (screenHeight - height) / 2
-        left = (screenWidth - width) / 2
-        break
-      case /^\s*center\s*left\s*$/i.test(popup.popup_position):
-        top = (screenHeight - height) / 2
-        left = 0
-        break
-      case /^\s*bottom\s*right\s*$/i.test(popup.popup_position):
-        top = screenHeight - height
-        left = screenWidth - width
-        break
-      case /^\s*bottom\s*center\s*$/i.test(popup.popup_position):
-        top = screenHeight - height
-        left = (screenWidth - width) / 2
-        break
-      case /^\s*bottom\s*left\s*$/i.test(popup.popup_position):
-        top = screenHeight - height
-        left = 0
-        break
-      default:
-        console.log("Default position")
-
-        top = (screenHeight - height) / 2
-        left = (screenWidth - width) / 2
-        break
-    }
+    const { top, left } = calculatePopupCoordinates(
+      popup,
+      screenHeight,
+      screenWidth,
+      width,
+      height
+    )
 
     setTimeout(() => {
       Browser.windows.create({

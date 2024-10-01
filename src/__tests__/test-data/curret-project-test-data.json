@@ -1,0 +1,126 @@
+{
+   "data": {
+     "id": 1,
+     "event_time": "12:00:00.000",
+     "createdAt": "2024-09-27T15:42:24.184Z",
+     "updatedAt": "2024-09-27T15:47:04.404Z",
+     "publishedAt": "2024-09-27T15:47:04.403Z",
+     "project": {
+       "id": 2,
+       "title": "Mundane Futures",
+       "launch_date": "2024-09-30",
+       "description": [
+         {
+           "type": "paragraph",
+           "children": [
+             {
+               "type": "text",
+               "text": "Mass Media’s vision of the future has traditionally been written by a handful of western, hetero male writers, thinkers, designers, and venture capitalists. The outcome is that the future is envisioned as a place where everyone wants flying cars and one where justice for disenfranchised, marginalized, and colonized peoples is not a priority. "
+             }
+           ]
+         },
+         {
+           "type": "paragraph",
+           "children": [
+             {
+               "type": "text",
+               "text": "The artists in this exhibition look to more heterogeneous, more just, more sustainable futures in a myriad of ways. Some are dealing directly with these futures but most are dealing with the present in ways that navigate us towards these futures. Working towards these futures, we must come to an understanding and a balance that moving towards one just future, for example ecologically, can lead to inequalities in other ways, such as socially or economically. The artists in this pavilion come from a range of backgrounds and represent a spectrum of established and emerging artists. To have futures that are more just for more people, we must have a swath of ideas and this exhibition seeks to show some of those ideas envisioned by artists."
+             }
+           ]
+         },
+         {
+           "type": "paragraph",
+           "children": [
+             {
+               "type": "text",
+               "text": "–Flounder Lee, Curator"
+             }
+           ]
+         }
+       ],
+       "cover_image": {
+         "id": 9,
+         "name": "mundane-futures-1-1.jpeg",
+         "alternativeText": null,
+         "caption": null,
+         "width": 2500,
+         "height": 1177,
+         "formats": {
+           "thumbnail": {
+             "name": "thumbnail_mundane-futures-1-1.jpeg",
+             "hash": "thumbnail_mundane_futures_1_1_9564eaec3c",
+             "ext": ".jpeg",
+             "mime": "image/jpeg",
+             "path": null,
+             "width": 245,
+             "height": 115,
+             "size": 9.71,
+             "sizeInBytes": 9710,
+             "url": "/uploads/thumbnail_mundane_futures_1_1_9564eaec3c.jpeg"
+           },
+           "medium": {
+             "name": "medium_mundane-futures-1-1.jpeg",
+             "hash": "medium_mundane_futures_1_1_9564eaec3c",
+             "ext": ".jpeg",
+             "mime": "image/jpeg",
+             "path": null,
+             "width": 750,
+             "height": 353,
+             "size": 58.05,
+             "sizeInBytes": 58047,
+             "url": "/uploads/medium_mundane_futures_1_1_9564eaec3c.jpeg"
+           },
+           "small": {
+             "name": "small_mundane-futures-1-1.jpeg",
+             "hash": "small_mundane_futures_1_1_9564eaec3c",
+             "ext": ".jpeg",
+             "mime": "image/jpeg",
+             "path": null,
+             "width": 500,
+             "height": 235,
+             "size": 30.03,
+             "sizeInBytes": 30025,
+             "url": "/uploads/small_mundane_futures_1_1_9564eaec3c.jpeg"
+           },
+           "large": {
+             "name": "large_mundane-futures-1-1.jpeg",
+             "hash": "large_mundane_futures_1_1_9564eaec3c",
+             "ext": ".jpeg",
+             "mime": "image/jpeg",
+             "path": null,
+             "width": 1000,
+             "height": 471,
+             "size": 91.48,
+             "sizeInBytes": 91481,
+             "url": "/uploads/large_mundane_futures_1_1_9564eaec3c.jpeg"
+           }
+         },
+         "hash": "mundane_futures_1_1_9564eaec3c",
+         "ext": ".jpeg",
+         "mime": "image/jpeg",
+         "size": 438.9,
+         "url": "/uploads/mundane_futures_1_1_9564eaec3c.jpeg",
+         "previewUrl": null,
+         "provider": "local",
+         "provider_metadata": null,
+         "createdAt": "2024-09-27T12:10:55.262Z",
+         "updatedAt": "2024-09-27T12:10:55.262Z"
+       },
+       "events": [
+         {
+           "id": 3,
+           "title": "Mundane Futures day 1",
+           "createdAt": "2024-09-27T14:40:44.459Z",
+           "updatedAt": "2024-09-27T14:40:44.459Z"
+         },
+         {
+           "id": 4,
+           "title": "Mundane Future day 2",
+           "createdAt": "2024-09-27T14:46:29.249Z",
+           "updatedAt": "2024-10-01T11:31:57.552Z"
+         }
+       ]
+     }
+   },
+   "meta": {}
+ }

@@ -25,13 +25,12 @@ export default function HomePage() {
   }, [])
 
   const triggerPopups = async () => {
-    const resp = await sendToBackground({
+    await sendToBackground({
       name: "triggerPopup",
       body: {
         id: 1
       }
     })
-    console.log(resp)
   }
 
   return (
@@ -58,7 +57,7 @@ export default function HomePage() {
           </button>
         </div>
       )}
-      <button style={{ marginTop: '40px' }} onClick={triggerPopups}>
+      <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
         Trigger Popups
       </button>
     </div>
