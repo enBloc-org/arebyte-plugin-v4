@@ -116,7 +116,7 @@ export default function BurgerMenu() {
                   x="0px"
                   y="0px"
                   width="30"
-                  height="30"
+                  height="25"
                   viewBox="0 5 50 50"
                   fill="var(--highlight)"
                 >
