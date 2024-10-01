@@ -11,10 +11,16 @@
 
 .burger--logo {
   z-index: 2;
+  transition: all 0.3s ease-in-out;
 }
 
 .burger--logo * {
   transition: all 0.3s ease-in-out;
+}
+
+.burger--logo__active {
+  transition: all 0.3s ease-in-out;
+  transform: rotate(180deg) translate(15%, -13%);
 }
 
 .burger--logo__active * {
@@ -40,14 +46,16 @@
   position: absolute;
   top: 0;
   left: 0;
-  animation: slideLeft 0.5s ease-out;
-  display: flex;
+  transition: all 0.5s ease-out;
 }
 
-.burger--close-button {
-  grid-column: 3;
-  grid-row: 1;
-  position: absolute;
+.burger--modal__inactive {
+  display: none;
+  transform: translateX(200%);
+}
+
+.burger--modal__active {
+  transform: translateX(0%);
 }
 
 .burger--navigation {
