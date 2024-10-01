@@ -9,9 +9,7 @@ export default function Layout({
 }) {
   return (
     <div className="layout">
-      <header></header>
       {children}
-      <footer></footer>
     </div>
   )
 }

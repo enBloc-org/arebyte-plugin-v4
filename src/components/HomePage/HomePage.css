@@ -1,9 +1,8 @@
 .home-page {
   width: 100dvw;
-  height: 500px;
+  height: 100dvh;
   background-color: white;
   animation: slideUp 0.5s ease-out;
-  position: absolute;
   padding: 10px;
 }
 

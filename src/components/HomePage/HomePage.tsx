@@ -26,7 +26,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="home-page">
+    <div className="home-page main">
       <h1>Home Page</h1>
       <CountDownTimer />
       <BurgerMenu />
