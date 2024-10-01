@@ -11,18 +11,11 @@ export default function BurgerMenu() {
   const navigateTo = useStore.use.navigateTo()
   const currentPage = useStore.use.currentPage()
 
-  const handleModal = () => setIsOpen(!isOpen)
+  const handleModal = () => setIsOpen(previous => !previous)
 
-  const handleNavigateHome = () =>
-    currentPage === "home" ? setIsOpen(false) : navigateTo("home")
+  const handleNavigate: typeof navigateTo = target =>
+    currentPage === target ? setIsOpen(false) : navigateTo(target)
 
-  const handleNavigateExplore = () =>
-    currentPage === "explore"
-      ? setIsOpen(false)
-      : navigateTo("explore")
-
-  const handleNavigateLogin = () =>
-    currentPage === "login" ? setIsOpen(false) : navigateTo("login")
   return (
     <div className="burger">
       <div className="burger--heading">
@@ -52,19 +45,19 @@ export default function BurgerMenu() {
         <div className="burger--navigation content-box shadow__public">
           <button
             className="text-xl button--secondary"
-            onClick={handleNavigateHome}
+            onClick={() => handleNavigate("home")}
           >
             HOME
           </button>
           <button
             className="text-xl button--secondary"
-            onClick={handleNavigateExplore}
+            onClick={() => handleNavigate("explore")}
           >
             EXPLORE
           </button>
           <button
             className="text-xl button--secondary"
-            onClick={handleNavigateLogin}
+            onClick={() => handleNavigate("login")}
           >
             LOGIN
           </button>
