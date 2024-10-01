@@ -1,3 +1,10 @@
+import Browser from "webextension-polyfill"
+
+import { currentProjectQueryString } from "~queries/currentProjectQuery"
+import type { CurrentProjectResponse } from "~types/projectTypes"
+import { fetchStrapiContent } from "~utils/fetchStrapiContent"
+import setEventAlarm from "~utils/setEventAlarm"
+
 export {}
 
 if (process.env.NODE_ENV === "development") {
@@ -8,4 +15,14 @@ if (process.env.NODE_ENV === "production") {
   console.log("This is a production build")
 }
 
-console.log("SITE_URL:", process.env.PLASMO_PUBLIC_SITE_URL)
+Browser.runtime.onInstalled.addListener(async () => {
+  const currentProject =
+    await fetchStrapiContent<CurrentProjectResponse>(
+      `api/current-project?${currentProjectQueryString}`
+    )
+
+  const [eventHour, eventMinute] =
+    currentProject.data.event_time.split(":")
+
+  setEventAlarm(parseInt(eventHour), parseInt(eventMinute))
+})

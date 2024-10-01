@@ -1,0 +1,32 @@
+.explore-page {
+  width: 100dvw;
+  height: 500px;
+  background-color: red;
+  animation: slideDown 0.5s ease-out;
+  position: absolute;
+}
+
+.explore-page-enter {
+  z-index: 3;
+}
+
+.explore-page-enter-active {
+  z-index: 3;
+}
+
+.explore-page-exit {
+  z-index: 1;
+}
+
+.explore-page-exit-active {
+  z-index: 1;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-200);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

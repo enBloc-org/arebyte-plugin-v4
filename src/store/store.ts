@@ -12,10 +12,12 @@ export type PlayList = typeof baseStore<
 type State = {
   user: User
   active_project?: ProjectResponse
+  currentPage: string
 }
 
 type Actions = {
   updateCurrentProject: (project: ProjectResponse) => void
+  navigateTo: (nextPage: "home" | "profile" | "explore") => void
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -29,13 +31,16 @@ const baseStore = create<State & Actions>(set => {
         is_paused: false,
         project_id: undefined,
         current_index: 0,
-        event_time: new Date(new Date().setHours(12, 0, 0, 0))
-          .getTime()
-          .toString(),
+        event_time: "12:00:00.000",
         playlist: []
       }
     },
     active_project: undefined,
+    currentPage: "home",
+    navigateTo: nextPage =>
+      set(() => ({
+        currentPage: nextPage
+      })),
     updateCurrentProject: project =>
       set(() => ({ active_project: project }))
   }

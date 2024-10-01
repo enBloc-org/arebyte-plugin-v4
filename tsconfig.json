@@ -1,11 +1,13 @@
 {
   "extends": "plasmo/templates/tsconfig.base",
   "exclude": ["node_modules"],
-  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx"],
+  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx", "src/store/store.test.ts", "src/background/messages/set_context.test.ts", "src/__tests__/fetchCurrentProject.test.js"],
   "compilerOptions": {
     "paths": {
       "~*": ["./src/*"]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "verbatimModuleSyntax": false,
+    "jsx": "react-jsx"
   }
 }

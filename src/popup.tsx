@@ -2,9 +2,8 @@ import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import "~components/normalize.css"
+import "./components/normalize.css"
 
-import Layout from "~components/Layout/Layout"
 import useStore from "~store/store"
 
 function IndexPopup() {
@@ -21,16 +20,6 @@ function IndexPopup() {
     updateCurrentProject()
   }, [])
 
-  const triggerPopups = async () => {
-    const resp = await sendToBackground({
-      name: "triggerPopup",
-      body: {
-        id: 1
-      }
-    })
-    console.log(resp)
-  }
-
   return (
     <Layout>
       <div
@@ -38,7 +27,8 @@ function IndexPopup() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          position: "relative"
         }}
       >
         {currentProject && (
@@ -54,7 +44,6 @@ function IndexPopup() {
             />
           </div>
         )}
-        <button onClick={triggerPopups}>Trigger Popups</button>
       </div>
     </Layout>
   )
