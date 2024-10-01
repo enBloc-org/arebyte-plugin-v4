@@ -61,6 +61,16 @@
   text-decoration: underline;
 }
 
+.background__stripped {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--base),
+    var(--base) 6px,
+    var(--highlight) 6.5px,
+    var(--highlight) 6px
+  );
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

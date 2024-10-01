@@ -45,7 +45,7 @@ export default function BurgerMenu() {
         </button>
       </div>
       {isOpen && (
-        <div className="burger--modal grid">
+        <div className="burger--modal grid background__stripped">
           <button
             className="burger--close-button button--secondary bold"
             type="button"
