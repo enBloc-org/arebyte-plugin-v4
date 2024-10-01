@@ -27,9 +27,9 @@ export default function HomePage() {
 
   return (
     <div className="home-page main">
+      <BurgerMenu />
       <h1>Home Page</h1>
       <CountDownTimer />
-      <BurgerMenu />
       {active_project && (
         <div className="content-box shadow__public">
           <h2>{active_project.data.project.title}</h2>
