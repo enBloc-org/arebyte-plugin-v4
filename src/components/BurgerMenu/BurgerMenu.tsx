@@ -26,7 +26,7 @@ export default function BurgerMenu() {
   return (
     <div className="burger">
       <div className="burger--heading">
-        <img src={arebyte} />
+        <img src={arebyte} alt="arebyte plugin official logo" />
         <button
           type="button"
           className={`button--secondary burger--logo ${isOpen ? "burger--logo__active" : ""}`}
