@@ -23,22 +23,25 @@ export default function BurgerMenu() {
     currentPage === "login" ? setIsOpen(false) : navigateTo("login")
   return (
     <div className="burger">
-      <button
-        type="button"
-        className="button--secondary"
-        onClick={handleModal}
-      >
-        <svg
-          viewBox="0 0 100 80"
-          width="40"
-          height="40"
-          fill="var(--highlight)"
+      <div className="burger--heading">
+        <p>@ r e b y t e</p>
+        <button
+          type="button"
+          className="button--secondary"
+          onClick={handleModal}
         >
-          <rect width="100" height="20"></rect>
-          <rect y="30" width="100" height="20"></rect>
-          <rect y="60" width="100" height="20"></rect>
-        </svg>
-      </button>
+          <svg
+            viewBox="0 0 110 50"
+            width="40"
+            height="40"
+            fill="var(--highlight)"
+          >
+            <rect width="100" height="15"></rect>
+            <rect y="25" width="100" height="15"></rect>
+            <rect y="50" width="100" height="15"></rect>
+          </svg>
+        </button>
+      </div>
       {isOpen && (
         <div className="burger--modal grid">
           <button

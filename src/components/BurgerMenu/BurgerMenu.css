@@ -1,3 +1,9 @@
+.burger--heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .burger--modal {
   height: 100%;
   width: 100%;
