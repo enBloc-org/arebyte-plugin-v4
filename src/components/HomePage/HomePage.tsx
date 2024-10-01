@@ -6,6 +6,7 @@ import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
 
 import "./HomePage.css"
 
+import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import useStore from "~store/store"
 
 export default function HomePage() {
@@ -25,7 +26,8 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="home-page">
+    <div className="home-page main">
+      <BurgerMenu />
       <h1>Home Page</h1>
       <CountDownTimer />
       {active_project && (
@@ -39,7 +41,11 @@ export default function HomePage() {
             }
             alt=""
           />
-          <button className="button--primary" type="button" onClick={() => navigateTo("profile")}>
+          <button
+            className="button--primary"
+            type="button"
+            onClick={() => navigateTo("profile")}
+          >
             p r o f i l e
           </button>
         </div>

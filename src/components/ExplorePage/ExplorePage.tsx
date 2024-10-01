@@ -6,7 +6,7 @@ export default function ExplorePage() {
   const navigateTo = useStore.use.navigateTo()
 
   return (
-    <div className="explore-page">
+    <div className="explore-page main">
       <h1>Opa! This is the Explore page</h1>
       <button type="button" onClick={() => navigateTo("home")}>
         h o m e

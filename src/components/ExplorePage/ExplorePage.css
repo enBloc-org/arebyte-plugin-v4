@@ -1,9 +1,6 @@
 .explore-page {
-  width: 100dvw;
-  height: 500px;
   background-color: red;
   animation: slideDown 0.5s ease-out;
-  position: absolute;
 }
 
 .explore-page-enter {

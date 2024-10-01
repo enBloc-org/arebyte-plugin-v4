@@ -1,21 +1,18 @@
 .layout {
   min-height: 100vh;
-  width: 300px;
-  display: grid;
-  grid-template-rows: auto, 1fr, auto;
+  width: 100dvw;
+  position: relative;
 }
 
-.layout header {
-  grid-row: 1;
-  border: 2px solid pink;
-}
-
-.layout footer {
-  grid-row: 3;
-  border: 2px solid red;
+.layout .main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100dvw;
 }
 
 body {
   height: 600px;
-  width: 300px;
+  width: 380px;
 }
