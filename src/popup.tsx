@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group"
 import ExplorePage from "~components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
+import LoginPage from "~components/LoginPage/LoginPage"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 
@@ -47,6 +48,15 @@ function IndexPopup() {
           unmountOnExit
         >
           <ExplorePage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "login"}
+          timeout={500}
+          classNames="login-page"
+          unmountOnExit
+        >
+          <LoginPage />
         </CSSTransition>
       </div>
     </Layout>
