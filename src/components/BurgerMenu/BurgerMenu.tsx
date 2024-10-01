@@ -2,7 +2,7 @@ import { useState } from "react"
 
 import "./BurgerMenu.css"
 
-import arebyte from "src/images/arebyte-Plugin-blue.png"
+import arebyte from "data-base64:assets/arebyte-Plugin-blue.png"
 
 import useStore from "~store/store"
 
