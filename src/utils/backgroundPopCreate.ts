@@ -1,5 +1,7 @@
 import Browser from "webextension-polyfill"
 
+import parseImageSize from "./parseImageSize"
+
 const backgroundPopupCreate = async popups => {
   const currentWindow = await Browser.windows.getCurrent()
   const screenHeight = currentWindow.height
@@ -8,48 +10,44 @@ const backgroundPopupCreate = async popups => {
   popups.forEach((popup, index) => {
     let top: number, left: number
 
-    const formatKey = popup.popup_size.toLowerCase().trim()
-    const format = popup.popup_content[0].media.formats[formatKey]
+    const { height, width, url } = parseImageSize(popup)
 
-    const height =
-      format?.height ?? popup.popup_content[0].media.height
-
-    const width = format?.width ?? popup.popup_content[0].media.width
+    console.log({ height, width, url })
 
     switch (true) {
-      case /^\s*top\s*right\s*$/i.test(popup.position):
+      case /^\s*top\s*right\s*$/i.test(popup.popup_position):
         top = 0
         left = screenWidth - width
         break
-      case /^\s*top\s*center\s*$/i.test(popup.position):
+      case /^\s*top\s*center\s*$/i.test(popup.popup_position):
         top = 0
         left = (screenWidth - width) / 2
         break
-      case /^\s*top\s*left\s*$/i.test(popup.position):
+      case /^\s*top\s*left\s*$/i.test(popup.popup_position):
         top = 0
         left = 0
         break
-      case /^\s*center\s*right\s*$/i.test(popup.position):
+      case /^\s*center\s*right\s*$/i.test(popup.popup_position):
         top = (screenHeight - height) / 2
         left = screenWidth - width
         break
-      case /^\s*center\s*$/i.test(popup.position):
+      case /^\s*center\s*$/i.test(popup.popup_position):
         top = (screenHeight - height) / 2
         left = (screenWidth - width) / 2
         break
-      case /^\s*center\s*left\s*$/i.test(popup.position):
+      case /^\s*center\s*left\s*$/i.test(popup.popup_position):
         top = (screenHeight - height) / 2
         left = 0
         break
-      case /^\s*bottom\s*right\s*$/i.test(popup.position):
+      case /^\s*bottom\s*right\s*$/i.test(popup.popup_position):
         top = screenHeight - height
         left = screenWidth - width
         break
-      case /^\s*bottom\s*center\s*$/i.test(popup.position):
+      case /^\s*bottom\s*center\s*$/i.test(popup.popup_position):
         top = screenHeight - height
         left = (screenWidth - width) / 2
         break
-      case /^\s*bottom\s*left\s*$/i.test(popup.position):
+      case /^\s*bottom\s*left\s*$/i.test(popup.popup_position):
         top = screenHeight - height
         left = 0
         break
@@ -63,7 +61,7 @@ const backgroundPopupCreate = async popups => {
 
     setTimeout(() => {
       Browser.windows.create({
-        url: "/tabs/newTab.html",
+        url: `/tabs/newTab.html?url=${url}&width=${width}&height=${height}`,
         type: "popup",
         width: width,
         height: height,
