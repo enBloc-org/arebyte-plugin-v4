@@ -46,6 +46,8 @@ export default function BurgerMenu() {
       </div>
       <div
         className={`burger--modal grid background__stripped ${isOpen ? "burger--modal__active" : "burger--modal__inactive"}`}
+        aria-label={isOpen ? "close menu" : "open menu"}
+        aria-expanded={isOpen}
       >
         <div className="burger--navigation content-box shadow__public">
           <button
