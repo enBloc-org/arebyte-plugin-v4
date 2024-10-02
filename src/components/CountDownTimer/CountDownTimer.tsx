@@ -42,9 +42,19 @@ export default function CountDownTimer() {
   return (
     <div className="content-box timer-container shadow">
       <span>COMING UP IN</span>
-      <div  className="flex center">
+      <div className="flex center">
         <h2>
-          {tHours}:{tMinutes}:{tSeconds}
+          {tHours.toString().length === 1
+            ? "0" + tHours.toString()
+            : tHours}
+          :
+          {tMinutes.toString().length === 1
+            ? "0" + tMinutes.toString()
+            : tMinutes}
+          :
+          {tSeconds.toString().length === 1
+            ? "0" + tSeconds.toString()
+            : tSeconds}
         </h2>
       </div>
     </div>
