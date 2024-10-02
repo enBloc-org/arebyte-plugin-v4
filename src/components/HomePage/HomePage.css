@@ -29,8 +29,18 @@
   }
 }
 
+.up-next {
+  grid-row: 2 /3;
+  font-weight: 300;
+}
+
+.up-next td {
+  font-weight: lighter;
+  font-size: 1.2rem;
+}
+
 .project-thumbnail {
-  grid-row: 2/3;
+  grid-row: 3/4;
 }
 
 .project-thumbnail img {
@@ -39,6 +49,15 @@
   border-top-right-radius: 5px;
 }
 
+.project__button {
+  width: 340px;
+}
+
 .project-thumbnail-description {
-  padding: 1.125rem .6rem;
+  padding: 0.6rem;
+}
+
+.project-thumbnail-description h3 {
+  margin: 0;
+  padding: 0;
 }

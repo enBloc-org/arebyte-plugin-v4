@@ -12,6 +12,8 @@ import useStore from "~store/store"
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
+  const userInfo = useStore.use.user()
+  const currentIndex = userInfo.audience_member.current_index
 
   useEffect(() => {
     const fetchCurrentProject = async () => {
@@ -48,33 +50,76 @@ export default function HomePage() {
       <main className="grid">
         <CountDownTimer />
         {active_project && (
-          <div className="content-box shadow project-thumbnail padding-0">
-            <img
-              src={
-                process.env.PLASMO_PUBLIC_API_URL +
-                active_project.data.project.cover_image.formats
-                  .thumbnail.url
-              }
-              alt={
-                active_project.data.project.cover_image
-                  .alternativeText
-              }
-            />
-            <div className="project-thumbnail-description stack">
-              <h2>{active_project.data.project.title}</h2>
-              <p>
-                Currated By:{" "}
-                {
-                  active_project.data.project.content_creator
-                    .artist_name
-                }
-              </p>
-              <p>
-                Launched:{" "}
-                {formatDate(active_project.data.project.launch_date)}
-              </p>
+          <>
+            <div className="up-next content-box shadow">
+              <p className="container-label">UP NEXT</p>
+              <div className="stack up-next-description">
+                <h2>
+                  {
+                    active_project.data.project.events[currentIndex]
+                      .title
+                  }
+                </h2>
+                <table>
+                  <tr>
+                    <td>Part of:</td>
+                    <td> {active_project.data.project.title}</td>
+                  </tr>
+                  <tr>
+                    <td>Start Time:</td>
+                    <td>
+                      {userInfo.audience_member.event_time.slice(
+                        0,
+                        -4
+                      )}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Day:</td>
+                    <td>
+                      {currentIndex + 1} of{" "}
+                      {active_project.data.project.events.length}
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
-          </div>
+            <div className="project-thumbnail stack">
+              <h3 className="container-label">CURRENT PROJECT</h3>
+              <button
+                className="content-box project__button shadow padding-0"
+                type="button"
+              >
+                <img
+                  src={
+                    process.env.PLASMO_PUBLIC_API_URL +
+                    active_project.data.project.cover_image.formats
+                      .thumbnail.url
+                  }
+                  alt={
+                    active_project.data.project.cover_image
+                      .alternativeText
+                  }
+                />
+                <div className="project-thumbnail-description stack">
+                  <h3>{active_project.data.project.title}</h3>
+                  <p>
+                    Currated By:{" "}
+                    {
+                      active_project.data.project.content_creator
+                        .artist_name
+                    }
+                  </p>
+                  <p>
+                    Launched:{" "}
+                    {formatDate(
+                      active_project.data.project.launch_date
+                    )}
+                  </p>
+                </div>
+              </button>
+            </div>
+          </>
         )}
         <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
           Trigger Popups
