@@ -11,6 +11,9 @@ const currentProjectQuery = {
         },
         events: {
           fields: ["*"]
+        },
+        content_creator: {
+          fields: ['artist_name', "bio"]
         }
       }
     }

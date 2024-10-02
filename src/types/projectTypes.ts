@@ -17,6 +17,11 @@ export interface ProjectData {
   cover_image: ImageResponse
   launch_date: string
   events: EventResponse[]
+  content_creator: {
+    id: number
+    artist_name: string
+    bio: BlocksContent
+  }
 }
 
 export interface Data {
