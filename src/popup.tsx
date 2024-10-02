@@ -12,6 +12,7 @@ import useStore from "~store/store"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
+
   return (
     <Layout>
       <div

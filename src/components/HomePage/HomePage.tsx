@@ -25,6 +25,15 @@ export default function HomePage() {
     fetchCurrentProject()
   }, [])
 
+  const triggerPopups = async () => {
+    await sendToBackground({
+      name: "triggerPopup",
+      body: {
+        id: 1
+      }
+    })
+  }
+
   return (
     <div className="home-page main">
       <BurgerMenu />
@@ -50,6 +59,9 @@ export default function HomePage() {
           </button>
         </div>
       )}
+      <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
+        Trigger Popups
+      </button>
     </div>
   )
 }
