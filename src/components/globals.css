@@ -18,15 +18,27 @@
   box-sizing: border-box;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 /* reusable component styles */
 .content-box {
   border: 2px solid var(--highlight);
-  padding: 5px;
+  padding: 0.6rem;
   border-radius: 7px;
   background-color: var(--base);
 }
 
-.shadow{
+.container-label {
+  font-size: 0.68rem;
+  font-weight: bold;
+  padding-top: 0.35rem;
+  margin: 0;
+}
+
+.shadow {
   box-shadow: 4px 4px 4px 0 var(--accent__public);
 }
 
@@ -80,8 +92,8 @@
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
-  padding: 20px;
+  grid-gap: 20px;
+  padding: 0 20px;
 }
 
 .flex {
@@ -91,6 +103,14 @@
 .center {
   justify-content: center;
   align-items: center;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.stack > * {
+  margin-top: 0.6rem;
 }
 
 .text-xl {
