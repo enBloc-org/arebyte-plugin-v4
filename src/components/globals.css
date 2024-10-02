@@ -1,8 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
   --accent__public: #e35ae4;
   --accent__registered: #4fe737;
+  --timer-font: "Major Mono Display", monospace;
 }
 
 * {
@@ -23,7 +26,7 @@
   background-color: var(--base);
 }
 
-.shadow__public {
+.shadow{
   box-shadow: 4px 4px 4px 0 var(--accent__public);
 }
 
@@ -78,7 +81,16 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
-  padding: 15px;
+  padding: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
 }
 
 .text-xl {

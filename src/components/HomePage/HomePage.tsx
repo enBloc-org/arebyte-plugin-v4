@@ -12,7 +12,6 @@ import useStore from "~store/store"
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const navigateTo = useStore.use.navigateTo()
 
   useEffect(() => {
     const fetchCurrentProject = async () => {
@@ -37,7 +36,7 @@ export default function HomePage() {
   return (
     <div className="home-page page">
       <BurgerMenu />
-      <main>
+      <main className="grid">
         <CountDownTimer />
         {active_project && (
           <div className="content-box shadow__public">
@@ -50,13 +49,6 @@ export default function HomePage() {
               }
               alt=""
             />
-            <button
-              className="button--primary"
-              type="button"
-              onClick={() => navigateTo("profile")}
-            >
-              p r o f i l e
-            </button>
           </div>
         )}
         <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
