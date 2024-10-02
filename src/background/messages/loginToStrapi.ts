@@ -8,15 +8,11 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        identifier: "userone@test.com",
-        password: "User1Test"
-      })
+      body: req.body
     }
   )
 
   const data = await response.json()
-
   res.send(data.jwt)
 }
 
