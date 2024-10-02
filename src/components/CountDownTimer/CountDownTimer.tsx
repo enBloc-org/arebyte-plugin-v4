@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 
 import useStore from "~store/store"
 
+import "./CountDownTimer.css"
+
 export default function CountDownTimer() {
   const [tHours, setTHours] = useState(0)
   const [tMinutes, setTMinutes] = useState(0)
@@ -15,7 +17,7 @@ export default function CountDownTimer() {
     const timer = setInterval(() => {
       const rightNow = new Date()
       const targetTime = new Date()
-  
+
       const [targetHour, targetMinute, targetSecond] =
         event_time.split(":")
 
@@ -38,8 +40,13 @@ export default function CountDownTimer() {
   }, [])
 
   return (
-    <h2>
-      {tHours} : {tMinutes} : {tSeconds}
-    </h2>
+    <div className="content-box timer-container shadow">
+      <span>COMING UP IN</span>
+      <div  className="flex center">
+        <h2>
+          {tHours}:{tMinutes}:{tSeconds}
+        </h2>
+      </div>
+    </div>
   )
 }
