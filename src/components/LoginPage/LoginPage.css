@@ -44,6 +44,10 @@
   height: 2.3rem;
 }
 
+.error-message {
+  grid-row: 6;
+}
+
 @keyframes loginSlideLeft {
   0% {
     transform: translateX(400);

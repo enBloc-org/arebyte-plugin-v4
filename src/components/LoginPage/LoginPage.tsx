@@ -4,10 +4,13 @@ import useStore from "~store/store"
 
 import "~components/LoginPage/LoginPage.css"
 
+import { useState } from "react"
+
 import { sendToBackground } from "@plasmohq/messaging"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
+  const [errorMessage, setErrorMessage] = useState("")
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -15,11 +18,14 @@ export default function LoginPage() {
       password: ""
     },
     onSubmit: async values => {
-      const result: string = await sendToBackground({
+      const response = await sendToBackground({
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
-      console.log(result)
+      if (!response.ok) return setErrorMessage(response.error.message)
+
+      localStorage.setItem("arebyte-audience-token", response.jwt)
+      navigateTo("home")
     }
   })
 
@@ -53,6 +59,9 @@ export default function LoginPage() {
           submit
         </button>
       </form>
+      {errorMessage && (
+        <p className="error-message text-lg">{errorMessage}</p>
+      )}
     </div>
   )
 }
