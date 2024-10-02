@@ -1,5 +1,7 @@
 import { useFormik } from "formik"
 
+import { Storage } from "@plasmohq/storage"
+
 import useStore from "~store/store"
 
 import "~components/LoginPage/LoginPage.css"
@@ -11,6 +13,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
+  const storage = new Storage()
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -24,7 +27,7 @@ export default function LoginPage() {
       })
       if (!response.ok) return setErrorMessage(response.error.message)
 
-      localStorage.setItem("arebyte-audience-token", response.jwt)
+      await storage.set("arebyte-audience-token", response.jwt)
       navigateTo("home")
     }
   })
