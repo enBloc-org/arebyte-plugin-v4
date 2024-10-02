@@ -41,7 +41,7 @@ export default function CountDownTimer() {
 
   return (
     <div className="content-box timer-container shadow">
-      <p>COMING UP IN</p>
+      <p className="container-label">COMING UP IN</p>
       <div className="flex center">
         <h2>
           {tHours.toString().length === 1
