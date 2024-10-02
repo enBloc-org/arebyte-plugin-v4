@@ -6,7 +6,7 @@ export async function fetchStrapiContent<T>(
   try {
     const headers: HeadersInit = {
       "Content-Type": "application/json",
-      ...(bearer ? { Authorization: `Bear ${bearer}` } : {})
+      ...(bearer ? { Authorization: `bearer ${bearer}` } : {})
     }
 
     const response = await fetch(
