@@ -1,6 +1,4 @@
 .home-page {
-  width: 100dvw;
-  height: 100dvh;
   background-color: white;
   animation: slideUp 0.5s ease-out;
   padding: 10px;

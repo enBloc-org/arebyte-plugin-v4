@@ -35,33 +35,34 @@ export default function HomePage() {
   }
 
   return (
-    <div className="home-page main">
+    <div className="home-page page">
       <BurgerMenu />
-      <h1>Home Page</h1>
-      <CountDownTimer />
-      {active_project && (
-        <div className="content-box shadow__public">
-          <h2>{active_project.data.project.title}</h2>
-          <img
-            src={
-              process.env.PLASMO_PUBLIC_API_URL +
-              active_project.data.project.cover_image.formats
-                .thumbnail.url
-            }
-            alt=""
-          />
-          <button
-            className="button--primary"
-            type="button"
-            onClick={() => navigateTo("profile")}
-          >
-            p r o f i l e
-          </button>
-        </div>
-      )}
-      <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
-        Trigger Popups
-      </button>
+      <main>
+        <CountDownTimer />
+        {active_project && (
+          <div className="content-box shadow__public">
+            <h2>{active_project.data.project.title}</h2>
+            <img
+              src={
+                process.env.PLASMO_PUBLIC_API_URL +
+                active_project.data.project.cover_image.formats
+                  .thumbnail.url
+              }
+              alt=""
+            />
+            <button
+              className="button--primary"
+              type="button"
+              onClick={() => navigateTo("profile")}
+            >
+              p r o f i l e
+            </button>
+          </div>
+        )}
+        <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
+          Trigger Popups
+        </button>
+      </main>
     </div>
   )
 }
