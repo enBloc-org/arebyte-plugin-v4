@@ -33,22 +33,47 @@ export default function HomePage() {
     })
   }
 
+  const formatDate = dateString => {
+    return new Date(dateString).toLocaleDateString("en-uk", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric"
+    })
+  }
+
   return (
     <div className="home-page page">
       <BurgerMenu />
       <main className="grid">
         <CountDownTimer />
         {active_project && (
-          <div className="content-box shadow__public">
-            <h2>{active_project.data.project.title}</h2>
+          <div className="content-box shadow project-thumbnail padding-0">
             <img
               src={
                 process.env.PLASMO_PUBLIC_API_URL +
                 active_project.data.project.cover_image.formats
                   .thumbnail.url
               }
-              alt=""
+              alt={
+                active_project.data.project.cover_image
+                  .alternativeText
+              }
             />
+            <div className="project-thumbnail-description stack">
+              <h2>{active_project.data.project.title}</h2>
+              <p>
+                Currated By:{" "}
+                {
+                  active_project.data.project.content_creator
+                    .artist_name
+                }
+              </p>
+              <p>
+                Launched:{" "}
+                {formatDate(active_project.data.project.launch_date)}
+              </p>
+            </div>
           </div>
         )}
         <button style={{ marginTop: "40px" }} onClick={triggerPopups}>

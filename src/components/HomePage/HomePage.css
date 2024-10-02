@@ -28,3 +28,17 @@
     transform: translateY(0);
   }
 }
+
+.project-thumbnail {
+  grid-row: 2/3;
+}
+
+.project-thumbnail img {
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.project-thumbnail-description {
+  padding: 1.125rem .6rem;
+}
