@@ -1,8 +1,7 @@
 import { useFormik } from "formik"
 
-import { Storage } from "@plasmohq/storage"
-
 import useStore from "~store/store"
+import newStorage from "~utils/newStorage"
 
 import "~components/LoginPage/LoginPage.css"
 
@@ -13,7 +12,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
-  const storage = new Storage()
+  const storage = newStorage()
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -25,7 +24,9 @@ export default function LoginPage() {
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
-      if (!response.ok) return setErrorMessage(response.error.message)
+
+      if (response.error)
+        return setErrorMessage(response.error.message)
 
       await storage.set("arebyte-audience-token", response.jwt)
       navigateTo("home")
