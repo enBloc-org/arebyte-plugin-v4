@@ -11,9 +11,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       body: req.body
     }
   )
-
   const data = await response.json()
-  res.send(data.jwt)
+  res.send(data)
 }
 
 export default handler
