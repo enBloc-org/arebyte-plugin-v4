@@ -30,12 +30,12 @@
   --highlight: #0017f8;
   --accent__public: #e35ae4;
   --accent__registered: #4fe737;
-  --timer-font: "Major Mono Display", monospace;
-  --main-font: "Futura TS New", sans-serif;
+  --secondary-font: "Major Mono Display", monospace;
+  --primary-font: "Futura TS New", sans-serif;
 }
 
 * {
-  font-family: var(--main-font);
+  font-family: var(--primary-font);
   color: var(--highlight);
   box-sizing: border-box;
 }

@@ -5,10 +5,9 @@
 }
 
 .timer-container h2 {
-  font-family: var(--timer-font);
+  font-family: var(--secondary-font);
   font-size: 47px;
   font-weight: 200;
-  padding-top: .25rem;
+  padding-top: 0.25rem;
   margin: 0;
 }
-
