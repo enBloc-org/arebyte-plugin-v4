@@ -1,19 +1,20 @@
 export async function fetchStrapiContent<T>(
   endPoint: string,
   method: "GET" | "POST" = "GET",
-  bearer?: string
+  bearer?: string,
+  body?: string
 ): Promise<T> {
   try {
     const headers: HeadersInit = {
       "Content-Type": "application/json",
       ...(bearer ? { Authorization: `bearer ${bearer}` } : {})
     }
-
     const response = await fetch(
       `${process.env.PLASMO_PUBLIC_API_URL}/${endPoint}`,
       {
         method: method,
-        headers: headers
+        headers: headers,
+        ...(body ? { body: body } : {})
       }
     )
     if (!response.ok) {
