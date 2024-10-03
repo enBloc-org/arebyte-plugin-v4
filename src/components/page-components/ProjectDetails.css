@@ -1,5 +1,5 @@
 .project-details {
-  background-color: green;
+  background-color: white;
   animation: slideIn 0.5s ease-out;
 }
 
@@ -27,4 +27,43 @@
   100% {
     transform: translateX(0);
   }
+}
+
+.project-details img {
+  height: 14.3rem;
+}
+
+.project-details__container {
+  margin-top: -1.25rem;
+  grid-column: 1/3;
+}
+
+.project-details-description {
+  width: 340px;
+}
+
+.project-details-description span {
+  margin-right: 0.625rem;
+}
+
+.read-more-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms;
+}
+
+.read-more-content div {
+  overflow: hidden;
+}
+
+.read-more__icon {
+  transition: transform 500ms;
+}
+
+.read-more__icon[aria-expanded="true"] {
+  transform: rotate(90deg);
+}
+
+.read-more-content[aria-hidden="false"] {
+  grid-template-rows: 1fr;
 }
