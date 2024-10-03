@@ -14,7 +14,6 @@ export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const navigateTo = useStore.use.navigateTo()
-  const isLoggedIn = useStore.use.isLoggedIn()
   const updateUserSession = useStore.use.updateUserSession()
   const storage = newStorage()
 
