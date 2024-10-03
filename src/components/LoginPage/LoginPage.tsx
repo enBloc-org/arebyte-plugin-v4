@@ -12,6 +12,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const storage = newStorage()
 
   const { handleSubmit, handleChange } = useFormik({
@@ -20,12 +21,17 @@ export default function LoginPage() {
       password: ""
     },
     onSubmit: async values => {
+      setErrorMessage("")
+      setIsLoading(true)
       const { jwt, error } = await sendToBackground({
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
 
-      if (error) return setErrorMessage(error.message)
+      if (error) {
+        setIsLoading(false)
+        return setErrorMessage(error.message)
+      }
 
       await storage.set("arebyte-audience-token", jwt)
       navigateTo("home")
@@ -58,10 +64,17 @@ export default function LoginPage() {
           required={true}
           onChange={handleChange}
         />
-        <button type="submit" className="button--primary">
+        <button
+          type="submit"
+          className="button--primary"
+          disabled={isLoading}
+        >
           submit
         </button>
       </form>
+      {isLoading && (
+        <span className="error-message text-lg">Loading ...</span>
+      )}
       {errorMessage && (
         <p className="error-message text-lg">{errorMessage}</p>
       )}
