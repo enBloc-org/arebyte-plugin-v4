@@ -7,14 +7,15 @@ import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
 import "./HomePage.css"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
-import useStore from "~store/store"
 import Footer from "~components/Footer/Footer"
+import useStore from "~store/store"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const userInfo = useStore.use.user()
   const currentIndex = userInfo.audience_member.current_index
+  const navigateTo = useStore.use.navigateTo()
 
   useEffect(() => {
     const fetchCurrentProject = async () => {
@@ -81,6 +82,7 @@ export default function HomePage() {
               <button
                 className="home-project__button shadow padding-0"
                 type="button"
+                onClick={() => navigateTo("project-details")}
               >
                 <img
                   src={

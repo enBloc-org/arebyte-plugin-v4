@@ -6,6 +6,7 @@ import { CSSTransition } from "react-transition-group"
 import ExplorePage from "~components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
+import ProjectDetails from "~components/page-components/ProjectDetails"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 
@@ -14,32 +15,41 @@ function IndexPopup() {
 
   return (
     <Layout>
-        <CSSTransition
-          in={currentPage === "home"}
-          timeout={500}
-          classNames="home-page"
-          unmountOnExit
-        >
-          <HomePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "home"}
+        timeout={500}
+        classNames="home-page"
+        unmountOnExit
+      >
+        <HomePage />
+      </CSSTransition>
 
-        <CSSTransition
-          in={currentPage === "profile"}
-          timeout={500}
-          classNames="profile-page"
-          unmountOnExit
-        >
-          <ProfilePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "profile"}
+        timeout={500}
+        classNames="profile-page"
+        unmountOnExit
+      >
+        <ProfilePage />
+      </CSSTransition>
 
-        <CSSTransition
-          in={currentPage === "explore"}
-          timeout={500}
-          classNames="explore-page"
-          unmountOnExit
-        >
-          <ExplorePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "explore"}
+        timeout={500}
+        classNames="explore-page"
+        unmountOnExit
+      >
+        <ExplorePage />
+      </CSSTransition>
+
+      <CSSTransition
+        in={currentPage === "project-details"}
+        timeout={500}
+        classNames="project-details"
+        unmountOnExit
+      >
+        <ProjectDetails />
+      </CSSTransition>
     </Layout>
   )
 }
