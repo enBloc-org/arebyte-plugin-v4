@@ -19,7 +19,7 @@ type State = {
 type Actions = {
   updateCurrentProject: (project: ProjectResponse) => void
   navigateTo: (
-    nextPage: "home" | "profile" | "explore" | "login"
+    nextPage: "home" | "profile" | "explore" | "login" | "favourites"
   ) => void
   updateUserSession: (newLoggedStatus: boolean) => void
 }
