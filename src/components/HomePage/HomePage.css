@@ -40,16 +40,15 @@
 }
 
 .home-up-next td {
-  letter-spacing: 0.07rem;
+  letter-spacing: 0.05rem;
 }
 
 .home-up-next td:nth-child(2n) {
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
 }
 
 .home-project-thumbnail {
   grid-row: 3/4;
-  margin-top: -0.5rem;
 }
 
 .home-project-thumbnail img {
@@ -60,6 +59,8 @@
 
 .home-project__button {
   width: 340px;
+  border: 2px solid var(--highlight);
+  border-radius: 7px;
 }
 
 .home-project-thumbnail-description {

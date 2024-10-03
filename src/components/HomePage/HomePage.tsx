@@ -79,7 +79,7 @@ export default function HomePage() {
             <div className="home-project-thumbnail stack">
               <h3 className="container-label">CURRENT PROJECT</h3>
               <button
-                className="content-box home-project__button shadow padding-0"
+                className="home-project__button shadow padding-0"
                 type="button"
               >
                 <img
