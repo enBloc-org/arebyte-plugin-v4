@@ -3,6 +3,7 @@
   --highlight: #0017f8;
   --accent__public: #e35ae4;
   --accent__registered: #4fe737;
+  --accent__disabled: #7d7d7d;
 }
 
 * {
@@ -46,6 +47,12 @@
   color: var(--base);
 }
 
+.button--primary:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  background-color: var(--base);
+}
+
 .button--primary__clicked {
   background-color: var(--highlight);
   color: var(--base);
@@ -60,6 +67,12 @@
 
 .button--secondary:hover {
   text-decoration: underline;
+}
+
+.button--secondary:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  background-color: var(--base);
 }
 
 /* background styles */
