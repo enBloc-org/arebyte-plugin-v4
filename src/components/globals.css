@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-@import url('https://fonts.cdnfonts.com/css/futura-ts-new');
+@import url("https://fonts.cdnfonts.com/css/futura-ts-new");
 
 /**
  * CONTENTS
@@ -21,7 +21,7 @@
  *
  */
 
- /*------------------------------------*\
+/*------------------------------------*\
   Settings
 \*------------------------------------*/
 
@@ -56,8 +56,8 @@ button {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  padding: 0 20px;
+  grid-gap: 1.25rem;
+  padding: 0 1.25rem;
 }
 
 .flex {
@@ -89,14 +89,13 @@ button {
   font-weight: bold;
 }
 
-
 /*------------------------------------*\
   Components
 \*------------------------------------*/
 
 .content-box {
   border: 2px solid var(--highlight);
-  padding: 0.6rem;
+  padding: 0.625rem;
   border-radius: 7px;
   background-color: var(--base);
 }
