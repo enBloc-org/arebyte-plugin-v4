@@ -1,19 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
-
+@import url('https://fonts.cdnfonts.com/css/futura-ts-new');
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
   --accent__public: #e35ae4;
   --accent__registered: #4fe737;
   --timer-font: "Major Mono Display", monospace;
+  --main-font: "Futura TS New", sans-serif;
 }
 
 * {
-  font-family:
-    Futura,
-    Trebuchet MS,
-    Arial,
-    sans-serif;
+  font-family: var(--main-font);
   color: var(--highlight);
   box-sizing: border-box;
 }
@@ -32,9 +29,8 @@ button {
 }
 
 .container-label {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: bold;
-  padding-top: 0.35rem;
   margin: 0;
 }
 
@@ -110,7 +106,7 @@ button {
 }
 
 .stack > * {
-  margin-top: 0.6rem;
+  margin-top: 0.625rem;
 }
 
 .text-xl {
