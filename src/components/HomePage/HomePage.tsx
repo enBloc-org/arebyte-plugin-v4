@@ -7,8 +7,8 @@ import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
 import "./HomePage.css"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
-import useStore from "~store/store"
 import Footer from "~components/Footer/Footer"
+import useStore from "~store/store"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
@@ -53,26 +53,28 @@ export default function HomePage() {
                   }
                 </h2>
                 <table>
-                  <tr>
-                    <td>Part of:</td>
-                    <td> {active_project.data.project.title}</td>
-                  </tr>
-                  <tr>
-                    <td>Start Time:</td>
-                    <td>
-                      {userInfo.audience_member.event_time.slice(
-                        0,
-                        -4
-                      )}
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Day:</td>
-                    <td>
-                      {currentIndex + 1} of{" "}
-                      {active_project.data.project.events.length}
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <td>Part of:</td>
+                      <td> {active_project.data.project.title}</td>
+                    </tr>
+                    <tr>
+                      <td>Start Time:</td>
+                      <td>
+                        {userInfo.audience_member.event_time.slice(
+                          0,
+                          -4
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Day:</td>
+                      <td>
+                        {currentIndex + 1} of{" "}
+                        {active_project.data.project.events.length}
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
             </div>
@@ -96,7 +98,7 @@ export default function HomePage() {
                 <div className="home-project-thumbnail-description stack">
                   <h3>{active_project.data.project.title}</h3>
                   <p>
-                    Currated By:{" "}
+                    Curated By:{" "}
                     {
                       active_project.data.project.content_creator
                         .artist_name
