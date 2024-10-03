@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { sendToBackground } from "@plasmohq/messaging"
 
 import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
+import newStorage from "~utils/newStorage"
 
 import "./HomePage.css"
 
@@ -13,16 +14,22 @@ export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const navigateTo = useStore.use.navigateTo()
+  const isLoggedIn = useStore.use.isLoggedIn()
+  const updateUserSession = useStore.use.updateUserSession()
+  const storage = newStorage()
 
   useEffect(() => {
-    const fetchCurrentProject = async () => {
+    const getUserSession = async () => {
       const response = await sendToBackground({
         name: "fetchCurrentProject"
       })
       updateCurrentProject(response)
+
+      const token = storage.get("arebyte-audience-token")
+      updateUserSession(!!token)
     }
 
-    fetchCurrentProject()
+    getUserSession()
   }, [])
 
   const triggerPopups = async () => {
