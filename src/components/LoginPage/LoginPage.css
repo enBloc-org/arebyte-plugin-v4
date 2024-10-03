@@ -46,6 +46,8 @@
 
 .error-message {
   grid-row: 6;
+  grid-column: 1;
+  margin: 0;
 }
 
 @keyframes loginSlideLeft {
