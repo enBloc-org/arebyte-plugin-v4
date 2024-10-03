@@ -24,9 +24,7 @@ export default function LoginPage() {
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
-
-      if (response.error)
-        return setErrorMessage(response.error.message)
+      if (!response.ok) return setErrorMessage(response.error.message)
 
       await storage.set("arebyte-audience-token", response.jwt)
       navigateTo("home")
