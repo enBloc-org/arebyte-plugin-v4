@@ -8,6 +8,7 @@ import "./HomePage.css"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import useStore from "~store/store"
+import Footer from "~components/Footer/Footer"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
@@ -25,15 +26,6 @@ export default function HomePage() {
 
     fetchCurrentProject()
   }, [])
-
-  const triggerPopups = async () => {
-    await sendToBackground({
-      name: "triggerPopup",
-      body: {
-        id: 1
-      }
-    })
-  }
 
   const formatDate = dateString => {
     return new Date(dateString).toLocaleDateString("en-uk", {
@@ -121,10 +113,8 @@ export default function HomePage() {
             </div>
           </>
         )}
-        <button style={{ marginTop: "40px", gridRow: '5/6'}} onClick={triggerPopups}>
-          Trigger Popups
-        </button>
       </main>
+      <Footer />
     </div>
   )
 }
