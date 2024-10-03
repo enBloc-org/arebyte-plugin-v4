@@ -1,5 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
 @import url('https://fonts.cdnfonts.com/css/futura-ts-new');
+
+/**
+ * CONTENTS
+ *
+ * SETTINGS
+ * Global...............Globally-available variables and config.
+ *
+ * BASE
+ * Base element defaults...........Basic styles for any html element.
+ *
+ * Universal
+ * Container Primitives...Wrapping and constraining elements.
+ * Font Primitives.......Generic font styles.
+ *
+ * COMPONENTS
+ * Content box class............wrapper for most content boxes.
+ * Context box label............class for content box label.
+ * Buttons..............Button elements and active states.
+ *
+ */
+
+ /*------------------------------------*\
+  Settings
+\*------------------------------------*/
+
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
@@ -15,12 +40,60 @@
   box-sizing: border-box;
 }
 
+/*------------------------------------*\
+  Base
+\*------------------------------------*/
+
 button {
   all: unset;
   cursor: pointer;
 }
 
-/* reusable component styles */
+/*------------------------------------*\
+  Universal
+\*------------------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  padding: 0 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.stack > * {
+  margin-top: 0.625rem;
+}
+
+.text-xl {
+  font-size: 1.8rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+/*------------------------------------*\
+  Components
+\*------------------------------------*/
+
 .content-box {
   border: 2px solid var(--highlight);
   padding: 0.6rem;
@@ -73,7 +146,6 @@ button {
   text-decoration: underline;
 }
 
-/* background styles */
 .background__stripped {
   background: repeating-linear-gradient(
     45deg,
@@ -82,41 +154,4 @@ button {
     var(--highlight) 6.5px,
     var(--highlight) 6px
   );
-}
-
-/* layout and general styling */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 20px;
-  padding: 0 20px;
-}
-
-.flex {
-  display: flex;
-}
-
-.center {
-  justify-content: center;
-  align-items: center;
-}
-
-.padding-0 {
-  padding: 0;
-}
-
-.stack > * {
-  margin-top: 0.625rem;
-}
-
-.text-xl {
-  font-size: 1.8rem;
-}
-
-.text-lg {
-  font-size: 1.2rem;
-}
-
-.bold {
-  font-weight: bold;
 }
