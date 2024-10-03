@@ -20,13 +20,14 @@ export default function LoginPage() {
       password: ""
     },
     onSubmit: async values => {
-      const response = await sendToBackground({
+      const { jwt, error } = await sendToBackground({
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
-      if (!response.ok) return setErrorMessage(response.error.message)
 
-      await storage.set("arebyte-audience-token", response.jwt)
+      if (error) return setErrorMessage(error.message)
+
+      await storage.set("arebyte-audience-token", jwt)
       navigateTo("home")
     }
   })
