@@ -12,12 +12,16 @@ export type PlayList = typeof baseStore<
 type State = {
   user: User
   active_project?: ProjectResponse
+  isLoggedIn: boolean
   currentPage: string
 }
 
 type Actions = {
   updateCurrentProject: (project: ProjectResponse) => void
-  navigateTo: (nextPage: "home" | "profile" | "explore" | "login") => void
+  navigateTo: (
+    nextPage: "home" | "profile" | "explore" | "login"
+  ) => void
+  updateUserSession: (newLoggedStatus: boolean) => void
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -36,13 +40,18 @@ const baseStore = create<State & Actions>(set => {
       }
     },
     active_project: undefined,
+    isLoggedIn: false,
     currentPage: "home",
     navigateTo: nextPage =>
       set(() => ({
         currentPage: nextPage
       })),
     updateCurrentProject: project =>
-      set(() => ({ active_project: project }))
+      set(() => ({ active_project: project })),
+    updateUserSession: newLoggedStatus =>
+      set(() => ({
+        isLoggedIn: newLoggedStatus
+      }))
   }
 })
 
