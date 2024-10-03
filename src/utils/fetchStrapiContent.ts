@@ -16,11 +16,6 @@ export async function fetchStrapiContent<T>(
       ...(body ? { body: body } : {})
     }
   )
-  if (!response.ok) {
-    const errorData = await response.json()
-    return errorData
-  }
-
   const returnedData = await response.json()
   return returnedData as T
 }
