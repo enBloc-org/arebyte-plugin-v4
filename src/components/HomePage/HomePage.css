@@ -29,35 +29,44 @@
   }
 }
 
-.up-next {
+.home-up-next {
   grid-row: 2 /3;
   font-weight: 300;
 }
 
-.up-next td {
-  font-weight: lighter;
-  font-size: 1.2rem;
+.home-up-next h2 {
+  font-weight: 500;
+  letter-spacing: 0.05rem;
 }
 
-.project-thumbnail {
+.home-up-next td {
+  letter-spacing: 0.07rem;
+}
+
+.home-up-next td:nth-child(2n) {
+  padding-left: 1.5rem;
+}
+
+.home-project-thumbnail {
   grid-row: 3/4;
+  margin-top: -0.5rem;
 }
 
-.project-thumbnail img {
+.home-project-thumbnail img {
   width: 100%;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.project__button {
+.home-project__button {
   width: 340px;
 }
 
-.project-thumbnail-description {
-  padding: 0.6rem;
+.home-project-thumbnail-description {
+  padding: 0.625rem;
 }
 
-.project-thumbnail-description h3 {
+.home-project-thumbnail-description h3 {
   margin: 0;
   padding: 0;
 }

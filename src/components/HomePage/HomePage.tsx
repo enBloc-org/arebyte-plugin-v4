@@ -51,10 +51,10 @@ export default function HomePage() {
         <CountDownTimer />
         {active_project && (
           <>
-            <div className="up-next content-box shadow">
+            <div className="home-up-next content-box shadow">
               <p className="container-label">UP NEXT</p>
-              <div className="stack up-next-description">
-                <h2>
+              <div className="stack home-up-next-description">
+                <h2 className="text-lg">
                   {
                     active_project.data.project.events[currentIndex]
                       .title
@@ -84,10 +84,10 @@ export default function HomePage() {
                 </table>
               </div>
             </div>
-            <div className="project-thumbnail stack">
+            <div className="home-project-thumbnail stack">
               <h3 className="container-label">CURRENT PROJECT</h3>
               <button
-                className="content-box project__button shadow padding-0"
+                className="content-box home-project__button shadow padding-0"
                 type="button"
               >
                 <img
@@ -101,7 +101,7 @@ export default function HomePage() {
                       .alternativeText
                   }
                 />
-                <div className="project-thumbnail-description stack">
+                <div className="home-project-thumbnail-description stack">
                   <h3>{active_project.data.project.title}</h3>
                   <p>
                     Currated By:{" "}
@@ -121,7 +121,7 @@ export default function HomePage() {
             </div>
           </>
         )}
-        <button style={{ marginTop: "40px" }} onClick={triggerPopups}>
+        <button style={{ marginTop: "40px", gridRow: '5/6'}} onClick={triggerPopups}>
           Trigger Popups
         </button>
       </main>
