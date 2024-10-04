@@ -15,42 +15,41 @@ function IndexPopup() {
 
   return (
     <Layout>
-        <CSSTransition
-          in={currentPage === "home"}
-          timeout={500}
-          classNames="home-page"
-          unmountOnExit
-        >
-          <HomePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "home"}
+        timeout={500}
+        classNames="home-page"
+        unmountOnExit
+      >
+        <HomePage />
+      </CSSTransition>
 
-        <CSSTransition
-          in={currentPage === "profile"}
-          timeout={500}
-          classNames="profile-page"
-          unmountOnExit
-        >
-          <ProfilePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "profile"}
+        timeout={500}
+        classNames="profile-page"
+        unmountOnExit
+      >
+        <ProfilePage />
+      </CSSTransition>
 
-        <CSSTransition
-          in={currentPage === "explore"}
-          timeout={500}
-          classNames="explore-page"
-          unmountOnExit
-        >
-          <ExplorePage />
-        </CSSTransition>
+      <CSSTransition
+        in={currentPage === "explore"}
+        timeout={500}
+        classNames="explore-page"
+        unmountOnExit
+      >
+        <ExplorePage />
+      </CSSTransition>
 
-        <CSSTransition
-          in={currentPage === "login"}
-          timeout={500}
-          classNames="login-page"
-          unmountOnExit
-        >
-          <LoginPage />
-        </CSSTransition>
-      </div>
+      <CSSTransition
+        in={currentPage === "login"}
+        timeout={500}
+        classNames="login-page"
+        unmountOnExit
+      >
+        <LoginPage />
+      </CSSTransition>
     </Layout>
   )
 }
