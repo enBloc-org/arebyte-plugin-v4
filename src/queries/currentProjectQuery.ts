@@ -13,7 +13,12 @@ const currentProjectQuery = {
           fields: ["*"]
         },
         content_creator: {
-          fields: ['artist_name', "bio"]
+          fields: ["artist_name", "bio"],
+          populate: {
+            upcoming_events: {
+              fields: ["*"]
+            }
+          }
         }
       }
     }

@@ -1,3 +1,5 @@
+import { BlocksContent } from "@strapi/blocks-react-renderer"
+
 export interface User {
   id: number
   username: string
@@ -10,4 +12,15 @@ export interface User {
     event_time: string
     playlist: number[]
   }
+}
+export interface ContentCreator {
+  id: number
+  artist_name: string
+  bio: BlocksContent
+  upcoming_events: {
+    id: number
+    event_name: string
+    event_location: string
+    event_date: string
+  }[]
 }
