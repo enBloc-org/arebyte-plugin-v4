@@ -45,44 +45,44 @@ export default function LoginPage() {
     <div className="login-page page background__stripped">
       <BackButton />
       <main>
-      <form className="login--form" onSubmit={handleSubmit}>
-        <legend className="bold">LOGIN</legend>
-        <input
-          name="identifier"
-          className="content-box shadow login--input"
-          type="email"
-          placeholder="Email*"
-          required={true}
-          onChange={handleChange}
-        />
-        <input
-          name="password"
-          className="content-box shadow login--input"
-          type="text"
-          placeholder="Password*"
-          required={true}
-          onChange={handleChange}
-        />
-        <fieldset>
-          <button
-            type="submit"
-            className="button--primary text-md"
-            disabled={isLoading}
-          >
-            submit
-          </button>
-          <div className="login--account-options">
-            <button>Password Recovery</button>
-            <button>No account yet? Register here</button>
-          </div>
-        </fieldset>
-      </form>
-      {isLoading && (
-        <span className="error-message text-lg">Loading ...</span>
-      )}
-      {errorMessage && (
-        <p className="error-message text-lg">{errorMessage}</p>
-      )}
+        <form className="login--form" onSubmit={handleSubmit}>
+          <legend className="bold">LOGIN</legend>
+          <input
+            name="identifier"
+            className="content-box shadow login--input"
+            type="email"
+            placeholder="Email*"
+            required={true}
+            onChange={handleChange}
+          />
+          <input
+            name="password"
+            className="content-box shadow login--input"
+            type="password"
+            placeholder="Password*"
+            required={true}
+            onChange={handleChange}
+          />
+          <fieldset>
+            <button
+              type="submit"
+              className="button--primary text-md"
+              disabled={isLoading}
+            >
+              submit
+            </button>
+            <div className="login--account-options">
+              <button>Password Recovery</button>
+              <button>No account yet? Register here</button>
+            </div>
+          </fieldset>
+        </form>
+        {isLoading && (
+          <span className="error-message text-lg">Loading ...</span>
+        )}
+        {errorMessage && (
+          <p className="error-message text-lg">{errorMessage}</p>
+        )}
       </main>
       <Footer />
     </div>
