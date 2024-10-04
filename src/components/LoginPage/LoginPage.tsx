@@ -61,13 +61,19 @@ export default function LoginPage() {
           required={true}
           onChange={handleChange}
         />
-        <button
-          type="submit"
-          className="button--primary text-md"
-          disabled={isLoading}
-        >
-          submit
-        </button>
+        <fieldset>
+          <button
+            type="submit"
+            className="button--primary text-md"
+            disabled={isLoading}
+          >
+            submit
+          </button>
+          <div className="login--account-options">
+            <button>Password Recovery</button>
+            <button>No account yet? Register here</button>
+          </div>
+        </fieldset>
       </form>
       {isLoading && (
         <span className="error-message text-lg">Loading ...</span>
