@@ -6,6 +6,12 @@
   padding: 20px;
 }
 
+.login-page .footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
 .login-page-enter {
   z-index: 3;
 }

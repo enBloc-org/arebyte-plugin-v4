@@ -10,6 +10,7 @@ import { useState } from "react"
 import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
+import Footer from "~components/Footer/Footer"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
@@ -43,6 +44,7 @@ export default function LoginPage() {
   return (
     <div className="login-page page background__stripped">
       <BackButton />
+      <main>
       <form className="login--form" onSubmit={handleSubmit}>
         <legend className="bold">LOGIN</legend>
         <input
@@ -81,6 +83,8 @@ export default function LoginPage() {
       {errorMessage && (
         <p className="error-message text-lg">{errorMessage}</p>
       )}
+      </main>
+      <Footer />
     </div>
   )
 }
