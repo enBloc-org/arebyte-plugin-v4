@@ -24,7 +24,7 @@ export default function HomePage() {
       })
       updateCurrentProject(response)
 
-      const token = storage.get("arebyte-audience-token")
+      const token = await storage.get("arebyte-audience-token")
       updateUserSession(!!token)
     }
 
