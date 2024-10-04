@@ -1,30 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+@import url("https://fonts.cdnfonts.com/css/futura-ts-new");
+
+/**
+ * CONTENTS
+ *
+ * SETTINGS
+ * Global...............Globally-available variables and config.
+ *
+ * BASE
+ * Base element defaults...........Basic styles for any html element.
+ *
+ * Universal
+ * Container Primitives...Wrapping and constraining elements.
+ * Font Primitives.......Generic font styles.
+ *
+ * COMPONENTS
+ * Content box class............wrapper for most content boxes.
+ * Context box label............class for content box label.
+ * Buttons..............Button elements and active states.
+ *
+ */
+
+/*------------------------------------*\
+  Settings
+\*------------------------------------*/
+
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
   --accent__public: #e35ae4;
   --accent__registered: #4fe737;
   --accent__disabled: #7d7d7d;
+  --secondary-font: "Major Mono Display", monospace;
+  --primary-font: "Futura TS New", sans-serif;
 }
 
 * {
-  font-family:
-    Futura,
-    Trebuchet MS,
-    Arial,
-    sans-serif;
+  font-family: var(--primary-font);
   color: var(--highlight);
   box-sizing: border-box;
 }
 
-/* reusable component styles */
+/*------------------------------------*\
+  Base
+\*------------------------------------*/
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/*------------------------------------*\
+  Universal
+\*------------------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.stack > * {
+  margin-top: 0.625rem;
+}
+
+.text-xl {
+  font-size: 1.8rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/*------------------------------------*\
+  Components
+\*------------------------------------*/
+
 .content-box {
   border: 2px solid var(--highlight);
-  padding: 5px;
+  padding: 0.625rem;
   border-radius: 7px;
   background-color: var(--base);
 }
 
-.shadow__public {
+.container-label {
+  font-size: 0.7rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.shadow {
   box-shadow: 4px 4px 4px 0 var(--accent__public);
 }
 
@@ -75,7 +158,12 @@
   background-color: var(--base);
 }
 
-/* background styles */
+.button--secondary:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  background-color: var(--base);
+}
+
 .background__stripped {
   background: repeating-linear-gradient(
     45deg,
@@ -84,25 +172,4 @@
     var(--highlight) 6.5px,
     var(--highlight) 6px
   );
-}
-
-/* layout and general styling */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(10, 1fr);
-  grid-gap: 10px;
-  padding: 25px;
-}
-
-.text-xl {
-  font-size: 1.8rem;
-}
-
-.text-lg {
-  font-size: 1.2rem;
-}
-
-.bold {
-  font-weight: bold;
 }

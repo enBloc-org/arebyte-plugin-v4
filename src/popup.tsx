@@ -15,15 +15,6 @@ function IndexPopup() {
 
   return (
     <Layout>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          position: "relative"
-        }}
-      >
         <CSSTransition
           in={currentPage === "home"}
           timeout={500}

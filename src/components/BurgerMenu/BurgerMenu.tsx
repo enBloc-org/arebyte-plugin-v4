@@ -25,6 +25,8 @@ export default function BurgerMenu() {
           type="button"
           className={`button--secondary burger--logo ${isOpen ? "burger--logo__active" : ""}`}
           onClick={handleModal}
+          aria-label={isOpen ? "close menu" : "open menu"}
+          aria-expanded={isOpen}
         >
           <svg
             viewBox="0 0 110 50"
@@ -40,10 +42,8 @@ export default function BurgerMenu() {
       </div>
       <div
         className={`burger--modal grid background__stripped ${isOpen ? "burger--modal__active" : "burger--modal__inactive"}`}
-        aria-label={isOpen ? "close menu" : "open menu"}
-        aria-expanded={isOpen}
       >
-        <div className="burger--navigation content-box shadow__public">
+        <div className="burger--navigation content-box shadow">
           <button
             className="text-xl button--secondary"
             onClick={() => handleNavigate("home")}

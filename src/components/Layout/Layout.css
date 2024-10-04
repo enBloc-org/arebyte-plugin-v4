@@ -1,18 +1,18 @@
+body {
+  height: 600px;
+  width: 380px;
+}
+
 .layout {
   min-height: 100vh;
   width: 100dvw;
   position: relative;
 }
 
-.layout .main {
+.page {
   position: absolute;
   top: 0;
   left: 0;
   height: 100dvh;
   width: 100dvw;
-}
-
-body {
-  height: 600px;
-  width: 380px;
 }
