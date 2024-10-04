@@ -16,7 +16,12 @@ export interface ProjectData {
   description: BlocksContent
   cover_image: ImageResponse
   launch_date: string
-  events: EventResponse[]
+  events: Omit<EventResponse["data"], "pop_ups">[]
+  content_creator: {
+    id: number
+    artist_name: string
+    bio: BlocksContent
+  }
 }
 
 export interface Data {

@@ -1,0 +1,13 @@
+.timer-container {
+  grid-column: 1 / 2;
+  width: 340px;
+  height: 112px;
+}
+
+.timer-container h2 {
+  font-family: var(--secondary-font);
+  font-size: 47px;
+  font-weight: 200;
+  padding-top: 0.25rem;
+  margin: 0;
+}
