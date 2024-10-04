@@ -41,13 +41,13 @@ export default function LoginPage() {
   })
 
   return (
-    <div className="login-page main grid background__stripped">
+    <div className="login-page page background__stripped">
       <BackButton />
       <form className="login--form" onSubmit={handleSubmit}>
         <legend className="bold">LOGIN</legend>
         <input
           name="identifier"
-          className="content-box shadow__public login--input"
+          className="content-box shadow login--input"
           type="email"
           placeholder="Email*"
           required={true}
@@ -55,7 +55,7 @@ export default function LoginPage() {
         />
         <input
           name="password"
-          className="content-box shadow__public login--input"
+          className="content-box shadow login--input"
           type="text"
           placeholder="Password*"
           required={true}
@@ -63,7 +63,7 @@ export default function LoginPage() {
         />
         <button
           type="submit"
-          className="button--primary"
+          className="button--primary text-md"
           disabled={isLoading}
         >
           submit
