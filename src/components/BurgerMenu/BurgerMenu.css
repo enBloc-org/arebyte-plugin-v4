@@ -53,6 +53,7 @@
 .burger--modal__inactive {
   display: none;
   transform: translateX(200%);
+  visibility: hidden;
 }
 
 .burger--modal__active {
