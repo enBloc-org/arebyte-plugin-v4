@@ -1,6 +1,6 @@
 .back-button {
-  width: fit-content;
-  height: 10px;
+  width: 25px;
+  height: 5px;
   background-color: var(--base);
   cursor: pointer;
   padding: 0;
