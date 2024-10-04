@@ -5,6 +5,8 @@ import "./ProjectDetails.css"
 import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import { useState } from "react"
 
+import Footer from "~components/Footer/Footer"
+
 const ProjectDetails = () => {
   const active_project = useStore.use.active_project()
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
@@ -28,13 +30,16 @@ const ProjectDetails = () => {
         }
       />
       <div className="grid project-details__container">
-        <div className="content-box shadow stack project-details-description">
+        <div className="content-box shadow padding-lg project-details-description">
           <h2>{active_project.data.project.title}</h2>
+          <p>
+            Curated by{" "}
+            {active_project.data.project.content_creator.artist_name}
+          </p>
           <p>Launched: {active_project.data.project.launch_date}</p>
           <button
             className="flex center"
             aria-controls="read-more-content"
-            aria-expanded={isExpanded}
             onClick={clickHandler}
           >
             <span
@@ -43,8 +48,8 @@ const ProjectDetails = () => {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="0.9em"
-                height="0.9em"
+                width="0.8em"
+                height="0.8em"
                 viewBox="0 0 32 32"
               >
                 <path
@@ -67,7 +72,31 @@ const ProjectDetails = () => {
             </div>
           </div>
         </div>
+        <div className="content-box shadow stack padding-lg project-curator-details">
+          <h3 className="content-label">Content Curator</h3>
+          <h2>
+            {active_project.data.project.content_creator.artist_name}
+          </h2>
+          <BlocksRenderer
+            content={active_project.data.project.content_creator.bio}
+          />
+          <div className="project-upcoming-events">
+            <h3>Up & Coming Events</h3>
+            {active_project.data.project.content_creator.upcoming_events.map(
+              event => {
+                return (
+                  <div key={event.id}>
+                    <h4>{event.event_name}</h4>
+                    <p>{event.event_location}</p>
+                    <p>{event.event_date}</p>
+                  </div>
+                )
+              }
+            )}
+          </div>
+        </div>
       </div>
+      <Footer />
     </main>
   )
 }

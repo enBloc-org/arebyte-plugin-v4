@@ -31,15 +31,18 @@
 
 .project-details img {
   height: 14.3rem;
+  width: 100%;
+  object-fit: cover;
 }
 
 .project-details__container {
-  margin-top: -1.25rem;
   grid-column: 1/3;
+  margin-top: -1.25rem;
 }
 
 .project-details-description {
   width: 340px;
+  padding: 1.25rem;
 }
 
 .project-details-description span {
@@ -48,12 +51,14 @@
 
 .project-details-description button {
   margin-top: 1.25rem;
+  font-size: 0.938rem;
 }
 
 .read-more-content {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 500ms;
+  margin-top: 0.625rem;
 }
 
 .read-more-content div {
@@ -70,4 +75,9 @@
 
 .read-more-content[aria-hidden="false"] {
   grid-template-rows: 1fr;
+}
+
+.project-curator-details {
+  grid-column: 1/3;
+  width: 340px;
 }
