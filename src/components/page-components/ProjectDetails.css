@@ -46,6 +46,10 @@
   margin-right: 0.625rem;
 }
 
+.project-details-description button {
+  margin-top: 1.25rem;
+}
+
 .read-more-content {
   display: grid;
   grid-template-rows: 0fr;

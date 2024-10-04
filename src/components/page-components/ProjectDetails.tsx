@@ -32,7 +32,7 @@ const ProjectDetails = () => {
           <h2>{active_project.data.project.title}</h2>
           <p>Launched: {active_project.data.project.launch_date}</p>
           <button
-            className="flex center read-more__button"
+            className="flex center"
             aria-controls="read-more-content"
             aria-expanded={isExpanded}
             onClick={clickHandler}
