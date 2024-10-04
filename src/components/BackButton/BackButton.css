@@ -1,0 +1,10 @@
+.back-button {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--base);
+  cursor: pointer;
+}
+
+.back-button svg {
+  /* border: 1px solid green; */
+}

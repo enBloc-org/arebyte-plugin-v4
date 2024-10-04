@@ -9,6 +9,8 @@ import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import BackButton from "~components/BackButton/BackButton"
+
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
@@ -40,12 +42,7 @@ export default function LoginPage() {
 
   return (
     <div className="login-page main grid background__stripped">
-      <button
-        className="button--primary login--button__back"
-        onClick={() => navigateTo("home")}
-      >
-        back
-      </button>
+      <BackButton />
       <form className="login--form" onSubmit={handleSubmit}>
         <legend className="bold">LOGIN</legend>
         <input
