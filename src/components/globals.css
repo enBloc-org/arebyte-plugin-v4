@@ -28,8 +28,7 @@
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
-  --accent__public: #e35ae4;
-  --accent__registered: #4fe737;
+  --accent: #e35ae4;
   --accent__disabled: #7d7d7d;
   --secondary-font: "Major Mono Display", monospace;
   --primary-font: "Futura TS New", sans-serif;
@@ -39,6 +38,14 @@
   font-family: var(--primary-font);
   color: var(--highlight);
   box-sizing: border-box;
+}
+
+[data-theme="logged-in"] {
+  --accent: #4fe737;
+}
+
+[data-theme="logged-out"] {
+  --accent: #e35ae4;
 }
 
 /*------------------------------------*\
@@ -116,11 +123,7 @@ button:hover {
 }
 
 .shadow {
-  box-shadow: 4px 4px 4px 0 var(--accent__public);
-}
-
-.shadow__audience {
-  box-shadow: 4px 4px 4px 0 var(--accent__registered);
+  box-shadow: 4px 4px 4px 0 var(--accent);
 }
 
 .button--primary {

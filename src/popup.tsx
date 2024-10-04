@@ -12,9 +12,10 @@ import useStore from "~store/store"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
+  const isLoggedIn = useStore.use.isLoggedIn()
 
   return (
-    <Layout>
+    <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
       <CSSTransition
         in={currentPage === "home"}
         timeout={500}
