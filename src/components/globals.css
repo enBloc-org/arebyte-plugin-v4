@@ -50,6 +50,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  text-decoration: underline;
+}
+
 /*------------------------------------*\
   Universal
 \*------------------------------------*/
@@ -154,12 +158,6 @@ button {
 
 .button--secondary:hover {
   text-decoration: underline;
-}
-
-.button--secondary:disabled {
-  border-color: var(--accent__disabled);
-  color: var(--accent__disabled);
-  background-color: var(--base);
 }
 
 .button--secondary:disabled {
