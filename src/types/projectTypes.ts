@@ -1,5 +1,6 @@
 import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
+import type { EventResponse } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 
 export interface ProjectDescription {
@@ -15,12 +16,7 @@ export interface ProjectData {
   description: BlocksContent
   cover_image: ImageResponse
   launch_date: string
-  events: {
-    id: number
-    title: string
-    createdAt: string
-    updatedAt: string
-  }[]
+  events: Omit<EventResponse["data"], "pop_ups">[]
   content_creator: {
     id: number
     artist_name: string
