@@ -3,12 +3,14 @@ import type { ReactNode } from "react"
 import "./Layout.css"
 
 export default function Layout({
-  children
+  children,
+  theme
 }: {
-  children: ReactNode
+  children: ReactNode,
+  theme:"logged-in"|"logged-out"
 }) {
   return (
-    <div className="layout">
+    <div className="layout" data-theme={theme}>
       {children}
     </div>
   )
