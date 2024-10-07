@@ -9,6 +9,7 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
@@ -27,15 +28,6 @@ export default function HomePage() {
 
     fetchCurrentProject()
   }, [])
-
-  const formatDate = dateString => {
-    return new Date(dateString).toLocaleDateString("en-uk", {
-      weekday: "long",
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    })
-  }
 
   return (
     <div className="home-page page">
