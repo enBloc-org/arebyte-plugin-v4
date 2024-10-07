@@ -149,6 +149,9 @@ button {
   margin-top: 0.625rem;
 }
 
+.margin-top-lg {
+  margin-top: 2.5rem;
+}
 .text-xl {
   font-size: 1.8rem;
 }

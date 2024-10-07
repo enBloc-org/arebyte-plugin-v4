@@ -6,6 +6,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import { useState } from "react"
 
 import Footer from "~components/Footer/Footer"
+import formatDate from "~utils/formatDate"
 
 const ProjectDetails = () => {
   const active_project = useStore.use.active_project()
@@ -80,19 +81,21 @@ const ProjectDetails = () => {
           <BlocksRenderer
             content={active_project.data.project.content_creator.bio}
           />
-          <div className="project-upcoming-events">
+          <div className="margin-top-lg">
             <h3>Up & Coming Events</h3>
-            {active_project.data.project.content_creator.upcoming_events.map(
-              event => {
-                return (
-                  <div key={event.id}>
-                    <h4>{event.event_name}</h4>
-                    <p>{event.event_location}</p>
-                    <p>{event.event_date}</p>
-                  </div>
-                )
-              }
-            )}
+            <div className="flex project-upcoming-events">
+              {active_project.data.project.content_creator.upcoming_events.map(
+                event => {
+                  return (
+                    <div key={event.id}>
+                      <h4>{event.event_name}</h4>
+                      <p>{event.event_location}</p>
+                      <p>{formatDate(event.event_date)}</p>
+                    </div>
+                  )
+                }
+              )}
+            </div>
           </div>
         </div>
       </div>
