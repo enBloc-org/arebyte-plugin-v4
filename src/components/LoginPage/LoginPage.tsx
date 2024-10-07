@@ -11,6 +11,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
+import { User, UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
@@ -26,17 +27,42 @@ export default function LoginPage() {
     onSubmit: async values => {
       setErrorMessage("")
       setIsLoading(true)
-      const { jwt, error } = await sendToBackground({
+      const {
+        jwt,
+        user: { id },
+        error: authError
+      } = await sendToBackground({
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
 
-      if (error) {
+      if (authError) {
         setIsLoading(false)
-        return setErrorMessage(error.message)
+        return setErrorMessage(authError.message)
       }
 
-      await storage.set("arebyte-audience-token", jwt)
+      const { data: userData, error: userError } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: jwt, id: id }
+        })
+
+      if (userError) {
+        setIsLoading(false)
+        return setErrorMessage(userError.message)
+      }
+
+      const userSession: UserSession = {
+        jwt: jwt,
+        id: id,
+        is_paused: userData.is_paused,
+        is_quiet: userData.is_quiet,
+        event_time: userData.event_time,
+        project_id: userData.project_id,
+        current_index: userData.current_index
+      }
+
+      await storage.set("arebyte-audience-token", userSession)
       navigateTo("home")
     }
   })

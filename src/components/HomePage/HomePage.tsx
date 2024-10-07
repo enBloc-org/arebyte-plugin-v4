@@ -10,6 +10,7 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import { UserSession } from "~types/userTypes"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
@@ -26,10 +27,12 @@ export default function HomePage() {
       })
       updateCurrentProject(response)
 
-      const token = await storage.get("arebyte-audience-token")
-      updateUserSession(!!token)
+      const userSession: UserSession = await storage.get(
+        "arebyte-audience-token"
+      )
+      updateUserSession(!!userSession.jwt)
+      console.log(userSession)
     }
-
     getUserSession()
   }, [])
 
