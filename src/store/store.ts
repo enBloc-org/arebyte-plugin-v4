@@ -23,7 +23,7 @@ type Actions = {
       | "profile"
       | "explore"
       | "login"
-      | "project-details"
+      | "current-project"
   ) => void
 }
 
