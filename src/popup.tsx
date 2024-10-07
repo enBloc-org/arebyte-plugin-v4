@@ -6,7 +6,7 @@ import { CSSTransition } from "react-transition-group"
 import ExplorePage from "~components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
-import ProjectDetails from "~components/page-components/ProjectDetails"
+import ProjectDetails from "~components/page-components/ProjectDetails/ProjectDetails"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 
