@@ -13,20 +13,18 @@ interface State {
   user: User
   active_project?: ProjectResponse
   isLoggedIn: boolean
-  currentPage: "home" | "profile" | "explore" | "login" | "favourites"
+  currentPage:
+    | "home"
+    | "profile"
+    | "explore"
+    | "login"
+    | "current-project"
+    | "favourites"
   previousPage: State["currentPage"]
 }
 
 interface Actions {
   updateCurrentProject: (project: ProjectResponse) => void
-  navigateTo: (
-    nextPage:
-      | "home"
-      | "profile"
-      | "explore"
-      | "login"
-      | "current-project"
-  ) => void
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUserSession: (newLoggedStatus: boolean) => void
 }
