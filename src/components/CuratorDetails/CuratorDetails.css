@@ -1,0 +1,13 @@
+.curator-details {
+  grid-column: 1/3;
+  width: 340px;
+}
+
+.upcoming-events {
+  gap: 2rem;
+}
+
+.upcoming-events h4 {
+  font-weight: 400;
+  font-size: 0.9rem;
+}
