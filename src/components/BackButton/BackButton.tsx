@@ -2,13 +2,17 @@ import useStore from "~store/store"
 
 import "./BackButton.css"
 
-export default function BackButton() {
+export default function BackButton({
+  className
+}: {
+  className?: string
+}) {
   const previousPage = useStore.use.previousPage()
   const navigateTo = useStore.use.navigateTo()
 
   return (
     <button
-      className="back-button text-xl content-box"
+      className={`back-button text-xl content-box ${className}`}
       onClick={() => navigateTo(previousPage)}
     >
       <svg
