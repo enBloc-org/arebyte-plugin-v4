@@ -6,7 +6,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import { useState } from "react"
 
 import Footer from "~components/Footer/Footer"
-import SocialLinks from "~components/social-media-icons/SocialLinks"
+import SocialLinks from "~components/SocialLinks/SocialLinks"
 import formatDate from "~utils/formatDate"
 
 const ProjectDetails = () => {

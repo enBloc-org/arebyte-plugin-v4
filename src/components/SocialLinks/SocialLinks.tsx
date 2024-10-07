@@ -1,12 +1,12 @@
 import type { ContentCreator } from "~types/userTypes"
 
-import FacebookIcon from "./FacebookIcon"
-import InstagramIcon from "./InstagramIcon"
-import LinkedIcon from "./LinkedIcon"
-import MastodonIcon from "./MastodonIcon"
-import TiktokIcon from "./TiktokIcon"
-import XIcon from "./XIcon"
-import YoutubeIcon from "./YoutubeIcon"
+import FacebookIcon from "../social-media-icons/FacebookIcon"
+import InstagramIcon from "../social-media-icons/InstagramIcon"
+import LinkedIcon from "../social-media-icons/LinkedIcon"
+import MastodonIcon from "../social-media-icons/MastodonIcon"
+import TiktokIcon from "../social-media-icons/TiktokIcon"
+import XIcon from "../social-media-icons/XIcon"
+import YoutubeIcon from "../social-media-icons/YoutubeIcon"
 
 import "./SocialLinks.css"
 
@@ -41,11 +41,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
   return (
     <div className="social-links">
       {socialMediaLinks.map(link => (
-        <a
-          key={link.id}
-          href={link.link_url}
-          target="_blank"
-        >
+        <a key={link.id} href={link.link_url} target="_blank">
           {renderIcon(link.platform)}
         </a>
       ))}
