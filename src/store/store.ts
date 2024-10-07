@@ -19,6 +19,7 @@ interface State {
     | "explore"
     | "login"
     | "current-project"
+    | "explore-project"
     | "favourites"
   previousPage: State["currentPage"]
 }

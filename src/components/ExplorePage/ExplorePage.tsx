@@ -11,6 +11,10 @@ export default function ExplorePage() {
       <button type="button" onClick={() => navigateTo("home")}>
         h o m e
       </button>
+      <br />
+      <button type="button" onClick={() => navigateTo("explore-project")}>
+        Project 1
+      </button>
     </div>
   )
 }

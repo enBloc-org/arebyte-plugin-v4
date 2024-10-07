@@ -1,0 +1,36 @@
+.explore-project {
+  background-color: white;
+  animation: exploreProjectIn 0.5s ease-out;
+}
+
+.explore-project-enter {
+  z-index: 3;
+}
+
+.explore-project-enter-active {
+  z-index: 3;
+}
+
+.explore-project-exit {
+  z-index: 1;
+}
+
+.explore-project-exit-active {
+  z-index: 1;
+}
+
+@keyframes exploreProjectIn {
+  0% {
+    transform: translateX(200);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.explore-project__back-button {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+}
