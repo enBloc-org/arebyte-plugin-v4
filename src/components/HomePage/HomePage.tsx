@@ -76,7 +76,7 @@ export default function HomePage() {
               <button
                 className="home-project__button shadow padding-0"
                 type="button"
-                onClick={() => navigateTo("project-details")}
+                onClick={() => navigateTo("current-project")}
               >
                 <img
                   src={
