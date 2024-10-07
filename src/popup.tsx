@@ -6,15 +6,17 @@ import { CSSTransition } from "react-transition-group"
 import ExplorePage from "~components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
+import LoginPage from "~components/LoginPage/LoginPage"
+import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
-import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
+  const isLoggedIn = useStore.use.isLoggedIn()
 
   return (
-    <Layout>
+    <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
       <CSSTransition
         in={currentPage === "home"}
         timeout={500}
@@ -49,6 +51,14 @@ function IndexPopup() {
         unmountOnExit
       >
         <CurrentProjectPage />
+      </CSSTransition>
+      <CSSTransition
+        in={currentPage === "login"}
+        timeout={500}
+        classNames="login-page"
+        unmountOnExit
+      >
+        <LoginPage />
       </CSSTransition>
     </Layout>
   )

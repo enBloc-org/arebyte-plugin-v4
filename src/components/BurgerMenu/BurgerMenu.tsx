@@ -10,6 +10,7 @@ export default function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false)
   const navigateTo = useStore.use.navigateTo()
   const currentPage = useStore.use.currentPage()
+  const isLoggedIn = useStore.use.isLoggedIn()
 
   const handleModal = () => setIsOpen(previous => !previous)
 
@@ -55,12 +56,20 @@ export default function BurgerMenu() {
           >
             EXPLORE
           </button>
-          <button
-            className="text-xl button--secondary"
-            onClick={() => handleNavigate("login")}
-          >
-            LOGIN
-          </button>
+
+          {isLoggedIn ? (
+            <>
+            <button className='button--secondary text-xl' onClick={()=>handleNavigate("profile")}>my account</button>
+            <button className='button--secondary text-xl' onClick={()=>handleNavigate("favourites")}>favourites</button>
+            </>
+          ) : (
+            <button
+              className="text-xl button--secondary"
+              onClick={() => handleNavigate("login")}
+            >
+              LOGIN
+            </button>
+          )}
         </div>
         <div className="burger--contact">
           <div>

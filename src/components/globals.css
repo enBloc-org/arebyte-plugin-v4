@@ -28,8 +28,8 @@
 :root {
   --base: #ffffff;
   --highlight: #0017f8;
-  --accent__public: #e35ae4;
-  --accent__registered: #4fe737;
+  --accent: #e35ae4;
+  --accent__disabled: #7d7d7d;
   --secondary-font: "Major Mono Display", monospace;
   --primary-font: "Futura TS New", sans-serif;
 }
@@ -40,6 +40,14 @@
   box-sizing: border-box;
 }
 
+[data-theme="logged-in"] {
+  --accent: #4fe737;
+}
+
+[data-theme="logged-out"] {
+  --accent: #e35ae4;
+}
+
 /*------------------------------------*\
   Base
 \*------------------------------------*/
@@ -48,7 +56,46 @@ button {
   border: none;
   background-color: transparent;
   cursor: pointer;
-  text-align: left;
+}
+
+/*------------------------------------*\
+  Universal
+\*------------------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.stack > * {
+  margin-top: 0.625rem;
+}
+
+.text-xl {
+  font-size: 1.8rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 /*------------------------------------*\
@@ -69,11 +116,7 @@ button {
 }
 
 .shadow {
-  box-shadow: 4px 4px 4px 0 var(--accent__public);
-}
-
-.shadow__audience {
-  box-shadow: 4px 4px 4px 0 var(--accent__registered);
+  box-shadow: 4px 4px 4px 0 var(--accent);
 }
 
 .button--primary {
@@ -91,6 +134,12 @@ button {
   color: var(--base);
 }
 
+.button--primary:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  background-color: var(--base);
+}
+
 .button--primary__clicked {
   background-color: var(--highlight);
   color: var(--base);
@@ -105,6 +154,12 @@ button {
 
 .button--secondary:hover {
   text-decoration: underline;
+}
+
+.button--secondary:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  background-color: var(--base);
 }
 
 .background__stripped {
