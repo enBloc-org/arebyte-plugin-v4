@@ -52,6 +52,7 @@ function IndexPopup() {
       >
         <CurrentProjectPage />
       </CSSTransition>
+      
       <CSSTransition
         in={currentPage === "login"}
         timeout={500}
