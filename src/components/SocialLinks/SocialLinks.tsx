@@ -28,7 +28,7 @@ const SocialLinks: React.FC<SocialLinksProps> = ({
       case "X":
         return <XIcon />
       case "Mastodon":
-        return <MastodonIcon />
+        return <MastodonIcon width="1.65rem" height="1.65rem"/>
       case "Youtube":
         return <YoutubeIcon />
       case "Tiktok":
