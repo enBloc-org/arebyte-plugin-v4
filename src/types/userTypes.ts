@@ -24,6 +24,7 @@ export interface ContentCreator {
     event_date: string
   }[]
   social_media_links: {
+    id: number
     platform:
       | "Facebook"
       | "Instagram"
@@ -32,5 +33,5 @@ export interface ContentCreator {
       | "Mastodon"
       | "Youtube"
     link_url: string
-  }
+  }[]
 }
