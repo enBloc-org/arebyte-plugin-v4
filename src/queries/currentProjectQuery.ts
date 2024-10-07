@@ -17,6 +17,9 @@ const currentProjectQuery = {
           populate: {
             upcoming_events: {
               fields: ["*"]
+            },
+            social_media_links: {
+              fields: ["*"]
             }
           }
         }
