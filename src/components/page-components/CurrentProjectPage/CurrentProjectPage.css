@@ -28,3 +28,9 @@
     transform: translateX(0);
   }
 }
+
+.current-project__back-button {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+}

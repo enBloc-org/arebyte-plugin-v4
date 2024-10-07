@@ -2,6 +2,7 @@ import useStore from "~store/store"
 
 import "./CurrentProjectPage.css"
 
+import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
@@ -12,6 +13,7 @@ const CurrentProjectPage = () => {
   return (
     <>
       <main className="current-project page">
+        <BackButton className="current-project__back-button" />
         <img
           src={
             process.env.PLASMO_PUBLIC_API_URL +
@@ -28,8 +30,8 @@ const CurrentProjectPage = () => {
             curator={active_project.data.project.content_creator}
           />
         </div>
+        <Footer />
       </main>
-      <Footer />
     </>
   )
 }
