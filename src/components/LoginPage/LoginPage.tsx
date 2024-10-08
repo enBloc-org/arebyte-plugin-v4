@@ -46,8 +46,12 @@ export default function LoginPage() {
         body: { jwt: jwt, id: id }
       })
 
-      const userSession: UserSession = { ...userData, jwt }
-      console.log(userSession)
+      const userSession: UserSession = {
+        user: {
+          ...userData
+        },
+        jwt
+      }
 
       await storage.set("arebyte-audience-session", userSession)
       navigateTo("home")

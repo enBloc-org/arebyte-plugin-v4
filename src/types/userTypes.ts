@@ -31,6 +31,7 @@ export interface UserResponse {
   meta: object
 }
 
-export interface UserSession extends User {
+export interface UserSession {
+  user: User
   jwt: string
 }
