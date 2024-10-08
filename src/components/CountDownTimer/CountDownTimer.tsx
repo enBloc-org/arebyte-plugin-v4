@@ -37,7 +37,7 @@ export default function CountDownTimer() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [event_time])
 
   return (
     <div className="content-box timer-container shadow">
