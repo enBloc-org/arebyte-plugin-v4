@@ -61,7 +61,6 @@ button:hover {
   text-decoration: underline;
 }
 
-
 /*------------------------------------*\
   Components
 \*------------------------------------*/
@@ -162,6 +161,10 @@ button:hover {
 
 .stack > * {
   margin-top: 0.625rem;
+}
+
+.margin-top-lg {
+  margin-top: 2.5rem;
 }
 
 .text-xl {

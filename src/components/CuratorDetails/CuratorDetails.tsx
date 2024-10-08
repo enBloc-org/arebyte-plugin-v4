@@ -14,7 +14,7 @@ const CuratorDetails = ({ curator }: { curator: ContentCreator }) => {
       <h2>{curator.artist_name}</h2>
       <BlocksRenderer content={curator.bio} />
       <div className="margin-top-lg">
-        <h3>Up & Coming Events</h3>
+        <h3>UP & COMING EVENTS</h3>
         <div className="flex upcoming-events">
           {curator.upcoming_events.map(event => {
             return (
