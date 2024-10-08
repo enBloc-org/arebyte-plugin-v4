@@ -101,7 +101,7 @@ export default function HomePage() {
                     Curated By:{" "}
                     {
                       active_project.data.project.content_creator
-                        .artist_name
+                        .curator_name
                     }
                   </p>
                   <p>

@@ -11,7 +11,7 @@ const CuratorDetails = ({ curator }: { curator: ContentCreator }) => {
   return (
     <div className="content-box shadow stack padding-lg curator-details">
       <h3 className="content-label">Content Curator</h3>
-      <h2>{curator.artist_name}</h2>
+      <h2>{curator.curator_name}</h2>
       <BlocksRenderer content={curator.bio} />
       <div className="margin-top-lg">
         <h3>UP & COMING EVENTS</h3>

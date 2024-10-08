@@ -16,7 +16,7 @@ const ProjectDetails = ({ project }: { project: ProjectData }) => {
   return (
     <div className="content-box shadow padding-lg project-details-description">
       <h2>{project.title}</h2>
-      <p>Curated by {project.content_creator.artist_name}</p>
+      <p>Curated by {project.content_creator.curator_name}</p>
       <p>Launched: {project.launch_date}</p>
       <button
         className="flex center"

@@ -10,8 +10,11 @@ const projectQuery = {
       fields: ["*"]
     },
     content_creator: {
-      fields: ["artist_name", "bio"],
+      fields: ["curator_name", "bio", "curator_organisation"],
       populate: {
+        organisation_logo: {
+          fields: ["*"]
+        },
         upcoming_events: {
           fields: ["*"]
         },

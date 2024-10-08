@@ -1,5 +1,7 @@
 import { BlocksContent } from "@strapi/blocks-react-renderer"
 
+import type { ImageResponse } from "./imageTypes"
+
 export interface User {
   id: number
   username: string
@@ -15,7 +17,9 @@ export interface User {
 }
 export interface ContentCreator {
   id: number
-  artist_name: string
+  curator_name: string
+  curator_organisation: string
+  organisation_logo: ImageResponse
   bio: BlocksContent
   upcoming_events: {
     id: number
