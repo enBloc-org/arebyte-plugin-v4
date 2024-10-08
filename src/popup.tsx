@@ -28,7 +28,7 @@ function IndexPopup() {
 
   useEffect(() => {
     updateUserSession(!!userSession)
-    if (userSession) updateUser(userSession.user)
+    if (userSession) updateUser({ ...userSession.user })
   }, [userSession?.jwt])
 
   return (
