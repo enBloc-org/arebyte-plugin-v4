@@ -30,7 +30,7 @@ export interface Data {
 }
 
 export interface ProjectResponse {
-  data: Data
+  data: Data | ProjectData
   meta: object
 }
 
