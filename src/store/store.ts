@@ -22,27 +22,32 @@ interface Actions {
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUserSession: (newLoggedStatus: boolean) => void
   updateUser: (newUser: User) => void
+  resetStore: () => void
+}
+
+const initialState: State = {
+  user: {
+    id: undefined,
+    username: undefined,
+    email: undefined,
+    audience_member: {
+      is_quiet: false,
+      is_paused: false,
+      project_id: undefined,
+      current_index: 0,
+      event_time: "12:00:00.000",
+      playlist: []
+    }
+  },
+  active_project: undefined,
+  isLoggedIn: false,
+  currentPage: "home",
+  previousPage: "home"
 }
 
 const baseStore = create<State & Actions>(set => {
   return {
-    user: {
-      id: undefined,
-      username: undefined,
-      email: undefined,
-      audience_member: {
-        is_quiet: false,
-        is_paused: false,
-        project_id: undefined,
-        current_index: 0,
-        event_time: "12:00:00.000",
-        playlist: []
-      }
-    },
-    active_project: undefined,
-    isLoggedIn: false,
-    currentPage: "home",
-    previousPage: "home",
+    ...initialState,
     navigateTo: nextPage =>
       set(state => ({
         previousPage: state.currentPage,
@@ -54,7 +59,18 @@ const baseStore = create<State & Actions>(set => {
       set(() => ({
         isLoggedIn: newLoggedStatus
       })),
-    updateUser: newUser => set(() => ({ user: newUser }))
+    updateUser: newUser => {
+      console.log(newUser)
+      set(() => ({ user: newUser }))
+    },
+    resetStore: () =>
+      set(() => ({
+        user: initialState.user,
+        active_project: initialState.active_project,
+        isLoggedIn: initialState.isLoggedIn,
+        currentPage: initialState.currentPage,
+        previousPage: initialState.previousPage
+      }))
   }
 })
 
