@@ -18,7 +18,6 @@ import newStorage from "~utils/newStorage"
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
-  const updateUserSession = useStore.use.updateUserSession()
   const updateUser = useStore.use.updateUser()
 
   const [userSession] = useStorage<UserSession>({
@@ -27,8 +26,7 @@ function IndexPopup() {
   })
 
   useEffect(() => {
-    updateUserSession(!!userSession)
-    if (userSession) updateUser({ ...userSession.user })
+    if (userSession) updateUser(userSession)
   }, [userSession?.jwt])
 
   return (
