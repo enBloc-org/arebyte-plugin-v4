@@ -1,7 +1,9 @@
 import { useFormik } from "formik"
 
+// import newStorage from "~utils/newStorage"
+import { useStorage } from "@plasmohq/storage/hook"
+
 import useStore from "~store/store"
-import newStorage from "~utils/newStorage"
 
 import "~components/LoginPage/LoginPage.css"
 
@@ -17,7 +19,7 @@ export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const storage = newStorage()
+  const [, setUserSession] = useStorage("arebyte-audience-session")
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -53,7 +55,7 @@ export default function LoginPage() {
         jwt
       }
 
-      await storage.set("arebyte-audience-session", userSession)
+      setUserSession(userSession)
       navigateTo("home")
     }
   })
