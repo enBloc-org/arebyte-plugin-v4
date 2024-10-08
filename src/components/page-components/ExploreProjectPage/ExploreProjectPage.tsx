@@ -30,7 +30,7 @@ const ExploreProjectPage = () => {
 
   return (
     <>
-      {project ? (
+      {project && (
         <main className="explore-project page">
           <BackButton className="explore-project__back-button" />
           <img
@@ -49,8 +49,6 @@ const ExploreProjectPage = () => {
           </div>
           <Footer />
         </main>
-      ) : (
-        <p>Loading</p>
       )}
     </>
   )
