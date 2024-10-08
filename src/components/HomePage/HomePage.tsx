@@ -31,8 +31,11 @@ export default function HomePage() {
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
-      updateUserSession(!!userSession.jwt)
-      updateUser(userSession.user)
+
+      updateUserSession(!!userSession)
+      if (userSession) {
+        updateUser(userSession.user)
+      }
     }
     getUserSession()
   }, [])
