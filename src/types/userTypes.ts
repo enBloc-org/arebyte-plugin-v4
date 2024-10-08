@@ -22,6 +22,7 @@ export interface ContentCreator {
     event_name: string
     event_location: string
     event_date: string
+    event_link: string
   }[]
   social_media_links: {
     id: number

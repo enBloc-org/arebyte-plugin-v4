@@ -19,7 +19,9 @@ const CuratorDetails = ({ curator }: { curator: ContentCreator }) => {
           {curator.upcoming_events.map(event => {
             return (
               <div key={event.id}>
-                <h4>{event.event_name}</h4>
+                <a href={event.event_link}>
+                  <h4>{event.event_name}</h4>
+                </a>
                 <p>{event.event_location}</p>
                 <p>{formatDate(event.event_date)}</p>
               </div>
