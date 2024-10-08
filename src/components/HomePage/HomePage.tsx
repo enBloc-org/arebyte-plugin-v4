@@ -17,6 +17,7 @@ export default function HomePage() {
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const userInfo = useStore.use.user()
   const updateUserSession = useStore.use.updateUserSession()
+  const updateUser = useStore.use.updateUser()
   const storage = newStorage()
   const currentIndex = userInfo.audience_member.current_index
 
@@ -31,6 +32,7 @@ export default function HomePage() {
         "arebyte-audience-session"
       )
       updateUserSession(!!userSession.jwt)
+      updateUser(userSession.user)
     }
     getUserSession()
   }, [])

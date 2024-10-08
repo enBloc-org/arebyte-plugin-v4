@@ -21,6 +21,7 @@ interface Actions {
   updateCurrentProject: (project: ProjectResponse) => void
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUserSession: (newLoggedStatus: boolean) => void
+  updateUser: (newUser: User) => void
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -52,7 +53,8 @@ const baseStore = create<State & Actions>(set => {
     updateUserSession: newLoggedStatus =>
       set(() => ({
         isLoggedIn: newLoggedStatus
-      }))
+      })),
+    updateUser: newUser => set(() => ({ user: newUser }))
   }
 })
 
