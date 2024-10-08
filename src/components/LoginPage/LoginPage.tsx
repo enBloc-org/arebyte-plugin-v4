@@ -41,28 +41,15 @@ export default function LoginPage() {
         return setErrorMessage(authError.message)
       }
 
-      const { data: userData, error: userError } =
-        await sendToBackground({
-          name: "fetchUserProfile",
-          body: { jwt: jwt, id: id }
-        })
+      const userData = await sendToBackground({
+        name: "fetchUserProfile",
+        body: { jwt: jwt, id: id }
+      })
 
-      if (userError) {
-        setIsLoading(false)
-        return setErrorMessage(userError.message)
-      }
+      const userSession: UserSession = { ...userData, jwt }
+      console.log(userSession)
 
-      const userSession: UserSession = {
-        jwt: jwt,
-        id: id,
-        is_paused: userData.is_paused,
-        is_quiet: userData.is_quiet,
-        event_time: userData.event_time,
-        project_id: userData.project_id,
-        current_index: userData.current_index
-      }
-
-      await storage.set("arebyte-audience-token", userSession)
+      await storage.set("arebyte-audience-session", userSession)
       navigateTo("home")
     }
   })

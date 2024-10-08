@@ -28,10 +28,9 @@ export default function HomePage() {
       updateCurrentProject(response)
 
       const userSession: UserSession = await storage.get(
-        "arebyte-audience-token"
+        "arebyte-audience-session"
       )
       updateUserSession(!!userSession.jwt)
-      console.log(userSession)
     }
     getUserSession()
   }, [])
