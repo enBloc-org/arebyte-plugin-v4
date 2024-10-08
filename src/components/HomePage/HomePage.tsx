@@ -3,7 +3,6 @@ import { useEffect } from "react"
 import { sendToBackground } from "@plasmohq/messaging"
 
 import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
-import newStorage from "~utils/newStorage"
 
 import "./HomePage.css"
 
