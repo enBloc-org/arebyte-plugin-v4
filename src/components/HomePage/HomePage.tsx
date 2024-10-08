@@ -10,15 +10,11 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
-import { UserSession } from "~types/userTypes"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const userInfo = useStore.use.user()
-  const updateUserSession = useStore.use.updateUserSession()
-  const updateUser = useStore.use.updateUser()
-  const storage = newStorage()
   const currentIndex = userInfo.audience_member.current_index
 
   useEffect(() => {
@@ -27,15 +23,6 @@ export default function HomePage() {
         name: "fetchCurrentProject"
       })
       updateCurrentProject(response)
-
-      const userSession: UserSession = await storage.get(
-        "arebyte-audience-session"
-      )
-
-      updateUserSession(!!userSession)
-      if (userSession) {
-        updateUser(userSession.user)
-      }
     }
     getUserSession()
   }, [])
