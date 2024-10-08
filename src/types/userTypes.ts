@@ -26,15 +26,11 @@ export interface AuthResponse {
   }
 }
 
-export interface UserSession
-  extends Pick<AuthResponse["user"], "id">,
-    Pick<
-      User["audience_member"],
-      | "event_time"
-      | "project_id"
-      | "current_index"
-      | "is_quiet"
-      | "is_paused"
-    > {
+export interface UserResponse {
+  data: User
+  meta: object
+}
+
+export interface UserSession extends User {
   jwt: string
 }

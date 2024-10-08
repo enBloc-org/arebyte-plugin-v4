@@ -10,7 +10,10 @@ const userQuery = {
         "project_id",
         "current_index",
         "is_paused"
-      ]
+      ],
+      playlist: {
+        fields: ["*"]
+      }
     }
   }
 }
