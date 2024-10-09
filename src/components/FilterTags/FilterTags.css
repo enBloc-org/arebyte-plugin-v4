@@ -1,0 +1,10 @@
+.tags-container {
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  width: 340px;
+  align-items: center;
+}
+
+.filter-button {
+  border-radius: 50%;
+}
