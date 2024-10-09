@@ -14,11 +14,11 @@ export interface ProjectDescription {
 export interface ProjectData {
   id: number
   title: string
-  description: BlocksContent
+  description?: BlocksContent
   cover_image: ImageResponse
   launch_date: string
-  events: Omit<EventResponse["data"], "pop_ups">[]
-  content_creator: ContentCreator
+  events?: Omit<EventResponse["data"], "pop_ups">[]
+  content_creator?: ContentCreator
 }
 
 export interface Data {
@@ -36,5 +36,10 @@ export interface ProjectResponse {
 
 export interface CurrentProjectResponse {
   data: Data & { event_time: string }
+  meta: object
+}
+
+export interface AllProjectResponse {
+  data: ProjectData[]
   meta: object
 }
