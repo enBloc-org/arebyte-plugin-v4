@@ -6,7 +6,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import FilterTags from "~components/FilterTags/FilterTags"
-import ProjectCard from "~components/ProjectCardsContainer/ProjectCard"
+import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { AllProjectResponse } from "~types/projectTypes"
 
 export default function ExplorePage() {
