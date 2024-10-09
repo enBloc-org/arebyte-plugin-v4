@@ -1,5 +1,5 @@
 .explore-page {
-  background-color: red;
+  background-color: white;
   animation: slideDown 0.5s ease-out;
 }
 
@@ -26,4 +26,8 @@
   100% {
     transform: translateY(0);
   }
+}
+
+.explore-cards-container {
+  grid-row: 3/4;
 }
