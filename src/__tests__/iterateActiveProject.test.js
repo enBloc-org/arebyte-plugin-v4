@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from "@jest/globals"
+import { beforeEach, describe, expect, it, jest } from "@jest/globals"
 import fetchMock from "jest-fetch-mock"
 
 import { currentProjectQueryString } from "../queries/currentProjectQuery"
@@ -29,10 +29,16 @@ describe("iterateActiveProject", () => {
 
   it("returns the id of the current active_project in case of an error fetching the unique content type current_project", async () => {
     fetchMock.mockRejectOnce({ error: "network error" })
+    const consoleMock = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {})
 
     const result = await iterateActiveProject(269)
 
     expect(fetch).toHaveBeenCalled()
+    expect(consoleMock).toHaveBeenCalledWith({
+      error: "network error"
+    })
     expect(result).toBe(269)
   })
 })
