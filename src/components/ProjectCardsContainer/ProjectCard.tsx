@@ -6,7 +6,10 @@ const ProjectCard = ({ project }: { project: ProjectData }) => {
   return (
     <div className="project-card">
       <img
-        src={project.cover_image.formats.thumbnail.url}
+        src={
+          process.env.PLASMO_PUBLIC_API_URL +
+          project.cover_image.formats.thumbnail.url
+        }
         alt={project.cover_image.alternativeText}
         style={{
           height: project.cover_image.formats.thumbnail.height,
