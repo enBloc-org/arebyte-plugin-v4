@@ -1,0 +1,16 @@
+{
+  "jwt": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzI4NDY4NTU1LCJleHAiOjE3MzEwNjA1NTV9.akf7EzGlTHSvaF2J5A4MWzYpWkwteyosQOjJolkll2I",
+  "user": {
+    "audience_member": {
+      "is_quiet": false,
+      "is_paused": false,
+      "project_id": 6,
+      "current_index": 0,
+      "event_time": "13:00:00.000",
+      "playlist": []
+    },
+    "email": "userone@test.com",
+    "id": 1,
+    "username": "useOne"
+  }
+}

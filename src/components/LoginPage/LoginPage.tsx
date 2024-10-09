@@ -54,7 +54,7 @@ export default function LoginPage() {
         },
         jwt
       }
-
+      console.log(userSession)
       setUserSession(userSession)
       navigateTo("home")
     }
