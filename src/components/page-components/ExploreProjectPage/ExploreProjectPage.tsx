@@ -36,10 +36,7 @@ const ExploreProjectPage = () => {
               process.env.PLASMO_PUBLIC_API_URL +
               project.cover_image.formats.small.url
             }
-            alt={
-              project.cover_image.alternativeText ||
-              "Project image thumbnail"
-            }
+            alt={project.cover_image.alternativeText || project.title}
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />
