@@ -1,12 +1,11 @@
 import browser from "webextension-polyfill"
 
-import { ProjectResponse } from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
-import { fetchStrapiContent } from "./fetchStrapiContent"
-import iterateIndex from "./iterateIndex"
+import iterateActiveProject from "./iterateActiveProject"
 import newStorage from "./newStorage"
+import updateStorage from "./updateStorage"
 
 /**
  *
@@ -24,6 +23,7 @@ export default function setEventAlarm(
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
+  console.log(`set alarm for ${eventHour}:${eventMinute}`)
 
   browser.alarms.onAlarm.addListener(async alarm => {
     if (alarm.name !== "test-alarm") return
@@ -31,13 +31,16 @@ export default function setEventAlarm(
     const userSession: UserSession = await storage.get(
       "arebyte-audience-session"
     )
+
     const projectId = userSession.user.audience_member.project_id
-    const currentIndex =
-      userSession.user.audience_member.current_index
 
-    const newIndex = iterateIndex([1, "2", 3], currentIndex)
+    const newProjectId = await iterateActiveProject(projectId)
+    const updatedSession = updateStorage(userSession, {
+      project_id: newProjectId
+    })
 
-    
+    console.log(updatedSession)
+    // storage.set("arebyte-audience-session", newStorage)
 
     browser.windows.create({
       url: "https://media.4-paws.org/f/b/9/e/fb9eaf496f739315766331e91bddde8936375550/VP0113037-1927x1333.jpg",
