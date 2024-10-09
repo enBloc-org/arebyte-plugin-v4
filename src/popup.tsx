@@ -3,7 +3,7 @@ import "~components/globals.css"
 
 import { CSSTransition } from "react-transition-group"
 
-import ExplorePage from "~components/ExplorePage/ExplorePage"
+import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
 import LoginPage from "~components/LoginPage/LoginPage"
