@@ -1,3 +1,5 @@
+import { Popup } from "~types/eventTypes"
+
 /**
  *
  * @param givenArray full array of pop_ups in an event
@@ -5,8 +7,7 @@
  * @returns the next index in the array or zero if the full length of the array has been reached
  */
 export default function iterateIndex(
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  givenArray: Array<any>,
+  givenArray: Array<Popup>,
   currentIndex: number
 ): number {
   const fullLength = givenArray.length
