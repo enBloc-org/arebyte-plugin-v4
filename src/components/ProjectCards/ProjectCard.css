@@ -1,3 +1,11 @@
-.project-cards__container {
-  grid-row: 2/3;
+.project-card {
+  width: 165px;
+  border-radius: 7px;
+}
+
+.project-card img {
+  width: 165px;
+  height: 165px;
+  border-radius: 7px;
+  object-fit: cover;
 }
