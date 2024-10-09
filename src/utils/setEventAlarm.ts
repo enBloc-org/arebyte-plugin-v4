@@ -1,9 +1,16 @@
 import browser from "webextension-polyfill"
 
+import { currentProjectQueryString } from "~queries/currentProjectQuery"
+import { eventPopupQueryString } from "~queries/eventPopupsQuery"
+import { EventResponse } from "~types/eventTypes"
+import { CurrentProjectResponse } from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
+import backgroundPopupCreate from "./backgroundPopCreate"
+import { fetchStrapiContent } from "./fetchStrapiContent"
 import iterateActiveProject from "./iterateActiveProject"
+import iterateIndex from "./iterateIndex"
 import newStorage from "./newStorage"
 import updateStorage from "./updateStorage"
 
@@ -31,22 +38,36 @@ export default function setEventAlarm(
     const userSession: UserSession = await storage.get(
       "arebyte-audience-session"
     )
+    if (userSession) {
+      const projectId = userSession.user.audience_member.project_id
 
-    const projectId = userSession.user.audience_member.project_id
+      const newProjectId = await iterateActiveProject(projectId)
+      const updatedSession = updateStorage(userSession, {
+        project_id: newProjectId
+      })
 
-    const newProjectId = await iterateActiveProject(projectId)
-    const updatedSession = updateStorage(userSession, {
-      project_id: newProjectId
-    })
+      console.log(updatedSession)
+      // storage.set("arebyte-audience-session", newStorage)
+    } else {
+      const publicIndex: number = await storage.get(
+        "arebyte-public-index"
+      )
 
-    console.log(updatedSession)
-    // storage.set("arebyte-audience-session", newStorage)
+      const currentProject =
+        await fetchStrapiContent<CurrentProjectResponse>(
+          `api/current-project?${currentProjectQueryString}`
+        )
+      const currentEventId =
+        currentProject.data.project.events[publicIndex].id
+      const {
+        data: { pop_ups }
+      } = await fetchStrapiContent<EventResponse>(
+        `api/events/${currentEventId}?${eventPopupQueryString}`
+      )
+      await backgroundPopupCreate(pop_ups)
 
-    browser.windows.create({
-      url: "https://media.4-paws.org/f/b/9/e/fb9eaf496f739315766331e91bddde8936375550/VP0113037-1927x1333.jpg",
-      type: "popup",
-      top: Math.floor(Math.random() * 1000),
-      left: Math.floor(Math.random() * 1000)
-    })
+      const newPublicIndex = iterateIndex(pop_ups, publicIndex)
+      await storage.set("arebyte-public-index", newPublicIndex)
+    }
   })
 }
