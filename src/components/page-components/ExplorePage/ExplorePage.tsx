@@ -6,6 +6,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import FilterTags from "~components/FilterTags/FilterTags"
+import Footer from "~components/Footer/Footer"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { AllProjectResponse } from "~types/projectTypes"
 
@@ -25,19 +26,20 @@ export default function ExplorePage() {
   return (
     <div className="explore-page page">
       <BurgerMenu />
-      <div className="grid">
+      <main className="grid">
         <FilterTags />
-        <div className="explore-cards-container">
+        <div className="explore-section">
           <h2 className="text-lg">EXPLORE</h2>
           {projects && (
-            <div>
+            <div className="flex gap margin-top-sm explore-card-container">
               {projects.data.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>
           )}
         </div>
-      </div>
+      </main>
+      <Footer />
     </div>
   )
 }

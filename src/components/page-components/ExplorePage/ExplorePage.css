@@ -28,6 +28,10 @@
   }
 }
 
-.explore-cards-container {
+.explore-section {
   grid-row: 3/4;
+}
+
+.explore-card-container {
+  flex-wrap: wrap;
 }
