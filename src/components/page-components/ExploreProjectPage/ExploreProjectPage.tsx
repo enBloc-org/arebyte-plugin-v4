@@ -21,8 +21,6 @@ const ExploreProjectPage = () => {
           id: 1
         }
       })
-      console.log({ response })
-
       setProject(response.data as ProjectData)
     }
     fetchProject()
