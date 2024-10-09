@@ -16,12 +16,10 @@ export default function updateStorage(
   index: number = 0,
   changes = {}
 ) {
-  // base case
   if (index > Object.keys(currentValue).length) {
     return { ...currentValue, ...changes }
   }
 
-  // function declaration
   const currentKey = Object.keys(currentValue)[index]
   switch (true) {
     case !newValue[currentKey] &&
