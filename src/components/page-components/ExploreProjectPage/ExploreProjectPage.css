@@ -34,3 +34,9 @@
   top: 1.25rem;
   left: 1.25rem;
 }
+
+.explore-project-image {
+  min-width: 380px;
+  max-height: 230px;
+  object-fit: cover;
+}

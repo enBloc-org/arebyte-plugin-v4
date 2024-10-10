@@ -43,6 +43,7 @@ const ExploreProjectPage = () => {
               project.cover_image.alternativeText ||
               "Project image thumbnail"
             }
+            className="explore-project-image"
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />
