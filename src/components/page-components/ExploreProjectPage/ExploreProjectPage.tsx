@@ -8,20 +8,21 @@ import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
+import useStore from "~store/store"
 import type { ProjectData } from "~types/projectTypes"
 
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
+  const exploreProjectId = useStore.use.exploreProjectId()
 
   useEffect(() => {
     const fetchProject = async () => {
       const response = await sendToBackground({
         name: "fetchProjectDetailsById",
         body: {
-          id: 1
+          id: exploreProjectId
         }
       })
-      console.log({ response })
 
       setProject(response.data as ProjectData)
     }
