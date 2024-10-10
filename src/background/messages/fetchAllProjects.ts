@@ -8,9 +8,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const response = await fetchStrapiContent<CurrentProjectResponse>(
     `api/projects?${allProjectQueryString}`
   )
-  console.log("====================================")
-  console.log(allProjectQueryString)
-  console.log("====================================")
   res.send(response)
 }
 
