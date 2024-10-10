@@ -14,11 +14,11 @@ export interface ProjectDescription {
 export interface ProjectData {
   id: number
   title: string
-  description?: BlocksContent
+  description: BlocksContent
   cover_image: ImageResponse
   launch_date: string
-  events?: Omit<EventResponse["data"], "pop_ups">[]
-  content_creator?: ContentCreator
+  events: Omit<EventResponse["data"], "pop_ups">[]
+  content_creator: ContentCreator
 }
 
 export interface Data {
@@ -40,6 +40,9 @@ export interface CurrentProjectResponse {
 }
 
 export interface AllProjectResponse {
-  data: ProjectData[]
+  data: Omit<
+    ProjectData,
+    "content_creator" | "events" | "description"
+  >
   meta: object
 }
