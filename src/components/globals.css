@@ -62,50 +62,6 @@ button:hover {
 }
 
 /*------------------------------------*\
-  Universal
-\*------------------------------------*/
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1.25rem;
-  padding: 0 1.25rem;
-}
-
-.flex {
-  display: flex;
-}
-
-.center {
-  justify-content: center;
-  align-items: center;
-}
-
-.padding-0 {
-  padding: 0;
-}
-
-.stack > * {
-  margin-top: 0.625rem;
-}
-
-.text-xl {
-  font-size: 1.8rem;
-}
-
-.text-lg {
-  font-size: 1.2rem;
-}
-
-.text-md {
-  font-size: 1rem;
-}
-
-.bold {
-  font-weight: bold;
-}
-
-/*------------------------------------*\
   Components
 \*------------------------------------*/
 
@@ -177,4 +133,56 @@ button:hover {
     var(--highlight) 6.5px,
     var(--highlight) 6px
   );
+}
+
+/*------------------------------------*\
+  Universal
+\*------------------------------------*/
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.25rem;
+  padding: 0 1.25rem;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.gap {
+  gap: .625rem;
+}
+
+.padding-0 {
+  padding: 0;
+}
+
+.stack > * {
+  margin-top: 0.625rem;
+}
+
+.margin-top-lg {
+  margin-top: 2.5rem;
+}
+
+.text-xl {
+  font-size: 1.8rem;
+}
+
+.text-lg {
+  font-size: 1.2rem;
+}
+
+.text-md {
+  font-size: 1rem;
+}
+
+.bold {
+  font-weight: bold;
 }

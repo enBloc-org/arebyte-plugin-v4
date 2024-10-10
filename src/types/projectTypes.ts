@@ -2,6 +2,7 @@ import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
 import type { EventResponse } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
+import type { ContentCreator } from "./userTypes"
 
 export interface ProjectDescription {
   type: string
@@ -17,11 +18,7 @@ export interface ProjectData {
   cover_image: ImageResponse
   launch_date: string
   events: Omit<EventResponse["data"], "pop_ups">[]
-  content_creator: {
-    id: number
-    artist_name: string
-    bio: BlocksContent
-  }
+  content_creator: ContentCreator
 }
 
 export interface Data {
@@ -33,7 +30,7 @@ export interface Data {
 }
 
 export interface ProjectResponse {
-  data: Data
+  data: ProjectData
   meta: object
 }
 
