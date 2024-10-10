@@ -1,19 +1,11 @@
 import browser from "webextension-polyfill"
 
-import { currentProjectQueryString } from "~queries/currentProjectQuery"
-import { eventPopupQueryString } from "~queries/eventPopupsQuery"
-import { projectQueryString } from "~queries/projectQuery"
-import { EventResponse } from "~types/eventTypes"
-import {
-  CurrentProjectResponse,
-  ProjectResponse
-} from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
 import backgroundPopupCreate from "./backgroundPopCreate"
-import { fetchStrapiContent } from "./fetchStrapiContent"
-import iterateActiveProject from "./iterateActiveProject"
+import getCurrentProjectPopups from "./getCurrentProjectPopups"
+import getProjectPopups from "./getProjectPopups"
 import iterateIndex from "./iterateIndex"
 import newStorage from "./newStorage"
 import updateStorage from "./updateStorage"
@@ -47,50 +39,25 @@ export default function setEventAlarm(
       const currentIndex =
         userSession.user.audience_member.current_index
 
-      const currentProject =
-        await fetchStrapiContent<ProjectResponse>(
-          `api/projects/${projectId}?${projectQueryString}`
-        )
-      const currentEventId =
-        currentProject.data.events[currentIndex].id
-      const {
-        data: { pop_ups }
-      } = await fetchStrapiContent<EventResponse>(
-        `api/events/${currentEventId}?${eventPopupQueryString}`
-      )
+      const pop_ups =
+        currentIndex === 0
+          ? await getCurrentProjectPopups(currentIndex)
+          : await getProjectPopups(projectId, currentIndex)
 
       await backgroundPopupCreate(pop_ups)
       const newIndex = iterateIndex(pop_ups, currentIndex)
 
-      if (newIndex === 0) {
-        const newProjectId = await iterateActiveProject(projectId)
-        const updatedSession = updateStorage(userSession, {
-          current_index: newIndex,
-          project_id: newProjectId
-        })
-        await storage.set("arebyte-audience-session", updatedSession)
-      } else {
-        const updatedSession = updateStorage(userSession, {
-          current_index: newIndex
-        })
-        await storage.set("arebyte-audience-session", updatedSession)
-      }
+      const updatedSession = updateStorage(userSession, {
+        current_index: newIndex,
+        ...(newIndex === 0 && { project_id: 0 })
+      })
+      await storage.set("arebyte-audience-session", updatedSession)
     } else {
       const publicIndex: number = await storage.get(
         "arebyte-public-index"
       )
 
-      const currentProject =
-        await fetchStrapiContent<CurrentProjectResponse>(
-          `api/current-project?${currentProjectQueryString}`
-        )
-      const currentEventId =
-        currentProject.data.project.events[publicIndex].id
-      const {
-        data: { pop_ups }
-      } = await fetchStrapiContent<EventResponse>(
-        `api/events/${currentEventId}?${eventPopupQueryString}`
-      )
+      const pop_ups = await getCurrentProjectPopups(publicIndex)
       await backgroundPopupCreate(pop_ups)
 
       const newPublicIndex = iterateIndex(pop_ups, publicIndex)
