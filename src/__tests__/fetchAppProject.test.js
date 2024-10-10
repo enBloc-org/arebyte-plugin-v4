@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, jest } from "@jest/globals"
 import fetchMock from "jest-fetch-mock"
 
-import handler from "../background/messages/fetchProjectDetailsById"
+import handler from "../background/messages/fetchAllProjects"
 import * as testData from "./test-data/current-project-test-data.json"
 
 fetchMock.enableMocks()
 
-describe("fetchProjectById", () => {
+describe("fetchProjectDetailsById", () => {
   beforeEach(() => {
     fetchMock.resetMocks()
   })
@@ -15,7 +15,7 @@ describe("fetchProjectById", () => {
     fetchMock.mockResponseOnce(JSON.stringify(testData))
 
     const req = {
-      name: "fetchCurrentProject"
+      name: "fetchAllProjects"
     }
 
     const res = {
