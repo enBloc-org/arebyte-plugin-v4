@@ -4,7 +4,14 @@ import "./ProjectCard.css"
 
 import useStore from "~store/store"
 
-const ProjectCard = ({ project }: { project: ProjectData }) => {
+const ProjectCard = ({
+  project
+}: {
+  project: Omit<
+    ProjectData,
+    "content_creator" | "events" | "description"
+  >
+}) => {
   const updateExploreProjectId = useStore.use.updateExploreProjectId()
   const navigateTo = useStore.use.navigateTo()
 

@@ -43,6 +43,6 @@ export interface AllProjectResponse {
   data: Omit<
     ProjectData,
     "content_creator" | "events" | "description"
-  >
+  >[]
   meta: object
 }
