@@ -5,3 +5,15 @@
   grid-row: 1/2;
   width: 340px;
 }
+
+.filter-button {
+  border: 1px solid var(--highlight);
+  border-radius: 1.25rem;
+  padding: 0.625rem;
+  min-width: 40px;
+}
+
+.filter-button:hover {
+  background-color: var(--highlight);
+  color: var(--base);
+}
