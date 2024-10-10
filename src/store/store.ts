@@ -45,7 +45,6 @@ const initialState: State = {
       playlist: []
     }
   },
-  active_project: undefined,
   isLoggedIn: false,
   currentPage: "home",
   previousPage: "home"
