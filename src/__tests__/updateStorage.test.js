@@ -25,5 +25,8 @@ describe("updateStorage", () => {
     expect(result.user.username).toBe("test name")
     expect(result.user.audience_member.current_index).toBe(5)
     expect(result.user.audience_member.project_id).toBe(269)
+    expect(Object.keys(result).length).toBe(
+      Object.keys(userData).length
+    )
   })
 })

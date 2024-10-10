@@ -16,7 +16,7 @@ export default function updateStorage(
   index: number = 0,
   changes = {}
 ) {
-  if (index > Object.keys(currentValue).length) {
+  if (index === Object.keys(currentValue).length) {
     return { ...currentValue, ...changes }
   }
 
