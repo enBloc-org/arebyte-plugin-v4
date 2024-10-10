@@ -11,7 +11,6 @@ export type PlayList = typeof baseStore<
 
 interface State {
   user: User
-  active_project?: CurrentProjectResponse
   isLoggedIn: boolean
   currentPage:
     | "home"
@@ -25,7 +24,6 @@ interface State {
 }
 
 interface Actions {
-  updateCurrentProject: (project: CurrentProjectResponse) => void
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUser: (newUser: UserSession) => void
   resetStore: () => void
@@ -58,15 +56,13 @@ const baseStore = create<State & Actions>(set => {
         previousPage: state.currentPage,
         currentPage: nextPage
       })),
-    updateCurrentProject: project =>
-      set(() => ({ active_project: project })),
+
     updateUser: newUser => {
       set(() => ({ user: newUser.user, isLoggedIn: true }))
     },
     resetStore: () =>
       set(() => ({
         user: initialState.user,
-        active_project: initialState.active_project,
         isLoggedIn: initialState.isLoggedIn,
         currentPage: initialState.currentPage,
         previousPage: initialState.previousPage

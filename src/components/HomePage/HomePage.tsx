@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
@@ -9,21 +9,23 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import { CurrentProjectResponse } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
-  const active_project = useStore.use.active_project()
-  const updateCurrentProject = useStore.use.updateCurrentProject()
   const userInfo = useStore.use.user()
   const currentIndex = userInfo.audience_member.current_index
   const navigateTo = useStore.use.navigateTo()
+  const [currentProject, setCurrentProject] = useState<
+    CurrentProjectResponse | undefined
+  >(undefined)
 
   useEffect(() => {
     const getUserSession = async () => {
       const response = await sendToBackground({
         name: "fetchCurrentProject"
       })
-      updateCurrentProject(response)
+      setCurrentProject(response)
     }
     getUserSession()
   }, [])
@@ -33,14 +35,14 @@ export default function HomePage() {
       <BurgerMenu />
       <main className="grid">
         <CountDownTimer />
-        {active_project && (
+        {currentProject && (
           <>
             <div className="home-up-next content-box shadow">
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
                   {
-                    active_project.data.project.events[currentIndex]
+                    currentProject.data.project.events[currentIndex]
                       .title
                   }
                 </h2>
@@ -48,7 +50,7 @@ export default function HomePage() {
                   <tbody>
                     <tr>
                       <td>Part of:</td>
-                      <td> {active_project.data.project.title}</td>
+                      <td> {currentProject.data.project.title}</td>
                     </tr>
                     <tr>
                       <td>Start Time:</td>
@@ -63,7 +65,7 @@ export default function HomePage() {
                       <td>Day:</td>
                       <td>
                         {currentIndex + 1} of{" "}
-                        {active_project.data.project.events.length}
+                        {currentProject.data.project.events.length}
                       </td>
                     </tr>
                   </tbody>
@@ -80,27 +82,27 @@ export default function HomePage() {
                 <img
                   src={
                     process.env.PLASMO_PUBLIC_API_URL +
-                    active_project.data.project.cover_image.formats
+                    currentProject.data.project.cover_image.formats
                       .thumbnail.url
                   }
                   alt={
-                    active_project.data.project.cover_image
+                    currentProject.data.project.cover_image
                       .alternativeText
                   }
                 />
                 <div className="home-project-thumbnail-description stack">
-                  <h3>{active_project.data.project.title}</h3>
+                  <h3>{currentProject.data.project.title}</h3>
                   <p>
                     Curated By:{" "}
                     {
-                      active_project.data.project.content_creator
+                      currentProject.data.project.content_creator
                         .curator_name
                     }
                   </p>
                   <p>
                     Launched:{" "}
                     {formatDate(
-                      active_project.data.project.launch_date
+                      currentProject.data.project.launch_date
                     )}
                   </p>
                 </div>
