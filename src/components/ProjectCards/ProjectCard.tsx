@@ -3,6 +3,7 @@ import type { ProjectData } from "~types/projectTypes"
 import "./ProjectCard.css"
 
 import useStore from "~store/store"
+import formatDate from "~utils/formatDate"
 
 const ProjectCard = ({
   project
@@ -30,6 +31,7 @@ const ProjectCard = ({
         className="shadow"
       />
       <h3>{project.title}</h3>
+      <span>From {formatDate(project.launch_date)}</span>
     </button>
   )
 }
