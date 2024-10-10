@@ -22,12 +22,14 @@ interface State {
     | "explore-project"
     | "favourites"
   previousPage: State["currentPage"]
+  exploreProjectId?: number
 }
 
 interface Actions {
   updateCurrentProject: (project: CurrentProjectResponse) => void
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUserSession: (newLoggedStatus: boolean) => void
+  updateExploreProjectId: (id: number) => void
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -49,6 +51,7 @@ const baseStore = create<State & Actions>(set => {
     isLoggedIn: false,
     currentPage: "home",
     previousPage: "home",
+    exploreProjectId: undefined,
     navigateTo: nextPage =>
       set(state => ({
         previousPage: state.currentPage,
@@ -59,7 +62,9 @@ const baseStore = create<State & Actions>(set => {
     updateUserSession: newLoggedStatus =>
       set(() => ({
         isLoggedIn: newLoggedStatus
-      }))
+      })),
+    updateExploreProjectId: id =>
+      set(() => ({ exploreProjectId: id }))
   }
 })
 
