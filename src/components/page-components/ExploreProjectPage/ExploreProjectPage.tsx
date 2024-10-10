@@ -9,7 +9,10 @@ import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
 import useStore from "~store/store"
-import type { ProjectData } from "~types/projectTypes"
+import type {
+  ProjectData,
+  ProjectResponse
+} from "~types/projectTypes"
 
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
@@ -17,14 +20,13 @@ const ExploreProjectPage = () => {
 
   useEffect(() => {
     const fetchProject = async () => {
-      const response = await sendToBackground({
+      const response: ProjectResponse = await sendToBackground({
         name: "fetchProjectDetailsById",
         body: {
           id: exploreProjectId
         }
-      })
-
-      setProject(response.data as ProjectData)
+      }) 
+      setProject(response.data)
     }
     fetchProject()
   }, [])
@@ -39,11 +41,7 @@ const ExploreProjectPage = () => {
               process.env.PLASMO_PUBLIC_API_URL +
               project.cover_image.formats.small.url
             }
-            alt={
-              project.cover_image.alternativeText ||
-              "Project image thumbnail"
-            }
-            className="explore-project-image"
+            alt={project.cover_image.alternativeText || project.title}
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />
