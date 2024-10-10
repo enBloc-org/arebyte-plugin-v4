@@ -21,12 +21,14 @@ interface State {
     | "explore-project"
     | "favourites"
   previousPage: State["currentPage"]
+  exploreProjectId?: number
 }
 
 interface Actions {
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUser: (newUser: UserSession) => void
   resetStore: () => void
+  updateExploreProjectId: (id: number) => void
 }
 
 const initialState: State = {

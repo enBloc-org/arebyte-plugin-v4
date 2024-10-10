@@ -1,0 +1,19 @@
+.tags-container {
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  grid-row: 1/2;
+  width: 340px;
+}
+
+.button--filter {
+  border: 1px solid var(--highlight);
+  border-radius: 1.25rem;
+  padding: 0.625rem;
+  min-width: 40px;
+}
+
+.button--filter:hover {
+  background-color: var(--highlight);
+  color: var(--base);
+}
