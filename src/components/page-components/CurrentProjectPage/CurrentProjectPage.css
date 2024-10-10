@@ -1,0 +1,36 @@
+.current-project {
+  background-color: white;
+  animation: slideIn 0.5s ease-out;
+}
+
+.current-project-enter {
+  z-index: 3;
+}
+
+.current-project-enter-active {
+  z-index: 3;
+}
+
+.current-project-exit {
+  z-index: 1;
+}
+
+.current-project-exit-active {
+  z-index: 1;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(200);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.current-project__back-button {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+}

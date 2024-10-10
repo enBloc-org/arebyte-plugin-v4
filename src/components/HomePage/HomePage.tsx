@@ -9,12 +9,14 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const userInfo = useStore.use.user()
   const currentIndex = userInfo.audience_member.current_index
+  const navigateTo = useStore.use.navigateTo()
 
   useEffect(() => {
     const getUserSession = async () => {
@@ -25,15 +27,6 @@ export default function HomePage() {
     }
     getUserSession()
   }, [])
-
-  const formatDate = dateString => {
-    return new Date(dateString).toLocaleDateString("en-uk", {
-      weekday: "long",
-      year: "numeric",
-      month: "short",
-      day: "numeric"
-    })
-  }
 
   return (
     <div className="home-page page">
@@ -82,6 +75,7 @@ export default function HomePage() {
               <button
                 className="home-project__button shadow padding-0"
                 type="button"
+                onClick={() => navigateTo("current-project")}
               >
                 <img
                   src={
@@ -100,7 +94,7 @@ export default function HomePage() {
                     Curated By:{" "}
                     {
                       active_project.data.project.content_creator
-                        .artist_name
+                        .curator_name
                     }
                   </p>
                   <p>
