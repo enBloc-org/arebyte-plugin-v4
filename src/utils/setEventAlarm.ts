@@ -2,8 +2,12 @@ import browser from "webextension-polyfill"
 
 import { currentProjectQueryString } from "~queries/currentProjectQuery"
 import { eventPopupQueryString } from "~queries/eventPopupsQuery"
+import { projectQueryString } from "~queries/projectQuery"
 import { EventResponse } from "~types/eventTypes"
-import { CurrentProjectResponse } from "~types/projectTypes"
+import {
+  CurrentProjectResponse,
+  ProjectResponse
+} from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
@@ -30,7 +34,6 @@ export default function setEventAlarm(
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
-  console.log(`set alarm for ${eventHour}:${eventMinute}`)
 
   browser.alarms.onAlarm.addListener(async alarm => {
     if (alarm.name !== "test-alarm") return
@@ -38,16 +41,40 @@ export default function setEventAlarm(
     const userSession: UserSession = await storage.get(
       "arebyte-audience-session"
     )
+
     if (userSession) {
       const projectId = userSession.user.audience_member.project_id
+      const currentIndex =
+        userSession.user.audience_member.current_index
 
-      const newProjectId = await iterateActiveProject(projectId)
-      const updatedSession = updateStorage(userSession, {
-        project_id: newProjectId
-      })
+      const currentProject =
+        await fetchStrapiContent<ProjectResponse>(
+          `api/projects/${projectId}?${projectQueryString}`
+        )
+      const currentEventId =
+        currentProject.data.events[currentIndex].id
+      const {
+        data: { pop_ups }
+      } = await fetchStrapiContent<EventResponse>(
+        `api/events/${currentEventId}?${eventPopupQueryString}`
+      )
 
-      console.log(updatedSession)
-      // storage.set("arebyte-audience-session", newStorage)
+      await backgroundPopupCreate(pop_ups)
+      const newIndex = iterateIndex(pop_ups, currentIndex)
+
+      if (newIndex === 0) {
+        const newProjectId = await iterateActiveProject(projectId)
+        const updatedSession = updateStorage(userSession, {
+          current_index: newIndex,
+          project_id: newProjectId
+        })
+        await storage.set("arebyte-audience-session", updatedSession)
+      } else {
+        const updatedSession = updateStorage(userSession, {
+          current_index: newIndex
+        })
+        await storage.set("arebyte-audience-session", updatedSession)
+      }
     } else {
       const publicIndex: number = await storage.get(
         "arebyte-public-index"
