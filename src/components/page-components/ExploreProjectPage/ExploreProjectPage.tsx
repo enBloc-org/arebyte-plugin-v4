@@ -8,6 +8,7 @@ import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
+import useStore from "~store/store"
 import type {
   ProjectData,
   ProjectResponse
@@ -15,15 +16,16 @@ import type {
 
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
+  const exploreProjectId = useStore.use.exploreProjectId()
 
   useEffect(() => {
     const fetchProject = async () => {
       const response: ProjectResponse = await sendToBackground({
         name: "fetchProjectDetailsById",
         body: {
-          id: 1
+          id: exploreProjectId
         }
-      })
+      }) 
       setProject(response.data)
     }
     fetchProject()

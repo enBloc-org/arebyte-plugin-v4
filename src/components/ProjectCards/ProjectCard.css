@@ -1,0 +1,21 @@
+.project-card {
+  width: 165px;
+  border-radius: 0.438rem;
+}
+
+.project-card img {
+  width: 165px;
+  height: 165px;
+  border-radius: 0.438rem;
+  object-fit: cover;
+}
+
+.project-card img:hover {
+  scale: 0.97;
+  transition: scale 100ms ease;
+}
+
+.project-card span {
+  font-weight: 300;
+  font-size: .65rem;
+}

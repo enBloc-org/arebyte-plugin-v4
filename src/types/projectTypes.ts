@@ -38,3 +38,11 @@ export interface CurrentProjectResponse {
   data: Data & { event_time: string }
   meta: object
 }
+
+export interface AllProjectResponse {
+  data: Omit<
+    ProjectData,
+    "content_creator" | "events" | "description"
+  >[]
+  meta: object
+}
