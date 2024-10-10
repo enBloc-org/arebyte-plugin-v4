@@ -7,7 +7,7 @@ const FilterTags = () => {
         return (
           <button
             key={tag.id}
-            className="filter-button"
+            className="button--filter"
           >
             {tag.name}
           </button>

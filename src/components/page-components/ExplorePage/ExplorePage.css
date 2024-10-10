@@ -1,5 +1,5 @@
 .explore-page {
-  background-color: white;
+  background-color: var(--base);
   animation: slideDown 0.5s ease-out;
 }
 
