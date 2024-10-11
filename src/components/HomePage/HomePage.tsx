@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
@@ -9,7 +9,6 @@ import "./HomePage.css"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
-import { CurrentProjectResponse } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
