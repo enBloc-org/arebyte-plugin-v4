@@ -1,19 +1,25 @@
+import { useStorage } from "@plasmohq/storage/hook"
+
 import useStore from "~store/store"
 
 import "./ProfilePage.css"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
+import { UserSession } from "~types/userTypes"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
-  const store = newStorage()
+  const userInfo = useStore.use.user()
+  const [, , { remove }] = useStorage<UserSession>(
+    "arebyte-audience-session"
+  )
 
   return (
     <div className="profile-page page background__stripped">
       <BurgerMenu />
       <main className="grid">
         <div className="content-box shadow profile-page--user-details">
-          <h3>USERNAME</h3>
+          <h3>{userInfo.username}</h3>
           <button className="flex center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +50,7 @@ export default function ProfilePage() {
         <button
           type="button"
           onClick={async () => {
-            await store.remove("arebyte-audience-session")
+            remove()
             navigateTo("home")
           }}
         >
