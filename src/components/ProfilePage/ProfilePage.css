@@ -64,6 +64,31 @@
   transform: rotate(-90deg);
 }
 
+.profile-page--toggle-pair {
+  display: flex;
+  align-items: center;
+  width: 40%;
+  margin: 5px 0;
+}
+
+.profile-page--toggle-pair:first-of-type {
+  margin-top: 0;
+}
+
+.profile-page--toggle-pair p {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.profile-page--footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
 .profile-page-enter {
   z-index: 3;
 }

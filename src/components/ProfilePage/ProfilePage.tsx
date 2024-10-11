@@ -7,6 +7,7 @@ import "./ProfilePage.css"
 import { useState } from "react"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
+import Footer from "~components/Footer/Footer"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import { UserSession } from "~types/userTypes"
 
@@ -34,7 +35,7 @@ export default function ProfilePage() {
   return (
     <div className="profile-page page background__stripped">
       <BurgerMenu />
-      <main className="grid">
+      <main className="grid profile-page--main">
         <div className="content-box shadow profile-page--user-details">
           <h3 className="profile-page--user-name">
             {userInfo.username}
@@ -110,19 +111,32 @@ export default function ProfilePage() {
         </div>
 
         <div className="profile-page--controls flex flex-column start">
-          <div>
+          <div className="profile-page--toggle-pair">
             <ToggleSwitch
               isChecked={isQuiet}
               clickHandler={handleQuietSwitchClick}
             />
-            <p>quiet mode on/off</p>
+            <p>quiet mode</p>
           </div>
-          <ToggleSwitch
-            isChecked={isPaused}
-            clickHandler={handlePausedSwitchClick}
-          />
+          <p>
+            Turn on whatever this feature is going to be eventually
+          </p>
+          <div className="profile-page--toggle-pair">
+            <ToggleSwitch
+              isChecked={isPaused}
+              clickHandler={handlePausedSwitchClick}
+            />
+            <p>pause</p>
+          </div>
+          <p>
+            This turns off the plugin so you will not receive daily
+            popups
+          </p>
         </div>
       </main>
+      <div className="profile-page--footer">
+        <Footer />
+      </div>
     </div>
   )
 }
