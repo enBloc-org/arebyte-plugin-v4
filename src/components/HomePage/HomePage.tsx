@@ -3,7 +3,6 @@ import { useEffect } from "react"
 import { sendToBackground } from "@plasmohq/messaging"
 
 import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
-import newStorage from "~utils/newStorage"
 
 import "./HomePage.css"
 
@@ -13,11 +12,9 @@ import useStore from "~store/store"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
+  const userInfo = useStore.use.user()
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const userInfo = useStore.use.user()
-  const updateUserSession = useStore.use.updateUserSession()
-  const storage = newStorage()
   const currentIndex = userInfo.audience_member.current_index
   const navigateTo = useStore.use.navigateTo()
 
@@ -27,11 +24,7 @@ export default function HomePage() {
         name: "fetchCurrentProject"
       })
       updateCurrentProject(response)
-
-      const token = await storage.get("arebyte-audience-token")
-      updateUserSession(!!token)
     }
-
     getUserSession()
   }, [])
 

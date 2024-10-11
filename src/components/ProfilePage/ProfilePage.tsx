@@ -1,5 +1,4 @@
 import useStore from "~store/store"
-import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
 
