@@ -40,7 +40,7 @@ export default function setEventAlarm(
         userSession.user.audience_member.current_index
 
       const pop_ups =
-        currentIndex === 0
+        projectId === 0
           ? await getCurrentProjectPopups(currentIndex)
           : await getProjectPopups(projectId, currentIndex)
 
