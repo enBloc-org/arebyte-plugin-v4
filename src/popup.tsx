@@ -1,7 +1,10 @@
 import "./components/normalize.css"
 import "~components/globals.css"
 
+import { useEffect } from "react"
 import { CSSTransition } from "react-transition-group"
+
+import { useStorage } from "@plasmohq/storage/hook"
 
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
@@ -11,10 +14,22 @@ import CurrentProjectPage from "~components/page-components/CurrentProjectPage/C
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
+import { UserSession } from "~types/userTypes"
+import newStorage from "~utils/newStorage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
+  const updateUser = useStore.use.updateUser()
+
+  const [userSession] = useStorage<UserSession>({
+    key: "arebyte-audience-session",
+    instance: newStorage()
+  })
+
+  useEffect(() => {
+    if (userSession) updateUser(userSession)
+  }, [userSession?.jwt])
 
   return (
     <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>

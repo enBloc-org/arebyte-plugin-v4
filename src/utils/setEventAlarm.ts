@@ -1,6 +1,14 @@
 import browser from "webextension-polyfill"
 
+import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
+
+import backgroundPopupCreate from "./backgroundPopCreate"
+import getCurrentProjectPopups from "./getCurrentProjectPopups"
+import getProjectPopups from "./getProjectPopups"
+import iterateIndex from "./iterateIndex"
+import newStorage from "./newStorage"
+import updateStorage from "./updateStorage"
 
 /**
  *
@@ -12,21 +20,48 @@ export default function setEventAlarm(
   eventHour: number,
   eventMinute: number
 ) {
-  browser.alarms.clear("test-alarm")
+  browser.alarms.clear("sequence-alarm")
 
-  browser.alarms.create("test-alarm", {
+  browser.alarms.create("sequence-alarm", {
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
 
-  browser.alarms.onAlarm.addListener(alarm => {
-    if (alarm.name !== "test-alarm") return
+  browser.alarms.onAlarm.addListener(async alarm => {
+    if (alarm.name !== "sequence-alarm") return
+    const storage = newStorage()
+    const userSession: UserSession = await storage.get(
+      "arebyte-audience-session"
+    )
 
-    browser.windows.create({
-      url: "https://media.4-paws.org/f/b/9/e/fb9eaf496f739315766331e91bddde8936375550/VP0113037-1927x1333.jpg",
-      type: "popup",
-      top: Math.floor(Math.random() * 1000),
-      left: Math.floor(Math.random() * 1000)
-    })
+    if (userSession) {
+      const projectId = userSession.user.audience_member.project_id
+      const currentIndex =
+        userSession.user.audience_member.current_index
+
+      const pop_ups =
+        projectId === 0
+          ? await getCurrentProjectPopups(currentIndex)
+          : await getProjectPopups(projectId, currentIndex)
+
+      await backgroundPopupCreate(pop_ups)
+      const newIndex = iterateIndex(pop_ups, currentIndex)
+
+      const updatedSession = updateStorage(userSession, {
+        current_index: newIndex,
+        ...(newIndex === 0 && { project_id: 0 })
+      })
+      await storage.set("arebyte-audience-session", updatedSession)
+    } else {
+      const publicIndex: number = await storage.get(
+        "arebyte-public-index"
+      )
+
+      const pop_ups = await getCurrentProjectPopups(publicIndex)
+      await backgroundPopupCreate(pop_ups)
+
+      const newPublicIndex = iterateIndex(pop_ups, publicIndex)
+      await storage.set("arebyte-public-index", newPublicIndex)
+    }
   })
 }
