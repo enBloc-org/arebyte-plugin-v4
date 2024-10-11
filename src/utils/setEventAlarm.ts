@@ -20,15 +20,15 @@ export default function setEventAlarm(
   eventHour: number,
   eventMinute: number
 ) {
-  browser.alarms.clear("test-alarm")
+  browser.alarms.clear("sequence-alarm")
 
-  browser.alarms.create("test-alarm", {
+  browser.alarms.create("sequence-alarm", {
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
 
   browser.alarms.onAlarm.addListener(async alarm => {
-    if (alarm.name !== "test-alarm") return
+    if (alarm.name !== "sequence-alarm") return
     const storage = newStorage()
     const userSession: UserSession = await storage.get(
       "arebyte-audience-session"
