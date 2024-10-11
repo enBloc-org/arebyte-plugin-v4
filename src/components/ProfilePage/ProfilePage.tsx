@@ -13,6 +13,7 @@ import { UserSession } from "~types/userTypes"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
+  const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
   const {
     audience_member: { is_quiet: isQuiet, is_paused: isPaused }
@@ -30,6 +31,11 @@ export default function ProfilePage() {
 
   const handlePausedSwitchClick = () => {
     updatedIsPaused(!isPaused)
+  }
+
+  const handleLogOff = () => {
+    remove()
+    resetStore()
   }
 
   return (
@@ -97,13 +103,7 @@ export default function ProfilePage() {
             </button>
 
             {isOpen && (
-              <button
-                type="button"
-                onClick={async () => {
-                  remove()
-                  navigateTo("home")
-                }}
-              >
+              <button type="button" onClick={handleLogOff}>
                 Log me out
               </button>
             )}
