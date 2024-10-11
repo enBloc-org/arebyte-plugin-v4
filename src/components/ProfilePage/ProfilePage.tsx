@@ -5,14 +5,23 @@ import useStore from "~store/store"
 import "./ProfilePage.css"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
+import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import { UserSession } from "~types/userTypes"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const userInfo = useStore.use.user()
+  const {
+    audience_member: { is_quiet: isQuiet }
+  } = useStore.use.user()
+  const updatedIsQuiet = useStore.use.updateIsQuiet()
   const [, , { remove }] = useStorage<UserSession>(
     "arebyte-audience-session"
   )
+
+  const handleQuietSwitchClick = () => {
+    updatedIsQuiet(!isQuiet)
+  }
 
   return (
     <div className="profile-page page background__stripped">
@@ -37,14 +46,10 @@ export default function ProfilePage() {
         </div>
 
         <div className="profile-page--controls flex flex-column start">
-          <span className="flex">
-            <input type="checkbox" id="quiet-mode"></input>
-            <label htmlFor="quiet-mode">QUIET MODE ON / OFF</label>
-          </span>
-          <span className="flex">
-            <input type="checkbox" id="on-off"></input>
-            <label htmlFor="on-off">ON / OFF</label>
-          </span>
+          <ToggleSwitch
+            isChecked={isQuiet}
+            clickHandler={handleQuietSwitchClick}
+          />
         </div>
 
         <button
