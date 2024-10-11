@@ -12,15 +12,20 @@ export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const userInfo = useStore.use.user()
   const {
-    audience_member: { is_quiet: isQuiet }
+    audience_member: { is_quiet: isQuiet, is_paused: isPaused }
   } = useStore.use.user()
   const updatedIsQuiet = useStore.use.updateIsQuiet()
+  const updatedIsPaused = useStore.use.updateIsPaused()
   const [, , { remove }] = useStorage<UserSession>(
     "arebyte-audience-session"
   )
 
   const handleQuietSwitchClick = () => {
     updatedIsQuiet(!isQuiet)
+  }
+
+  const handlePausedSwitchClick = () => {
+    updatedIsPaused(!isPaused)
   }
 
   return (
@@ -49,6 +54,10 @@ export default function ProfilePage() {
           <ToggleSwitch
             isChecked={isQuiet}
             clickHandler={handleQuietSwitchClick}
+          />
+          <ToggleSwitch
+            isChecked={isPaused}
+            clickHandler={handlePausedSwitchClick}
           />
         </div>
 
