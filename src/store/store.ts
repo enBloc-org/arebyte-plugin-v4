@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-import type { CurrentProjectResponse } from "~types/projectTypes"
+import { CurrentProjectResponse } from "~types/projectTypes"
 import type { User, UserSession } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
@@ -12,6 +12,9 @@ export type PlayList = typeof baseStore<
 interface State {
   user: User
   isLoggedIn: boolean
+  exploreProjectId: number
+  active_project: CurrentProjectResponse
+  previousPage: State["currentPage"]
   currentPage:
     | "home"
     | "profile"
@@ -20,8 +23,6 @@ interface State {
     | "current-project"
     | "explore-project"
     | "favourites"
-  previousPage: State["currentPage"]
-  exploreProjectId?: number
 }
 
 interface Actions {
@@ -29,6 +30,7 @@ interface Actions {
   updateUser: (newUser: UserSession) => void
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
+  updateCurrentProject: (project: CurrentProjectResponse) => void
 }
 
 const initialState: State = {
@@ -47,7 +49,9 @@ const initialState: State = {
   },
   isLoggedIn: false,
   currentPage: "home",
-  previousPage: "home"
+  previousPage: "home",
+  exploreProjectId: undefined,
+  active_project: undefined
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -67,8 +71,13 @@ const baseStore = create<State & Actions>(set => {
         user: initialState.user,
         isLoggedIn: initialState.isLoggedIn,
         currentPage: initialState.currentPage,
-        previousPage: initialState.previousPage
-      }))
+        previousPage: initialState.previousPage,
+        active_project: initialState.active_project
+      })),
+    updateCurrentProject: project =>
+      set(() => ({ active_project: project })),
+    updateExploreProjectId: (id: number) =>
+      set(() => ({ exploreProjectId: id }))
   }
 })
 
