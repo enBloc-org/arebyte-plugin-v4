@@ -1,3 +1,5 @@
+import { useFormik } from "formik"
+
 import { useStorage } from "@plasmohq/storage/hook"
 
 import useStore from "~store/store"
@@ -10,6 +12,7 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import { UserSession } from "~types/userTypes"
+import updateStorage from "~utils/updateStorage"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
@@ -24,6 +27,28 @@ export default function ProfilePage() {
     "arebyte-audience-session"
   )
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  const { handleSubmit, handleChange } = useFormik({
+    initialValues: {
+      userName: userInfo.username,
+      emailAddress: userInfo.email,
+      eventTime: userInfo.audience_member.event_time
+    },
+    onSubmit: async values => {
+      setErrorMessage("")
+      setIsLoading(true)
+
+      console.log(values)
+
+      // send values to CMS
+      // fetch user info
+      // updateUser() with new values
+
+      setIsLoading(false)
+    }
+  })
 
   const handleQuietSwitchClick = () => {
     updatedIsQuiet(!isQuiet)
@@ -36,6 +61,7 @@ export default function ProfilePage() {
   const handleLogOff = () => {
     remove()
     resetStore()
+    navigateTo("home")
   }
 
   return (
@@ -51,35 +77,34 @@ export default function ProfilePage() {
             id="account-settings"
             className="profile-page--form flex flex-column"
             aria-hidden={!isOpen}
+            onSubmit={handleSubmit}
           >
             <input
+              name="userName"
               type="text"
               placeholder={userInfo.username}
               className="content-box"
+              onChange={handleChange}
             />
             <input
+              name="emailAddress"
               type="email"
               placeholder={userInfo.email}
               className="content-box"
+              onChange={handleChange}
             />
             <input
-              type="text"
-              placeholder="Second name"
+              name="eventTime"
+              type="time"
+              placeholder={userInfo.audience_member.event_time}
               className="content-box"
-            />
-            <input
-              type="date"
-              placeholder="Date of birth"
-              className="content-box"
-            />
-            <input
-              type="text"
-              placeholder="Location (where you live)"
-              className="content-box"
+              onChange={handleChange}
             />
             <button type="submit" className="button--primary">
               submit
             </button>
+            {errorMessage && <p>{errorMessage}</p>}
+            {isLoading && <p>Loading ...</p>}
           </form>
           <div className="profile-page--modal-buttons">
             <button
