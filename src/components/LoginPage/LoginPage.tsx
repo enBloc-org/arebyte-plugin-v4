@@ -12,6 +12,8 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
+import EyeIcon from "~components/Icons/EyeIcon"
+import SlashedEyeIcon from "~components/Icons/SlashedEyeIcon"
 import { UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
@@ -19,6 +21,7 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
+  const [showPassword, setShowPassword] = useState(false)
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -72,14 +75,27 @@ export default function LoginPage() {
             required={true}
             onChange={handleChange}
           />
-          <input
-            name="password"
-            className="content-box shadow login--input"
-            type="password"
-            placeholder="Password*"
-            required={true}
-            onChange={handleChange}
-          />
+          <div className="password-input-container">
+            <input
+              name="password"
+              className="content-box shadow login--input"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password*"
+              required={true}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <SlashedEyeIcon width="16px" height="16px" />
+              ) : (
+                <EyeIcon width="16px" height="16px" />
+              )}
+            </button>
+          </div>
           <fieldset>
             <button
               type="submit"
