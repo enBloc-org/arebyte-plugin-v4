@@ -21,22 +21,22 @@ export interface ProjectData {
   content_creator: ContentCreator
 }
 
-export interface Data {
+export interface CurrentProjectData {
   id: number
-  createdAt: string
-  updatedAt: string
-  publishedAt: string
+  event_time: string
   project: ProjectData
 }
 
 export interface ProjectResponse {
   data: ProjectData
   meta: object
+  error: string
 }
 
 export interface CurrentProjectResponse {
-  data: Data & { event_time: string }
+  data: CurrentProjectData
   meta: object
+  error: string
 }
 
 export interface AllProjectResponse {
@@ -45,4 +45,5 @@ export interface AllProjectResponse {
     "content_creator" | "events" | "description"
   >[]
   meta: object
+  error: string
 }
