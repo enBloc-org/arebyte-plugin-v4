@@ -12,7 +12,6 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import { UserSession } from "~types/userTypes"
-import updateStorage from "~utils/updateStorage"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
@@ -30,10 +29,12 @@ export default function ProfilePage() {
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const { handleSubmit, handleChange } = useFormik({
+  const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       userName: userInfo.username,
       emailAddress: userInfo.email,
+      birthDate: userInfo.birth_date,
+      location: userInfo.location,
       eventTime: userInfo.audience_member.event_time
     },
     onSubmit: async values => {
@@ -82,21 +83,35 @@ export default function ProfilePage() {
             <input
               name="userName"
               type="text"
-              placeholder={userInfo.username}
+              value={values.userName}
               className="content-box"
               onChange={handleChange}
             />
             <input
               name="emailAddress"
               type="email"
-              placeholder={userInfo.email}
+              value={values.emailAddress}
+              className="content-box"
+              onChange={handleChange}
+            />
+            <input
+              name="birthDate"
+              type="date"
+              value={values.birthDate}
+              className="content-box"
+              onChange={handleChange}
+            />
+            <input
+              name="location"
+              type="text"
+              value={values.location}
               className="content-box"
               onChange={handleChange}
             />
             <input
               name="eventTime"
               type="time"
-              placeholder={userInfo.audience_member.event_time}
+              value={values.eventTime}
               className="content-box"
               onChange={handleChange}
             />
