@@ -42,8 +42,9 @@ export interface ContentCreator {
 }
 
 export interface AuthResponse {
-  jwt: string
-  user: {
+  data?: null
+  jwt?: string
+  user?: {
     blocked: boolean
     confirmed: boolean
     createdAt: string
@@ -53,6 +54,7 @@ export interface AuthResponse {
     updatedAt: string
     username: string
   }
+  error: string | null
 }
 
 export interface UserResponse {

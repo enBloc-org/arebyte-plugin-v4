@@ -14,39 +14,27 @@ export async function fetchStrapiContent<T>(
     "Content-Type": "application/json",
     ...(bearer ? { Authorization: `bearer ${bearer}` } : {})
   }
-  try {
-    const response = await fetch(
-      `${process.env.PLASMO_PUBLIC_API_URL}/${endPoint}`,
-      {
-        method: method,
-        headers: headers,
-        ...(body ? { body: body } : {})
-      }
-    )
-
-    const returnedData = await response.json()
-
-    if (!response.ok) {
-      return {
-        data: null,
-        meta: {},
-        error:
-          returnedData.error?.message || "An unknown error occurred"
-      }
+  const response = await fetch(
+    `${process.env.PLASMO_PUBLIC_API_URL}/${endPoint}`,
+    {
+      method: method,
+      headers: headers,
+      ...(body ? { body: body } : {})
     }
+  )
 
+  const returnedData = await response.json()
+
+  if (!response.ok) {
     return {
       ...returnedData,
-      error: null
-    }
-  } catch (error) {
-    return {
-      data: null,
-      meta: {},
       error:
-        error instanceof Error
-          ? error.message
-          : "An unknown error occurred"
+        returnedData.error?.message || "An unknown error occurred"
     }
+  }
+
+  return {
+    ...returnedData,
+    error: null
   }
 }

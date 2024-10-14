@@ -1,6 +1,5 @@
 import { useFormik } from "formik"
 
-// import newStorage from "~utils/newStorage"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import useStore from "~store/store"
@@ -31,7 +30,7 @@ export default function LoginPage() {
       setIsLoading(true)
       const {
         jwt,
-        user: { id },
+        user,
         error: authError
       } = await sendToBackground({
         name: "loginToStrapi",
@@ -40,12 +39,12 @@ export default function LoginPage() {
 
       if (authError) {
         setIsLoading(false)
-        return setErrorMessage(authError.message)
+        return setErrorMessage(authError)
       }
 
       const userData = await sendToBackground({
         name: "fetchUserProfile",
-        body: { jwt: jwt, id: id }
+        body: { jwt: jwt, id: user.id }
       })
 
       const userSession: UserSession = {
