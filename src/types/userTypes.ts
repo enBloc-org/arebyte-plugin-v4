@@ -6,6 +6,8 @@ export interface User {
   id: number
   username: string
   email: string
+  birth_date: string
+  location: string
   audience_member: {
     is_quiet: boolean
     is_paused: boolean
@@ -52,6 +54,8 @@ export interface AuthResponse {
     provider: string
     updatedAt: string
     username: string
+    birth_date: string
+    location: string
   }
 }
 

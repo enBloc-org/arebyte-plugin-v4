@@ -1,7 +1,7 @@
 import qs from "qs"
 
 const userQuery = {
-  fields: ["id", "username", "email"],
+  fields: ["id", "username", "email", "birth_date", "location"],
   populate: {
     audience_member: {
       fields: [
