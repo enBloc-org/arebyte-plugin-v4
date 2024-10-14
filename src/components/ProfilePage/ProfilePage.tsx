@@ -26,8 +26,6 @@ export default function ProfilePage() {
     "arebyte-audience-session"
   )
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<string>("")
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
@@ -38,16 +36,11 @@ export default function ProfilePage() {
       eventTime: userInfo.audience_member.event_time
     },
     onSubmit: async values => {
-      setErrorMessage("")
-      setIsLoading(true)
-
       console.log(values)
 
       // send values to CMS
       // fetch user info
       // updateUser() with new values
-
-      setIsLoading(false)
     }
   })
 
@@ -118,8 +111,6 @@ export default function ProfilePage() {
             <button type="submit" className="button--primary">
               submit
             </button>
-            {errorMessage && <p>{errorMessage}</p>}
-            {isLoading && <p>Loading ...</p>}
           </form>
           <div className="profile-page--modal-buttons">
             <button
