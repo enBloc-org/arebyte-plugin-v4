@@ -23,6 +23,7 @@ interface State {
     | "current-project"
     | "explore-project"
     | "favourites"
+    | "contact"
 }
 
 interface Actions {
