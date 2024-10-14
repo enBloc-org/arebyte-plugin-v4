@@ -54,3 +54,13 @@ export interface AuthResponse {
     username: string
   }
 }
+
+export interface UserResponse {
+  data: User
+  meta: object
+}
+
+export interface UserSession {
+  user: User
+  jwt: string
+}

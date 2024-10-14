@@ -1,7 +1,9 @@
 import { useFormik } from "formik"
 
+// import newStorage from "~utils/newStorage"
+import { useStorage } from "@plasmohq/storage/hook"
+
 import useStore from "~store/store"
-import newStorage from "~utils/newStorage"
 
 import "~components/LoginPage/LoginPage.css"
 
@@ -11,12 +13,13 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
+import { UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
-  const storage = newStorage()
+  const [, setUserSession] = useStorage("arebyte-audience-session")
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -26,17 +29,32 @@ export default function LoginPage() {
     onSubmit: async values => {
       setErrorMessage("")
       setIsLoading(true)
-      const { jwt, error } = await sendToBackground({
+      const {
+        jwt,
+        user: { id },
+        error: authError
+      } = await sendToBackground({
         name: "loginToStrapi",
         body: JSON.stringify(values)
       })
 
-      if (error) {
+      if (authError) {
         setIsLoading(false)
-        return setErrorMessage(error.message)
+        return setErrorMessage(authError.message)
       }
 
-      await storage.set("arebyte-audience-token", jwt)
+      const userData = await sendToBackground({
+        name: "fetchUserProfile",
+        body: { jwt: jwt, id: id }
+      })
+
+      const userSession: UserSession = {
+        user: {
+          ...userData
+        },
+        jwt
+      }
+      setUserSession(userSession)
       navigateTo("home")
     }
   })

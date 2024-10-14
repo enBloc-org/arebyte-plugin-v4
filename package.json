@@ -70,6 +70,11 @@
     ],
     "permissions": [
       "alarms"
-    ]
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "{013da1a4-7fc0-4f54-8bb8-37e575903c25}"
+      }
+    }
   }
 }

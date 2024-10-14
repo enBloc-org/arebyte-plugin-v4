@@ -1,12 +1,14 @@
+import { useStorage } from "@plasmohq/storage/hook"
+
 import BackButton from "~components/BackButton/BackButton"
 import useStore from "~store/store"
-import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
-  const storage = newStorage()
+  const resetStore = useStore.use.resetStore()
+  const [, , { remove }] = useStorage("arebyte-audience-session")
 
   return (
     <div className="profile-page page">
@@ -14,7 +16,12 @@ export default function ProfilePage() {
       <button type="button" onClick={() => navigateTo("explore")}>
         e x p l o r e
       </button>
-      <button onClick={async () => await storage.removeAll()}>
+      <button
+        onClick={() => {
+          remove()
+          resetStore()
+        }}
+      >
         Log out
       </button>
       <BackButton />
