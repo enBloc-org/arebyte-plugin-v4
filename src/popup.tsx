@@ -1,16 +1,13 @@
 import "./components/normalize.css"
 import "~components/globals.css"
 
-import { ErrorBoundary } from "react-error-boundary"
-import { CSSTransition } from "react-transition-group"
-
-import Fallback from "~components/ErrorFallback/ErrorFallBack"
 import { useEffect } from "react"
+import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
-import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
+import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
 import LoginPage from "~components/LoginPage/LoginPage"
@@ -37,7 +34,7 @@ function IndexPopup() {
   }, [userSession?.jwt])
 
   return (
-    <ErrorBoundary FallbackComponent={Fallback}>
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
         <CSSTransition
           in={currentPage === "home"}

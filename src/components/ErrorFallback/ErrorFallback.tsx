@@ -4,7 +4,7 @@ import "./ErrorFallback.css"
 
 import arebyte from "data-base64:assets/arebyte-Plugin-blue.png"
 
-const FallBack = ({ error }) => {
+const ErrorFallBack = ({ error }) => {
   const { resetBoundary } = useErrorBoundary()
 
   return (
@@ -28,4 +28,4 @@ const FallBack = ({ error }) => {
   )
 }
 
-export default FallBack
+export default ErrorFallBack

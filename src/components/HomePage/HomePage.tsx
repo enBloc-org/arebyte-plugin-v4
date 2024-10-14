@@ -30,10 +30,6 @@ export default function HomePage() {
       if (error) showBoundary(error)
 
       updateCurrentProject(data)
-
-      const token = await storage.get("arebyte-audience-token")
-      updateUserSession(!!token)
-      updateCurrentProject(response)
     }
     getUserSession()
   }, [])
@@ -49,10 +45,7 @@ export default function HomePage() {
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {
-                    active_project.project.events[currentIndex]
-                      .title
-                  }
+                  {active_project.project.events[currentIndex].title}
                 </h2>
                 <table>
                   <tbody>
@@ -94,8 +87,7 @@ export default function HomePage() {
                       .thumbnail.url
                   }
                   alt={
-                    active_project.project.cover_image
-                      .alternativeText
+                    active_project.project.cover_image.alternativeText
                   }
                 />
                 <div className="home-project-thumbnail-description stack">
@@ -109,9 +101,7 @@ export default function HomePage() {
                   </p>
                   <p>
                     Launched:{" "}
-                    {formatDate(
-                      active_project.project.launch_date
-                    )}
+                    {formatDate(active_project.project.launch_date)}
                   </p>
                 </div>
               </button>
