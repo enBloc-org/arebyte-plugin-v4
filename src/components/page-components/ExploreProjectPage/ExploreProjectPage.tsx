@@ -8,6 +8,7 @@ import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
+import SelectProjectButton from "~components/SelectProjectButton/SelectProjectButton"
 import useStore from "~store/store"
 import type {
   ProjectData,
@@ -25,7 +26,7 @@ const ExploreProjectPage = () => {
         body: {
           id: exploreProjectId
         }
-      }) 
+      })
       setProject(response.data)
     }
     fetchProject()
@@ -45,6 +46,7 @@ const ExploreProjectPage = () => {
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />
+            <SelectProjectButton />
             <CuratorDetails curator={project.content_creator} />
           </div>
           <Footer />
