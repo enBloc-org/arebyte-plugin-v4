@@ -17,17 +17,17 @@ const CurrentProjectPage = () => {
         <img
           src={
             process.env.PLASMO_PUBLIC_API_URL +
-            active_project.data.project.cover_image.formats.small.url
+            active_project.project.cover_image.formats.small.url
           }
           alt={
-            active_project.data.project.cover_image.alternativeText ||
+            active_project.project.cover_image.alternativeText ||
             "Project image thumbnail"
           }
         />
         <div className="grid project-details__container">
-          <ProjectDetails project={active_project.data.project} />
+          <ProjectDetails project={active_project.project} />
           <CuratorDetails
-            curator={active_project.data.project.content_creator}
+            curator={active_project.project.content_creator}
           />
         </div>
         <Footer />

@@ -3,6 +3,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import "./ExploreProjectPage.css"
 
 import { useEffect, useState } from "react"
+import { useErrorBoundary } from "react-error-boundary"
 
 import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
@@ -18,16 +19,20 @@ import type {
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
   const exploreProjectId = useStore.use.exploreProjectId()
+  const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const fetchProject = async () => {
-      const response: ProjectResponse = await sendToBackground({
-        name: "fetchProjectDetailsById",
-        body: {
-          id: exploreProjectId
+      const { data, error }: ProjectResponse = await sendToBackground(
+        {
+          name: "fetchProjectDetailsById",
+          body: {
+            id: exploreProjectId
+          }
         }
-      })
-      setProject(response.data)
+      )
+      if (error) showBoundary(error)
+      setProject(data)
     }
     fetchProject()
   }, [])
