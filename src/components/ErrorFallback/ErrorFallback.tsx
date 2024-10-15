@@ -14,9 +14,9 @@ const ErrorFallBack = ({ error }) => {
         alt="Arebyte Plugin Logo"
         className="error-logo"
       />
-      <div className="margin-top-lg stack error-message">
+      <div className="margin-top-lg stack error-message-container">
         <p>Something went wrong:</p>
-        <p style={{ color: "red" }}>{error.message}</p>
+        <p className="error-message">{error.message}</p>
         <button
           className="button--primary margin-top-lg"
           onClick={resetBoundary}
