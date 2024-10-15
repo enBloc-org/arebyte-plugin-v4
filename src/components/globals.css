@@ -97,6 +97,7 @@ button {
   border-color: var(--accent__disabled);
   color: var(--accent__disabled);
   background-color: var(--base);
+  box-shadow: none;
 }
 
 .button--primary__clicked {
