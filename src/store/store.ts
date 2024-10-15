@@ -40,8 +40,8 @@ const initialState: State = {
     id: undefined,
     username: undefined,
     email: undefined,
-    birth_date: "01:01:1973",
-    location: "London, UK",
+    birth_date: undefined,
+    location: undefined,
     audience_member: {
       is_quiet: false,
       is_paused: false,
