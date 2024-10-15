@@ -6,11 +6,11 @@ import { CSSTransition } from "react-transition-group"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
-import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
 import LoginPage from "~components/LoginPage/LoginPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
+import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
@@ -29,7 +29,7 @@ function IndexPopup() {
 
   useEffect(() => {
     if (userSession) updateUser(userSession)
-  }, [userSession?.jwt])
+  }, [userSession?.user])
 
   return (
     <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
