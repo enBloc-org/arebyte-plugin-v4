@@ -1,0 +1,29 @@
+.sign-up-page {
+  background-color: white;
+  animation: signUpSlideRight 0.5s ease-out;
+}
+
+.sign-up-page-enter {
+  z-index: 3;
+}
+
+.sign-up-page-enter-active {
+  z-index: 3;
+}
+
+.sign-up-page-exit {
+  z-index: 1;
+}
+
+.sign-up-page-exit-active {
+  z-index: 1;
+}
+
+@keyframes signUpSlideRight {
+  0% {
+    transform: translateX(-200);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
