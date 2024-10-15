@@ -60,6 +60,11 @@ export interface UserResponse {
   meta: object
 }
 
+export interface AudienceMemberResponse {
+  data: User["audience_member"]
+  meta: object
+}
+
 export interface UserSession {
   user: User
   jwt: string
