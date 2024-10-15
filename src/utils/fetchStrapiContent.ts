@@ -1,6 +1,6 @@
 export async function fetchStrapiContent<T>(
   endPoint: string,
-  method: "GET" | "POST" = "GET",
+  method: "GET" | "POST" | "PUT" = "GET",
   bearer?: string,
   body?: string
 ): Promise<T> {
