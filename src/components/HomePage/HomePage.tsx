@@ -6,6 +6,8 @@ import CountDownTimer from "~components/CountDownTimer/CountDownTimer"
 
 import "./HomePage.css"
 
+import { useErrorBoundary } from "react-error-boundary"
+
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
@@ -17,13 +19,17 @@ export default function HomePage() {
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const currentIndex = userInfo.audience_member.current_index
   const navigateTo = useStore.use.navigateTo()
+  const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const getUserSession = async () => {
-      const response = await sendToBackground({
+      const { data, error } = await sendToBackground({
         name: "fetchCurrentProject"
       })
-      updateCurrentProject(response)
+
+      if (error) showBoundary(error)
+
+      updateCurrentProject(data)
     }
     getUserSession()
   }, [])
@@ -39,16 +45,13 @@ export default function HomePage() {
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {
-                    active_project.data.project.events[currentIndex]
-                      .title
-                  }
+                  {active_project.project.events[currentIndex].title}
                 </h2>
                 <table>
                   <tbody>
                     <tr>
                       <td>Part of:</td>
-                      <td> {active_project.data.project.title}</td>
+                      <td> {active_project.project.title}</td>
                     </tr>
                     <tr>
                       <td>Start Time:</td>
@@ -63,7 +66,7 @@ export default function HomePage() {
                       <td>Day:</td>
                       <td>
                         {currentIndex + 1} of{" "}
-                        {active_project.data.project.events.length}
+                        {active_project.project.events.length}
                       </td>
                     </tr>
                   </tbody>
@@ -80,28 +83,25 @@ export default function HomePage() {
                 <img
                   src={
                     process.env.PLASMO_PUBLIC_API_URL +
-                    active_project.data.project.cover_image.formats
+                    active_project.project.cover_image.formats
                       .thumbnail.url
                   }
                   alt={
-                    active_project.data.project.cover_image
-                      .alternativeText
+                    active_project.project.cover_image.alternativeText
                   }
                 />
                 <div className="home-project-thumbnail-description stack">
-                  <h3>{active_project.data.project.title}</h3>
+                  <h3>{active_project.project.title}</h3>
                   <p>
                     Curated By:{" "}
                     {
-                      active_project.data.project.content_creator
+                      active_project.project.content_creator
                         .curator_name
                     }
                   </p>
                   <p>
                     Launched:{" "}
-                    {formatDate(
-                      active_project.data.project.launch_date
-                    )}
+                    {formatDate(active_project.project.launch_date)}
                   </p>
                 </div>
               </button>

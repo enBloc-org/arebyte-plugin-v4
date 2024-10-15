@@ -1,6 +1,8 @@
 import { create } from "zustand"
 
-import { CurrentProjectResponse } from "~types/projectTypes"
+import type {
+  CurrentProjectData,
+} from "~types/projectTypes"
 import type { User, UserSession } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
@@ -11,9 +13,9 @@ export type PlayList = typeof baseStore<
 
 interface State {
   user: User
+  active_project?: CurrentProjectData
   isLoggedIn: boolean
   exploreProjectId: number
-  active_project: CurrentProjectResponse
   previousPage: State["currentPage"]
   currentPage:
     | "home"
@@ -26,11 +28,11 @@ interface State {
 }
 
 interface Actions {
+  updateCurrentProject: (project: CurrentProjectData) => void
   navigateTo: (nextPage: State["currentPage"]) => void
   updateUser: (newUser: UserSession) => void
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
-  updateCurrentProject: (project: CurrentProjectResponse) => void
 }
 
 const initialState: State = {
