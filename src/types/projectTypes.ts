@@ -30,13 +30,13 @@ export interface CurrentProjectData {
 export interface ProjectResponse {
   data: ProjectData
   meta: object
-  error: string
+  error: string | null
 }
 
 export interface CurrentProjectResponse {
   data: CurrentProjectData
   meta: object
-  error: string
+  error: string | null
 }
 
 export interface AllProjectResponse {
@@ -45,5 +45,5 @@ export interface AllProjectResponse {
     "content_creator" | "events" | "description"
   >[]
   meta: object
-  error: string
+  error: string | null
 }
