@@ -2,5 +2,51 @@
   grid-row: 2;
   text-align: center;
   height: 35px;
-  
+}
+
+.select-project-button__disabled {
+  color: var(--accent__disabled);
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 7px;
+  border: 2px solid var(--accent__disabled);
+  height: 35px;
+}
+
+.select-project-button--warning {
+  position: absolute;
+  top: calc(100% - (310px * 1.5));
+  left: calc(100% - (215px * 1.6));
+  height: 215px;
+  width: 310px;
+  background-color: var(--base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 25px;
+  text-align: center;
+}
+
+.select-project-button--warning span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.select-project-button--warning button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+.select-project-button--warning::before {
+  content: "";
+  height: 100dvh;
+  width: 100dvw;
+  position: absolute;
+  top: -135px;
+  left: -36px;
+  background-color: var(--accent__disabled);
+  opacity: 0.6;
 }
