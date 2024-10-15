@@ -1,8 +1,6 @@
 import { create } from "zustand"
 
-import type {
-  CurrentProjectData,
-} from "~types/projectTypes"
+import type { CurrentProjectData } from "~types/projectTypes"
 import type { User, UserSession } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
@@ -22,6 +20,7 @@ interface State {
     | "profile"
     | "explore"
     | "login"
+    | "sign-up"
     | "current-project"
     | "explore-project"
     | "favourites"
