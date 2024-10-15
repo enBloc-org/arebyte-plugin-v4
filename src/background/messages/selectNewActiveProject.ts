@@ -28,8 +28,6 @@ const handler: PlasmoMessaging.MessageHandler = async req => {
   })
 
   await storage.set("arebyte-audience-session", newSession)
-
-  console.log(response)
 }
 
 export default handler

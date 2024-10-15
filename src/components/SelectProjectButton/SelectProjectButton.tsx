@@ -13,7 +13,6 @@ export default function SelectProjectButton() {
   const exploreProjectId = useStore.use.exploreProjectId()
 
   const handleClick = async () => {
-    console.log(exploreProjectId)
     await sendToBackground({
       name: "selectNewActiveProject",
       body: { selectedProjectId: exploreProjectId }
