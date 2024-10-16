@@ -1,6 +1,6 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
-import { AudienceMemberResponse, UserSession } from "~types/userTypes"
+import { User, UserSession } from "~types/userTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 import newStorage from "~utils/newStorage"
 import updateStorage from "~utils/updateStorage"
@@ -13,7 +13,7 @@ const handler: PlasmoMessaging.MessageHandler = async req => {
     "arebyte-audience-session"
   )
 
-  const response = await fetchStrapiContent<AudienceMemberResponse>(
+  const response = await fetchStrapiContent<User["audience_member"]>(
     `api/audience-members/${userSession.user.id}`,
     "PUT",
     userSession.jwt,
@@ -22,6 +22,8 @@ const handler: PlasmoMessaging.MessageHandler = async req => {
       project_id: selectedProjectId
     })
   )
+
+  if (response.error) console.log(response.error)
 
   const newSession = updateStorage(userSession, {
     project_id: response.data.project_id
