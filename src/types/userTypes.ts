@@ -43,7 +43,7 @@ export interface ContentCreator {
   }[]
 }
 
-export interface AuthResponse {
+export interface AuthData {
   jwt: string
   user: {
     blocked: boolean

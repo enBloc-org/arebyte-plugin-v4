@@ -1,11 +1,11 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
 import { projectQueryString } from "~queries/projectQuery"
-import type { ProjectResponse } from "~types/projectTypes"
+import type { ProjectData } from "~types/projectTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  const response = await fetchStrapiContent<ProjectResponse>(
+  const response = await fetchStrapiContent<ProjectData>(
     `api/projects/${req.body.id}?${projectQueryString}`
   )
   res.send(response)
