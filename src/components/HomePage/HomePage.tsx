@@ -11,28 +11,50 @@ import { useErrorBoundary } from "react-error-boundary"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import { CurrentProjectData, ProjectData } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
   const userInfo = useStore.use.user()
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const currentIndex = userInfo.audience_member.current_index
+  const {
+    audience_member: { current_index, project_id }
+  } = useStore.use.user()
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const getUserSession = async () => {
-      const { data, error } = await sendToBackground({
-        name: "fetchCurrentProject"
-      })
+      if (project_id === 0) {
+        const {
+          data,
+          error
+        }: { data: CurrentProjectData; error: string | null } =
+          await sendToBackground({
+            name: "fetchCurrentProject"
+          })
 
-      if (error) showBoundary(error)
+        if (error) showBoundary(error)
 
-      updateCurrentProject(data)
+        updateCurrentProject(data.project)
+      } else {
+        const {
+          data,
+          error
+        }: { data: ProjectData; error: string | null } =
+          await sendToBackground({
+            name: "fetchProjectDetailsById",
+            body: { id: project_id }
+          })
+
+        if (error) showBoundary(error)
+
+        updateCurrentProject(data)
+      }
     }
     getUserSession()
-  }, [])
+  }, [project_id])
 
   return (
     <div className="home-page page">
@@ -45,13 +67,13 @@ export default function HomePage() {
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {active_project.project.events[currentIndex].title}
+                  {active_project.events[current_index].title}
                 </h2>
                 <table>
                   <tbody>
                     <tr>
                       <td>Part of:</td>
-                      <td> {active_project.project.title}</td>
+                      <td> {active_project.title}</td>
                     </tr>
                     <tr>
                       <td>Start Time:</td>
@@ -65,8 +87,8 @@ export default function HomePage() {
                     <tr>
                       <td>Day:</td>
                       <td>
-                        {currentIndex + 1} of{" "}
-                        {active_project.project.events.length}
+                        {current_index + 1} of{" "}
+                        {active_project.events.length}
                       </td>
                     </tr>
                   </tbody>
@@ -83,25 +105,18 @@ export default function HomePage() {
                 <img
                   src={
                     process.env.PLASMO_PUBLIC_API_URL +
-                    active_project.project.cover_image.formats
-                      .thumbnail.url
+                    active_project.cover_image.formats.thumbnail.url
                   }
-                  alt={
-                    active_project.project.cover_image.alternativeText
-                  }
+                  alt={active_project.cover_image.alternativeText}
                 />
                 <div className="home-project-thumbnail-description stack">
-                  <h3>{active_project.project.title}</h3>
+                  <h3>{active_project.title}</h3>
                   <p>
                     Curated By:{" "}
-                    {
-                      active_project.project.content_creator
-                        .curator_name
-                    }
+                    {active_project.content_creator.curator_name}
                   </p>
                   <p>
-                    Launched:{" "}
-                    {formatDate(active_project.project.launch_date)}
+                    Launched: {formatDate(active_project.launch_date)}
                   </p>
                 </div>
               </button>
