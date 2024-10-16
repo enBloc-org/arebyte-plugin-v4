@@ -25,6 +25,10 @@ export async function fetchStrapiContent<T>(
     )
 
     const returnedData = await response.json()
+
+    if (returnedData.error)
+      throw new Error(returnedData.error.message)
+
     return {
       ...returnedData,
       error: null
