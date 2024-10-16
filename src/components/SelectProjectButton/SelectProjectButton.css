@@ -13,6 +13,7 @@
   border: 2px solid var(--accent__disabled);
   height: 35px;
   padding: 8px;
+  cursor: not-allowed;
 }
 
 .select-project-button--warning {

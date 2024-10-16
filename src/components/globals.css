@@ -98,6 +98,7 @@ button {
   color: var(--accent__disabled);
   background-color: var(--base);
   box-shadow: none;
+  cursor: not-allowed;
 }
 
 .button--primary__clicked {
