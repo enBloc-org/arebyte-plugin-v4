@@ -19,7 +19,7 @@ export default function HomePage() {
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const {
-    audience_member: { current_index, project_id }
+    audience_member: { current_index, project_id, event_time }
   } = useStore.use.user()
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
@@ -34,8 +34,7 @@ export default function HomePage() {
           await sendToBackground({
             name: "fetchCurrentProject"
           })
-
-        if (error) showBoundary(error)
+        if (error) return showBoundary(error)
 
         updateCurrentProject(data.project)
       } else {
@@ -47,14 +46,21 @@ export default function HomePage() {
             name: "fetchProjectDetailsById",
             body: { id: project_id }
           })
-
-        if (error) showBoundary(error)
-
+        if (error) return showBoundary(error)
         updateCurrentProject(data)
+
+        const [setHour, setMinute] = event_time.split(":")
+        await sendToBackground({
+          name: "updateEventAlarm",
+          body: {
+            eventHour: parseInt(setHour),
+            eventMinute: parseInt(setMinute)
+          }
+        })
       }
     }
     getUserSession()
-  }, [project_id])
+  }, [project_id, event_time, current_index])
 
   return (
     <div className="home-page page">
