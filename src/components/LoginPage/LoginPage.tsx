@@ -52,7 +52,14 @@ export default function LoginPage() {
 
       const userSession: UserSession = {
         user: {
-          ...userData
+          id: userData.id,
+          username: userData.username,
+          email: userData.email,
+          birth_date: userData.birth_date,
+          location: userData.location,
+          audience_member: {
+            ...userData.audience_member
+          }
         },
         jwt
       }
