@@ -6,16 +6,18 @@ import Footer from "~components/Footer/Footer"
 import "./SignUpPage.css"
 
 import { Form, Formik } from "formik"
+import { useState } from "react"
 
+import { sendToBackground } from "@plasmohq/messaging"
+
+import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
-import TextInput from "~components/Forms/PasswordInput/TextInput"
-
-// import { sendToBackground } from "@plasmohq/messaging"
 
 // import useStore from "~store/store"
 
 const SignUpPage = () => {
   // const navigateTo = useStore.use.navigateTo()
+  const [errorMessage, setErrorMessage] = useState("")
   const initialValues = {
     username: "",
     identifier: "",
@@ -59,32 +61,55 @@ const SignUpPage = () => {
               .required("Password is required"),
             passwordCheck: Yup.string()
               .oneOf([Yup.ref("password")], "Passwords must match")
-              .required("Please confirm your password")
+              .required("Please confirm your password"),
+            location: Yup.string().required(
+              "Please enter your location"
+            )
           })}
-          onSubmit={() => {}}
+          onSubmit={async (values, actions) => {
+            const { data, error } = await sendToBackground({
+              name: "createNewUser",
+              body: JSON.stringify(values)
+            })
+
+            if (error) return setErrorMessage(error)
+
+            console.log("====================================")
+            console.log(data)
+            console.log("====================================")
+
+            actions.setSubmitting(false)
+          }}
         >
           <Form className="form--container stack">
-            <TextInput
+            <FormInput
               name="username"
               placeholder="Username*"
               type="text"
             />
-            <TextInput
+            <FormInput
               name="email"
               placeholder="Email*"
               type="email"
             />
-
             <PasswordInput name="password" placeholder="Password*" />
             <PasswordInput
               name="passwordCheck"
-              placeholder="Password Check*"
+              placeholder="Retype Password*"
+            />
+            <FormInput
+              name="location"
+              placeholder="Location*"
+              type="text"
             />
             <button type="submit" className="button--primary text-md">
               Submit
             </button>
           </Form>
         </Formik>
+        {errorMessage && (
+          <p className="error-message text-lg">{errorMessage}</p>
+        )}
       </main>
       <Footer />
     </div>
