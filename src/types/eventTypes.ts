@@ -2,15 +2,12 @@ import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
 import type { ImageResponse } from "./imageTypes"
 
-export interface EventResponse {
-  data: {
-    id: number
-    title: string
-    createdAt: string
-    updatedAt: string
-    pop_ups: Popup[]
-  }
-  meta: object
+export interface EventData {
+  id: number
+  title: string
+  createdAt: string
+  updatedAt: string
+  pop_ups: Popup[]
 }
 
 export interface PopupContent {

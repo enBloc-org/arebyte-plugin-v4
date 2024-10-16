@@ -13,6 +13,7 @@ import Layout from "~components/Layout/Layout"
 import LoginPage from "~components/page-components/LoginPage/LoginPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
+import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import ProfilePage from "~components/ProfilePage/ProfilePage"
@@ -32,7 +33,7 @@ function IndexPopup() {
 
   useEffect(() => {
     if (userSession) updateUser(userSession)
-  }, [userSession?.jwt])
+  }, [userSession?.user])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
