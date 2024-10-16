@@ -5,7 +5,7 @@ import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 import newStorage from "~utils/newStorage"
 import updateStorage from "~utils/updateStorage"
 
-const handler: PlasmoMessaging.MessageHandler = async req => {
+const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const storage = newStorage()
   const { selectedProjectId } = req.body
 
@@ -23,13 +23,17 @@ const handler: PlasmoMessaging.MessageHandler = async req => {
     })
   )
 
-  if (response.error) console.log(response.error)
+  if (response.error) {
+    console.log(response.error)
+    res.send(false)
+  }
 
   const newSession = updateStorage(userSession, {
     project_id: response.data.project_id
   })
 
   await storage.set("arebyte-audience-session", newSession)
+  res.send(true)
 }
 
 export default handler
