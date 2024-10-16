@@ -73,6 +73,7 @@ export default function ProfilePage() {
             aria-hidden={!isOpen}
             onSubmit={handleSubmit}
           >
+            <label htmlFor="userName">Username</label>
             <input
               name="userName"
               type="text"
@@ -80,6 +81,7 @@ export default function ProfilePage() {
               className="content-box"
               onChange={handleChange}
             />
+            <label htmlFor="emailAddress">Email address</label>
             <input
               name="emailAddress"
               type="email"
@@ -87,6 +89,7 @@ export default function ProfilePage() {
               className="content-box"
               onChange={handleChange}
             />
+            <label htmlFor="birthDate">Date of birth</label>
             <input
               name="birthDate"
               type="date"
@@ -94,6 +97,7 @@ export default function ProfilePage() {
               className="content-box"
               onChange={handleChange}
             />
+            <label htmlFor="location">Location</label>
             <input
               name="location"
               type="text"
@@ -101,6 +105,9 @@ export default function ProfilePage() {
               className="content-box"
               onChange={handleChange}
             />
+            <label htmlFor="eventTime">
+              Your preferred time to receive popups
+            </label>
             <input
               name="eventTime"
               type="time"
@@ -141,7 +148,7 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="profile-page--controls flex flex-column start">
+        <div className="profile-page--controls flex flex-column start" aria-hidden={isOpen}>
           <div className="profile-page--toggle-pair">
             <ToggleSwitch
               isChecked={isQuiet}
