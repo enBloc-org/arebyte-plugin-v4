@@ -7,6 +7,12 @@
   animation: signUpSlideRight 0.5s ease-out;
 }
 
+.sign-up-page .footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
 .sign-up-page-enter {
   z-index: 3;
 }
