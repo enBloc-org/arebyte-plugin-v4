@@ -4,7 +4,7 @@ import { useStorage } from "@plasmohq/storage/hook"
 
 import useStore from "~store/store"
 
-import "~components/LoginPage/LoginPage.css"
+import "./LoginPage.css"
 
 import { useState } from "react"
 
