@@ -1,0 +1,26 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5rem;
+  text-align: center;
+}
+
+.error-message-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-message {
+  color: red;
+  font-style: italic;
+}
+
+.error-message button {
+  max-width: 150px;
+}
+
+.error-logo {
+  width: 12.5rem;
+}

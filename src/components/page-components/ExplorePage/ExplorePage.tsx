@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 
 import "./ExplorePage.css"
 
+import { useErrorBoundary } from "react-error-boundary"
+
 import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
@@ -11,14 +13,18 @@ import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { AllProjectResponse } from "~types/projectTypes"
 
 export default function ExplorePage() {
-  const [projects, setProjects] = useState<AllProjectResponse>()
+  const [projects, setProjects] =
+    useState<AllProjectResponse["data"]>()
+  const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const fetchAllProjects = async () => {
-      const response = await sendToBackground({
+      const { data, error } = await sendToBackground({
         name: "fetchAllProjects"
       })
-      setProjects(response)
+
+      if (error) showBoundary(error)
+      setProjects(data)
     }
     fetchAllProjects()
   }, [])
@@ -32,7 +38,7 @@ export default function ExplorePage() {
           <h2 className="text-lg">EXPLORE</h2>
           {projects && (
             <div className="flex gap margin-top-sm explore-card-container">
-              {projects.data.map(project => (
+              {projects.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}
             </div>

@@ -1,6 +1,5 @@
 import { useFormik } from "formik"
 
-// import newStorage from "~utils/newStorage"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import useStore from "~store/store"
@@ -13,6 +12,8 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
+import EyeIcon from "~components/Icons/EyeIcon"
+import SlashedEyeIcon from "~components/Icons/SlashedEyeIcon"
 import { UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
@@ -20,6 +21,7 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
+  const [showPassword, setShowPassword] = useState(false)
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -31,7 +33,7 @@ export default function LoginPage() {
       setIsLoading(true)
       const {
         jwt,
-        user: { id },
+        user,
         error: authError
       } = await sendToBackground({
         name: "loginToStrapi",
@@ -40,12 +42,12 @@ export default function LoginPage() {
 
       if (authError) {
         setIsLoading(false)
-        return setErrorMessage(authError.message)
+        return setErrorMessage(authError)
       }
 
       const userData = await sendToBackground({
         name: "fetchUserProfile",
-        body: { jwt: jwt, id: id }
+        body: { jwt: jwt, id: user.id }
       })
 
       const userSession: UserSession = {
@@ -73,14 +75,27 @@ export default function LoginPage() {
             required={true}
             onChange={handleChange}
           />
-          <input
-            name="password"
-            className="content-box shadow login--input"
-            type="password"
-            placeholder="Password*"
-            required={true}
-            onChange={handleChange}
-          />
+          <div className="password-input-container">
+            <input
+              name="password"
+              className="content-box shadow login--input"
+              type={showPassword ? "text" : "password"}
+              placeholder="Password*"
+              required={true}
+              onChange={handleChange}
+            />
+            <button
+              type="button"
+              className="password-toggle-btn"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <SlashedEyeIcon width="16px" height="16px" />
+              ) : (
+                <EyeIcon width="16px" height="16px" />
+              )}
+            </button>
+          </div>
           <fieldset>
             <button
               type="submit"
