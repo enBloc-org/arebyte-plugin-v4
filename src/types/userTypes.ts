@@ -6,6 +6,8 @@ export interface User {
   id: number
   username: string
   email: string
+  birth_date: string | null
+  location: string | null
   audience_member: {
     is_quiet: boolean
     is_paused: boolean
@@ -41,10 +43,9 @@ export interface ContentCreator {
   }[]
 }
 
-export interface AuthResponse {
-  data?: null
-  jwt?: string
-  user?: {
+export interface AuthData {
+  jwt: string
+  user: {
     blocked: boolean
     confirmed: boolean
     createdAt: string
@@ -54,14 +55,7 @@ export interface AuthResponse {
     updatedAt: string
     username: string
   }
-  error: string | null
 }
-
-export interface UserResponse {
-  data: User
-  meta: object
-}
-
 export interface UserSession {
   user: User
   jwt: string

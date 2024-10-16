@@ -2,18 +2,16 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import "./ExploreProjectPage.css"
 
-import { useEffect, useState } from "react"
+import { ErrorInfo, useEffect, useState } from "react"
 import { useErrorBoundary } from "react-error-boundary"
 
 import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
+import SelectProjectButton from "~components/SelectProjectButton/SelectProjectButton"
 import useStore from "~store/store"
-import type {
-  ProjectData,
-  ProjectResponse
-} from "~types/projectTypes"
+import type { ProjectData } from "~types/projectTypes"
 
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
@@ -22,14 +20,13 @@ const ExploreProjectPage = () => {
 
   useEffect(() => {
     const fetchProject = async () => {
-      const { data, error }: ProjectResponse = await sendToBackground(
-        {
+      const { data, error }: { data: ProjectData; error: ErrorInfo } =
+        await sendToBackground({
           name: "fetchProjectDetailsById",
           body: {
             id: exploreProjectId
           }
-        }
-      )
+        })
       if (error) showBoundary(error)
       setProject(data)
     }
@@ -50,6 +47,7 @@ const ExploreProjectPage = () => {
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />
+            <SelectProjectButton />
             <CuratorDetails curator={project.content_creator} />
           </div>
           <Footer />

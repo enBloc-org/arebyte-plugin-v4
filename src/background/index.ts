@@ -1,7 +1,7 @@
 import Browser from "webextension-polyfill"
 
 import { currentProjectQueryString } from "~queries/currentProjectQuery"
-import type { CurrentProjectResponse } from "~types/projectTypes"
+import type { CurrentProjectData } from "~types/projectTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 import newStorage from "~utils/newStorage"
 import setEventAlarm from "~utils/setEventAlarm"
@@ -22,7 +22,7 @@ Browser.runtime.onInstalled.addListener(async () => {
   storage.set("arebyte-public-index", 0)
   
   const currentProject =
-    await fetchStrapiContent<CurrentProjectResponse>(
+    await fetchStrapiContent<CurrentProjectData>(
       `api/current-project?${currentProjectQueryString}`
     )
 
