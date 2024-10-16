@@ -14,13 +14,18 @@ export default function SelectProjectButton() {
   const navigateTo = useStore.use.navigateTo()
   const exploreProjectId = useStore.use.exploreProjectId()
   const [isShowingAlarm, setIsShowingAlarm] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleClick = async () => {
     if (!isLoggedIn) return setIsShowingAlarm(true)
-    await sendToBackground({
+
+    setIsLoading(true)
+    const result = await sendToBackground({
       name: "selectNewActiveProject",
       body: { selectedProjectId: exploreProjectId }
     })
+
+    if (result) setIsLoading(false)
   }
 
   return (
@@ -86,6 +91,7 @@ export default function SelectProjectButton() {
       )}
       <button
         className={`${exploreProjectId === currentProjectId || !isLoggedIn ? "select-project-button__disabled" : "button--primary shadow"} text-md select-project-button`}
+        disabled={exploreProjectId === currentProjectId || isLoading}
         onClick={handleClick}
       >
         {exploreProjectId === currentProjectId
