@@ -12,6 +12,7 @@
   border-radius: 7px;
   border: 2px solid var(--accent__disabled);
   height: 35px;
+  padding: 8px;
 }
 
 .select-project-button--warning {
@@ -40,13 +41,13 @@
   top: 15px;
 }
 
-.select-project-button--warning::before {
+.select-project-button--warning-backdrop {
   content: "";
   height: 100dvh;
   width: 100dvw;
   position: absolute;
-  top: -135px;
-  left: -36px;
+  top: 0;
+  left: 0;
   background-color: var(--accent__disabled);
   opacity: 0.6;
 }
