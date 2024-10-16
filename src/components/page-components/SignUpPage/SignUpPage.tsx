@@ -2,13 +2,13 @@ import * as Yup from "yup"
 
 import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
-import EyeIcon from "~components/Icons/EyeIcon"
-import SlashedEyeIcon from "~components/Icons/SlashedEyeIcon"
 
 import "./SignUpPage.css"
 
-import { ErrorMessage, Field, Form, Formik } from "formik"
-import { useState } from "react"
+import { Form, Formik } from "formik"
+
+import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
+import TextInput from "~components/Forms/PasswordInput/TextInput"
 
 // import { sendToBackground } from "@plasmohq/messaging"
 
@@ -16,7 +16,6 @@ import { useState } from "react"
 
 const SignUpPage = () => {
   // const navigateTo = useStore.use.navigateTo()
-  const [showPassword, setShowPassword] = useState(false)
   const initialValues = {
     username: "",
     identifier: "",
@@ -38,46 +37,49 @@ const SignUpPage = () => {
               .required("Required"),
             email: Yup.string()
               .email("Invalid email address")
-              .required("Required")
+              .required("Required"),
+            password: Yup.string()
+              .min(8, "Password must be at least 8 characters")
+              .matches(
+                /[a-z]/,
+                "Password must contain at least one lowercase letter"
+              )
+              .matches(
+                /[A-Z]/,
+                "Password must contain at least one uppercase letter"
+              )
+              .matches(
+                /[0-9]/,
+                "Password must contain at least one number"
+              )
+              .matches(
+                /[^a-zA-Z0-9]/,
+                "Password must contain at least one special character"
+              )
+              .required("Password is required"),
+            passwordCheck: Yup.string()
+              .oneOf([Yup.ref("password")], "Passwords must match")
+              .required("Please confirm your password")
           })}
           onSubmit={() => {}}
         >
-          <Form className="login--form">
-            <Field
+          <Form className="form--container stack">
+            <TextInput
               name="username"
-              type="text"
               placeholder="Username*"
-              className="content-box shadow login--input"
-            />
-            <ErrorMessage name="username" />
-            <Field
-              name="email"
               type="text"
-              placeholder="Email*"
-              className="content-box shadow login--input"
             />
-            <ErrorMessage name="email" />
-            <div className="password-input-container">
-              <Field
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Password*"
-                className="content-box shadow login--input"
-              />
-              <button
-                type="button"
-                className="password-toggle-btn"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? (
-                  <SlashedEyeIcon width="16px" height="16px" />
-                ) : (
-                  <EyeIcon width="16px" height="16px" />
-                )}
-              </button>
-            </div>
+            <TextInput
+              name="email"
+              placeholder="Email*"
+              type="email"
+            />
 
-            <ErrorMessage name="email" />
+            <PasswordInput name="password" placeholder="Password*" />
+            <PasswordInput
+              name="passwordCheck"
+              placeholder="Password Check*"
+            />
             <button type="submit" className="button--primary text-md">
               Submit
             </button>
