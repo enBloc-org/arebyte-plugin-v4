@@ -6,7 +6,7 @@ interface FetchResult<T> {
 
 export async function fetchStrapiContent<T>(
   endPoint: string,
-  method: "GET" | "POST" = "GET",
+  method: "GET" | "POST" | "PUT" = "GET",
   bearer?: string,
   body?: string
 ): Promise<FetchResult<T>> {
@@ -25,6 +25,10 @@ export async function fetchStrapiContent<T>(
     )
 
     const returnedData = await response.json()
+
+    if (returnedData.error)
+      throw new Error(returnedData.error.message)
+
     return {
       ...returnedData,
       error: null
