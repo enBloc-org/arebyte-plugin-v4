@@ -9,9 +9,7 @@ export default function CountDownTimer() {
   const [tMinutes, setTMinutes] = useState(0)
   const [tSeconds, setTSeconds] = useState(0)
 
-  const {
-    audience_member: { event_time }
-  } = useStore.use.user()
+  const { event_time } = useStore.use.user()
 
   useEffect(() => {
     const timer = setInterval(() => {
