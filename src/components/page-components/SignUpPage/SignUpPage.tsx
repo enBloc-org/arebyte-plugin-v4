@@ -98,10 +98,6 @@ const SignUpPage = () => {
               jwt
             }
 
-            console.log("====================================")
-            console.log({ userSession })
-            console.log("====================================")
-
             setUserSession(userSession)
             actions.setSubmitting(false)
             setIsLoading(false)
