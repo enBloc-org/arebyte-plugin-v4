@@ -45,14 +45,9 @@ export default function LoginPage() {
         return setErrorMessage(authError)
       }
 
-      const userData = await sendToBackground({
-        name: "fetchUserProfile",
-        body: { jwt: jwt, id: user.id }
-      })
-
       const userSession: UserSession = {
         user: {
-          ...userData
+          ...user
         },
         jwt
       }
