@@ -11,7 +11,7 @@ const userQuery = {
     "is_paused"
   ],
   populate: {
-    playlist: {
+    favourites: {
       fields: ["*"]
     }
   }
