@@ -45,23 +45,17 @@ export default function LoginPage() {
         return setErrorMessage(authError)
       }
 
-      const userData = await sendToBackground({
+      const data = await sendToBackground({
         name: "fetchUserProfile",
         body: { jwt: jwt, id: user.id }
       })
 
       const userSession: UserSession = {
-        user: {
-          id: userData.id,
-          username: userData.username,
-          email: userData.email,
-          birth_date: userData.birth_date,
-          location: userData.location,
-          audience_member: {
-            ...userData.audience_member
-          }
-        },
-        jwt
+        id: data.id,
+        event_time: data.audience_member.event_time,
+        project_id: data.audience_member.project_id,
+        current_index: data.audience_member.current_index,
+        jwt: jwt
       }
       setUserSession(userSession)
       navigateTo("home")

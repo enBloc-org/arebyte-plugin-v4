@@ -31,7 +31,7 @@ function IndexPopup() {
 
   useEffect(() => {
     if (userSession) updateUser(userSession)
-  }, [userSession?.user])
+  }, [userSession])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>

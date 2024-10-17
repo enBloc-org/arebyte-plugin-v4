@@ -35,9 +35,9 @@ export default function setEventAlarm(
     )
 
     if (userSession) {
-      const projectId = userSession.user.audience_member.project_id
+      const projectId = userSession.project_id
       const currentIndex =
-        userSession.user.audience_member.current_index
+        userSession.current_index
 
       const pop_ups =
         projectId === 0

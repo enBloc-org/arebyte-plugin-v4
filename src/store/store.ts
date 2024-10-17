@@ -38,6 +38,8 @@ const initialState: State = {
     id: undefined,
     username: undefined,
     email: undefined,
+    birth_date: undefined,
+    location: undefined,
     audience_member: {
       is_quiet: false,
       is_paused: false,
@@ -64,7 +66,19 @@ const baseStore = create<State & Actions>(set => {
       })),
 
     updateUser: newUser => {
-      set(() => ({ user: newUser.user, isLoggedIn: true }))
+      set(state => ({
+        user: {
+          ...state.user,
+          id: newUser.id,
+          audience_member: {
+            ...state.user.audience_member,
+            event_time: newUser.event_time,
+            project_id: newUser.project_id,
+            current_index: newUser.current_index
+          }
+        },
+        isLoggedIn: true
+      }))
     },
     resetStore: () =>
       set(() => ({
