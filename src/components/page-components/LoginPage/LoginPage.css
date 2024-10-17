@@ -60,12 +60,6 @@
   justify-content: space-between;
 }
 
-.error-message {
-  grid-row: 4;
-  grid-column: 1;
-  margin: 0;
-}
-
 @keyframes loginSlideLeft {
   0% {
     transform: translateX(400);

@@ -120,10 +120,10 @@ export default function LoginPage() {
           </fieldset>
         </form>
         {isLoading && (
-          <span className="error-message text-lg">Loading ...</span>
+          <span className="message text-lg">Loading ...</span>
         )}
         {errorMessage && (
-          <p className="error-message text-lg">{errorMessage}</p>
+          <p className="message message__error text-lg">{errorMessage}</p>
         )}
       </main>
       <Footer />
