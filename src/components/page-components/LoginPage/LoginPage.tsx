@@ -52,14 +52,7 @@ export default function LoginPage() {
 
       const userSession: UserSession = {
         user: {
-          id: userData.id,
-          username: userData.username,
-          email: userData.email,
-          birth_date: userData.birth_date,
-          location: userData.location,
-          audience_member: {
-            ...userData.audience_member
-          }
+          ...userData
         },
         jwt
       }
@@ -123,7 +116,9 @@ export default function LoginPage() {
           <span className="message text-lg">Loading ...</span>
         )}
         {errorMessage && (
-          <p className="message message__error text-lg">{errorMessage}</p>
+          <p className="message message__error text-lg">
+            {errorMessage}
+          </p>
         )}
       </main>
       <Footer />

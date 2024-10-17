@@ -7,9 +7,7 @@ import "./SelectProjectButton.css"
 import useStore from "~store/store"
 
 export default function SelectProjectButton() {
-  const {
-    audience_member: { project_id: currentProjectId }
-  } = useStore.use.user()
+  const { project_id: currentProjectId } = useStore.use.user()
   const isLoggedIn = useStore.use.isLoggedIn()
   const navigateTo = useStore.use.navigateTo()
   const exploreProjectId = useStore.use.exploreProjectId()
