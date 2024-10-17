@@ -18,6 +18,8 @@ import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
 const SignUpPage = () => {
   // const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
+
   const initialValues = {
     username: "",
     identifier: "",
@@ -67,21 +69,29 @@ const SignUpPage = () => {
             )
           })}
           onSubmit={async (values, actions) => {
+            setIsLoading(true)
+            setErrorMessage("")
             const { data, error } = await sendToBackground({
               name: "createNewUser",
               body: JSON.stringify(values)
             })
 
-            if (error) return setErrorMessage(error)
+            if (error) {
+              setErrorMessage(error)
+              setIsLoading(false)
+              return actions.setSubmitting(false)
+            }
 
             console.log("====================================")
             console.log(data)
             console.log("====================================")
 
             actions.setSubmitting(false)
+            setIsLoading(false)
           }}
         >
           <Form className="form--container stack">
+            <legend className="bold">SIGN UP</legend>
             <FormInput
               name="username"
               placeholder="Username*"
@@ -95,20 +105,29 @@ const SignUpPage = () => {
             <PasswordInput name="password" placeholder="Password*" />
             <PasswordInput
               name="passwordCheck"
-              placeholder="Retype Password*"
+              placeholder="Re-enter password*"
             />
             <FormInput
               name="location"
               placeholder="Location*"
               type="text"
             />
-            <button type="submit" className="button--primary text-md">
+            <button
+              type="submit"
+              className="button--primary text-md"
+              disabled={isLoading}
+            >
               Submit
             </button>
           </Form>
         </Formik>
+        {isLoading && (
+          <p className="message margin-top-sm text-lg">Loading</p>
+        )}
         {errorMessage && (
-          <p className="error-message text-lg">{errorMessage}</p>
+          <p className="message__error margin-top-sm text-lg">
+            {errorMessage}
+          </p>
         )}
       </main>
       <Footer />
