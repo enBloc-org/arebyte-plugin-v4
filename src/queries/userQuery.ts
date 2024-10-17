@@ -8,7 +8,8 @@ const userQuery = {
     "event_time",
     "project_id",
     "current_index",
-    "is_paused"
+    "is_paused",
+    "birth_date"
   ],
   populate: {
     favourites: {
