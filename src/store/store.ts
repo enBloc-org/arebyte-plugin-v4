@@ -31,6 +31,8 @@ interface Actions {
   updateUser: (newUser: UserSession) => void
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
+  updateIsQuiet: (newStatus: boolean) => void
+  updateIsPaused: (newStatus: boolean) => void
 }
 
 const initialState: State = {
@@ -91,7 +93,27 @@ const baseStore = create<State & Actions>(set => {
     updateCurrentProject: project =>
       set(() => ({ active_project: project })),
     updateExploreProjectId: (id: number) =>
-      set(() => ({ exploreProjectId: id }))
+      set(() => ({ exploreProjectId: id })),
+    updateIsQuiet: newStatus =>
+      set(state => ({
+        user: {
+          ...state.user,
+          audience_member: {
+            ...state.user.audience_member,
+            is_quiet: newStatus
+          }
+        }
+      })),
+    updateIsPaused: newStatus =>
+      set(state => ({
+        user: {
+          ...state.user,
+          audience_member: {
+            ...state.user.audience_member,
+            is_paused: newStatus
+          }
+        }
+      }))
   }
 })
 

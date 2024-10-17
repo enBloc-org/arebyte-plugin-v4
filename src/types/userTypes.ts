@@ -6,8 +6,8 @@ export interface User {
   id: number
   username: string
   email: string
-  birth_date: string | null
-  location: string | null
+  birth_date: string
+  location: string
   audience_member: {
     is_quiet: boolean
     is_paused: boolean
