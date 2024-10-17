@@ -9,16 +9,18 @@ import { Form, Formik } from "formik"
 import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
+import { useStorage } from "@plasmohq/storage/hook"
 
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
-
 // import useStore from "~store/store"
+import { User, UserSession } from "~types/userTypes"
 
 const SignUpPage = () => {
   // const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+  const [, setUserSession] = useStorage("arebyte-audience-session")
 
   const initialValues = {
     username: "",
@@ -73,10 +75,15 @@ const SignUpPage = () => {
           onSubmit={async (values, actions) => {
             setIsLoading(true)
             setErrorMessage("")
-            const { data, error } = await sendToBackground({
-              name: "createNewUser",
-              body: JSON.stringify(values)
-            })
+            const {
+              jwt,
+              user,
+              error
+            }: { jwt: string; user: User; error: string | null } =
+              await sendToBackground({
+                name: "createNewUser",
+                body: values
+              })
 
             if (error) {
               setErrorMessage(error)
@@ -84,12 +91,21 @@ const SignUpPage = () => {
               return actions.setSubmitting(false)
             }
 
+            const userSession: UserSession = {
+              user: {
+                ...user
+              },
+              jwt
+            }
+
             console.log("====================================")
-            console.log(data)
+            console.log({ userSession })
             console.log("====================================")
 
+            setUserSession(userSession)
             actions.setSubmitting(false)
             setIsLoading(false)
+            // navigateTo("home")
           }}
         >
           <Form className="form--container stack">
