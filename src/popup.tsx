@@ -15,7 +15,7 @@ import CurrentProjectPage from "~components/page-components/CurrentProjectPage/C
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
-import ProfilePage from "~components/ProfilePage/ProfilePage"
+import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 import { UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
