@@ -1,4 +1,5 @@
 import { useFormik } from "formik"
+import { useErrorBoundary } from "react-error-boundary"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
@@ -14,7 +15,7 @@ import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
 import EyeIcon from "~components/Icons/EyeIcon"
 import SlashedEyeIcon from "~components/Icons/SlashedEyeIcon"
-import { UserSession } from "~types/userTypes"
+import { User, UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
@@ -22,6 +23,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
   const [showPassword, setShowPassword] = useState(false)
+  const { showBoundary } = useErrorBoundary()
 
   const { handleSubmit, handleChange } = useFormik({
     initialValues: {
@@ -45,20 +47,28 @@ export default function LoginPage() {
         return setErrorMessage(authError)
       }
 
-      const userData = await sendToBackground({
-        name: "fetchUserProfile",
-        body: { jwt: jwt, id: user.id }
-      })
+      const { data, error }: { data: User; error: string | null } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: jwt, id: user.id }
+        })
+
+      if (error) showBoundary(error)
 
       const userSession: UserSession = {
         user: {
-          id: userData.id,
-          username: userData.username,
-          email: userData.email,
-          birth_date: userData.birth_date,
-          location: userData.location,
+          id: data.id,
+          username: data.username,
+          email: data.email,
+          birth_date: data.birth_date,
+          location: data.location,
           audience_member: {
-            ...userData.audience_member
+            is_quiet: data.audience_member.is_quiet,
+            is_paused: data.audience_member.is_paused,
+            project_id: data.audience_member.project_id,
+            current_index: data.audience_member.current_index,
+            event_time: data.audience_member.event_time,
+            playlist: []
           }
         },
         jwt
