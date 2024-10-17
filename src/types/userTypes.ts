@@ -1,5 +1,6 @@
 import { BlocksContent } from "@strapi/blocks-react-renderer"
 
+import type { Popup } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 
 export interface User {
@@ -8,20 +9,11 @@ export interface User {
   email: string
   birth_date: string | null
   location: string | null
-  audience_member: Omit<UserAudienceMember, "id">
-}
-
-export interface AudienceMember {
-  id: number
-  is_quiet: boolean
   is_paused: boolean
   project_id: number
   current_index: number
   event_time: string
-}
-
-export interface UserAudienceMember extends AudienceMember {
-  playlist: number[]
+  playlist: Popup[]
 }
 
 export interface ContentCreator {
@@ -51,8 +43,8 @@ export interface ContentCreator {
 }
 
 export interface AuthData {
+  user: User
   jwt: string
-  user: Omit<User, "audience_member">
 }
 export interface UserSession {
   user: User
