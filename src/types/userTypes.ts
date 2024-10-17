@@ -8,15 +8,22 @@ export interface User {
   email: string
   birth_date: string | null
   location: string | null
-  audience_member: {
-    is_quiet: boolean
-    is_paused: boolean
-    project_id: number
-    current_index: number
-    event_time: string
-    playlist: number[]
-  }
+  audience_member: Omit<UserAudienceMember, "id">
 }
+
+export interface AudienceMember {
+  id: number
+  is_quiet: boolean
+  is_paused: boolean
+  project_id: number
+  current_index: number
+  event_time: string
+}
+
+export interface UserAudienceMember extends AudienceMember {
+  playlist: number[]
+}
+
 export interface ContentCreator {
   id: number
   curator_name: string
@@ -45,16 +52,7 @@ export interface ContentCreator {
 
 export interface AuthData {
   jwt: string
-  user: {
-    blocked: boolean
-    confirmed: boolean
-    createdAt: string
-    email: string
-    id: number
-    provider: string
-    updatedAt: string
-    username: string
-  }
+  user: Omit<User, "audience_member">
 }
 export interface UserSession {
   user: User
