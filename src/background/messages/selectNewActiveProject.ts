@@ -13,22 +13,22 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     "arebyte-audience-session"
   )
 
-  const response = await fetchStrapiContent<User>(
-    `api/users/${userSession.id}`,
-    "PUT",
-    userSession.jwt,
-    JSON.stringify({
-      project_id: selectedProjectId
-    })
-  )
-
-  if (response.error) {
-    console.log(response.error)
+  const { data, error }: { data: User; error: string | null } =
+    await fetchStrapiContent<User>(
+      `api/users/${userSession.id}`,
+      "PUT",
+      userSession.jwt,
+      JSON.stringify({
+        project_id: selectedProjectId
+      })
+    )
+  if (error) {
+    console.log(error)
     res.send(false)
   }
 
   const newSession = updateStorage(userSession, {
-    project_id: response.data.project_id
+    project_id: data.project_id
   })
 
   await storage.set("arebyte-audience-session", newSession)
