@@ -1,4 +1,5 @@
 import { useFormik } from "formik"
+import { useErrorBoundary } from "react-error-boundary"
 
 import { useStorage } from "@plasmohq/storage/hook"
 
@@ -6,12 +7,14 @@ import useStore from "~store/store"
 
 import "./ProfilePage.css"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
+
+import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
-import { UserSession } from "~types/userTypes"
+import type { User, UserSession } from "~types/userTypes"
 
 export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
@@ -21,12 +24,31 @@ export default function ProfilePage() {
     useStore.use.user()
   const updatedIsQuiet = useStore.use.updateIsQuiet()
   const updatedIsPaused = useStore.use.updateIsPaused()
-  const [, , { remove }] = useStorage<UserSession>(
+  const updateUser = useStore.use.updateUser()
+  const [userSession, , { remove }] = useStorage<UserSession>(
     "arebyte-audience-session"
   )
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  console.log(userInfo)
+  const { showBoundary } = useErrorBoundary()
 
+  useEffect(() => {
+    const getUserDetails = async () => {
+      const { data, error }: { data: User; error: string | null } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: userSession.jwt, id: userSession.id }
+        })
+
+      if (error) showBoundary(error)
+      updateUser(data)
+    }
+
+    if (userInfo.username === undefined) {
+      getUserDetails()
+    }
+  }, [])
+
+  console.log(userInfo)
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
       userName: userInfo.username,
