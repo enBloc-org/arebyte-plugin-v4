@@ -24,7 +24,6 @@ export default function HomePage() {
 
   useEffect(() => {
     const getUserSession = async () => {
-      console.log(project_id)
       if (project_id === 0) {
         const {
           data,
