@@ -20,9 +20,7 @@ export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
-  const { is_quiet: isQuiet, is_paused: isPaused } =
-    useStore.use.user()
-  const updatedIsQuiet = useStore.use.updateIsQuiet()
+  const { is_paused: isPaused } = useStore.use.user()
   const updatedIsPaused = useStore.use.updateIsPaused()
   const updateUser = useStore.use.updateUser()
   const [userSession, , { remove }] = useStorage<UserSession>(
@@ -65,10 +63,6 @@ export default function ProfilePage() {
       // updateUser() with new values
     }
   })
-
-  const handleQuietSwitchClick = () => {
-    updatedIsQuiet(!isQuiet)
-  }
 
   const handlePausedSwitchClick = () => {
     updatedIsPaused(!isPaused)
@@ -174,16 +168,6 @@ export default function ProfilePage() {
           className="profile-page--controls flex flex-column start"
           aria-hidden={isOpen}
         >
-          <div className="profile-page--toggle-pair">
-            <ToggleSwitch
-              isChecked={isQuiet}
-              clickHandler={handleQuietSwitchClick}
-            />
-            <p>quiet mode</p>
-          </div>
-          <p>
-            Turn on whatever this feature is going to be eventually
-          </p>
           <div className="profile-page--toggle-pair">
             <ToggleSwitch
               isChecked={isPaused}

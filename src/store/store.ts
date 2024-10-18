@@ -30,7 +30,6 @@ interface Actions {
   updateUser: (newUser: Partial<User>) => void
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
-  updateIsQuiet: (newStatus: boolean) => void
   updateIsPaused: (newStatus: boolean) => void
 }
 
@@ -84,13 +83,6 @@ const baseStore = create<State & Actions>(set => {
       set(() => ({ active_project: project })),
     updateExploreProjectId: (id: number) =>
       set(() => ({ exploreProjectId: id })),
-    updateIsQuiet: newStatus =>
-      set(state => ({
-        user: {
-          ...state.user,
-          is_quiet: newStatus
-        }
-      })),
     updateIsPaused: newStatus =>
       set(state => ({
         user: {
