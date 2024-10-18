@@ -13,7 +13,8 @@ import Layout from "~components/Layout/Layout"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
-import ProfilePage from "~components/ProfilePage/ProfilePage"
+import LoginPage from "~components/page-components/LoginPage/LoginPage"
+import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 import { UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
@@ -87,14 +88,6 @@ function IndexPopup() {
           unmountOnExit
         >
           <LoginPage />
-        </CSSTransition>
-        <CSSTransition
-          in={currentPage === "sign-up"}
-          timeout={500}
-          classNames="sign-up-page"
-          unmountOnExit
-        >
-          <SignUpPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
