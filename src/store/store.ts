@@ -1,7 +1,7 @@
 import { create } from "zustand"
 
 import type { ProjectData } from "~types/projectTypes"
-import type { User, UserSession } from "~types/userTypes"
+import type { User } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
 
@@ -27,7 +27,7 @@ interface State {
 interface Actions {
   updateCurrentProject: (project: ProjectData) => void
   navigateTo: (nextPage: State["currentPage"]) => void
-  updateUser: (newUser: UserSession) => void
+  updateUser: (newUser: Partial<User>) => void
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
   updateIsQuiet: (newStatus: boolean) => void
@@ -68,10 +68,7 @@ const baseStore = create<State & Actions>(set => {
       set(state => ({
         user: {
           ...state.user,
-          id: newUser.id,
-          event_time: newUser.event_time,
-          project_id: newUser.project_id,
-          current_index: newUser.current_index
+          ...newUser
         },
         isLoggedIn: true
       }))
