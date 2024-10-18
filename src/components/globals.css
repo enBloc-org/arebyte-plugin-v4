@@ -199,9 +199,17 @@ button:disabled {
   display: flex;
 }
 
+.flex-column {
+  flex-direction: column;
+}
+
 .center {
   justify-content: center;
   align-items: center;
+}
+
+.start {
+  align-items: start;
 }
 
 .gap {

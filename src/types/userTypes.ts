@@ -10,6 +10,7 @@ export interface User {
   birth_date: string | null
   location: string | null
   is_paused: boolean
+  is_
   project_id: number
   current_index: number
   event_time: string
