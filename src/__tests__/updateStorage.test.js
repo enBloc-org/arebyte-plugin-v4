@@ -14,17 +14,17 @@ describe("updateStorage", () => {
     }
     const result = updateStorage(oldValue, newValue)
 
-    expect(result.user.audience_member.event_time).toBe(
-      userData.user.audience_member.event_time
+    expect(result.user.event_time).toBe(
+      userData.user.event_time
     )
     expect(result.user.email).toBe(userData.user.email)
-    expect(result.user.audience_member.is_quiet).toBe(
-      userData.user.audience_member.is_quiet
+    expect(result.user.is_quiet).toBe(
+      userData.user.is_quiet
     )
     expect(result.jwt).toBe("fake jwt")
     expect(result.user.username).toBe("test name")
-    expect(result.user.audience_member.current_index).toBe(5)
-    expect(result.user.audience_member.project_id).toBe(269)
+    expect(result.user.current_index).toBe(5)
+    expect(result.user.project_id).toBe(269)
     expect(Object.keys(result).length).toBe(
       Object.keys(userData).length
     )

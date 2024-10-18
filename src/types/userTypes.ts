@@ -1,22 +1,22 @@
 import { BlocksContent } from "@strapi/blocks-react-renderer"
 
+import type { Popup } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 
 export interface User {
   id: number
   username: string
   email: string
-  birth_date: string
-  location: string
-  audience_member: {
-    is_quiet: boolean
-    is_paused: boolean
-    project_id: number
-    current_index: number
-    event_time: string
-    playlist: number[]
-  }
+  birth_date: string | null
+  location: string | null
+  is_paused: boolean
+  is_quiet: boolean
+  project_id: number
+  current_index: number
+  event_time: string
+  playlist: Popup[]
 }
+
 export interface ContentCreator {
   id: number
   curator_name: string
@@ -44,17 +44,8 @@ export interface ContentCreator {
 }
 
 export interface AuthData {
+  user: User
   jwt: string
-  user: {
-    blocked: boolean
-    confirmed: boolean
-    createdAt: string
-    email: string
-    id: number
-    provider: string
-    updatedAt: string
-    username: string
-  }
 }
 export interface UserSession {
   user: User

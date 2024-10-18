@@ -13,7 +13,7 @@ let changes = {}
 export default function updateStorage(
   currentValue: UserSession,
   newValue: Partial<Omit<UserSession["user"], "audience_member">> &
-    Partial<UserSession["user"]["audience_member"]>,
+    Partial<UserSession["user"]>,
   index: number = 0
 ) {
   if (index === Object.keys(currentValue).length) {

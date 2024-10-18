@@ -17,7 +17,7 @@ export default function HomePage() {
   const userInfo = useStore.use.user()
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const currentIndex = userInfo.audience_member.current_index
+  const currentIndex = userInfo.current_index
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
 
@@ -55,12 +55,7 @@ export default function HomePage() {
                     </tr>
                     <tr>
                       <td>Start Time:</td>
-                      <td>
-                        {userInfo.audience_member.event_time.slice(
-                          0,
-                          -4
-                        )}
-                      </td>
+                      <td>{userInfo.event_time.slice(0, -4)}</td>
                     </tr>
                     <tr>
                       <td>Day:</td>
