@@ -17,7 +17,7 @@ export default function SelectProjectButton() {
   const handleClick = async () => {
     if (!isLoggedIn) return setIsShowingAlarm(true)
 
-    setIsLoading(true)
+      setIsLoading(true)
     const result = await sendToBackground({
       name: "selectNewActiveProject",
       body: { selectedProjectId: exploreProjectId }
