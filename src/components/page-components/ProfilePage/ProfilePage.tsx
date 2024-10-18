@@ -17,15 +17,15 @@ export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
-  const {
-    audience_member: { is_quiet: isQuiet, is_paused: isPaused }
-  } = useStore.use.user()
+  const { is_quiet: isQuiet, is_paused: isPaused } =
+    useStore.use.user()
   const updatedIsQuiet = useStore.use.updateIsQuiet()
   const updatedIsPaused = useStore.use.updateIsPaused()
   const [, , { remove }] = useStorage<UserSession>(
     "arebyte-audience-session"
   )
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  console.log(userInfo)
 
   const { handleSubmit, handleChange, values } = useFormik({
     initialValues: {
@@ -33,7 +33,7 @@ export default function ProfilePage() {
       emailAddress: userInfo.email,
       birthDate: userInfo.birth_date,
       location: userInfo.location,
-      eventTime: userInfo.audience_member.event_time
+      eventTime: userInfo.event_time
     },
     onSubmit: async values => {
       console.log(values)
@@ -148,7 +148,10 @@ export default function ProfilePage() {
           </div>
         </div>
 
-        <div className="profile-page--controls flex flex-column start" aria-hidden={isOpen}>
+        <div
+          className="profile-page--controls flex flex-column start"
+          aria-hidden={isOpen}
+        >
           <div className="profile-page--toggle-pair">
             <ToggleSwitch
               isChecked={isQuiet}

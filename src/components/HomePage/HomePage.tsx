@@ -15,15 +15,16 @@ import { CurrentProjectData, ProjectData } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
-  const userInfo = useStore.use.user()
+  const { event_time, project_id, current_index } =
+    useStore.use.user()
   const active_project = useStore.use.active_project()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const currentIndex = userInfo.current_index
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const getUserSession = async () => {
+      console.log(project_id)
       if (project_id === 0) {
         const {
           data,
@@ -81,7 +82,7 @@ export default function HomePage() {
                     </tr>
                     <tr>
                       <td>Start Time:</td>
-                      <td>{userInfo.event_time.slice(0, -4)}</td>
+                      <td>{event_time.slice(0, -4)}</td>
                     </tr>
                     <tr>
                       <td>Day:</td>

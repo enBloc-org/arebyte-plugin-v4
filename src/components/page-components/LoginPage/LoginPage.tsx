@@ -46,9 +46,7 @@ export default function LoginPage() {
       }
 
       const userSession: UserSession = {
-        user: {
-          ...user
-        },
+        ...user,
         jwt
       }
       setUserSession(userSession)

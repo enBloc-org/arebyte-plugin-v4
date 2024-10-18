@@ -18,6 +18,7 @@ interface State {
     | "profile"
     | "explore"
     | "login"
+    | "sign-up"
     | "current-project"
     | "explore-project"
     | "favourites"
@@ -42,7 +43,7 @@ const initialState: State = {
     location: undefined,
     is_quiet: false,
     is_paused: false,
-    project_id: undefined,
+    project_id: 0,
     current_index: 0,
     event_time: "12:00:00.000",
     playlist: []
@@ -68,12 +69,9 @@ const baseStore = create<State & Actions>(set => {
         user: {
           ...state.user,
           id: newUser.id,
-          audience_member: {
-            ...state.user.audience_member,
-            event_time: newUser.event_time,
-            project_id: newUser.project_id,
-            current_index: newUser.current_index
-          }
+          event_time: newUser.event_time,
+          project_id: newUser.project_id,
+          current_index: newUser.current_index
         },
         isLoggedIn: true
       }))
