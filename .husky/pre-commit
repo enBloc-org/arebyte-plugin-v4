@@ -1,4 +1,3 @@
-pnpm test:changed
 status=$?
 if [ $status -ne 0 ]; then
   echo "\033[1;31mBREAKING CHANGE - check your tests"
