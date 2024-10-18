@@ -41,7 +41,6 @@ const initialState: State = {
     email: undefined,
     birth_date: undefined,
     location: undefined,
-    is_quiet: false,
     is_paused: false,
     project_id: 0,
     current_index: 0,
