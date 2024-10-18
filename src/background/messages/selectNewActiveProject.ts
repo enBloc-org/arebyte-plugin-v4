@@ -13,12 +13,11 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     "arebyte-audience-session"
   )
 
-  const response = await fetchStrapiContent<User["audience_member"]>(
-    `api/audience-members/${userSession.id}`,
+  const response = await fetchStrapiContent<User>(
+    `api/users/${userSession.user.id}`,
     "PUT",
     userSession.jwt,
     JSON.stringify({
-      ...userSession,
       project_id: selectedProjectId
     })
   )

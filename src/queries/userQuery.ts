@@ -1,19 +1,19 @@
 import qs from "qs"
 
 const userQuery = {
-  fields: ["id", "username", "email", "birth_date", "location"],
+  fields: [
+    "id",
+    "username",
+    "email",
+    "event_time",
+    "project_id",
+    "current_index",
+    "is_paused",
+    "birth_date"
+  ],
   populate: {
-    audience_member: {
-      fields: [
-        "is_quiet",
-        "event_time",
-        "project_id",
-        "current_index",
-        "is_paused"
-      ],
-      playlist: {
-        fields: ["*"]
-      }
+    favourites: {
+      fields: ["*"]
     }
   }
 }

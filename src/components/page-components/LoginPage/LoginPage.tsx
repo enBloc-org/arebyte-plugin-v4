@@ -4,7 +4,7 @@ import { useStorage } from "@plasmohq/storage/hook"
 
 import useStore from "~store/store"
 
-import "~components/LoginPage/LoginPage.css"
+import "./LoginPage.css"
 
 import { useState } from "react"
 
@@ -45,17 +45,11 @@ export default function LoginPage() {
         return setErrorMessage(authError)
       }
 
-      const data = await sendToBackground({
-        name: "fetchUserProfile",
-        body: { jwt: jwt, id: user.id }
-      })
-
       const userSession: UserSession = {
-        id: data.id,
-        event_time: data.audience_member.event_time,
-        project_id: data.audience_member.project_id,
-        current_index: data.audience_member.current_index,
-        jwt: jwt
+        user: {
+          ...user
+        },
+        jwt
       }
       setUserSession(userSession)
       navigateTo("home")
@@ -107,15 +101,19 @@ export default function LoginPage() {
             </button>
             <div className="login--account-options">
               <button>Password Recovery</button>
-              <button>No account yet? Register here</button>
+              <button onClick={() => navigateTo("sign-up")}>
+                No account yet? Register here
+              </button>
             </div>
           </fieldset>
         </form>
         {isLoading && (
-          <span className="error-message text-lg">Loading ...</span>
+          <span className="message text-lg">Loading ...</span>
         )}
         {errorMessage && (
-          <p className="error-message text-lg">{errorMessage}</p>
+          <p className="message message__error text-lg">
+            {errorMessage}
+          </p>
         )}
       </main>
       <Footer />

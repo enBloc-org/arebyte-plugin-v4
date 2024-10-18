@@ -5,9 +5,7 @@ import type { User, UserSession } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
 
-export type PlayList = typeof baseStore<
-  State["user"]["audience_member"]["playlist"]
->
+export type PlayList = typeof baseStore<State["user"]["playlist"]>
 
 interface State {
   user: User
@@ -42,14 +40,12 @@ const initialState: State = {
     email: undefined,
     birth_date: undefined,
     location: undefined,
-    audience_member: {
-      is_quiet: false,
-      is_paused: false,
-      project_id: 0,
-      current_index: 0,
-      event_time: "12:00:00.000",
-      playlist: []
-    }
+    is_quiet: false,
+    is_paused: false,
+    project_id: undefined,
+    current_index: 0,
+    event_time: "12:00:00.000",
+    playlist: []
   },
   isLoggedIn: false,
   currentPage: "home",
@@ -98,20 +94,14 @@ const baseStore = create<State & Actions>(set => {
       set(state => ({
         user: {
           ...state.user,
-          audience_member: {
-            ...state.user.audience_member,
-            is_quiet: newStatus
-          }
+          is_quiet: newStatus
         }
       })),
     updateIsPaused: newStatus =>
       set(state => ({
         user: {
           ...state.user,
-          audience_member: {
-            ...state.user.audience_member,
-            is_paused: newStatus
-          }
+          is_paused: newStatus
         }
       }))
   }
