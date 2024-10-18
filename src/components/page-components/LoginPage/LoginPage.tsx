@@ -32,8 +32,7 @@ export default function LoginPage() {
       setErrorMessage("")
       setIsLoading(true)
       const {
-        jwt,
-        user,
+        data: { jwt, user },
         error: authError
       } = await sendToBackground({
         name: "loginToStrapi",
