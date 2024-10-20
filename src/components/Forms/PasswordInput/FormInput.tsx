@@ -7,7 +7,7 @@ const FormInput = ({
 }: {
   name: string
   placeholder: string
-  type: "text" | "email" | "date"
+  type: "text" | "email" | "date" | "time"
 }) => {
   return (
     <>
