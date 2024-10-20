@@ -2,9 +2,8 @@ import { Form, Formik } from "formik"
 import { useErrorBoundary } from "react-error-boundary"
 import * as Yup from "yup"
 
-import { useStorage } from "@plasmohq/storage/hook"
-
 import useStore from "~store/store"
+import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
 
@@ -19,21 +18,22 @@ import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import type { User, UserSession } from "~types/userTypes"
 
 export default function ProfilePage() {
+  const storage = newStorage()
   const navigateTo = useStore.use.navigateTo()
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
   const { is_paused: isPaused } = useStore.use.user()
   const updatedIsPaused = useStore.use.updateIsPaused()
   const updateUser = useStore.use.updateUser()
-  const [userSession, , { remove }] = useStorage<UserSession>(
-    "arebyte-audience-session"
-  )
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const getUserDetails = async () => {
+      const userSession: UserSession = await storage.get(
+        "arebyte-audience-session"
+      )
       const { data, error }: { data: User; error: string | null } =
         await sendToBackground({
           name: "fetchUserProfile",
@@ -47,14 +47,14 @@ export default function ProfilePage() {
     if (userInfo.username === undefined) {
       getUserDetails()
     }
-  }, [userSession])
+  }, [])
 
   const handlePausedSwitchClick = () => {
     updatedIsPaused(!isPaused)
   }
 
-  const handleLogOff = () => {
-    remove()
+  const handleLogOff = async () => {
+    await storage.remove("arebyte-audience-session")
     resetStore()
     navigateTo("home")
   }
@@ -71,18 +71,19 @@ export default function ProfilePage() {
 
             <Formik
               initialValues={{
-                userName: "",
-                emailAddress: "",
-                birthDate: "",
-                location: "",
-                eventTime: ""
+                userName: userInfo.username,
+                emailAddress: userInfo.email,
+                birthDate: userInfo.birth_date,
+                location: userInfo.location,
+                eventTime: userInfo.event_time
               }}
+              enableReinitialize={true}
               validationSchema={Yup.object({
-                username: Yup.string()
+                userName: Yup.string()
                   .min(3, "Must be longer then 3 characters")
                   .max(15, "Must be 15 characters or less")
                   .required("Required"),
-                email: Yup.string()
+                emailAddress: Yup.string()
                   .min(6, "Must be longer then 6 characters")
                   .email("Invalid email address")
                   .required("Required"),
