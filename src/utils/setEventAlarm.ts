@@ -4,6 +4,7 @@ import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
 import backgroundPopupCreate from "./backgroundPopCreate"
+import eventAlarmListener from "./eventAlarmListener"
 import getCurrentProjectPopups from "./getCurrentProjectPopups"
 import getProjectPopups from "./getProjectPopups"
 import iterateIndex from "./iterateIndex"
@@ -21,47 +22,11 @@ export default function setEventAlarm(
   eventMinute: number
 ) {
   browser.alarms.clear("sequence-alarm")
+  browser.alarms.onAlarm.removeListener(eventAlarmListener)
 
   browser.alarms.create("sequence-alarm", {
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
-
-  browser.alarms.onAlarm.addListener(async alarm => {
-    if (alarm.name !== "sequence-alarm") return
-    const storage = newStorage()
-    const userSession: UserSession = await storage.get(
-      "arebyte-audience-session"
-    )
-
-    if (userSession) {
-      const projectId = userSession.project_id
-      const currentIndex =
-        userSession.current_index
-
-      const pop_ups =
-        projectId === 0
-          ? await getCurrentProjectPopups(currentIndex)
-          : await getProjectPopups(projectId, currentIndex)
-
-      await backgroundPopupCreate(pop_ups)
-      const newIndex = iterateIndex(pop_ups, currentIndex)
-
-      const updatedSession = updateStorage(userSession, {
-        current_index: newIndex,
-        ...(newIndex === 0 && { project_id: 0 })
-      })
-      await storage.set("arebyte-audience-session", updatedSession)
-    } else {
-      const publicIndex: number = await storage.get(
-        "arebyte-public-index"
-      )
-
-      const pop_ups = await getCurrentProjectPopups(publicIndex)
-      await backgroundPopupCreate(pop_ups)
-
-      const newPublicIndex = iterateIndex(pop_ups, publicIndex)
-      await storage.set("arebyte-public-index", newPublicIndex)
-    }
-  })
+  browser.alarms.onAlarm.addListener(eventAlarmListener)
 }
