@@ -56,6 +56,17 @@ export default function ProfilePage() {
     })
     if (result instanceof Error) showBoundary(result.message)
     updatedIsPaused(!isPaused)
+
+    if (!isPaused) {
+      const [selectedHour, selectedMinute] =
+        userInfo.event_time.split(":")
+      await sendToBackground({
+        name: "updateEventAlarm",
+        body: { eventHour: selectedHour, eventMinute: selectedMinute }
+      })
+    } else {
+      await sendToBackground({ name: "removeEventAlarm" })
+    }
   }
 
   const handleLogOff = async () => {
@@ -168,6 +179,7 @@ export default function ProfilePage() {
                   placeholder={userInfo.event_time}
                   name="event_time"
                   type="time"
+                  isDisabled={userInfo.is_paused}
                 />
                 <button
                   type="submit"
