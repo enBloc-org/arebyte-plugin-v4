@@ -155,26 +155,6 @@ button:disabled {
   height: 2.3rem;
 }
 
-.password-input-container {
-  position: relative;
-  width: 100%;
-}
-
-.password-toggle-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.password-toggle-btn svg {
-  width: 16px;
-  height: 16px;
-}
-
 .message {
   color:#373636;
 }
