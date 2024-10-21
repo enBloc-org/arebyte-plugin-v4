@@ -12,7 +12,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import FormInput from "~components/Forms/PasswordInput/FormInput"
-import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
+import PasswordInput from "~components/Forms/PasswordInput/PasswordInput/PasswordInput"
 import useStore from "~store/store"
 // import useStore from "~store/store"
 import { User, UserSession } from "~types/userTypes"
@@ -29,7 +29,6 @@ const SignUpPage = () => {
     password: "",
     passwordCheck: "",
     location: "",
-    dateOfBirth: new Date()
   }
 
   return (
@@ -102,7 +101,7 @@ const SignUpPage = () => {
             setUserSession(userSession)
             actions.setSubmitting(false)
             setIsLoading(false)
-            // navigateTo("home")
+            navigateTo("home")
           }}
         >
           <Form className="form--container stack">
@@ -127,7 +126,7 @@ const SignUpPage = () => {
               placeholder="Location*"
               type="text"
             />
-            <div className="flex sign-up__buttons">
+            <div className="flex sign-up--buttons">
               <button
                 type="submit"
                 className="button--primary text-md"
