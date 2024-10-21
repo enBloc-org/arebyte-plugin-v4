@@ -57,10 +57,19 @@ const baseStore = create<State & Actions>(set => {
   return {
     ...initialState,
     navigateTo: nextPage =>
-      set(state => ({
+      set(state => {
+        if (nextPage === "login" || nextPage === "sign-up") {
+          return {
+            previousPage: "home",
+            currentPage: nextPage
+          }
+        } else {
+            return {
         previousPage: state.currentPage,
         currentPage: nextPage
-      })),
+      }
+        }
+      }),
 
     updateUser: newUser => {
       set(state => ({
