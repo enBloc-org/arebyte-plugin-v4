@@ -49,7 +49,12 @@ export default function ProfilePage() {
     }
   }, [])
 
-  const handlePausedSwitchClick = () => {
+  const handlePausedSwitchClick = async () => {
+    const result = await sendToBackground({
+      name: "updateUserDetails",
+      body: { is_paused: !isPaused }
+    })
+    if (result instanceof Error) showBoundary(result.message)
     updatedIsPaused(!isPaused)
   }
 
