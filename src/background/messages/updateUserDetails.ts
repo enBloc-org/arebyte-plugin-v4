@@ -24,7 +24,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   if (response.error) {
     console.error(response.error)
   }
-  console.log(response)
+
   const newSession = updateStorage(userSession, {
     id: response.data.id,
     event_time: response.data.event_time,
