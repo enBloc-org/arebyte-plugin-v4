@@ -32,8 +32,7 @@ export default function LoginPage() {
       setErrorMessage("")
       setIsLoading(true)
       const {
-        jwt,
-        user,
+        data: { jwt, user },
         error: authError
       } = await sendToBackground({
         name: "loginToStrapi",
@@ -46,12 +45,23 @@ export default function LoginPage() {
       }
 
       const userSession: UserSession = {
-        user: {
-          ...user
-        },
+        id: user.id,
+        project_id: user.project_id,
+        event_time: user.event_time,
+        current_index: user.current_index,
         jwt
       }
       setUserSession(userSession)
+
+      const [setHour, setMinute] = user.event_time.split(":")
+      await sendToBackground({
+        name: "updateEventAlarm",
+        body: {
+          eventHour: parseInt(setHour),
+          eventMinute: parseInt(setMinute)
+        }
+      })
+
       navigateTo("home")
     }
   })

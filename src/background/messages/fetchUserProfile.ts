@@ -12,7 +12,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     "GET",
     jwt
   )
-
   res.send(response)
 }
 
