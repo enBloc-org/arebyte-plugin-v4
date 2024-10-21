@@ -71,29 +71,47 @@ export default function ProfilePage() {
 
             <Formik
               initialValues={{
-                userName: userInfo.username,
-                emailAddress: userInfo.email,
-                birthDate: userInfo.birth_date,
+                username: userInfo.username,
+                email: userInfo.email,
+                birth_date: userInfo.birth_date,
                 location: userInfo.location,
-                eventTime: userInfo.event_time
+                event_time: userInfo.event_time
               }}
               enableReinitialize={true}
               validationSchema={Yup.object({
-                userName: Yup.string()
+                username: Yup.string()
                   .min(3, "Must be longer then 3 characters")
                   .max(15, "Must be 15 characters or less")
                   .required("Required"),
-                emailAddress: Yup.string()
+                email: Yup.string()
                   .min(6, "Must be longer then 6 characters")
                   .email("Invalid email address")
                   .required("Required"),
-                location: Yup.string().required(
-                  "Please enter your location"
+                location: Yup.string()
+                  .min(5, "Location entry is too short")
+                  .matches(/[^\W]{3}/gi)
+                  .required("Please enter your location"),
+                event_time: Yup.string().required(
+                  "Please select a preferred time for your popups"
                 )
               })}
               onSubmit={async (values, actions) => {
                 setIsLoading(true)
-                console.log(values)
+                const result = await sendToBackground({
+                  name: "updateUserDetails",
+                  body: {
+                    username: values.username,
+                    email: values.email,
+                    birth_date: values.birth_date,
+                    location: values.location,
+                    event_time: values.event_time + ":00.000"
+                  }
+                })
+                if (result instanceof Error)
+                  showBoundary(result.message)
+
+                setIsLoading(false)
+                setIsOpen(false)
                 return actions.setSubmitting(false)
               }}
             >
@@ -102,22 +120,22 @@ export default function ProfilePage() {
                 className="profile-page--form flex flex-column"
                 aria-hidden={!isOpen}
               >
-                <label htmlFor="userName">Username</label>
+                <label htmlFor="username">Username</label>
                 <FormInput
                   placeholder={userInfo.username}
-                  name="userName"
+                  name="username"
                   type="text"
                 />
-                <label htmlFor="emailAddress">Email address</label>
+                <label htmlFor="email">Email address</label>
                 <FormInput
                   placeholder={userInfo.email}
-                  name="emailAddress"
+                  name="email"
                   type="email"
                 />
-                <label htmlFor="birthDate">Date of birth</label>
+                <label htmlFor="birth_date">Date of birth</label>
                 <FormInput
                   placeholder={userInfo.birth_date}
-                  name="birthDate"
+                  name="birth_date"
                   type="date"
                 />
                 <label htmlFor="location">Location</label>
@@ -126,12 +144,12 @@ export default function ProfilePage() {
                   name="location"
                   type="text"
                 />
-                <label htmlFor="eventTime">
+                <label htmlFor="event_time">
                   Your preferred time to receive popups
                 </label>
                 <FormInput
                   placeholder={userInfo.event_time}
-                  name="eventTime"
+                  name="event_time"
                   type="time"
                 />
                 <button
