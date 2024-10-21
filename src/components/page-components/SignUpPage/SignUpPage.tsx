@@ -14,7 +14,6 @@ import { useStorage } from "@plasmohq/storage/hook"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput/PasswordInput"
 import useStore from "~store/store"
-// import useStore from "~store/store"
 import { User, UserSession } from "~types/userTypes"
 
 const SignUpPage = () => {
