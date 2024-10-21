@@ -3,11 +3,13 @@ import { ErrorMessage, Field } from "formik"
 const FormInput = ({
   name,
   placeholder,
-  type
+  type,
+  isDisabled
 }: {
   name: string
   placeholder: string
   type: "text" | "email" | "date" | "time"
+  isDisabled?: boolean
 }) => {
   return (
     <>
@@ -16,6 +18,7 @@ const FormInput = ({
         type={type}
         placeholder={placeholder}
         className="content-box shadow form--input"
+        disabled={isDisabled}
       />
       <ErrorMessage name={name} className="margin-top-sm" />
     </>
