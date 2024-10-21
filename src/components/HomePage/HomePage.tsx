@@ -33,7 +33,6 @@ export default function HomePage() {
             name: "fetchCurrentProject"
           })
         if (error) return showBoundary(error)
-
         updateCurrentProject(data.project)
       } else {
         const {
@@ -46,15 +45,6 @@ export default function HomePage() {
           })
         if (error) return showBoundary(error)
         updateCurrentProject(data)
-
-        const [setHour, setMinute] = event_time.split(":")
-        await sendToBackground({
-          name: "updateEventAlarm",
-          body: {
-            eventHour: parseInt(setHour),
-            eventMinute: parseInt(setMinute)
-          }
-        })
       }
     }
     getUserSession()

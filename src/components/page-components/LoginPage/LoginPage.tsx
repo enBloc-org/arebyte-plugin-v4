@@ -52,6 +52,16 @@ export default function LoginPage() {
         jwt
       }
       setUserSession(userSession)
+
+      const [setHour, setMinute] = user.event_time.split(":")
+      await sendToBackground({
+        name: "updateEventAlarm",
+        body: {
+          eventHour: parseInt(setHour),
+          eventMinute: parseInt(setMinute)
+        }
+      })
+
       navigateTo("home")
     }
   })
