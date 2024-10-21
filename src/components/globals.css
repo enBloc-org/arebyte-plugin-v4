@@ -155,13 +155,19 @@ button:disabled {
   height: 2.3rem;
 }
 
+.form--input:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  cursor: not-allowed;
+}
+
 .message {
-  color:#373636;
+  color: #373636;
 }
 
 .message__error {
   font-style: italic;
-  color: var(--accent)
+  color: var(--accent);
 }
 
 /*------------------------------------*\

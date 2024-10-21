@@ -7,7 +7,9 @@ import * as testData from "./test-data/current-project-test-data.json"
 fetchMock.enableMocks()
 
 const dataWithError = {
-  ...testData,
+  data: {
+    ...testData
+  },
   error: null
 }
 

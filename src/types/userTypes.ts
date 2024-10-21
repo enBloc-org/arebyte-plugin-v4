@@ -7,13 +7,12 @@ export interface User {
   id: number
   username: string
   email: string
-  birth_date: string | null
-  location: string | null
-  is_paused: boolean
-  is_quiet: boolean
+  event_time: string
   project_id: number
   current_index: number
-  event_time: string
+  is_paused: boolean
+  birth_date: string | null
+  location: string | null
   playlist: Popup[]
 }
 
@@ -47,7 +46,10 @@ export interface AuthData {
   user: User
   jwt: string
 }
-export interface UserSession {
-  user: User
+export interface UserSession
+  extends Pick<
+    User,
+    "event_time" | "project_id" | "current_index" | "id"
+  > {
   jwt: string
 }

@@ -7,7 +7,7 @@ const Footer = () => {
     await sendToBackground({
       name: "triggerPopup",
       body: {
-        id: 1
+        id: 5
       }
     })
   }
