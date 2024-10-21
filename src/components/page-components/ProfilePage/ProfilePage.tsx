@@ -23,28 +23,30 @@ export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
-  const {
-    audience_member: { is_quiet: isQuiet, is_paused: isPaused }
-  } = useStore.use.user()
-  const updatedIsQuiet = useStore.use.updateIsQuiet()
+  const { is_paused: isPaused } = useStore.use.user()
   const updatedIsPaused = useStore.use.updateIsPaused()
   const updateUser = useStore.use.updateUser()
   const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const { showBoundary } = useErrorBoundary()
 
-  const { handleSubmit, handleChange, values } = useFormik({
-    initialValues: {
-      userName: userInfo.username,
-      emailAddress: userInfo.email,
-      birthDate: userInfo.birth_date,
-      location: userInfo.location,
-      eventTime: userInfo.audience_member.event_time
-    },
-    onSubmit: async values => {
-      console.log(values)
+  useEffect(() => {
+    const getUserDetails = async () => {
+      const userSession: UserSession = await storage.get(
+        "arebyte-audience-session"
+      )
+      const { data, error }: { data: User; error: string | null } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: userSession.jwt, id: userSession.id }
+        })
 
-      // send values to CMS
-      // fetch user info
-      // updateUser() with new values
+      if (error) showBoundary(error)
+      updateUser(data)
+    }
+
+    if (userInfo.username === undefined) {
+      getUserDetails()
     }
   }, [])
 
@@ -223,33 +225,27 @@ export default function ProfilePage() {
             </div>
           </div>
 
-        <div className="profile-page--controls flex flex-column start" aria-hidden={isOpen}>
-          <div className="profile-page--toggle-pair">
-            <ToggleSwitch
-              isChecked={isQuiet}
-              clickHandler={handleQuietSwitchClick}
-            />
-            <p>quiet mode</p>
+          <div
+            className="profile-page--controls flex flex-column start"
+            aria-hidden={isOpen}
+          >
+            <div className="profile-page--toggle-pair">
+              <ToggleSwitch
+                isChecked={isPaused}
+                clickHandler={handlePausedSwitchClick}
+              />
+              <p>pause</p>
+            </div>
+            <p>
+              This turns off the plugin so you will not receive daily
+              popups
+            </p>
           </div>
-          <p>
-            Turn on whatever this feature is going to be eventually
-          </p>
-          <div className="profile-page--toggle-pair">
-            <ToggleSwitch
-              isChecked={isPaused}
-              clickHandler={handlePausedSwitchClick}
-            />
-            <p>pause</p>
-          </div>
-          <p>
-            This turns off the plugin so you will not receive daily
-            popups
-          </p>
+        </main>
+        <div className="profile-page--footer">
+          <Footer />
         </div>
-      </main>
-      <div className="profile-page--footer">
-        <Footer />
       </div>
-    </div>
+    )
   )
 }
