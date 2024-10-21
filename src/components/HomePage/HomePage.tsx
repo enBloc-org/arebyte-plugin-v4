@@ -48,7 +48,7 @@ export default function HomePage() {
       }
     }
     getUserSession()
-  }, [project_id, event_time, current_index])
+  }, [project_id, current_index])
 
   return (
     <div className="home-page page">
