@@ -17,7 +17,7 @@ import formatDate from "~utils/formatDate"
 export default function HomePage() {
   const { event_time, project_id, current_index } =
     useStore.use.user()
-  const active_project = useStore.use.active_project()
+  const currentProject = useStore.use.currentProject()
   const updateCurrentProject = useStore.use.updateCurrentProject()
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
@@ -65,19 +65,19 @@ export default function HomePage() {
       <BurgerMenu />
       <main className="grid">
         <CountDownTimer />
-        {active_project && (
+        {currentProject && (
           <>
             <div className="home-up-next content-box shadow">
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {active_project.events[current_index].title}
+                  {currentProject.events[current_index].title}
                 </h2>
                 <table>
                   <tbody>
                     <tr>
                       <td>Part of:</td>
-                      <td> {active_project.title}</td>
+                      <td> {currentProject.title}</td>
                     </tr>
                     <tr>
                       <td>Start Time:</td>
@@ -87,7 +87,7 @@ export default function HomePage() {
                       <td>Day:</td>
                       <td>
                         {current_index + 1} of{" "}
-                        {active_project.events.length}
+                        {currentProject.events.length}
                       </td>
                     </tr>
                   </tbody>
@@ -104,18 +104,18 @@ export default function HomePage() {
                 <img
                   src={
                     process.env.PLASMO_PUBLIC_API_URL +
-                    active_project.cover_image.formats.thumbnail.url
+                    currentProject.cover_image.formats.thumbnail.url
                   }
-                  alt={active_project.cover_image.alternativeText}
+                  alt={currentProject.cover_image.alternativeText}
                 />
                 <div className="home-project-thumbnail-description stack">
-                  <h3>{active_project.title}</h3>
+                  <h3>{currentProject.title}</h3>
                   <p>
                     Curated By:{" "}
-                    {active_project.content_creator.curator_name}
+                    {currentProject.content_creator.curator_name}
                   </p>
                   <p>
-                    Launched: {formatDate(active_project.launch_date)}
+                    Launched: {formatDate(currentProject.launch_date)}
                   </p>
                 </div>
               </button>

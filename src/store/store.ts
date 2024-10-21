@@ -9,7 +9,7 @@ export type PlayList = typeof baseStore<State["user"]["playlist"]>
 
 interface State {
   user: User
-  active_project: ProjectData
+  currentProject: ProjectData
   isLoggedIn: boolean
   exploreProjectId: number
   previousPage: State["currentPage"]
@@ -50,7 +50,7 @@ const initialState: State = {
   currentPage: "home",
   previousPage: "home",
   exploreProjectId: undefined,
-  active_project: undefined
+  currentProject: undefined
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -77,10 +77,10 @@ const baseStore = create<State & Actions>(set => {
         isLoggedIn: initialState.isLoggedIn,
         currentPage: initialState.currentPage,
         previousPage: initialState.previousPage,
-        active_project: initialState.active_project
+        currentProject: initialState.currentProject
       })),
     updateCurrentProject: project =>
-      set(() => ({ active_project: project })),
+      set(() => ({ currentProject: project })),
     updateExploreProjectId: (id: number) =>
       set(() => ({ exploreProjectId: id })),
     updateIsPaused: newStatus =>
