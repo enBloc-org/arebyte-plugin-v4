@@ -19,7 +19,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       "PUT",
       userSession.jwt,
       JSON.stringify({
-        project_id: selectedProjectId
+        project_id: selectedProjectId,
+        current_index: 0
       })
     )
   if (error) {
@@ -28,9 +29,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   }
 
   const newSession = updateStorage(userSession, {
-    project_id: data.project_id
+    project_id: data.project_id,
+    current_index: data.current_index
   })
-
+  console.log(newSession)
   await storage.set("arebyte-audience-session", newSession)
   res.send(true)
 }
