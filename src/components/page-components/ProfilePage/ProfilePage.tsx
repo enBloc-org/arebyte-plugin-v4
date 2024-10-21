@@ -50,16 +50,17 @@ export default function ProfilePage() {
   }, [])
 
   const handlePausedSwitchClick = async () => {
-    const result = await sendToBackground({
-      name: "updateUserDetails",
-      body: { is_paused: !isPaused }
-    })
-    if (result instanceof Error) showBoundary(result.message)
+    const { data, error }: { data: User; error: string | null } =
+      await sendToBackground({
+        name: "updateUserDetails",
+        body: { is_paused: !isPaused }
+      })
+    if (error) showBoundary(error)
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
       const [selectedHour, selectedMinute] =
-        userInfo.event_time.split(":")
+        data.event_time.split(":")
       await sendToBackground({
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
@@ -113,22 +114,26 @@ export default function ProfilePage() {
               })}
               onSubmit={async (values, actions) => {
                 setIsLoading(true)
-                const result = await sendToBackground({
-                  name: "updateUserDetails",
-                  body: {
-                    username: values.username,
-                    email: values.email,
-                    birth_date: values.birth_date,
-                    location: values.location,
-                    event_time: values.event_time + ":00.000"
-                  }
-                })
-                if (result instanceof Error)
-                  showBoundary(result.message)
+                console.log(values.event_time)
+                const {
+                  data,
+                  error
+                }: { data: User; error: string | null } =
+                  await sendToBackground({
+                    name: "updateUserDetails",
+                    body: {
+                      username: values.username,
+                      email: values.email,
+                      birth_date: values.birth_date,
+                      location: values.location,
+                      event_time: values.event_time
+                    }
+                  })
+                if (error) showBoundary(error)
 
-                if (values.event_time !== userInfo.event_time) {
+                if (data.event_time !== userInfo.event_time) {
                   const [selectedHour, selectedMinute] =
-                    values.event_time.split(":")
+                    data.event_time.split(":")
                   await sendToBackground({
                     name: "updateEventAlarm",
                     body: {
