@@ -37,3 +37,8 @@
     transform: translateX(0);
   }
 }
+
+.sign-up__buttons {
+  width: 100%;
+  justify-content: space-between;
+}

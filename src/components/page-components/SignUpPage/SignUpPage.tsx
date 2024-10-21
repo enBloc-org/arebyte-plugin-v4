@@ -13,11 +13,12 @@ import { useStorage } from "@plasmohq/storage/hook"
 
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput"
+import useStore from "~store/store"
 // import useStore from "~store/store"
 import { User, UserSession } from "~types/userTypes"
 
 const SignUpPage = () => {
-  // const navigateTo = useStore.use.navigateTo()
+  const navigateTo = useStore.use.navigateTo()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
@@ -126,13 +127,19 @@ const SignUpPage = () => {
               placeholder="Location*"
               type="text"
             />
-            <button
-              type="submit"
-              className="button--primary text-md"
-              disabled={isLoading}
-            >
-              Submit
-            </button>
+            <div className="flex sign-up__buttons">
+              <button
+                type="submit"
+                className="button--primary text-md"
+                disabled={isLoading}
+              >
+                Submit
+              </button>
+
+              <button onClick={() => navigateTo("login")}>
+                Already have an account? Login
+              </button>
+            </div>
           </Form>
         </Formik>
         {isLoading && (
