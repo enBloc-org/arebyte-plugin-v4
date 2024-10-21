@@ -115,6 +115,18 @@ export default function ProfilePage() {
                 if (result instanceof Error)
                   showBoundary(result.message)
 
+                if (values.event_time !== userInfo.event_time) {
+                  const [selectedHour, selectedMinute] =
+                    values.event_time.split(":")
+                  await sendToBackground({
+                    name: "updateEventAlarm",
+                    body: {
+                      eventHour: parseInt(selectedHour),
+                      eventMinute: parseInt(selectedMinute)
+                    }
+                  })
+                }
+
                 setIsLoading(false)
                 setIsOpen(false)
                 return actions.setSubmitting(false)
