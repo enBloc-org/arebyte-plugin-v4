@@ -11,7 +11,7 @@ export default function ToggleSwitch({
     <label className="toggle--switch">
       <input
         onClick={clickHandler}
-        defaultChecked={isChecked}
+        checked={isChecked}
         className="toggle--input"
         type="checkbox"
       />
