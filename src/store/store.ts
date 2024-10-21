@@ -18,6 +18,7 @@ interface State {
     | "profile"
     | "explore"
     | "login"
+    | "sign-up"
     | "current-project"
     | "explore-project"
     | "favourites"

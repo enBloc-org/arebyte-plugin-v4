@@ -18,6 +18,7 @@ import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import useStore from "~store/store"
 import { UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
+import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
@@ -88,6 +89,15 @@ function IndexPopup() {
           unmountOnExit
         >
           <LoginPage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "sign-up"}
+          timeout={500}
+          classNames="sign-up-page"
+          unmountOnExit
+        >
+          <SignUpPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
