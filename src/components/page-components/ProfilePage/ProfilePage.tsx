@@ -16,6 +16,7 @@ import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import type { User, UserSession } from "~types/userTypes"
+import formatTimeString from "~utils/formatTimeString"
 
 export default function ProfilePage() {
   const storage = newStorage()
@@ -114,7 +115,8 @@ export default function ProfilePage() {
               })}
               onSubmit={async (values, actions) => {
                 setIsLoading(true)
-                console.log(values.event_time)
+                const eventTime = formatTimeString(values.event_time)
+
                 const {
                   data,
                   error
@@ -126,11 +128,10 @@ export default function ProfilePage() {
                       email: values.email,
                       birth_date: values.birth_date,
                       location: values.location,
-                      event_time: values.event_time
+                      event_time: eventTime
                     }
                   })
                 if (error) showBoundary(error)
-
                 if (data.event_time !== userInfo.event_time) {
                   const [selectedHour, selectedMinute] =
                     data.event_time.split(":")
