@@ -1,15 +1,8 @@
 import browser from "webextension-polyfill"
 
-import { UserSession } from "~types/userTypes"
 import calculateCountDown from "~utils/calculateCountDown"
 
-import backgroundPopupCreate from "./backgroundPopCreate"
 import eventAlarmListener from "./eventAlarmListener"
-import getCurrentProjectPopups from "./getCurrentProjectPopups"
-import getProjectPopups from "./getProjectPopups"
-import iterateIndex from "./iterateIndex"
-import newStorage from "./newStorage"
-import updateStorage from "./updateStorage"
 
 /**
  *
