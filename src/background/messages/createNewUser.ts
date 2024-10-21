@@ -4,7 +4,6 @@ import type { AuthData } from "~types/userTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  // Register new user and add audience member relation
   const response = await fetchStrapiContent<AuthData>(
     `api/auth/local/register`,
     "POST",
