@@ -1,9 +1,65 @@
 import Browser from "webextension-polyfill"
 
+import type { EventData, Popup, SlimPopup } from "~types/eventTypes"
+
 import calculatePopupCoordinates from "./calculatePopupCoordinates"
+import determineFormat from "./determineFormat"
 import parseImageSize from "./parseImageSize"
 
-const backgroundPopupCreate = async popups => {
+const createWindow = async (
+  index: number,
+  width: number,
+  height: number,
+  top: number,
+  left: number,
+  url?: string
+) => {
+  const popupWindow = await Browser.windows.create({
+    url: `/tabs/newTab.html?&width=${width}&height=${height}&index=${index}&url=${url}`,
+    type: "popup",
+    width: width,
+    height: height,
+    state: "normal",
+    top: Math.floor(top),
+    left: Math.floor(left)
+  })
+
+  if (popupWindow.width !== width || popupWindow.height !== height) {
+    await Browser.windows.update(popupWindow.id, {
+      width: Math.floor(width),
+      height: Math.floor(height)
+    })
+  }
+}
+
+const parseWindowSize = (
+  size: "small" | "medium" | "large",
+  screenWidth: number,
+  screenHeight: number
+): { width: number; height: number } => {
+  switch (size) {
+    case "small":
+      return {
+        width: Math.floor(screenWidth * 0.2),
+        height: Math.floor(screenHeight * 0.2)
+      }
+    case "medium":
+      return {
+        width: Math.floor(screenWidth * 0.4),
+        height: Math.floor(screenHeight * 0.4)
+      }
+    case "large":
+      return {
+        width: Math.floor(screenWidth * 0.6),
+        height: Math.floor(screenHeight * 0.6)
+      }
+    default:
+      return { width: 600, height: 450 }
+  }
+}
+
+const backgroundPopupCreate = async (event: EventData) => {
+  // Get system widow size
   const screenDimensions = await Browser.tabs
     .query({ active: true, currentWindow: true })
     .then(tabs =>
@@ -11,39 +67,126 @@ const backgroundPopupCreate = async popups => {
         action: "getScreenDimensions"
       })
     )
+
   const { width: screenWidth, height: screenHeight } =
     screenDimensions as { width: number; height: number }
 
-  popups.forEach(async popup => {
-    const { height, width, url } = parseImageSize(popup)
+  const slimPopups: SlimPopup[] = []
 
-    const { top, left } = calculatePopupCoordinates(
-      popup,
-      screenHeight,
-      screenWidth,
-      width,
-      height
-    )
+  event.pop_ups.forEach(async (popup: Popup, index: number) => {
+    if (popup.popup_content[0].__component === "piece.text-content") {
+      const { width, height } = parseWindowSize(
+        popup.popup_size,
+        screenWidth,
+        screenHeight
+      )
+      const { top, left } = calculatePopupCoordinates(
+        popup,
+        screenHeight,
+        screenWidth,
+        width,
+        height
+      )
 
-    const popupWindow = await Browser.windows.create({
-      url: `/tabs/newTab.html?url=${url}&width=${width}&height=${height}`,
-      type: "popup",
-      width: width,
-      height: height,
-      state: "normal",
-      top: Math.floor(top),
-      left: Math.floor(left)
-    })
-
-    if (
-      popupWindow.width !== width ||
-      popupWindow.height !== height
-    ) {
-      await Browser.windows.update(popupWindow.id, {
-        width: Math.floor(width),
-        height: Math.floor(height)
+      slimPopups.push({
+        type: "text",
+        index: index,
+        popupInfo: {
+          artist_name: popup.artist_name,
+          medium: popup.medium,
+          work_title: popup.work_title,
+          creation_date: popup.creation_date,
+          external_link: popup.external_link
+        },
+        description: popup.popup_content[0].description,
+        text_content: popup.popup_content[0].text_content,
+        width: width,
+        height: height,
+        top: top,
+        left: left
       })
     }
+    if (popup.popup_content[0].__component === "piece.piece") {
+      switch (determineFormat(popup.popup_content[0].media.ext)) {
+        case "image": {
+          const { height, width, url } = parseImageSize(popup)
+          const { top, left } = calculatePopupCoordinates(
+            popup,
+            screenHeight,
+            screenWidth,
+            width,
+            height
+          )
+          slimPopups.push({
+            type: "image",
+            index: index,
+            popupInfo: {
+              artist_name: popup.artist_name,
+              medium: popup.medium,
+              work_title: popup.work_title,
+              creation_date: popup.creation_date,
+              external_link: popup.external_link
+            },
+            url: url,
+            description: popup.popup_content[0].description,
+            width: width,
+            height: height,
+            top: top,
+            left: left
+          })
+          break
+        }
+        case "video":
+          {
+            const { width, height } = parseWindowSize(
+              popup.popup_size,
+              screenWidth,
+              screenHeight
+            )
+            const { top, left } = calculatePopupCoordinates(
+              popup,
+              screenHeight,
+              screenWidth,
+              width,
+              height
+            )
+            slimPopups.push({
+              type: "video",
+              index: index,
+              popupInfo: {
+                artist_name: popup.artist_name,
+                medium: popup.medium,
+                work_title: popup.work_title,
+                creation_date: popup.creation_date,
+                external_link: popup.external_link
+              },
+              url: popup.popup_content[0].media.url,
+              description: popup.popup_content[0].description,
+              width: width,
+              height: height,
+              top: top,
+              left: left
+            })
+          }
+          break
+        default:
+          console.log("No format found")
+      }
+    }
+  })
+
+  //Set popups to storage
+  await Browser.storage.session.set({ popups: slimPopups })
+
+  slimPopups.forEach(popup => {
+    createWindow(
+      popup.index,
+      popup.width,
+      popup.height,
+      popup.top,
+      popup.left,
+      popup.url
+    )
   })
 }
 
