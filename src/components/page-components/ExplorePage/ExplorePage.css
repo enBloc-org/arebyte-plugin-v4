@@ -1,6 +1,6 @@
 .explore-page {
   background-color: var(--base);
-  animation: slideDown 0.5s ease-out;
+  animation: slideDown 0.8s ease-in-out;
 }
 
 .explore-page-enter {
@@ -17,15 +17,6 @@
 
 .explore-page-exit-active {
   z-index: 1;
-}
-
-@keyframes slideDown {
-  0% {
-    transform: translateY(-200);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 .explore-section {

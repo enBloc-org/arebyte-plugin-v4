@@ -1,6 +1,6 @@
 .explore-project {
   background-color: white;
-  animation: exploreProjectIn 0.5s ease-out;
+  animation: slideLeft 0.8s ease-in-out;
 }
 
 .explore-project-enter {
@@ -17,16 +17,6 @@
 
 .explore-project-exit-active {
   z-index: 1;
-}
-
-@keyframes exploreProjectIn {
-  0% {
-    transform: translateX(200);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
 }
 
 .explore-project__back-button {
