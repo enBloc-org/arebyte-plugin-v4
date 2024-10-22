@@ -6,7 +6,7 @@ const calculatePopupCoordinates = (
   screenWidth: number,
   popupWidth: number,
   popupHeight: number
-) => {
+): { top: number; left: number } => {
   let top, left
 
   switch (true) {
