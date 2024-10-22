@@ -11,57 +11,73 @@ import { useErrorBoundary } from "react-error-boundary"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
+import { CurrentProjectData, ProjectData } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
-  const userInfo = useStore.use.user()
-  const active_project = useStore.use.active_project()
+  const { event_time, project_id, current_index } =
+    useStore.use.user()
+  const currentProject = useStore.use.currentProject()
   const updateCurrentProject = useStore.use.updateCurrentProject()
-  const currentIndex = userInfo.current_index
   const navigateTo = useStore.use.navigateTo()
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const getUserSession = async () => {
-      const { data, error } = await sendToBackground({
-        name: "fetchCurrentProject"
-      })
-
-      if (error) showBoundary(error)
-
-      updateCurrentProject(data)
+      if (project_id === 0) {
+        const {
+          data,
+          error
+        }: { data: CurrentProjectData; error: string | null } =
+          await sendToBackground({
+            name: "fetchCurrentProject"
+          })
+        if (error) return showBoundary(error)
+        updateCurrentProject(data.project)
+      } else {
+        const {
+          data,
+          error
+        }: { data: ProjectData; error: string | null } =
+          await sendToBackground({
+            name: "fetchProjectDetailsById",
+            body: { id: project_id }
+          })
+        if (error) return showBoundary(error)
+        updateCurrentProject(data)
+      }
     }
     getUserSession()
-  }, [])
+  }, [project_id, current_index])
 
   return (
     <div className="home-page page">
       <BurgerMenu />
       <main className="grid">
         <CountDownTimer />
-        {active_project && (
+        {currentProject && (
           <>
             <div className="home-up-next content-box shadow">
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {active_project.project.events[currentIndex].title}
+                  {currentProject.events[current_index].title}
                 </h2>
                 <table>
                   <tbody>
                     <tr>
                       <td>Part of:</td>
-                      <td> {active_project.project.title}</td>
+                      <td> {currentProject.title}</td>
                     </tr>
                     <tr>
                       <td>Start Time:</td>
-                      <td>{userInfo.event_time.slice(0, -4)}</td>
+                      <td>{event_time.slice(0, -4)}</td>
                     </tr>
                     <tr>
                       <td>Day:</td>
                       <td>
-                        {currentIndex + 1} of{" "}
-                        {active_project.project.events.length}
+                        {current_index + 1} of{" "}
+                        {currentProject.events.length}
                       </td>
                     </tr>
                   </tbody>
@@ -78,25 +94,18 @@ export default function HomePage() {
                 <img
                   src={
                     process.env.PLASMO_PUBLIC_API_URL +
-                    active_project.project.cover_image.formats
-                      .thumbnail.url
+                    currentProject.cover_image.formats.thumbnail.url
                   }
-                  alt={
-                    active_project.project.cover_image.alternativeText
-                  }
+                  alt={currentProject.cover_image.alternativeText}
                 />
                 <div className="home-project-thumbnail-description stack">
-                  <h3>{active_project.project.title}</h3>
+                  <h3>{currentProject.title}</h3>
                   <p>
                     Curated By:{" "}
-                    {
-                      active_project.project.content_creator
-                        .curator_name
-                    }
+                    {currentProject.content_creator.curator_name}
                   </p>
                   <p>
-                    Launched:{" "}
-                    {formatDate(active_project.project.launch_date)}
+                    Launched: {formatDate(currentProject.launch_date)}
                   </p>
                 </div>
               </button>

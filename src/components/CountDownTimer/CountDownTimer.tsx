@@ -10,6 +10,7 @@ export default function CountDownTimer() {
   const [tSeconds, setTSeconds] = useState(0)
 
   const { event_time } = useStore.use.user()
+  const { is_paused } = useStore.use.user()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,19 +42,23 @@ export default function CountDownTimer() {
     <div className="content-box timer-container shadow">
       <p className="container-label">COMING UP IN</p>
       <div className="flex center">
-        <h2>
-          {tHours.toString().length === 1
-            ? "0" + tHours.toString()
-            : tHours}
-          :
-          {tMinutes.toString().length === 1
-            ? "0" + tMinutes.toString()
-            : tMinutes}
-          :
-          {tSeconds.toString().length === 1
-            ? "0" + tSeconds.toString()
-            : tSeconds}
-        </h2>
+        {is_paused ? (
+          <h2>--:--:-- </h2>
+        ) : (
+          <h2>
+            {tHours.toString().length === 1
+              ? "0" + tHours.toString()
+              : tHours}
+            :
+            {tMinutes.toString().length === 1
+              ? "0" + tMinutes.toString()
+              : tMinutes}
+            :
+            {tSeconds.toString().length === 1
+              ? "0" + tSeconds.toString()
+              : tSeconds}
+          </h2>
+        )}
       </div>
     </div>
   )

@@ -4,6 +4,8 @@ import { useState } from "react"
 import EyeIcon from "~components/Icons/EyeIcon"
 import SlashedEyeIcon from "~components/Icons/SlashedEyeIcon"
 
+import "./PasswordInput.css"
+
 const PasswordInput = ({
   name,
   placeholder
@@ -34,7 +36,7 @@ const PasswordInput = ({
         )}
       </button>
       <ErrorMessage name={name}>
-        {msg => <div className="margin-top-sm">{msg}</div>}
+        {msg => <div>{msg}</div>}
       </ErrorMessage>
     </div>
   )

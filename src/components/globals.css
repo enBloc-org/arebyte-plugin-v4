@@ -155,33 +155,19 @@ button:disabled {
   height: 2.3rem;
 }
 
-.password-input-container {
-  position: relative;
-  width: 100%;
-}
-
-.password-toggle-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.password-toggle-btn svg {
-  width: 16px;
-  height: 16px;
+.form--input:disabled {
+  border-color: var(--accent__disabled);
+  color: var(--accent__disabled);
+  cursor: not-allowed;
 }
 
 .message {
-  color:#373636;
+  color: #373636;
 }
 
 .message__error {
   font-style: italic;
-  color: var(--accent)
+  color: var(--accent);
 }
 
 /*------------------------------------*\

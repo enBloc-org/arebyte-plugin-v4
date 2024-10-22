@@ -29,6 +29,15 @@ export async function fetchStrapiContent<T>(
     if (returnedData.error)
       throw new Error(returnedData.error.message)
 
+    if (!returnedData.data)
+      return {
+        data: {
+          ...returnedData
+        },
+        meta: {},
+        error: null
+      }
+
     return {
       ...returnedData,
       error: null
