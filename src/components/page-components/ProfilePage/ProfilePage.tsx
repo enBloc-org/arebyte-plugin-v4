@@ -135,13 +135,14 @@ export default function ProfilePage() {
                 if (data.event_time !== userInfo.event_time) {
                   const [selectedHour, selectedMinute] =
                     data.event_time.split(":")
-                  await sendToBackground({
+                  const { error } = await sendToBackground({
                     name: "updateEventAlarm",
                     body: {
                       eventHour: parseInt(selectedHour),
                       eventMinute: parseInt(selectedMinute)
                     }
                   })
+                  if (error) showBoundary(error)
                 }
 
                 setIsLoading(false)

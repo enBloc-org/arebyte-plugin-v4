@@ -22,4 +22,7 @@ export default function setEventAlarm(
     when: calculateCountDown(eventHour, eventMinute)
   })
   browser.alarms.onAlarm.addListener(eventAlarmListener)
+
+  const newAlarm = browser.alarms.get("sequence-alarm")
+  return newAlarm
 }
