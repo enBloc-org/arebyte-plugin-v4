@@ -1,6 +1,6 @@
 .home-page {
   background-color: white;
-  animation: slideUp 0.8s ease-in-out;
+  animation-name: slideUp;
 }
 
 .home-page-enter {

@@ -1,6 +1,6 @@
 .explore-page {
   background-color: var(--base);
-  animation: slideDown 0.8s ease-in-out;
+  animation-name: slideDown;
 }
 
 .explore-page-enter {

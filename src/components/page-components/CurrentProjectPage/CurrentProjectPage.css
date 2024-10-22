@@ -1,6 +1,6 @@
 .current-project {
   background-color: white;
-  animation: slideLeft 0.8s ease-in-out;
+  animation-name: slideDown;
 }
 
 .current-project-enter {

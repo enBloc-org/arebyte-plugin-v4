@@ -1,5 +1,5 @@
 .profile-page {
-  animation: slideRight 0.8s ease-in-out;
+  animation-name: slideRight;
 }
 
 .profile-page--user-details {
