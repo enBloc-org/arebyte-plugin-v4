@@ -9,8 +9,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const { data } = await fetchStrapiContent<EventData>(
     `api/events/${req.body.id}?${eventPopupQueryString}`
   )
-
-  backgroundPopupCreate(data.pop_ups)
+  backgroundPopupCreate(data)
   res.send("success!")
 }
 
