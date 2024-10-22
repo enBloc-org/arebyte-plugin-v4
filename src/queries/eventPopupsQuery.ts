@@ -7,7 +7,7 @@ const eventPopupQuery = {
       fields: ["*"],
       populate: {
         popup_content: {
-          fields: ["id", "description"],
+          fields: ["*"],
           populate: {
             media: {
               fields: ["*"]
