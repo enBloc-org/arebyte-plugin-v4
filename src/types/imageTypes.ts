@@ -35,3 +35,23 @@ export interface ImageResponse {
   createdAt: string
   updatedAt: string
 }
+
+export interface VideoResponse {
+  id: number
+  name: string
+  alternativeText: string | null
+  caption: string | null
+  width: number | null
+  height: number | null
+  formats: null
+  hash: string
+  ext: string
+  mime: string
+  size: number
+  url: string
+  previewUrl: null
+  provider: string
+  provider_metadata: unknown | null
+  createdAt: string
+  updatedAt: string
+}
