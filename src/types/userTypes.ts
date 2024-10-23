@@ -13,7 +13,7 @@ export interface User {
   is_paused: boolean
   birth_date: string | null
   location: string | null
-  playlist: Popup[]
+  favourites: Popup[]
 }
 
 export interface ContentCreator {
