@@ -8,7 +8,6 @@ import Browser from "webextension-polyfill"
  * @param {number} height - the height of the pop up
  * @param {number} top - the top position of the pop up
  * @param {number} left - the left position of the pop up
- * @param {string} url - the url of the pop up (optional)
  */
 
 const createWindow = async (
@@ -16,11 +15,10 @@ const createWindow = async (
   width: number,
   height: number,
   top: number,
-  left: number,
-  url?: string
+  left: number
 ) => {
   const popupWindow = await Browser.windows.create({
-    url: `/tabs/newTab.html?&width=${width}&height=${height}&index=${index}&url=${url}`,
+    url: `/tabs/newTab.html?index=${index}`,
     type: "popup",
     width: width,
     height: height,
