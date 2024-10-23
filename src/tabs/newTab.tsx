@@ -9,12 +9,6 @@ import { SlimPopup } from "~types/eventTypes"
 
 const NewTab = () => {
   const params = new URLSearchParams(window.location.search)
-  const width = params.get("width")
-  const height = params.get("height")
-  const url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:1337" + params.get("url")
-      : params.get("url")
   const index = params.get("index")
   const [popup, setPopup] = useState<SlimPopup>()
   useEffect(() => {
@@ -25,7 +19,7 @@ const NewTab = () => {
     getFromStorage()
   }, [])
   return (
-    <div style={{ width: width, height: height }}>
+    <div style={{ width: "100%", height: "100%" }}>
       {popup && (
         <>
           {popup.type === "text" && (
@@ -38,14 +32,26 @@ const NewTab = () => {
           )}
           {popup.type === "image" && (
             <img
-              src={url}
+              src={
+                process.env.NODE_ENV === "development"
+                  ? "http://localhost:1337" + popup.url
+                  : popup.url
+              }
               alt="an image"
-              style={{ width: width, height: height }}
+              className="video-container"
             />
           )}
           {popup.type === "video" && (
             <div className="video-container">
-              <video src={url} autoPlay controls />
+              <video
+                src={
+                  process.env.NODE_ENV === "development"
+                    ? "http://localhost:1337" + popup.url
+                    : popup.url
+                }
+                autoPlay
+                controls
+              />
             </div>
           )}
         </>
