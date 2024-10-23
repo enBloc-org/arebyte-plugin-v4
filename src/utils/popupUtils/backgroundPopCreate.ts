@@ -140,7 +140,6 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
       popup.height,
       popup.top,
       popup.left,
-      popup.url
     )
   })
 }
