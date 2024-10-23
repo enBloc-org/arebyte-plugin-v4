@@ -5,7 +5,7 @@ import "./NewTab.css"
 import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import Browser from "webextension-polyfill"
 
-import { Popup, SlimPopup } from "~types/eventTypes"
+import { SlimPopup } from "~types/eventTypes"
 
 const NewTab = () => {
   const params = new URLSearchParams(window.location.search)
@@ -20,9 +20,6 @@ const NewTab = () => {
   useEffect(() => {
     const getFromStorage = async () => {
       const { popups } = await Browser.storage.session.get(["popups"])
-      console.log("====================================")
-      console.log(popups)
-      console.log("====================================")
       setPopup(popups[index])
     }
     getFromStorage()
@@ -47,12 +44,9 @@ const NewTab = () => {
             />
           )}
           {popup.type === "video" && (
-            <video
-              src={url}
-              autoPlay
-              controls
-              style={{ width: width, height: height }}
-            />
+            <div className="video-container">
+              <video src={url} autoPlay controls />
+            </div>
           )}
         </>
       )}
