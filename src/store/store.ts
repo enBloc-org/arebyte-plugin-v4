@@ -21,7 +21,7 @@ interface State {
     | "sign-up"
     | "current-project"
     | "explore-project"
-    | "favourites"
+    | "favorites"
 }
 
 interface Actions {

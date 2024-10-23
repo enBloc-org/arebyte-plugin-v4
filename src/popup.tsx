@@ -13,12 +13,13 @@ import Layout from "~components/Layout/Layout"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
+import FavoritesPage from "~components/page-components/FavoritesPage/FavoritesPage"
 import LoginPage from "~components/page-components/LoginPage/LoginPage"
 import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
+import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
 import { UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
-import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
@@ -98,6 +99,15 @@ function IndexPopup() {
           unmountOnExit
         >
           <SignUpPage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "favorites"}
+          timeout={500}
+          classNames="favorites-page"
+          unmountOnExit
+        >
+          <FavoritesPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
