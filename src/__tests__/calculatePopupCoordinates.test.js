@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals"
-import calculatePopupCoordinates from "~utils/calculatePopupCoordinates"
+import calculatePopupCoordinates from "~utils/popup-utils/calculatePopupCoordinates"
 import testData from "./test-data/event-test-data.json"
 
 describe("calculatePopupCoordinates", () => {
