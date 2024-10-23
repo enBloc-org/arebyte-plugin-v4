@@ -28,6 +28,8 @@ export default function ProfilePage() {
   const updateUser = useStore.use.updateUser()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [pausedStateError, setPausedStateError] = useState<string>("")
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function ProfilePage() {
         name: "updateUserDetails",
         body: { is_paused: !isPaused }
       })
-    if (error) showBoundary(error)
+    if (error) setPausedStateError(error)
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
@@ -66,7 +68,7 @@ export default function ProfilePage() {
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
       })
-      if (error) showBoundary(error)
+      if (error) setPausedStateError(error)
     } else {
       await sendToBackground({ name: "removeEventAlarm" })
     }
@@ -108,7 +110,7 @@ export default function ProfilePage() {
                   .required("Required"),
                 location: Yup.string()
                   .min(5, "Location entry is too short")
-                  .matches(/[^\W]{3}/gi)
+                  .matches(/[^\W|(0-9)]{3}/gi, "Location is invalid")
                   .required("Please enter your location"),
                 event_time: Yup.string().required(
                   "Please select a preferred time for your popups"
@@ -120,7 +122,7 @@ export default function ProfilePage() {
 
                 const {
                   data,
-                  error
+                  error: userError
                 }: { data: User; error: string | null } =
                   await sendToBackground({
                     name: "updateUserDetails",
@@ -132,18 +134,23 @@ export default function ProfilePage() {
                       event_time: eventTime
                     }
                   })
-                if (error) showBoundary(error)
+                if (userError) {
+                  setErrorMessage(userError)
+                  setIsLoading(false)
+                  return actions.setSubmitting(false)
+                }
                 if (data.event_time !== userInfo.event_time) {
                   const [selectedHour, selectedMinute] =
                     data.event_time.split(":")
-                  const { error } = await sendToBackground({
-                    name: "updateEventAlarm",
-                    body: {
-                      eventHour: parseInt(selectedHour),
-                      eventMinute: parseInt(selectedMinute)
-                    }
-                  })
-                  if (error) showBoundary(error)
+                  const { error: alarmError } =
+                    await sendToBackground({
+                      name: "updateEventAlarm",
+                      body: {
+                        eventHour: parseInt(selectedHour),
+                        eventMinute: parseInt(selectedMinute)
+                      }
+                    })
+                  if (alarmError) setErrorMessage(alarmError)
                 }
 
                 setIsLoading(false)
@@ -189,13 +196,20 @@ export default function ProfilePage() {
                   type="time"
                   isDisabled={userInfo.is_paused}
                 />
-                <button
-                  type="submit"
-                  className="button--primary"
-                  disabled={isLoading}
-                >
-                  submit
-                </button>
+                <div className="flex gap">
+                  <button
+                    type="submit"
+                    className="button--primary"
+                    disabled={isLoading}
+                  >
+                    submit
+                  </button>
+                  {errorMessage && (
+                    <p className="message__error margin-top-sm text-lg">
+                      {errorMessage}
+                    </p>
+                  )}
+                </div>
               </Form>
             </Formik>
             <div className="profile-page--modal-buttons">
@@ -239,8 +253,8 @@ export default function ProfilePage() {
               <p>pause</p>
             </div>
             <p>
-              This turns off the plugin so you will not receive daily
-              popups
+              {pausedStateError ??
+                "This turns off the plugin so you will not receive daily popups"}
             </p>
           </div>
         </main>
