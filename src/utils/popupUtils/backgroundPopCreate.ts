@@ -1,65 +1,18 @@
 import Browser from "webextension-polyfill"
 
-import type { EventData, Popup, SlimPopup } from "~types/eventTypes"
+import type {
+  MediaContent,
+  Popup,
+  SlimPopup
+} from "~types/eventTypes"
 
 import calculatePopupCoordinates from "./calculatePopupCoordinates"
+import createWindow from "./createWindow"
 import determineFormat from "./determineFormat"
 import parseImageSize from "./parseImageSize"
+import parseWindowSize from "./parseWindowSize"
 
-const createWindow = async (
-  index: number,
-  width: number,
-  height: number,
-  top: number,
-  left: number,
-  url?: string
-) => {
-  const popupWindow = await Browser.windows.create({
-    url: `/tabs/newTab.html?&width=${width}&height=${height}&index=${index}&url=${url}`,
-    type: "popup",
-    width: width,
-    height: height,
-    state: "normal",
-    top: Math.floor(top),
-    left: Math.floor(left)
-  })
-
-  if (popupWindow.width !== width || popupWindow.height !== height) {
-    await Browser.windows.update(popupWindow.id, {
-      width: Math.floor(width),
-      height: Math.floor(height)
-    })
-  }
-}
-
-const parseWindowSize = (
-  size: string,
-  screenWidth: number,
-  screenHeight: number,
-  aspectRatio: number = 16 / 9
-): { width: number; height: number } => {
-  const calculateWidth = (factor: number) => {
-    const width = Math.floor(screenWidth * factor)
-    const height = Math.floor(width / aspectRatio)
-    return { width, height }
-  }
-  
-  switch (true) {
-    case /^small$/i.test(size):
-      return calculateWidth(0.3)
-    case /^medium$/i.test(size):
-      return calculateWidth(0.5)
-    case /^large$/i.test(size):
-      return calculateWidth(0.75)
-    default:
-      return {
-        width: 600,
-        height: Math.floor(600 / aspectRatio)
-      }
-  }
-}
-
-const backgroundPopupCreate = async (event: EventData) => {
+const backgroundPopupCreate = async (popups: Popup[]) => {
   // Get system widow size
   const screenDimensions = await Browser.tabs
     .query({ active: true, currentWindow: true })
@@ -68,19 +21,16 @@ const backgroundPopupCreate = async (event: EventData) => {
         action: "getScreenDimensions"
       })
     )
-
   const { width: screenWidth, height: screenHeight } =
     screenDimensions as { width: number; height: number }
 
   const slimPopups: SlimPopup[] = []
 
-  event.pop_ups.forEach(async (popup: Popup, index: number) => {
+  popups.forEach(async (popup: Popup, index: number) => {
     if (popup.popup_content[0].__component === "piece.text-content") {
-      const size = popup.popup_size.toLowerCase()
       const { width, height } = parseWindowSize(
         popup.popup_size,
-        screenWidth,
-        screenHeight
+        screenWidth
       )
       const { top, left } = calculatePopupCoordinates(
         popup,
@@ -111,7 +61,10 @@ const backgroundPopupCreate = async (event: EventData) => {
     if (popup.popup_content[0].__component === "piece.piece") {
       switch (determineFormat(popup.popup_content[0].media.ext)) {
         case "image": {
-          const { height, width, url } = parseImageSize(popup)
+          const { height, width, url } = parseImageSize(
+            popup.popup_size,
+            popup.popup_content as unknown as MediaContent
+          )
           const { top, left } = calculatePopupCoordinates(
             popup,
             screenHeight,
@@ -180,6 +133,7 @@ const backgroundPopupCreate = async (event: EventData) => {
   //Set popups to storage
   await Browser.storage.session.set({ popups: slimPopups })
 
+  // Create windows
   slimPopups.forEach(popup => {
     createWindow(
       popup.index,
