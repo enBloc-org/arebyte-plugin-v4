@@ -33,28 +33,29 @@ const createWindow = async (
 }
 
 const parseWindowSize = (
-  size: "small" | "medium" | "large",
+  size: string,
   screenWidth: number,
-  screenHeight: number
+  screenHeight: number,
+  aspectRatio: number = 16 / 9
 ): { width: number; height: number } => {
-  switch (size) {
-    case "small":
-      return {
-        width: Math.floor(screenWidth * 0.2),
-        height: Math.floor(screenHeight * 0.2)
-      }
-    case "medium":
-      return {
-        width: Math.floor(screenWidth * 0.4),
-        height: Math.floor(screenHeight * 0.4)
-      }
-    case "large":
-      return {
-        width: Math.floor(screenWidth * 0.6),
-        height: Math.floor(screenHeight * 0.6)
-      }
+  const calculateWidth = (factor: number) => {
+    const width = Math.floor(screenWidth * factor)
+    const height = Math.floor(width / aspectRatio)
+    return { width, height }
+  }
+  
+  switch (true) {
+    case /^small$/i.test(size):
+      return calculateWidth(0.3)
+    case /^medium$/i.test(size):
+      return calculateWidth(0.5)
+    case /^large$/i.test(size):
+      return calculateWidth(0.75)
     default:
-      return { width: 600, height: 450 }
+      return {
+        width: 600,
+        height: Math.floor(600 / aspectRatio)
+      }
   }
 }
 
@@ -75,6 +76,7 @@ const backgroundPopupCreate = async (event: EventData) => {
 
   event.pop_ups.forEach(async (popup: Popup, index: number) => {
     if (popup.popup_content[0].__component === "piece.text-content") {
+      const size = popup.popup_size.toLowerCase()
       const { width, height } = parseWindowSize(
         popup.popup_size,
         screenWidth,
