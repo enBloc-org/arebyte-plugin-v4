@@ -15,7 +15,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const response = await fetchStrapiContent<User>(
     `api/users/${userSession.id}`,
     "PUT",
-    "fakejwt",
+    userSession.jwt,
     JSON.stringify({
       ...newDetails
     })
