@@ -4,10 +4,10 @@ import setEventAlarm from "~utils/setEventAlarm"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const { eventHour, eventMinute } = req.body
-  const newAlarm = setEventAlarm(eventHour, eventMinute)
-  if (!newAlarm)
-    res.send({ data: null, error: "Could not set new alarm" })
-  res.send({ data: newAlarm, error: null })
+  const {data, error} = await setEventAlarm(eventHour, eventMinute)
+  if (error)
+    res.send({ data: null, error: error })
+  res.send({ data: data, error: null })
 }
 
 export default handler
