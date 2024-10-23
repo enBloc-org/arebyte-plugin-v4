@@ -1,6 +1,6 @@
 .current-project {
   background-color: white;
-  animation: slideIn 0.5s ease-out;
+  animation-name: slideDown;
 }
 
 .current-project-enter {
@@ -17,16 +17,6 @@
 
 .current-project-exit-active {
   z-index: 1;
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateX(200);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
 }
 
 .current-project__back-button {
