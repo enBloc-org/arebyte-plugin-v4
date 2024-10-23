@@ -2,7 +2,6 @@
  * @description Parse the size of a window
  * @param {string} size - the size of the window
  * @param {number} screenWidth - the width of the screen
- * @param {number} screenHeight - the height of the screen
  * @param {number} aspectRatio - the aspect ratio of the window, default to 16/9
  * @returns {object} - the width and height of the window
  */
@@ -10,7 +9,6 @@
 const parseWindowSize = (
   size: string,
   screenWidth: number,
-  screenHeight: number,
   aspectRatio: number = 16 / 9
 ): { width: number; height: number } => {
   const calculateWidth = (factor: number) => {
