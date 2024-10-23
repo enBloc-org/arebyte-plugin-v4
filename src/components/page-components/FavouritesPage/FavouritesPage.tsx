@@ -8,6 +8,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
+import PopupCard from "~components/PopupCard/PopupCard"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import type { Popup } from "~types/eventTypes"
 import type { User, UserSession } from "~types/userTypes"
@@ -61,8 +62,10 @@ export default function FavouritesPage() {
 
         {favouritesList && (
           <div className="favourites-page--favourites-grid">
-            {favouritesList.map(popup => (
-              <div key={popup.id}>{popup.artist_name}</div>
+            {favouritesList.map(favourite => (
+              <div key={favourite.id}>
+                <PopupCard popup={favourite} />
+              </div>
             ))}
           </div>
         )}

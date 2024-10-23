@@ -41,9 +41,3 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 15px;
 }
-
-.favourites-page--favourites-grid div {
-  border: 1px solid pink;
-  height: 165px;
-  width: 165px;
-}
