@@ -1,3 +1,9 @@
+/**
+ * @description Determine the format of a file based on its extension
+ * @param {string} ext - the file extension
+ * @returns {string} - the type of file
+ */
+
 const determineFormat = (
   ext: string | undefined
 ): "image" | "video" | "unknown" => {

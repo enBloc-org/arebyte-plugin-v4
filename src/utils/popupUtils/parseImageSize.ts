@@ -1,5 +1,11 @@
 import type { Popup } from "~types/eventTypes"
 
+/**
+ * @description Parse the size of an image
+ * @param {Popup} popup - the popup object
+ * @returns {object} - the width, height, and url of the image
+ */
+
 const parseImageSize = (
   popup: Popup
 ): { width: number; height: number; url: string } => {

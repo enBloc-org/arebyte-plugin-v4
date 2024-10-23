@@ -1,5 +1,15 @@
 import { Popup } from "~types/eventTypes"
 
+/**
+ * @description Calculate the top and left coordinates of a pop up
+ * @param {Popup} popup - the pop up object
+ * @param {number} screenHeight - the height of the screen
+ * @param {number} screenWidth - the width of the screen
+ * @param {number} popupWidth - the width of the pop up
+ * @param {number} popupHeight - the height of the pop up
+ * @returns {Object} - the top and left coordinates of the pop up
+ */
+
 const calculatePopupCoordinates = (
   popup: Popup,
   screenHeight: number,
@@ -7,7 +17,7 @@ const calculatePopupCoordinates = (
   popupWidth: number,
   popupHeight: number
 ): { top: number; left: number } => {
-  let top, left
+  let top: number, left: number
 
   switch (true) {
     case /^\s*top\s*right\s*$/i.test(popup.popup_position):
