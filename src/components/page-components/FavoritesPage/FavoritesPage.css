@@ -1,5 +1,6 @@
 .favorites-page {
   background-color: var(--base);
+  animation-name: slideLeft;
 }
 
 .favorites-page-enter {
