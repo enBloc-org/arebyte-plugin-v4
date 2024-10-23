@@ -27,7 +27,7 @@ export interface TextContent {
 export interface Popup {
   id: number
   work_title: string
-  popup_size: "small" | "medium" | "large"
+  popup_size: "Small" | "Medium" | "Large"
   popup_position: string
   external_link: string | null
   artist_name: string
