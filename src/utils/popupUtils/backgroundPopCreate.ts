@@ -95,8 +95,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
           {
             const { width, height } = parseWindowSize(
               popup.popup_size,
-              screenWidth,
-              screenHeight
+              screenWidth
             )
             const { top, left } = calculatePopupCoordinates(
               popup,
