@@ -16,12 +16,17 @@ export default function FavoritesPage() {
   return (
     <div className="page favorites-page">
       <BurgerMenu />
-      <main className="grid flex flex-column">
-        <ToggleSwitch
-          clickHandler={handleToggleSwitch}
-          isChecked={isEditing}
-        />
-        <p className="bold favorites-page--title">FAVOURITES</p>
+      <main className="grid">
+        <div className='favorites-page--toggle-pair'>
+          <ToggleSwitch
+            clickHandler={handleToggleSwitch}
+            isChecked={isEditing}
+          />
+          <p className="bold uppercase">edit favourites</p>
+        </div>
+        <p className="bold uppercase favorites-page--title">
+          favourites
+        </p>
         <div className="favorites-page--favorites-grid">
           <div>1</div>
           <div>2</div>
