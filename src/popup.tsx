@@ -13,7 +13,7 @@ import Layout from "~components/Layout/Layout"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
-import FavoritesPage from "~components/page-components/FavoritesPage/FavoritesPage"
+import FavouritesPage from "~components/page-components/FavouritesPage/FavouritesPage"
 import LoginPage from "~components/page-components/LoginPage/LoginPage"
 import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
@@ -102,12 +102,12 @@ function IndexPopup() {
         </CSSTransition>
 
         <CSSTransition
-          in={currentPage === "favorites"}
+          in={currentPage === "favourites"}
           timeout={500}
-          classNames="favorites-page"
+          classNames="favourites-page"
           unmountOnExit
         >
-          <FavoritesPage />
+          <FavouritesPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>

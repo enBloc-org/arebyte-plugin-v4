@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import "./FavoritesPage.css"
+import "./FavouritesPage.css"
 
 import { useErrorBoundary } from "react-error-boundary"
 
@@ -13,10 +13,12 @@ import type { Popup } from "~types/eventTypes"
 import type { User, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
 
-export default function FavoritesPage() {
+export default function FavouritesPage() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const { showBoundary } = useErrorBoundary()
-  const [favoritesList, setFavoritesList] = useState<Array<Popup>>([])
+  const [favouritesList, setFavouritesList] = useState<Array<Popup>>(
+    []
+  )
   const storage = newStorage()
 
   const handleToggleSwitch = () => {
@@ -24,7 +26,7 @@ export default function FavoritesPage() {
   }
 
   useEffect(() => {
-    const getFavorites = async () => {
+    const getFavourites = async () => {
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
@@ -36,30 +38,30 @@ export default function FavoritesPage() {
         })
       if (error) return showBoundary(error)
 
-      setFavoritesList(data.favourites)
+      setFavouritesList(data.favourites)
     }
 
-    getFavorites()
-  }, [setFavoritesList])
+    getFavourites()
+  }, [setFavouritesList])
 
   return (
-    <div className="page favorites-page">
+    <div className="page favourites-page">
       <BurgerMenu />
       <main className="grid">
-        <div className="favorites-page--toggle-pair">
+        <div className="favourites-page--toggle-pair">
           <ToggleSwitch
             clickHandler={handleToggleSwitch}
             isChecked={isEditing}
           />
           <p className="bold uppercase">edit favourites</p>
         </div>
-        <p className="bold uppercase favorites-page--title">
+        <p className="bold uppercase favourites-page--title">
           favourites
         </p>
 
-        {favoritesList && (
-          <div className="favorites-page--favorites-grid">
-            {favoritesList.map(popup => (
+        {favouritesList && (
+          <div className="favourites-page--favourites-grid">
+            {favouritesList.map(popup => (
               <div key={popup.id}>{popup.artist_name}</div>
             ))}
           </div>
