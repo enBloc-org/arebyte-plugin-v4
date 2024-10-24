@@ -32,11 +32,16 @@ export default function FavouritesPage() {
         "arebyte-audience-session"
       )
 
-      const { data, error }: { data: User; error: string | null } =
-        await sendToBackground({
-          name: "fetchUserFavourites",
-          body: { jwt: userSession.jwt, id: userSession.id }
-        })
+      const {
+        data,
+        error
+      }: {
+        data: Pick<User, "id" | "favourites">
+        error: string | null
+      } = await sendToBackground({
+        name: "fetchUserFavourites",
+        body: { jwt: userSession.jwt, id: userSession.id }
+      })
       if (error) return showBoundary(error)
 
       setFavouritesList(data.favourites)
