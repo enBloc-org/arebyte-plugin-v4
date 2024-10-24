@@ -15,12 +15,9 @@ export default function PopupCard({
         className="popup-card--image"
         src={
           process.env.PLASMO_PUBLIC_API_URL +
-          popup.popup_content[0].media.url
+          popup.thumbnail_image.formats.thumbnail.url
         }
         alt={popup.work_title}
-        onError={() =>
-          popup.popup_content[0].media.formats.thumbnail.url
-        }
       />
       {isEditing && <span>REMOVE</span>}
     </div>

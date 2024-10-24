@@ -4,13 +4,15 @@ const favouritesQuery = {
   fields: ["id"],
   populate: {
     favourites: {
-      fields: ["*"],
       populate: {
-        popup_content: {
-          fields: ["*"],
+        thumbnail_image: {
           populate: {
-            media: {
-              fields: ["url"]
+            formats: {
+              populate: {
+                thumbnail: {
+                  fields: ["url"]
+                }
+              }
             }
           }
         }
