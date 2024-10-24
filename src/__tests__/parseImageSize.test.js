@@ -1,12 +1,17 @@
 import { describe, expect, it } from "@jest/globals"
-import parseImageSize from "~utils/parseImageSize"
+
+import parseImageSize from "~utils/popup-utils/parseImageSize"
+
 import testData from "./test-data/event-test-data.json"
 
 describe("parseImageSize", () => {
   it("should return the correct image size and URL when format exists", () => {
-    const popup = testData.data.pop_ups[0]; 
+    const popup = testData.data.pop_ups[0]
 
-    const result = parseImageSize(popup)
+    const result = parseImageSize(
+      popup.popup_size,
+      popup.popup_content
+    )
     expect(result).toEqual({
       width: 500,
       height: 375,
@@ -29,7 +34,10 @@ describe("parseImageSize", () => {
       ]
     }
 
-    const result = parseImageSize(popup)
+    const result = parseImageSize(
+      popup.popup_size,
+      popup.popup_content
+    )
     expect(result).toEqual({
       width: 2500,
       height: 2291,

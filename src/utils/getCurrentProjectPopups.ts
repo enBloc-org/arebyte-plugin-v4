@@ -1,7 +1,7 @@
 import { currentProjectQueryString } from "~queries/currentProjectQuery"
 import { eventPopupQueryString } from "~queries/eventPopupsQuery"
-import type { EventResponse } from "~types/eventTypes"
-import type { CurrentProjectResponse } from "~types/projectTypes"
+import type { EventData } from "~types/eventTypes"
+import type { CurrentProjectData } from "~types/projectTypes"
 
 import { fetchStrapiContent } from "./fetchStrapiContent"
 
@@ -12,15 +12,14 @@ import { fetchStrapiContent } from "./fetchStrapiContent"
 export default async function getCurrentProjectPopups(
   currentIndex: number
 ) {
-  const currentProject =
-    await fetchStrapiContent<CurrentProjectResponse>(
-      `api/current-project?${currentProjectQueryString}`
-    )
+  const currentProject = await fetchStrapiContent<CurrentProjectData>(
+    `api/current-project?${currentProjectQueryString}`
+  )
   const currentEventId =
     currentProject.data.project.events[currentIndex].id
   const {
     data: { pop_ups }
-  } = await fetchStrapiContent<EventResponse>(
+  } = await fetchStrapiContent<EventData>(
     `api/events/${currentEventId}?${eventPopupQueryString}`
   )
   return pop_ups
