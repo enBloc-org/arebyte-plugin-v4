@@ -6,7 +6,7 @@ import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const { jwt, id } = req.body
-  console.log(userFavouritesQueryString)
+  
   const response = await fetchStrapiContent<
     Pick<User, "id" | "favourites">
   >(`api/users/${id}?${userFavouritesQueryString}`, "GET", jwt)
