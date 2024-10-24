@@ -11,7 +11,9 @@ export default function PopupCard({
   popup: Favourite
   isEditing?: boolean
 }) {
-  const handleClick = async () => {
+  const handlePopup = async () => {
+    if (isEditing) return
+
     const { data, error } = await sendToBackground({
       name: "viewSinglePopup",
       body: { id: popup.id }
@@ -22,8 +24,12 @@ export default function PopupCard({
     console.log(data)
   }
 
+  const handleRemove = async () => {
+    console.log("REMOVE")
+  }
+
   return (
-    <button onClick={handleClick}>
+    <button onClick={handlePopup}>
       <div className="popup-card content-box shadow">
         <img
           className="popup-card--image"
@@ -33,7 +39,14 @@ export default function PopupCard({
           }
           alt={popup.work_title}
         />
-        {isEditing && <span>REMOVE</span>}
+        {isEditing && (
+          <button
+            onClick={handleRemove}
+            className="popup-card--remove-button button--secondary bold"
+          >
+            REMOVE
+          </button>
+        )}
       </div>
     </button>
   )
