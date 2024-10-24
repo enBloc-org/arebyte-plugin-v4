@@ -58,7 +58,7 @@ export default function ProfilePage() {
         name: "updateUserDetails",
         body: { is_paused: !isPaused }
       })
-    if (error) setPausedStateError(error)
+    if (error) setPausedStateError("Something went wrong. Please try again later.")
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
@@ -68,7 +68,7 @@ export default function ProfilePage() {
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
       })
-      if (error) setPausedStateError(error)
+      if (error) setPausedStateError("Something went wrong. Please try again later.")
     } else {
       await sendToBackground({ name: "removeEventAlarm" })
     }
