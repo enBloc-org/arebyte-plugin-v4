@@ -69,7 +69,7 @@ export default function FavouritesPage() {
           <div className="favourites-page--favourites-grid">
             {favouritesList.map(favourite => (
               <div key={favourite.id}>
-                <PopupCard popup={favourite} />
+                <PopupCard popup={favourite} isEditing={isEditing} />
               </div>
             ))}
           </div>
