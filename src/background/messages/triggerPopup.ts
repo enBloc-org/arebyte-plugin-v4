@@ -3,7 +3,7 @@ import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { eventPopupQueryString } from "~queries/eventPopupsQuery"
 import type { EventData } from "~types/eventTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
-import backgroundPopupCreate from "~utils/popupUtils/backgroundPopCreate"
+import backgroundPopupCreate from "~utils/popup-utils/backgroundPopCreate"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const { data } = await fetchStrapiContent<EventData>(
