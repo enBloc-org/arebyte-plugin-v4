@@ -13,8 +13,10 @@ const NewTab = () => {
   const [popup, setPopup] = useState<SlimPopup>()
   useEffect(() => {
     const getFromStorage = async () => {
-      const { popups } = await Browser.storage.session.get(["popups"])
-      setPopup(popups[index])
+      const { arebytePopups } = await Browser.storage.session.get([
+        "arebytePopups"
+      ])
+      setPopup(arebytePopups[index])
     }
     getFromStorage()
   }, [])
@@ -50,18 +52,13 @@ const NewTab = () => {
                     : popup.url
                 }
                 autoPlay
+                muted
                 controls
               />
             </div>
           )}
         </>
       )}
-
-      {/* <img
-        src={url}
-        alt="an image"
-        style={{ width: width, height: height }}
-      /> */}
     </div>
   )
 }
