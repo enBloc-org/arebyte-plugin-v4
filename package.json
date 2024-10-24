@@ -70,7 +70,10 @@
       "https://*/*"
     ],
     "permissions": [
-      "alarms"
+      "alarms",
+      "tabs",
+      "activeTab",
+      "storage"
     ],
     "browser_specific_settings": {
       "gecko": {

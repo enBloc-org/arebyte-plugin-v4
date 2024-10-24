@@ -1,6 +1,6 @@
 import type { UserSession } from "~types/userTypes"
 
-import backgroundPopupCreate from "./backgroundPopCreate"
+import backgroundPopupCreate from "./popup-utils/backgroundPopCreate"
 import getCurrentProjectPopups from "./getCurrentProjectPopups"
 import getProjectPopups from "./getProjectPopups"
 import iterateIndex from "./iterateIndex"
