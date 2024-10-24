@@ -1,4 +1,4 @@
-import type { Popup } from "~types/eventTypes"
+import type { Favourite } from "~types/eventTypes"
 
 import "./PopupCard.css"
 
@@ -8,7 +8,7 @@ export default function PopupCard({
   popup,
   isEditing
 }: {
-  popup: Popup
+  popup: Favourite
   isEditing?: boolean
 }) {
   const handleClick = async () => {

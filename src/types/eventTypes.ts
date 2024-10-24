@@ -36,6 +36,11 @@ export interface Popup {
   createdAt: string
   updatedAt: string
   popup_content: Array<MediaContent | TextContent>
+}
+
+export interface Favourite {
+  id: number
+  work_title: string
   thumbnail_image: {
     formats: {
       thumbnail: {

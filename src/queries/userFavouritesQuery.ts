@@ -1,7 +1,7 @@
 import qs from "qs"
 
 const favouritesQuery = {
-  fields: ["id"],
+  fields: ["id, work_title"],
   populate: {
     favourites: {
       populate: {

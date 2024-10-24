@@ -1,6 +1,6 @@
 import { BlocksContent } from "@strapi/blocks-react-renderer"
 
-import type { Popup } from "./eventTypes"
+import type { Favourite, Popup } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 
 export interface User {
@@ -52,4 +52,9 @@ export interface UserSession
     "event_time" | "project_id" | "current_index" | "id"
   > {
   jwt: string
+}
+
+export interface UserFavourites {
+  id: number
+  favourites: Array<Favourite>
 }

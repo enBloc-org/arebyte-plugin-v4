@@ -10,16 +10,16 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import PopupCard from "~components/PopupCard/PopupCard"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
-import type { Popup } from "~types/eventTypes"
-import type { User, UserSession } from "~types/userTypes"
+import type { Favourite } from "~types/eventTypes"
+import type { UserFavourites, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
 
 export default function FavouritesPage() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const { showBoundary } = useErrorBoundary()
-  const [favouritesList, setFavouritesList] = useState<Array<Popup>>(
-    []
-  )
+  const [favouritesList, setFavouritesList] = useState<
+    Array<Favourite>
+  >([])
   const storage = newStorage()
 
   const handleToggleSwitch = () => {
@@ -36,7 +36,7 @@ export default function FavouritesPage() {
         data,
         error
       }: {
-        data: Pick<User, "id" | "favourites">
+        data: UserFavourites
         error: string | null
       } = await sendToBackground({
         name: "fetchUserFavourites",
