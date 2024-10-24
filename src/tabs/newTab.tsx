@@ -5,12 +5,14 @@ import "./NewTab.css"
 import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import Browser from "webextension-polyfill"
 
+import PopupInfo from "~components/popup-components/PopupInfo/PopupInfo"
 import { SlimPopup } from "~types/eventTypes"
 
 const NewTab = () => {
   const params = new URLSearchParams(window.location.search)
   const index = params.get("index")
   const [popup, setPopup] = useState<SlimPopup>()
+  const [showInfo, setShowInfo] = useState(false)
   useEffect(() => {
     const getFromStorage = async () => {
       const { arebytePopups } = await Browser.storage.session.get([
@@ -20,31 +22,63 @@ const NewTab = () => {
     }
     getFromStorage()
   }, [])
+
+  const clickHandler = () => {
+    setShowInfo(prev => !prev)
+  }
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <>
       {popup && (
-        <>
+        <div style={{ width: popup.width, height: popup.height }} className="tab__container">
           {popup.type === "text" && (
             <>
-              <h1>{popup.popupInfo.work_title}</h1>
+              <button
+                onClick={clickHandler}
+                className="show--info__button"
+              >
+                INFO
+              </button>
               <BlocksRenderer content={popup.text_content} />
-              <h1>{popup.popupInfo.work_title}</h1>
-              <BlocksRenderer content={popup.text_content} />
+              {showInfo && (
+                <PopupInfo
+                  popup={popup}
+                  clickHandler={clickHandler}
+                />
+              )}
             </>
           )}
           {popup.type === "image" && (
-            <img
-              src={
-                process.env.NODE_ENV === "development"
-                  ? "http://localhost:1337" + popup.url
-                  : popup.url
-              }
-              alt="an image"
-              className="video-container"
-            />
+            <>
+              <button
+                onClick={clickHandler}
+                className="show--info__button"
+              >
+                INFO
+              </button>
+              <img
+                src={
+                  process.env.NODE_ENV === "development"
+                    ? "http://localhost:1337" + popup.url
+                    : popup.url
+                }
+                alt={popup.alt}
+              />
+              {showInfo && (
+                <PopupInfo
+                  popup={popup}
+                  clickHandler={clickHandler}
+                />
+              )}
+            </>
           )}
           {popup.type === "video" && (
             <div className="video-container">
+              <button
+                onClick={clickHandler}
+                className="show--info__button"
+              >
+                INFO
+              </button>
               <video
                 src={
                   process.env.NODE_ENV === "development"
@@ -55,11 +89,17 @@ const NewTab = () => {
                 muted
                 controls
               />
+              {showInfo && (
+                <PopupInfo
+                  popup={popup}
+                  clickHandler={clickHandler}
+                />
+              )}
             </div>
           )}
-        </>
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
