@@ -95,7 +95,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
           {
             const { width, height } = parseWindowSize(
               popup.popup_size,
-              screenWidth,
+              screenWidth
             )
             const { top, left } = calculatePopupCoordinates(
               popup,
@@ -130,7 +130,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
   })
 
   //Set popups to storage
-  await Browser.storage.session.set({ popups: slimPopups })
+  await Browser.storage.session.set({ arebytePopups: slimPopups })
 
   // Create windows
   slimPopups.forEach(async popup => {
@@ -139,7 +139,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
       popup.width,
       popup.height,
       popup.top,
-      popup.left,
+      popup.left
     )
   })
 }
