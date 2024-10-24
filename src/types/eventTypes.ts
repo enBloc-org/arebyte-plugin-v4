@@ -28,4 +28,11 @@ export interface Popup {
   createdAt: string
   updatedAt: string
   popup_content: PopupContent[]
+  thumbnail_image: {
+    formats: {
+      thumbnail: {
+        url: string
+      }
+    }
+  }
 }
