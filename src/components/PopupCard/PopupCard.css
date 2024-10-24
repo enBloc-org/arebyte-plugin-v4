@@ -1,4 +1,16 @@
 .popup-card {
   height: 165px;
   width: 165px;
+  position: relative;
+}
+
+.popup-card img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border-radius: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

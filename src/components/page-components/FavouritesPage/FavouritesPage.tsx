@@ -34,7 +34,7 @@ export default function FavouritesPage() {
 
       const { data, error }: { data: User; error: string | null } =
         await sendToBackground({
-          name: "fetchUserProfile",
+          name: "fetchUserFavourites",
           body: { jwt: userSession.jwt, id: userSession.id }
         })
       if (error) return showBoundary(error)
