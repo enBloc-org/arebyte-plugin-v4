@@ -26,6 +26,22 @@ export default function FavouritesPage() {
     setIsEditing(previous => !previous)
   }
 
+  const handlePopupRemove = async givenId => {
+    const updatedFavourites = favouritesList.filter(
+      favourite => favourite.id !== givenId
+    )
+
+    const { error }: { error: string | null } =
+      await sendToBackground({
+        name: "updateUserDetails",
+        body: { favourites: updatedFavourites }
+      })
+
+    if (error) console.error("poop")
+
+    setFavouritesList(updatedFavourites)
+  }
+
   useEffect(() => {
     const getFavourites = async () => {
       const userSession: UserSession = await storage.get(
@@ -69,7 +85,13 @@ export default function FavouritesPage() {
           <div className="favourites-page--favourites-grid">
             {favouritesList.map(favourite => (
               <div key={favourite.id}>
-                <PopupCard popup={favourite} isEditing={isEditing} />
+                <PopupCard
+                  popup={favourite}
+                  isEditing={isEditing}
+                  removeButtonHandler={() =>
+                    handlePopupRemove(favourite.id)
+                  }
+                />
               </div>
             ))}
           </div>
