@@ -29,29 +29,33 @@ const NewTab = () => {
   return (
     <>
       {popup && (
-        <div style={{ width: popup.width, height: popup.height }} className="tab__container">
+        <div className="tab__container">
           {popup.type === "text" && (
-            <>
+            <div className="content--container">
               <button
                 onClick={clickHandler}
                 className="show--info__button"
+                aria-expanded={showInfo}
               >
                 INFO
               </button>
-              <BlocksRenderer content={popup.text_content} />
+              <div className="text--content">
+                <BlocksRenderer content={popup.text_content} />
+              </div>
               {showInfo && (
                 <PopupInfo
                   popup={popup}
                   clickHandler={clickHandler}
                 />
               )}
-            </>
+            </div>
           )}
           {popup.type === "image" && (
-            <>
+            <div className="content--container">
               <button
                 onClick={clickHandler}
                 className="show--info__button"
+                aria-expanded={showInfo}
               >
                 INFO
               </button>
@@ -69,13 +73,14 @@ const NewTab = () => {
                   clickHandler={clickHandler}
                 />
               )}
-            </>
+            </div>
           )}
           {popup.type === "video" && (
-            <div className="video-container">
+            <div className="content--container">
               <button
                 onClick={clickHandler}
                 className="show--info__button"
+                aria-expanded={showInfo}
               >
                 INFO
               </button>
@@ -85,7 +90,6 @@ const NewTab = () => {
                     ? "http://localhost:1337" + popup.url
                     : popup.url
                 }
-                autoPlay
                 muted
                 controls
               />
