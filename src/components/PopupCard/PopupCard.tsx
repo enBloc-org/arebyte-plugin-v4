@@ -37,8 +37,10 @@ export default function PopupCard({
         <img
           className="popup-card--image"
           src={
-            process.env.PLASMO_PUBLIC_API_URL +
-            popup.thumbnail_image.formats.thumbnail.url
+            process.env.NODE_ENV === "development"
+              ? process.env.PLASMO_PUBLIC_API_URL +
+                popup.thumbnail_image.formats.thumbnail.url
+              : popup.thumbnail_image.formats.thumbnail.url
           }
           alt={popup.work_title}
         />
