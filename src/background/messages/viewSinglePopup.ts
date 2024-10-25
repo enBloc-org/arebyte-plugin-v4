@@ -26,7 +26,9 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     res.send(response)
   }
 
-  await backgroundPopupCreate([response.data])
+  const temporaryPopup = response.data
+  temporaryPopup.popup_position = "center"
+  await backgroundPopupCreate([temporaryPopup])
 
   res.send(response)
 }
