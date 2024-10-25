@@ -5,6 +5,10 @@
   cursor: pointer;
 }
 
+.popup-card__editing {
+  cursor: default;
+}
+
 .popup-card--image {
   object-fit: cover;
   height: 100%;
