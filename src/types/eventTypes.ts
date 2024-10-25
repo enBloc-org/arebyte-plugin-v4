@@ -69,11 +69,4 @@ export interface SlimPopup {
   alt?: string
   description: BlocksContent
   text_content?: BlocksContent
-  thumbnail_image: {
-    formats: {
-      thumbnail: {
-        url: string
-      }
-    }
-  }
 }
