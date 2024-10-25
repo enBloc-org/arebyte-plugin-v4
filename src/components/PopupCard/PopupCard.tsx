@@ -6,10 +6,12 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 export default function PopupCard({
   popup,
-  isEditing
+  isEditing,
+  removeButtonHandler
 }: {
   popup: Favourite
   isEditing?: boolean
+  removeButtonHandler: () => void
 }) {
   const handlePopup = async () => {
     if (isEditing) return
@@ -22,10 +24,6 @@ export default function PopupCard({
     if (error) console.log("ooops!")
 
     console.log(data)
-  }
-
-  const handleRemove = async () => {
-    console.log("REMOVE")
   }
 
   return (
@@ -41,7 +39,7 @@ export default function PopupCard({
         />
         {isEditing && (
           <button
-            onClick={handleRemove}
+            onClick={removeButtonHandler}
             className="popup-card--remove-button button--secondary bold"
           >
             REMOVE
