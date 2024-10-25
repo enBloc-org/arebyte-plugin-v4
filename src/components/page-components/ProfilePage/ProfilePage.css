@@ -1,5 +1,5 @@
 .profile-page {
-  animation: slideRight 0.5s ease-out;
+  animation-name: slideRight;
 }
 
 .profile-page--user-details {
@@ -104,13 +104,4 @@
 
 .profile-page-exit-active {
   z-index: 1;
-}
-
-@keyframes slideRight {
-  0% {
-    transform: translateX(-200);
-  }
-  100% {
-    transform: translateX(0);
-  }
 }

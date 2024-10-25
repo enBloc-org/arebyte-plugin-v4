@@ -1,3 +1,7 @@
+*:has(.burger--logo__active) {
+  overflow: hidden;
+}
+
 .burger--heading {
   display: flex;
   justify-content: space-between;
