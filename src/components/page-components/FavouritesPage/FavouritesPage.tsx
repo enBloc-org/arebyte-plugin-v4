@@ -37,7 +37,7 @@ export default function FavouritesPage() {
         body: { favourites: updatedFavourites }
       })
 
-    if (error) console.error("poop")
+    if (error) return showBoundary(error)
 
     setFavouritesList(updatedFavourites)
   }
@@ -58,7 +58,10 @@ export default function FavouritesPage() {
         name: "fetchUserFavourites",
         body: { jwt: userSession.jwt, id: userSession.id }
       })
-      if (error) return showBoundary(error)
+      if (error)
+        return showBoundary(
+          "Something went wrong. Please try again later."
+        )
 
       setFavouritesList(data.favourites)
     }

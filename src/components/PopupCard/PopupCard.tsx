@@ -2,6 +2,8 @@ import type { Favourite } from "~types/eventTypes"
 
 import "./PopupCard.css"
 
+import { useErrorBoundary } from "react-error-boundary"
+
 import { sendToBackground } from "@plasmohq/messaging"
 
 export default function PopupCard({
@@ -13,17 +15,20 @@ export default function PopupCard({
   isEditing?: boolean
   removeButtonHandler: () => void
 }) {
+  const { showBoundary } = useErrorBoundary()
+
   const handlePopup = async () => {
     if (isEditing) return
 
-    const { data, error } = await sendToBackground({
+    const { error } = await sendToBackground({
       name: "viewSinglePopup",
       body: { id: popup.id }
     })
 
-    if (error) console.log("ooops!")
-
-    console.log(data)
+    if (error)
+      return showBoundary(
+        "Something went wrong. Please try again later."
+      )
   }
 
   return (
