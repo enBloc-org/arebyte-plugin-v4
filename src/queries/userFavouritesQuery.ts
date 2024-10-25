@@ -1,9 +1,10 @@
 import qs from "qs"
 
 const favouritesQuery = {
-  fields: ["id, work_title"],
+  fields: ["id"],
   populate: {
     favourites: {
+      fields: ["id, work_title"],
       populate: {
         thumbnail_image: {
           populate: {
