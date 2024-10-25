@@ -2,6 +2,8 @@ import type { Favourite } from "~types/eventTypes"
 
 import "./PopupCard.css"
 
+import defaultImage from "data-base64:assets/icon.png"
+import { useState } from "react"
 import { useErrorBoundary } from "react-error-boundary"
 
 import { sendToBackground } from "@plasmohq/messaging"
@@ -16,6 +18,16 @@ export default function PopupCard({
   removeButtonHandler: () => void
 }) {
   const { showBoundary } = useErrorBoundary()
+  const [sourceString, setSourceString] = useState<string>(
+    process.env.NODE_ENV === "development"
+      ? process.env.PLASMO_PUBLIC_API_URL +
+          popup.thumbnail_image.formats.thumbnail.url
+      : popup.thumbnail_image.formats.thumbnail.url
+  )
+
+  const setToDefault = () => {
+    setSourceString(defaultImage)
+  }
 
   const handlePopup = async () => {
     if (isEditing) return
@@ -36,13 +48,9 @@ export default function PopupCard({
       <div className="popup-card content-box shadow">
         <img
           className="popup-card--image"
-          src={
-            process.env.NODE_ENV === "development"
-              ? process.env.PLASMO_PUBLIC_API_URL +
-                popup.thumbnail_image.formats.thumbnail.url
-              : popup.thumbnail_image.formats.thumbnail.url
-          }
+          src={sourceString}
           alt={popup.work_title}
+          onError={setToDefault}
         />
         {isEditing && (
           <button
