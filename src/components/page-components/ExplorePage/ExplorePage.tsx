@@ -55,14 +55,14 @@ export default function ExplorePage() {
               ))}
             </div>
           )}
+          <PaginationNav
+            pageNumber={pageNumber}
+            pageCount={pageCount}
+            incrementPage={navigateToNext}
+            decrementPage={navigateToPrevious}
+          />
         </div>
       </main>
-      <PaginationNav
-        pageNumber={pageNumber}
-        pageCount={pageCount}
-        incrementPage={navigateToNext}
-        decrementPage={navigateToPrevious}
-      />
       <Footer />
     </div>
   )
