@@ -71,6 +71,9 @@ export default function FavouritesPage() {
           "Something went wrong. Please try again later."
         )
 
+      const targetArray: number[] = favouritesData.favourites.map(
+        favourite => favourite.id
+      )
       const {
         data: popupData,
         error: popupError,
@@ -83,9 +86,7 @@ export default function FavouritesPage() {
         name: "fetchListOfPopups",
         body: {
           page: pageNumber,
-          popupArray: favouritesData.favourites.map(
-            favourite => favourite.id
-          )
+          popupArray: targetArray
         }
       })
 
