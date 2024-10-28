@@ -46,7 +46,7 @@ export default function PopupCard({
   return (
     <button onClick={handlePopup}>
       <div
-        className={`${isEditing ? "popup-card__editing" : ""} popup-card content-box shadow`}
+        className={`${isEditing ? "popup-card__editing" : ""} popup-card shadow`}
       >
         <img
           className="popup-card--image"

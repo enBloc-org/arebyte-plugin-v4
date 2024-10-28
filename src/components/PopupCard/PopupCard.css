@@ -3,6 +3,7 @@
   width: 165px;
   position: relative;
   cursor: pointer;
+  border-radius: 7px;
 }
 
 .popup-card__editing {
