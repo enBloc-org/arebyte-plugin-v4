@@ -10,7 +10,7 @@ export default function allProjectsQueryString(pageNumber: number) {
     },
     pagination: {
       page: pageNumber,
-      pageSize: 1
+      pageSize: 6
     }
   }
 
