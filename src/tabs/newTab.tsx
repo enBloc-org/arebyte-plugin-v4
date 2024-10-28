@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import "./NewTab.css"
 
 import { BlocksRenderer } from "@strapi/blocks-react-renderer"
+import arebyte from "data-base64:assets/arebyte-Plugin-blue.png"
 import Browser from "webextension-polyfill"
 
 import PopupInfo from "~components/popup-components/PopupInfo/PopupInfo"
@@ -66,6 +67,9 @@ const NewTab = () => {
                       : popup.url
                   }
                   alt={popup.alt}
+                  onError={e => {
+                    e.currentTarget.src = arebyte
+                  }}
                 />
               </>
               <PopupInfo
@@ -92,6 +96,9 @@ const NewTab = () => {
                 }
                 muted
                 controls
+                onError={e => {
+                  e.currentTarget.src = arebyte
+                }}
               />
               <PopupInfo
                 popup={popup}
