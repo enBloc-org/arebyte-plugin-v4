@@ -1,3 +1,5 @@
+import "./PaginationNav.css"
+
 export default function PaginationNav({
   pageNumber,
   pageCount,
@@ -10,7 +12,7 @@ export default function PaginationNav({
   decrementPage: () => void
 }) {
   return (
-    <div>
+    <div className="pagination-nav">
       <button
         className="button--secondary"
         onClick={decrementPage}
