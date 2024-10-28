@@ -4,6 +4,8 @@ import { SlimPopup } from "~types/eventTypes"
 
 import "./PopupInfo.css"
 
+import AddToFavourtesButton from "../AddToFavouritesButton/AddToFavouritesButton"
+
 interface PopupInfoProps {
   popup: SlimPopup
   showInfo: boolean
@@ -54,7 +56,7 @@ const PopupInfo: React.FC<PopupInfoProps> = ({
         </div>
       </div>
       <div className="info-buttons--container">
-        <button className="info--button">ADD TO FAVOURITES</button>
+        <AddToFavourtesButton popupId={popup.popupInfo.id} />
         <button className="info--button">CLOSE ALL POPUPS</button>
       </div>
     </div>
