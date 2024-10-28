@@ -8,8 +8,10 @@ import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
+import PaginationNav from "~components/PaginationNav/PaginationNav"
 import PopupCard from "~components/PopupCard/PopupCard"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
+import { Meta } from "~types/baseTypes"
 import type { Favourite } from "~types/eventTypes"
 import type { UserFavourites, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
@@ -20,6 +22,8 @@ export default function FavouritesPage() {
   const [favouritesList, setFavouritesList] = useState<
     Array<Favourite>
   >([])
+  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [pageCount, setPageCount] = useState<number>(1)
   const storage = newStorage()
 
   const handleToggleSwitch = () => {
@@ -49,25 +53,60 @@ export default function FavouritesPage() {
       )
 
       const {
-        data,
-        error
+        data: favouritesData,
+        error: favouritesError
       }: {
         data: UserFavourites
         error: string | null
       } = await sendToBackground({
         name: "fetchUserFavourites",
-        body: { jwt: userSession.jwt, id: userSession.id }
+        body: {
+          jwt: userSession.jwt,
+          id: userSession.id
+        }
       })
-      if (error)
+
+      if (favouritesError)
         return showBoundary(
           "Something went wrong. Please try again later."
         )
 
-      setFavouritesList(data.favourites)
+      // FETCH POPUPS IN THIS ARRAY
+
+      const {
+        data: popupData,
+        error: popupError,
+        meta
+      }: {
+        data: Favourite[]
+        error: string | null
+        meta: Meta
+      } = await sendToBackground({
+        name: "fetchListOfPopups",
+        body: {
+          page: pageNumber,
+          popupArray: favouritesData.favourites.map(
+            favourite => favourite.id
+          )
+        }
+      })
+
+      if (popupError) return showBoundary(popupError)
+
+      setPageCount(meta.pagination.pageCount)
+      setFavouritesList(popupData)
     }
 
     getFavourites()
-  }, [setFavouritesList])
+  }, [setFavouritesList, pageNumber])
+
+  const navigateToNext = () => {
+    setPageNumber(page => page + 1)
+  }
+
+  const navigateToPrevious = () => {
+    setPageNumber(page => page - 1)
+  }
 
   return (
     <div className="page favourites-page">
@@ -100,6 +139,12 @@ export default function FavouritesPage() {
           </div>
         )}
       </main>
+      <PaginationNav
+        pageNumber={pageNumber}
+        pageCount={pageCount}
+        incrementPage={navigateToNext}
+        decrementPage={navigateToPrevious}
+      />
       <Footer />
     </div>
   )

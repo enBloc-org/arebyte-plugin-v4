@@ -4,25 +4,14 @@ const favouritesQuery = {
   fields: ["id"],
   populate: {
     favourites: {
-      fields: ["id, work_title"],
-      populate: {
-        thumbnail_image: {
-          populate: {
-            formats: {
-              populate: {
-                thumbnail: {
-                  fields: ["url"]
-                }
-              }
-            }
-          }
-        }
-      }
+      fields: ["id"]
     }
   }
 }
 
 export const userFavouritesQueryString = qs.stringify(
   favouritesQuery,
-  { encodedValuesOnly: true }
+  {
+    encodedValuesOnly: true
+  }
 )
