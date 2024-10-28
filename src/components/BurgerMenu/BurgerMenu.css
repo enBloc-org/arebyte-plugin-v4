@@ -96,7 +96,7 @@
   padding: 0 25px;
 }
 
-@keyframes slideLeft {
+@keyframes slideIn {
   0% {
     transform: translateX(200%);
   }

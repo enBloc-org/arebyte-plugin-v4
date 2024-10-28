@@ -233,3 +233,7 @@ button:disabled {
 .bold {
   font-weight: bold;
 }
+
+.uppercase{
+  text-transform: uppercase;
+}

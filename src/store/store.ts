@@ -64,10 +64,10 @@ const baseStore = create<State & Actions>(set => {
             currentPage: nextPage
           }
         } else {
-            return {
-        previousPage: state.currentPage,
-        currentPage: nextPage
-      }
+          return {
+            previousPage: state.currentPage,
+            currentPage: nextPage
+          }
         }
       }),
 
