@@ -12,6 +12,7 @@ const NewTab = () => {
   const params = new URLSearchParams(window.location.search)
   const index = params.get("index")
   const [popup, setPopup] = useState<SlimPopup>()
+
   const [showInfo, setShowInfo] = useState(false)
   useEffect(() => {
     const getFromStorage = async () => {
@@ -23,63 +24,62 @@ const NewTab = () => {
     getFromStorage()
   }, [])
 
-  const clickHandler = () => {
-    setShowInfo(prev => !prev)
-  }
   return (
     <>
       {popup && (
-        <div className="tab__container">
+        <div className="tab--container">
           {popup.type === "text" && (
             <div className="content--container">
-              <button
-                onClick={clickHandler}
-                className="show--info__button"
-                aria-expanded={showInfo}
-              >
-                INFO
-              </button>
-              <div className="text--content">
-                <BlocksRenderer content={popup.text_content} />
-              </div>
-              {showInfo && (
-                <PopupInfo
-                  popup={popup}
-                  clickHandler={clickHandler}
-                />
-              )}
+              <>
+                <button
+                  onClick={() => setShowInfo(true)}
+                  className="show-info--button"
+                  aria-expanded={showInfo}
+                >
+                  INFO
+                </button>
+                <div className="text--content">
+                  <BlocksRenderer content={popup.text_content} />
+                </div>
+              </>
+              <PopupInfo
+                popup={popup}
+                showInfo={showInfo}
+                setShowInfo={setShowInfo}
+              />
             </div>
           )}
           {popup.type === "image" && (
             <div className="content--container">
-              <button
-                onClick={clickHandler}
-                className="show--info__button"
-                aria-expanded={showInfo}
-              >
-                INFO
-              </button>
-              <img
-                src={
-                  process.env.NODE_ENV === "development"
-                    ? "http://localhost:1337" + popup.url
-                    : popup.url
-                }
-                alt={popup.alt}
-              />
-              {showInfo && (
-                <PopupInfo
-                  popup={popup}
-                  clickHandler={clickHandler}
+              <>
+                <button
+                  onClick={() => setShowInfo(true)}
+                  className="show-info--button"
+                  aria-expanded={showInfo}
+                >
+                  INFO
+                </button>
+                <img
+                  src={
+                    process.env.NODE_ENV === "development"
+                      ? "http://localhost:1337" + popup.url
+                      : popup.url
+                  }
+                  alt={popup.alt}
                 />
-              )}
+              </>
+              <PopupInfo
+                popup={popup}
+                showInfo={showInfo}
+                setShowInfo={setShowInfo}
+              />
             </div>
           )}
           {popup.type === "video" && (
             <div className="content--container">
               <button
-                onClick={clickHandler}
-                className="show--info__button"
+                onClick={() => setShowInfo(true)}
+                className="show-info--button"
                 aria-expanded={showInfo}
               >
                 INFO
@@ -93,12 +93,11 @@ const NewTab = () => {
                 muted
                 controls
               />
-              {showInfo && (
-                <PopupInfo
-                  popup={popup}
-                  clickHandler={clickHandler}
-                />
-              )}
+              <PopupInfo
+                popup={popup}
+                showInfo={showInfo}
+                setShowInfo={setShowInfo}
+              />
             </div>
           )}
         </div>
