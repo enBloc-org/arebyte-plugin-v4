@@ -71,8 +71,6 @@ export default function FavouritesPage() {
           "Something went wrong. Please try again later."
         )
 
-      // FETCH POPUPS IN THIS ARRAY
-
       const {
         data: popupData,
         error: popupError,
