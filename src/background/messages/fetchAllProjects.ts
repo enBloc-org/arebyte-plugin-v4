@@ -15,7 +15,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     >
   >(`api/projects?${newQueryString}`)
 
-  console.log(response)
   res.send(response)
 }
 
