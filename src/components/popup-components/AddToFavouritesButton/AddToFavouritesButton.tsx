@@ -2,48 +2,52 @@ import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-const AddToFavourtesButton = ({ popupId }) => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [status, setStaus] = useState<
-    "idle" | "resolved" | "rejected"
+import "./AddToFavouritesButton.css"
+
+const AddToFavouritesButton = ({ popupId }) => {
+  const [status, setStatus] = useState<
+    "idle" | "loading" | "rejected"
   >("idle")
+  const [isFavourite, setIsFavourite] = useState<boolean>(false)
 
   const clickHandler = async () => {
-    setIsLoading(true)
+    setStatus("loading")
     const { data, error } = await sendToBackground({
       name: "updateUserDetails",
       body: {
         favourites: {
-          connnet: [popupId]
+          [isFavourite ? "disconnect" : "connect"]: [popupId]
         }
       }
     })
 
     if (error) {
       console.error(error)
-      setStaus("rejected")
+      setStatus("rejected")
     }
 
     if (data) {
-      setStaus("resolved")
+      setIsFavourite(!isFavourite)
+      setStatus("idle")
     }
-
-    setIsLoading(false)
   }
 
   return (
-    <>
+    <div className="fav-button--container">
       <button
         className="info--button"
-        disabled={isLoading || status === "resolved"}
+        disabled={status === "loading"}
         onClick={clickHandler}
       >
-        {status === "idle" && "Add to Favourites"}
-        {status === "resolved" && "Added to Favourites"}
+        {isFavourite ? "REMOVE FROM FAVOURITES" : "ADD TO FAVOURITES"}
       </button>
-      {status === "rejected" && <p>Something went wrong</p>}
-    </>
+      {status === "rejected" && (
+        <p className="fav-message__error">
+          Something went wrong, try again.
+        </p>
+      )}
+    </div>
   )
 }
 
-export default AddToFavourtesButton
+export default AddToFavouritesButton
