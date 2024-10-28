@@ -6,16 +6,23 @@ body {
   font-family: "Futura TS New", sans-serif;
 }
 
-.tab__container {
+.tab--container {
   position: relative;
   width: 100dvw;
   height: auto;
+  z-index: 1;
 }
 
 .content--container {
   width: 100dvw;
   height: 100dvh;
   position: relative;
+  overflow: hidden;
+}
+
+.content--container:has(.info-panel__active),
+.content--container:has(.text--content) {
+  overflow: auto;
 }
 
 .content--container:has(img),
@@ -39,4 +46,18 @@ body {
 .text--content blockquote {
   font-style: italic;
   font-weight: 300;
+}
+
+.show-info--button {
+  position: absolute;
+  right: -10px;
+  top: 10px;
+  background-color: #0017f8;
+  color: #fff;
+  opacity: 0.65;
+  padding: 0.5rem;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
+  transform: rotate(-90deg);
+  z-index: 50;
 }
