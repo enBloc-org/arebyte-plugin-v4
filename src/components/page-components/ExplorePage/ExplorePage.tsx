@@ -11,6 +11,7 @@ import FilterTags from "~components/FilterTags/FilterTags"
 import Footer from "~components/Footer/Footer"
 import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
+import type { Meta } from "~types/baseTypes"
 import type { ProjectData } from "~types/projectTypes"
 
 export default function ExplorePage() {
@@ -21,12 +22,18 @@ export default function ExplorePage() {
 
   useEffect(() => {
     const fetchAllProjects = async () => {
-      const { data, error, meta } = await sendToBackground({
-        name: "fetchAllProjects",
-        body: { page: pageNumber }
-      })
+      const {
+        data,
+        error,
+        meta
+      }: { data: ProjectData[]; error: string | null; meta: Meta } =
+        await sendToBackground({
+          name: "fetchAllProjects",
+          body: { page: pageNumber }
+        })
 
       if (error) showBoundary(error)
+        
       setPageCount(meta.pagination.pageCount)
       setProjects(data)
     }
