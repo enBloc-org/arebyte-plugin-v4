@@ -9,6 +9,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import FilterTags from "~components/FilterTags/FilterTags"
 import Footer from "~components/Footer/Footer"
+import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { ProjectData } from "~types/projectTypes"
 
@@ -32,6 +33,14 @@ export default function ExplorePage() {
     fetchAllProjects()
   }, [pageNumber])
 
+  const navigateToNext = () => {
+    setPageNumber(page => page + 1)
+  }
+
+  const navigateToPrevious = () => {
+    setPageNumber(page => page - 1)
+  }
+
   return (
     <div className="explore-page page">
       <BurgerMenu />
@@ -48,23 +57,12 @@ export default function ExplorePage() {
           )}
         </div>
       </main>
-      <div>
-        <button
-          className="button--secondary"
-          onClick={() => setPageNumber(page => page - 1)}
-          disabled={pageNumber === 1}
-        >
-          previous
-        </button>
-        <p className="bold">{pageNumber}</p>
-        <button
-          className="button--secondary"
-          onClick={() => setPageNumber(page => page + 1)}
-          disabled={pageNumber === pageCount}
-        >
-          next
-        </button>
-      </div>
+      <PaginationNav
+        pageNumber={pageNumber}
+        pageCount={pageCount}
+        incrementPage={navigateToNext}
+        decrementPage={navigateToPrevious}
+      />
       <Footer />
     </div>
   )
