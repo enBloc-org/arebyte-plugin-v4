@@ -55,6 +55,7 @@ export interface SlimPopup {
   index: number
   popupInfo: Pick<
     Popup,
+    | "id"
     | "artist_name"
     | "medium"
     | "work_title"

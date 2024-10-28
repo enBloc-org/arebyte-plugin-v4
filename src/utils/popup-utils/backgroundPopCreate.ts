@@ -44,6 +44,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
         type: "text",
         index: index,
         popupInfo: {
+          id: popup.id,
           artist_name: popup.artist_name,
           medium: popup.medium,
           work_title: popup.work_title,
@@ -76,6 +77,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
             type: "image",
             index: index,
             popupInfo: {
+              id: popup.id,
               artist_name: popup.artist_name,
               medium: popup.medium,
               work_title: popup.work_title,
@@ -108,6 +110,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
               type: "video",
               index: index,
               popupInfo: {
+                id: popup.id,
                 artist_name: popup.artist_name,
                 medium: popup.medium,
                 work_title: popup.work_title,
