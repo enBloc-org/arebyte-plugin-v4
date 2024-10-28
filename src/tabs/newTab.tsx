@@ -38,7 +38,7 @@ const NewTab = () => {
                 >
                   INFO
                 </button>
-                <div className="text--content">
+                <div className="text--content" hidden={showInfo}>
                   <BlocksRenderer content={popup.text_content} />
                 </div>
               </>
