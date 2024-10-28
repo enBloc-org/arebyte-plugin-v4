@@ -10,24 +10,27 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import FilterTags from "~components/FilterTags/FilterTags"
 import Footer from "~components/Footer/Footer"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
-import type { AllProjectResponse } from "~types/projectTypes"
+import type { ProjectData } from "~types/projectTypes"
 
 export default function ExplorePage() {
-  const [projects, setProjects] =
-    useState<AllProjectResponse["data"]>()
+  const [projects, setProjects] = useState<ProjectData[]>()
+  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [pageCount, setPageCount] = useState<number>(1)
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const fetchAllProjects = async () => {
-      const { data, error } = await sendToBackground({
-        name: "fetchAllProjects"
+      const { data, error, meta } = await sendToBackground({
+        name: "fetchAllProjects",
+        body: { page: pageNumber }
       })
 
       if (error) showBoundary(error)
+      setPageCount(meta.pagination.pageCount)
       setProjects(data)
     }
     fetchAllProjects()
-  }, [])
+  }, [pageNumber])
 
   return (
     <div className="explore-page page">
@@ -45,6 +48,23 @@ export default function ExplorePage() {
           )}
         </div>
       </main>
+      <div>
+        <button
+          className="button--secondary"
+          onClick={() => setPageNumber(page => page - 1)}
+          disabled={pageNumber === 1}
+        >
+          previous
+        </button>
+        <p className="bold">{pageNumber}</p>
+        <button
+          className="button--secondary"
+          onClick={() => setPageNumber(page => page + 1)}
+          disabled={pageNumber === pageCount}
+        >
+          next
+        </button>
+      </div>
       <Footer />
     </div>
   )
