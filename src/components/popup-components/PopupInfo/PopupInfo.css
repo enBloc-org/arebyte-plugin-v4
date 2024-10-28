@@ -1,8 +1,6 @@
-@import url("https://fonts.cdnfonts.com/css/futura-ts-new");
-
-body:has(.info--container) {
+body:has(.info-panel__active) {
   background-color: #0017f8;
-  font-family: "Futura TS New", sans-serif;
+  transition: background-color 0.5s ease-out 0.5s;
 }
 
 button {
@@ -10,30 +8,28 @@ button {
   cursor: pointer;
 }
 
-.show--info__button {
-  position: absolute;
-  right: -10px;
-  top: 10px;
-  background-color: #0017f8;
-  color: #fff;
-  opacity: 0.65;
-  padding: 0.5rem;
-  font-weight: bold;
-  letter-spacing: 0.1rem;
-  transform: rotate(-90deg);
-  z-index: 50;
+.info-panel__inactive {
+  display: none;
+  transform: translateX(200%);
+  visibility: hidden;
+}
+
+.info-panel__active {
+  transform: translateX(0%);
 }
 
 .info--container {
+  display: grid;
   color: #fff;
   padding: 4rem 3rem;
   font-size: 1rem;
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #0017f8;
   z-index: 100;
+  background-color: #0017f8;
   height: 100%;
+  transition: all 0.5s ease-out;
 }
 
 .info--container h2 {
@@ -42,33 +38,33 @@ button {
   margin: 0;
 }
 
-.info--details {
+.info-details {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.info--details > * {
+.info-details > * {
   margin: 0;
   margin-top: 0.625rem;
   font-style: italic;
 }
 
-.creation--date {
+.creation-date {
   margin: 0;
   margin-top: 0.3rem;
   font-weight: 200;
   font-size: 0.8rem;
 }
 
-.info--description {
+.info-description {
   margin-top: 2rem;
   font-size: 0.9rem;
   font-weight: 300;
   line-height: 1.4;
 }
 
-.info__back-button {
+.info--back-button {
   position: absolute;
   top: 0.85rem;
   left: 3rem;
@@ -85,13 +81,17 @@ button {
   justify-content: center;
 }
 
-.info--buttons__container {
+.info--back-button svg {
+  transform: rotate(180deg);
+}
+
+.info-buttons--container {
   display: flex;
   flex-direction: column;
   padding-bottom: 3rem;
 }
 
-.info__button {
+.info--button {
   border: 1px solid #fff;
   border-radius: 5px;
   padding: 0.5rem 1rem;
@@ -112,11 +112,11 @@ button {
     min-width: 800px;
   }
 
-  .info--description {
+  .info-description {
     min-width: 400px;
   }
 
-  .info--buttons__container {
+  .info-buttons--container {
     margin-top: 6rem;
     align-items: center;
     flex-direction: column;
