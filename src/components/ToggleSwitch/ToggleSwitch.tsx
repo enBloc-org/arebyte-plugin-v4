@@ -14,6 +14,7 @@ export default function ToggleSwitch({
         checked={isChecked}
         className="toggle--input"
         type="checkbox"
+        readOnly
       />
       <span className="toggle--slider" />
     </label>

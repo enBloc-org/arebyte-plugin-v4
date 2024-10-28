@@ -38,6 +38,18 @@ export interface Popup {
   popup_content: Array<MediaContent | TextContent>
 }
 
+export interface Favourite {
+  id: number
+  work_title: string
+  thumbnail_image: {
+    formats: {
+      thumbnail: {
+        url: string
+      }
+    }
+  }
+}
+
 export interface SlimPopup {
   type: "text" | "image" | "video"
   index: number
