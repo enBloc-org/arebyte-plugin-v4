@@ -1,32 +1,44 @@
+import { useEffect, useState } from "react"
+
 import "./FilterTags.css"
 
+import { sendToBackground } from "@plasmohq/messaging"
+
+import type { TagsData } from "~types/projectTypes"
+
 const FilterTags = () => {
+  const [tags, setTags] = useState<TagsData[]>()
+  const [hasError, setHasError] = useState(false)
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      const { data, error } = await sendToBackground({
+        name: "fetchFilterTags"
+      })
+      if (error) {
+        setHasError(true)
+      } else {
+        setTags(data)
+      }
+    }
+    fetchTags()
+  }, [])
+
   return (
     <div className="flex tags-container">
-      {tags.map(tag => {
-        return (
-          <button
-            key={tag.id}
-            className="button--filter"
-          >
-            {tag.name}
-          </button>
-        )
-      })}
+      {tags &&
+        tags.map(tag => {
+          return (
+            <button key={tag.id} className="button--filter">
+              {tag.name}
+            </button>
+          )
+        })}
+      {hasError && (
+        <p className="message__error">Tags have not loaded...</p>
+      )}
     </div>
   )
 }
 
 export default FilterTags
-
-const tags = [
-  { id: 1, name: "Realism" },
-  { id: 2, name: "Digital Painting" },
-  { id: 3, name: "3D Modeling" },
-  { id: 4, name: "Fantasy" },
-  { id: 5, name: "AI" },
-  { id: 6, name: "Adobe Photoshop" },
-  { id: 7, name: "High-Fi" },
-  { id: 8, name: "Lo-Fi" },
-  { id: 9, name: "Western" }
-]
