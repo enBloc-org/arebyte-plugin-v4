@@ -2,8 +2,6 @@ import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import "./ManageFavouritesButton.css"
-
 const ManageFavouritesButton = ({ popupId }) => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "rejected"
