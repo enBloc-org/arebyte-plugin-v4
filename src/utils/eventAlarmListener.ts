@@ -23,14 +23,12 @@ export default async function eventAlarmListener(alarm) {
         ? await getCurrentProjectPopups(currentIndex)
         : await getProjectPopups(projectId, currentIndex)
 
-    console.log(pop_ups)
     await backgroundPopupCreate(pop_ups)
     const newIndex = iterateIndex(numberOfEvents, currentIndex)
     const updatedSession = updateStorage(userSession, {
       current_index: newIndex,
       ...(newIndex === 0 && { project_id: 0 })
     })
-    console.log(updatedSession)
     await storage.set("arebyte-audience-session", updatedSession)
   } else {
     const publicIndex: number = await storage.get(
