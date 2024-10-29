@@ -3,14 +3,14 @@ import { useState } from "react"
 import { sendToBackground } from "@plasmohq/messaging"
 
 const CloseAllPopupsButton = () => {
-  const [error, setError] = useState<boolean>(false)
+  const [hasError, setHasError] = useState<boolean>(false)
   const clickHandler = async () => {
-    setError(false)
+    setHasError(false)
     const response = await sendToBackground({
       name: "closeAllPopups"
     })
 
-    if (response === "error") setError(true)
+    if (response === "error") setHasError(true)
   }
 
   return (
@@ -22,7 +22,7 @@ const CloseAllPopupsButton = () => {
       >
         CLOSE ALL POPUPS
       </button>
-      {error && (
+      {hasError && (
         <p className="controls-message__error">
           Something went wrong, try again.
         </p>
