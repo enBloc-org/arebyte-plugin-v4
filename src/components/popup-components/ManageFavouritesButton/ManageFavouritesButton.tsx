@@ -2,9 +2,9 @@ import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import "./AddToFavouritesButton.css"
+import "./ManageFavouritesButton.css"
 
-const AddToFavouritesButton = ({ popupId }) => {
+const ManageFavouritesButton = ({ popupId }) => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "rejected"
   >("idle")
@@ -48,4 +48,4 @@ const AddToFavouritesButton = ({ popupId }) => {
   )
 }
 
-export default AddToFavouritesButton
+export default ManageFavouritesButton
