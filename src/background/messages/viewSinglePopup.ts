@@ -5,7 +5,7 @@ import type { Popup } from "~types/eventTypes"
 import type { UserSession } from "~types/userTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 import newStorage from "~utils/newStorage"
-import backgroundPopupCreate from "~utils/popup-utils/backgroundPopCreate"
+// import backgroundPopupCreate from "~utils/popup-utils/backgroundPopCreate"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const { id } = req.body
@@ -28,9 +28,9 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
   const temporaryPopup = response.data
   temporaryPopup.popup_position = "center"
-  await backgroundPopupCreate([temporaryPopup])
+  // await backgroundPopupCreate([temporaryPopup])
 
-  res.send(response)
+  res.send({ data: temporaryPopup, error: null })
 }
 
 export default handler

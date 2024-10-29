@@ -8,6 +8,8 @@ import { useErrorBoundary } from "react-error-boundary"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import displayPopup from "~utils/popup-utils/displayPopup"
+
 export default function PopupCard({
   popup,
   isEditing,
@@ -32,7 +34,7 @@ export default function PopupCard({
   const handlePopup = async () => {
     if (isEditing) return
 
-    const { error } = await sendToBackground({
+    const { data, error } = await sendToBackground({
       name: "viewSinglePopup",
       body: { id: popup.id }
     })
@@ -41,6 +43,8 @@ export default function PopupCard({
       return showBoundary(
         "Something went wrong. Please try again later."
       )
+
+    await displayPopup(data)
   }
 
   return (
