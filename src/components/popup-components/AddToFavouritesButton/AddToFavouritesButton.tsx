@@ -12,7 +12,7 @@ const AddToFavouritesButton = ({ popupId }) => {
 
   const clickHandler = async () => {
     setStatus("loading")
-    const { data, error } = await sendToBackground({
+    const { error } = await sendToBackground({
       name: "updateUserDetails",
       body: {
         favourites: {
@@ -26,10 +26,8 @@ const AddToFavouritesButton = ({ popupId }) => {
       setStatus("rejected")
     }
 
-    if (data) {
-      setIsFavourite(!isFavourite)
-      setStatus("idle")
-    }
+    setIsFavourite(!isFavourite)
+    setStatus("idle")
   }
 
   return (
