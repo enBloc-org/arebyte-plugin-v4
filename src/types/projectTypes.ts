@@ -26,3 +26,8 @@ export interface CurrentProjectData {
   event_time: string
   project: ProjectData
 }
+
+export interface TagsData {
+  id: number
+  name: string
+}
