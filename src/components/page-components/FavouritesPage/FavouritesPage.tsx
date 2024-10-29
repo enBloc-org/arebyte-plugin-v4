@@ -99,14 +99,6 @@ export default function FavouritesPage() {
     getFavourites()
   }, [setFavouritesList, pageNumber])
 
-  const navigateToNext = () => {
-    setPageNumber(page => page + 1)
-  }
-
-  const navigateToPrevious = () => {
-    setPageNumber(page => page - 1)
-  }
-
   return (
     <div className="page favourites-page">
       <BurgerMenu />
@@ -141,8 +133,7 @@ export default function FavouritesPage() {
       <PaginationNav
         pageNumber={pageNumber}
         pageCount={pageCount}
-        incrementPage={navigateToNext}
-        decrementPage={navigateToPrevious}
+        setterFunction={setPageNumber}
       />
       <Footer />
     </div>

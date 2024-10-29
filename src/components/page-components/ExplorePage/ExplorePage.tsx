@@ -33,20 +33,12 @@ export default function ExplorePage() {
         })
 
       if (error) showBoundary(error)
-        
+
       setPageCount(meta.pagination.pageCount)
       setProjects(data)
     }
     fetchAllProjects()
   }, [pageNumber])
-
-  const navigateToNext = () => {
-    setPageNumber(page => page + 1)
-  }
-
-  const navigateToPrevious = () => {
-    setPageNumber(page => page - 1)
-  }
 
   return (
     <div className="explore-page page">
@@ -65,8 +57,7 @@ export default function ExplorePage() {
           <PaginationNav
             pageNumber={pageNumber}
             pageCount={pageCount}
-            incrementPage={navigateToNext}
-            decrementPage={navigateToPrevious}
+            setterFunction={setPageNumber}
           />
         </div>
       </main>
