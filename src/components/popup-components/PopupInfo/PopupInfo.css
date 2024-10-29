@@ -107,6 +107,19 @@ button {
   width: 250px;
 }
 
+/* Styles for buttons controls in info panel */
+
+.controls-button--container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls-message__error {
+  font-weight: 200;
+  font-style: italic;
+}
+
 @media (min-width: 800px) {
   .info--container {
     display: grid;
@@ -125,5 +138,9 @@ button {
     align-items: center;
     flex-direction: column;
     min-width: 400px;
+  }
+
+  .controls-button--container {
+    flex-direction: column;
   }
 }
