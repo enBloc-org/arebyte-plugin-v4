@@ -1,17 +1,15 @@
-import { Popup } from "~types/eventTypes"
-
 /**
  *
- * @param givenArray full array of pop_ups in an event
+ * @param totalCount expects the length of the event array in the target object
  * @param currentIndex current_index in storage
  * @returns the next index in the array or zero if the full length of the array has been reached
  */
 export default function iterateIndex(
-  givenArray: Array<Popup>,
+  totalCount: number,
   currentIndex: number
 ): number {
-  const fullLength = givenArray.length
-  if (currentIndex >= fullLength) return 0
+  if (currentIndex === totalCount - 1 || currentIndex === totalCount)
+    return 0
 
   return currentIndex + 1
 }
