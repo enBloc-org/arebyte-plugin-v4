@@ -1,11 +1,9 @@
 import { create } from "zustand"
 
-import type { ProjectData } from "~types/projectTypes"
+import type { ProjectData, TagsData } from "~types/projectTypes"
 import type { User } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
-
-export type PlayList = typeof baseStore<State["user"]["playlist"]>
 
 interface State {
   user: User
@@ -13,6 +11,7 @@ interface State {
   isLoggedIn: boolean
   exploreProjectId: number
   previousPage: State["currentPage"]
+  tags: TagsData[]
   currentPage:
     | "home"
     | "profile"
@@ -31,6 +30,7 @@ interface Actions {
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
   updateIsPaused: (newStatus: boolean) => void
+  setTags: (tags: TagsData[]) => void
 }
 
 const initialState: State = {
@@ -44,13 +44,14 @@ const initialState: State = {
     project_id: 0,
     current_index: 0,
     event_time: "12:00:00.000",
-    playlist: []
+    favourites: []
   },
   isLoggedIn: false,
   currentPage: "home",
   previousPage: "home",
   exploreProjectId: undefined,
-  currentProject: undefined
+  currentProject: undefined,
+  tags: []
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -98,7 +99,8 @@ const baseStore = create<State & Actions>(set => {
           ...state.user,
           is_paused: newStatus
         }
-      }))
+      })),
+    setTags: tags => set(() => ({ tags: tags }))
   }
 })
 

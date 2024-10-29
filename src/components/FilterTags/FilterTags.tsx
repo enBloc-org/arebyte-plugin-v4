@@ -4,10 +4,11 @@ import "./FilterTags.css"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import type { TagsData } from "~types/projectTypes"
+import useStore from "~store/store"
 
 const FilterTags = () => {
-  const [tags, setTags] = useState<TagsData[]>()
+  const tags = useStore.use.tags()
+  const setTags = useStore.use.setTags()
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
