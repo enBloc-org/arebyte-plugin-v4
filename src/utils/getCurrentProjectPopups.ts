@@ -22,5 +22,8 @@ export default async function getCurrentProjectPopups(
   } = await fetchStrapiContent<EventData>(
     `api/events/${currentEventId}?${eventPopupQueryString}`
   )
-  return pop_ups
+  return {
+    pop_ups: pop_ups,
+    numberOfEvents: currentProject.data.project.events.length
+  }
 }
