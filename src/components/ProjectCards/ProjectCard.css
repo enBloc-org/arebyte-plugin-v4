@@ -8,6 +8,7 @@
   height: 165px;
   border-radius: 0.438rem;
   object-fit: cover;
+  border: 2px solid var(--highlight);
 }
 
 .project-card img:hover {
@@ -17,5 +18,5 @@
 
 .project-card span {
   font-weight: 300;
-  font-size: .65rem;
+  font-size: 0.65rem;
 }
