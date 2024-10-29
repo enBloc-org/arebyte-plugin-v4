@@ -9,25 +9,36 @@ import { sendToBackground } from "@plasmohq/messaging"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import FilterTags from "~components/FilterTags/FilterTags"
 import Footer from "~components/Footer/Footer"
+import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
-import type { AllProjectResponse } from "~types/projectTypes"
+import type { Meta } from "~types/baseTypes"
+import type { ProjectData } from "~types/projectTypes"
 
 export default function ExplorePage() {
-  const [projects, setProjects] =
-    useState<AllProjectResponse["data"]>()
+  const [projects, setProjects] = useState<ProjectData[]>()
+  const [pageNumber, setPageNumber] = useState<number>(1)
+  const [pageCount, setPageCount] = useState<number>(1)
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
     const fetchAllProjects = async () => {
-      const { data, error } = await sendToBackground({
-        name: "fetchAllProjects"
-      })
+      const {
+        data,
+        error,
+        meta
+      }: { data: ProjectData[]; error: string | null; meta: Meta } =
+        await sendToBackground({
+          name: "fetchAllProjects",
+          body: { page: pageNumber }
+        })
 
       if (error) showBoundary(error)
+
+      setPageCount(meta.pagination.pageCount)
       setProjects(data)
     }
     fetchAllProjects()
-  }, [])
+  }, [pageNumber])
 
   return (
     <div className="explore-page page">
@@ -43,6 +54,11 @@ export default function ExplorePage() {
               ))}
             </div>
           )}
+          <PaginationNav
+            pageNumber={pageNumber}
+            pageCount={pageCount}
+            setterFunction={setPageNumber}
+          />
         </div>
       </main>
       <Footer />

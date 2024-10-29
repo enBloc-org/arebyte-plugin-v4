@@ -1,0 +1,7 @@
+.pagination-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 50%;
+  margin-top: 10px;
+}

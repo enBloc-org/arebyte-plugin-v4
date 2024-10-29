@@ -1,14 +1,22 @@
 import qs from "qs"
 
-const allProjectsQuery = {
-  fields: ["id", "title", "launch_date"],
-  populate: {
-    cover_image: {
-      fields: ["*"]
+export default function allProjectsQueryString(pageNumber: number) {
+  const allProjectsQuery = {
+    fields: ["id", "title", "launch_date"],
+    populate: {
+      cover_image: {
+        fields: ["*"]
+      }
+    },
+    pagination: {
+      page: pageNumber,
+      pageSize: 6
     }
   }
-}
 
-export const allProjectQueryString = qs.stringify(allProjectsQuery, {
-  encodeValuesOnly: true
-})
+  const allProjectQueryString = qs.stringify(allProjectsQuery, {
+    encodeValuesOnly: true
+  })
+
+  return allProjectQueryString
+}
