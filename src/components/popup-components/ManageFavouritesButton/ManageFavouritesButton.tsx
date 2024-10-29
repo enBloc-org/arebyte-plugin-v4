@@ -2,8 +2,6 @@ import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import "./ManageFavouritesButton.css"
-
 const ManageFavouritesButton = ({ popupId }) => {
   const [status, setStatus] = useState<
     "idle" | "loading" | "rejected"
@@ -31,7 +29,7 @@ const ManageFavouritesButton = ({ popupId }) => {
   }
 
   return (
-    <div className="fav-button--container">
+    <div className="controls-button--container">
       <button
         className="info--button"
         disabled={status === "loading"}
@@ -40,7 +38,7 @@ const ManageFavouritesButton = ({ popupId }) => {
         {isFavourite ? "REMOVE FROM FAVOURITES" : "ADD TO FAVOURITES"}
       </button>
       {status === "rejected" && (
-        <p className="fav-message__error">
+        <p className="controls-message__error">
           Something went wrong, try again.
         </p>
       )}
