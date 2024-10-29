@@ -1,0 +1,10 @@
+.fav-button--container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fav-message__error {
+  font-weight: 200;
+  font-style: italic;
+}

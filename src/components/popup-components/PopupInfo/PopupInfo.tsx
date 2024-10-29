@@ -3,6 +3,7 @@ import { BlocksRenderer } from "@strapi/blocks-react-renderer"
 import { SlimPopup } from "~types/eventTypes"
 
 import "./PopupInfo.css"
+import ManageFavouritesButton from "../ManageFavouritesButton/ManageFavouritesButton"
 
 interface PopupInfoProps {
   popup: SlimPopup
@@ -54,7 +55,7 @@ const PopupInfo: React.FC<PopupInfoProps> = ({
         </div>
       </div>
       <div className="info-buttons--container">
-        <button className="info--button">ADD TO FAVOURITES</button>
+        <ManageFavouritesButton popupId={popup.popupInfo.id} />
         <button className="info--button">CLOSE ALL POPUPS</button>
       </div>
     </div>
