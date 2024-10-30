@@ -1,6 +1,6 @@
 import { create } from "zustand"
 
-import type { ProjectData, TagsData } from "~types/projectTypes"
+import type { ProjectData } from "~types/projectTypes"
 import type { User } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
@@ -11,7 +11,6 @@ interface State {
   isLoggedIn: boolean
   exploreProjectId: number
   previousPage: State["currentPage"]
-  tags: TagsData[]
   currentPage:
     | "home"
     | "profile"
@@ -30,7 +29,6 @@ interface Actions {
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
   updateIsPaused: (newStatus: boolean) => void
-  setTags: (tags: TagsData[]) => void
 }
 
 const initialState: State = {
@@ -50,8 +48,7 @@ const initialState: State = {
   currentPage: "home",
   previousPage: "home",
   exploreProjectId: undefined,
-  currentProject: undefined,
-  tags: []
+  currentProject: undefined
 }
 
 const baseStore = create<State & Actions>(set => {
@@ -99,8 +96,7 @@ const baseStore = create<State & Actions>(set => {
           ...state.user,
           is_paused: newStatus
         }
-      })),
-    setTags: tags => set(() => ({ tags: tags }))
+      }))
   }
 })
 
