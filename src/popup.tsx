@@ -10,6 +10,7 @@ import { useStorage } from "@plasmohq/storage/hook"
 import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
+import AboutPage from "~components/page-components/AboutPage/AboutPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
@@ -108,6 +109,15 @@ function IndexPopup() {
           unmountOnExit
         >
           <FavouritesPage />
+        </CSSTransition>
+
+        <CSSTransition
+          in={currentPage === "about"}
+          timeout={500}
+          classNames="about-page"
+          unmountOnExit
+        >
+          <AboutPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
