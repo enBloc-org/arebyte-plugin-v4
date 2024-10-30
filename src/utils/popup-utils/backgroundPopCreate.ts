@@ -21,6 +21,11 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
         action: "getScreenDimensions"
       })
     )
+    .catch(error => {
+      console.error(error)
+      return { width: 1920, height: 1080 }
+    })
+
   const { width: screenWidth, height: screenHeight } =
     screenDimensions as { width: number; height: number }
 
