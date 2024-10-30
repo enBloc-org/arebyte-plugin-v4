@@ -17,3 +17,12 @@
   background-color: var(--highlight);
   color: var(--base);
 }
+
+.button--filter__active {
+  background-color: var(--highlight);
+  color: var(--base);
+}
+
+.button--clear {
+  align-self: flex-end;
+}
