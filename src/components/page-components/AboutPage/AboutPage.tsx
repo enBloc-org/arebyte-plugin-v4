@@ -7,6 +7,7 @@ import "./AboutPage.css"
 import { sendToBackground } from "@plasmohq/messaging"
 
 import BackButton from "~components/BackButton/BackButton"
+import Footer from "~components/Footer/Footer"
 import type { AboutPage } from "~types/baseTypes"
 
 export default function AboutPage() {
@@ -60,6 +61,7 @@ export default function AboutPage() {
           <p className="bold">all rights reserved to arebyte 2024</p>
         </div>
       </main>
+      <Footer />
     </div>
   )
 }
