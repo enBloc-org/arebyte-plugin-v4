@@ -48,7 +48,7 @@ export default function ExplorePage() {
         <div className="explore-section">
           <h2 className="text-lg">EXPLORE</h2>
           {projects && (
-            <div className="flex gap margin-top-sm explore-card-container">
+            <div className="gap margin-top-sm explore-page--card-container">
               {projects.map(project => (
                 <ProjectCard key={project.id} project={project} />
               ))}

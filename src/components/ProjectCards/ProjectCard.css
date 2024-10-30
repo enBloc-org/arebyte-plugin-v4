@@ -15,6 +15,11 @@
   scale: 0.97;
   transition: scale 100ms ease;
 }
+.project-card h3 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
 
 .project-card span {
   font-weight: 300;

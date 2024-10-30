@@ -3,6 +3,11 @@
   animation-name: slideDown;
 }
 
+.explore-page--card-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .explore-page-enter {
   z-index: 3;
 }
