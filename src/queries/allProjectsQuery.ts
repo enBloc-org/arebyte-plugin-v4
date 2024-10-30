@@ -1,6 +1,11 @@
 import qs from "qs"
 
-export default function allProjectsQueryString(pageNumber: number) {
+import { TagData } from "~types/projectTypes"
+
+export default function allProjectsQueryString(
+  pageNumber: number,
+  tags?: TagData[]
+) {
   const allProjectsQuery = {
     fields: ["id", "title", "launch_date"],
     populate: {
@@ -11,12 +16,24 @@ export default function allProjectsQueryString(pageNumber: number) {
     pagination: {
       page: pageNumber,
       pageSize: 6
-    }
+    },
+    ...(tags &&
+      tags.length > 0 && {
+        filters: {
+          tags: {
+            $or: tags.map(tag => ({
+              id: {
+                $eq: tag.id
+              }
+            }))
+          }
+        }
+      })
   }
 
-  const allProjectQueryString = qs.stringify(allProjectsQuery, {
+  const queryString = qs.stringify(allProjectsQuery, {
     encodeValuesOnly: true
   })
 
-  return allProjectQueryString
+  return queryString
 }

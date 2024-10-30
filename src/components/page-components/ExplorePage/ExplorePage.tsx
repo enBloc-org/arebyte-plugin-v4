@@ -12,13 +12,14 @@ import Footer from "~components/Footer/Footer"
 import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { Meta } from "~types/baseTypes"
-import type { ProjectData } from "~types/projectTypes"
+import { TagData, type ProjectData } from "~types/projectTypes"
 
 export default function ExplorePage() {
   const [projects, setProjects] = useState<ProjectData[]>()
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageCount, setPageCount] = useState<number>(1)
   const { showBoundary } = useErrorBoundary()
+  const [activeTags, setActiveTags] = useState<TagData[]>([])
 
   useEffect(() => {
     const fetchAllProjects = async () => {
@@ -29,7 +30,7 @@ export default function ExplorePage() {
       }: { data: ProjectData[]; error: string | null; meta: Meta } =
         await sendToBackground({
           name: "fetchAllProjects",
-          body: { page: pageNumber }
+          body: { page: pageNumber, tags: activeTags }
         })
 
       if (error) showBoundary(error)
@@ -38,13 +39,16 @@ export default function ExplorePage() {
       setProjects(data)
     }
     fetchAllProjects()
-  }, [pageNumber])
+  }, [pageNumber, activeTags, setActiveTags])
 
   return (
     <div className="explore-page page">
       <BurgerMenu />
       <main className="grid">
-        <FilterTags />
+        <FilterTags
+          activeTags={activeTags}
+          setActiveTags={setActiveTags}
+        />
         <div className="explore-section">
           <h2 className="text-lg">EXPLORE</h2>
           {projects && (
