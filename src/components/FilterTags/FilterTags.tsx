@@ -4,11 +4,18 @@ import "./FilterTags.css"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import useStore from "~store/store"
+import type { TagsData } from "~types/projectTypes"
 
-const FilterTags = () => {
-  const tags = useStore.use.tags()
-  const setTags = useStore.use.setTags()
+interface FilterTagsProps {
+  activeTags: TagsData[]
+  setActiveTags: (tags: TagsData[]) => void
+}
+
+const FilterTags: React.FC<FilterTagsProps> = ({
+  activeTags,
+  setActiveTags
+}) => {
+  const [tags, setTags] = useState<TagsData[] | null>(null)
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
@@ -25,19 +32,37 @@ const FilterTags = () => {
     fetchTags()
   }, [])
 
+  const clickHander = (toggledTag: TagsData) => {
+    const tagExists = activeTags.some(tag => tag.id === toggledTag.id)
+
+    const updatedTags = tagExists
+      ? activeTags.filter(tag => tag.id !== toggledTag.id)
+      : [...activeTags, toggledTag]
+
+    setActiveTags(updatedTags)
+  }
+
   return (
-    <div className="flex tags-container">
-      {tags &&
-        tags.map(tag => {
-          return (
-            <button key={tag.id} className="button--filter">
-              {tag.name}
-            </button>
-          )
-        })}
-      {hasError && (
-        <p className="message__error">Tags have not loaded...</p>
-      )}
+    <div className="flex flex-column gap">
+      <div className="flex tags-container">
+        {tags &&
+          tags.map(tag => {
+            return (
+              <button
+                key={tag.id}
+                className={`button--filter ${activeTags.some(activeTag => activeTag.id === tag.id) ? "button--filter__active" : ""}`}
+                onClick={() => clickHander(tag)}
+              >
+                {tag.name}
+              </button>
+            )
+          })}
+
+        {hasError && (
+          <p className="message__error">Tags have not loaded...</p>
+        )}
+      </div>
+      <button onClick={() => setActiveTags([])} className="button--clear">Clear Tags </button>
     </div>
   )
 }
