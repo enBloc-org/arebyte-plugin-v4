@@ -4,18 +4,18 @@ import "./FilterTags.css"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
-import type { TagsData } from "~types/projectTypes"
+import type { TagData } from "~types/projectTypes"
 
 interface FilterTagsProps {
-  activeTags: TagsData[]
-  setActiveTags: (tags: TagsData[]) => void
+  activeTags: TagData[]
+  setActiveTags: (tags: TagData[]) => void
 }
 
 const FilterTags: React.FC<FilterTagsProps> = ({
   activeTags,
   setActiveTags
 }) => {
-  const [tags, setTags] = useState<TagsData[] | null>(null)
+  const [tags, setTags] = useState<TagData[] | null>(null)
   const [hasError, setHasError] = useState(false)
 
   useEffect(() => {
@@ -32,10 +32,12 @@ const FilterTags: React.FC<FilterTagsProps> = ({
     fetchTags()
   }, [])
 
-  const clickHander = (toggledTag: TagsData) => {
-    const tagExists = activeTags.some(tag => tag.id === toggledTag.id)
+  const clickHandler = (toggledTag: TagData) => {
+    const isTagActive = activeTags.some(
+      tag => tag.id === toggledTag.id
+    )
 
-    const updatedTags = tagExists
+    const updatedTags = isTagActive
       ? activeTags.filter(tag => tag.id !== toggledTag.id)
       : [...activeTags, toggledTag]
 
@@ -51,7 +53,7 @@ const FilterTags: React.FC<FilterTagsProps> = ({
               <button
                 key={tag.id}
                 className={`button--filter ${activeTags.some(activeTag => activeTag.id === tag.id) ? "button--filter__active" : ""}`}
-                onClick={() => clickHander(tag)}
+                onClick={() => clickHandler(tag)}
               >
                 {tag.name}
               </button>
@@ -62,7 +64,14 @@ const FilterTags: React.FC<FilterTagsProps> = ({
           <p className="message__error">Tags have not loaded...</p>
         )}
       </div>
-      <button onClick={() => setActiveTags([])} className="button--clear">Clear Tags </button>
+      {activeTags.length > 0 && (
+        <button
+          onClick={() => setActiveTags([])}
+          className="button--clear"
+        >
+          Clear Tags{" "}
+        </button>
+      )}
     </div>
   )
 }

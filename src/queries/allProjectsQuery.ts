@@ -1,10 +1,10 @@
 import qs from "qs"
 
-import { TagsData } from "~types/projectTypes"
+import { TagData } from "~types/projectTypes"
 
 export default function allProjectsQueryString(
   pageNumber: number,
-  tags?: TagsData[]
+  tags?: TagData[]
 ) {
   const allProjectsQuery = {
     fields: ["id", "title", "launch_date"],

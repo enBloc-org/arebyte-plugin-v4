@@ -12,14 +12,14 @@ import Footer from "~components/Footer/Footer"
 import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
 import type { Meta } from "~types/baseTypes"
-import { TagsData, type ProjectData } from "~types/projectTypes"
+import { TagData, type ProjectData } from "~types/projectTypes"
 
 export default function ExplorePage() {
   const [projects, setProjects] = useState<ProjectData[]>()
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageCount, setPageCount] = useState<number>(1)
   const { showBoundary } = useErrorBoundary()
-  const [activeTags, setActiveTags] = useState<TagsData[]>([])
+  const [activeTags, setActiveTags] = useState<TagData[]>([])
 
   useEffect(() => {
     const fetchAllProjects = async () => {

@@ -27,7 +27,7 @@ export interface CurrentProjectData {
   project: ProjectData
 }
 
-export interface TagsData {
+export interface TagData {
   id: number
   name: string
 }
