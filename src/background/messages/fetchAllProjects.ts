@@ -5,9 +5,9 @@ import type { ProjectData } from "~types/projectTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
-  const { page } = req.body
+  const { page, tags } = req.body
 
-  const newQueryString = allProjectsQueryString(page)
+  const newQueryString = allProjectsQueryString(page, tags)
 
   const response = await fetchStrapiContent<
     Array<
