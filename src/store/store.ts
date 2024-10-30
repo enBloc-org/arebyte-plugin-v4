@@ -5,7 +5,7 @@ import type { User } from "~types/userTypes"
 
 import createSelectors from "./createSelectors"
 
-export type PlayList = typeof baseStore<State["user"]["playlist"]>
+export type PlayList = typeof baseStore<State["user"]["favourites"]>
 
 interface State {
   user: User
@@ -45,7 +45,7 @@ const initialState: State = {
     project_id: 0,
     current_index: 0,
     event_time: "12:00:00.000",
-    playlist: []
+    favourites: []
   },
   isLoggedIn: false,
   currentPage: "home",
