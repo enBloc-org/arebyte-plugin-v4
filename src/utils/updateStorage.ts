@@ -22,6 +22,7 @@ export default function updateStorage(
   const currentKey = Object.keys(currentValue)[index]
   switch (true) {
     case !newValue[currentKey] &&
+      newValue[currentKey] !== 0 &&
       typeof currentValue[currentKey] !== "object":
       changes = {
         ...changes,

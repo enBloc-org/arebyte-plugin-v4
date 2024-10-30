@@ -5,10 +5,7 @@ import "./Footer.css"
 const Footer = () => {
   const triggerPopups = async () => {
     await sendToBackground({
-      name: "triggerPopup",
-      body: {
-        id: 5
-      }
+      name: "manuallyTriggerEventAlarm"
     })
   }
 

@@ -1,10 +1,10 @@
 import type { UserSession } from "~types/userTypes"
 
-import backgroundPopupCreate from "./popup-utils/backgroundPopCreate"
 import getCurrentProjectPopups from "./getCurrentProjectPopups"
 import getProjectPopups from "./getProjectPopups"
 import iterateIndex from "./iterateIndex"
 import newStorage from "./newStorage"
+import backgroundPopupCreate from "./popup-utils/backgroundPopCreate"
 import updateStorage from "./updateStorage"
 
 export default async function eventAlarmListener(alarm) {
@@ -18,14 +18,13 @@ export default async function eventAlarmListener(alarm) {
     const projectId = userSession.project_id
     const currentIndex = userSession.current_index
 
-    const pop_ups =
+    const { pop_ups, numberOfEvents } =
       projectId === 0
         ? await getCurrentProjectPopups(currentIndex)
         : await getProjectPopups(projectId, currentIndex)
 
     await backgroundPopupCreate(pop_ups)
-    const newIndex = iterateIndex(pop_ups, currentIndex)
-
+    const newIndex = iterateIndex(numberOfEvents, currentIndex)
     const updatedSession = updateStorage(userSession, {
       current_index: newIndex,
       ...(newIndex === 0 && { project_id: 0 })
@@ -36,10 +35,11 @@ export default async function eventAlarmListener(alarm) {
       "arebyte-public-index"
     )
 
-    const pop_ups = await getCurrentProjectPopups(publicIndex)
+    const { pop_ups, numberOfEvents } =
+      await getCurrentProjectPopups(publicIndex)
     await backgroundPopupCreate(pop_ups)
 
-    const newPublicIndex = iterateIndex(pop_ups, publicIndex)
+    const newPublicIndex = iterateIndex(numberOfEvents, publicIndex)
     await storage.set("arebyte-public-index", newPublicIndex)
   }
 }
