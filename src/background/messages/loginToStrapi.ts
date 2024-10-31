@@ -10,6 +10,12 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     undefined,
     req.body
   )
+
+  if (response.error) {
+    console.log(response.error)
+    res.send(response)
+  }
+
   res.send(response)
 }
 
