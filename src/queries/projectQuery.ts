@@ -6,7 +6,7 @@ const projectQuery = {
     cover_image: {
       fields: ["*"]
     },
-    events: {
+    sequence: {
       fields: ["*"]
     },
     content_creator: {
