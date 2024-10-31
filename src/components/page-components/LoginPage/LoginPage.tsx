@@ -15,7 +15,7 @@ import BackButton from "~components/BackButton/BackButton"
 import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput/PasswordInput"
-import { UserSession } from "~types/userTypes"
+import { AuthData, UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
@@ -43,24 +43,26 @@ export default function LoginPage() {
             setErrorMessage("")
             setIsLoading(true)
             const {
-              data: { jwt, user },
-              error: authError
-            } = await sendToBackground({
-              name: "loginToStrapi",
-              body: JSON.stringify(values)
-            })
+              data,
+              error
+            }: { data: AuthData; error: string | null } =
+              await sendToBackground({
+                name: "loginToStrapi",
+                body: JSON.stringify(values)
+              })
 
-            if (authError) {
+            if (error) {
               setIsLoading(false)
-              return setErrorMessage(authError)
+              setErrorMessage(error)
+              return actions.setSubmitting(false)
             }
-            
+
             const userSession: UserSession = {
-              id: user.id,
-              project_id: user.project_id,
-              event_time: user.event_time,
-              current_index: user.current_index,
-              jwt
+              id: data.user.id,
+              project_id: data.user.project_id,
+              event_time: data.user.event_time,
+              current_index: data.user.current_index,
+              jwt: data.jwt
             }
             setUserSession(userSession)
             navigateTo("home")

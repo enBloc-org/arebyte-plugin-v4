@@ -46,6 +46,7 @@ export interface AuthData {
   user: User
   jwt: string
 }
+
 export interface UserSession
   extends Pick<
     User,
