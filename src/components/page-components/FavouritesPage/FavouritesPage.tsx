@@ -42,6 +42,10 @@ export default function FavouritesPage() {
       })
 
     if (error) return showBoundary(error)
+
+    setFavouritesList(previous =>
+      previous.filter(favourite => favourite.id !== givenId)
+    )
   }
 
   useEffect(() => {
@@ -96,7 +100,7 @@ export default function FavouritesPage() {
 
       setFavouritesList(popupData)
     }
-    console.log("use effect")
+
     getFavourites()
   }, [setFavouritesList, pageNumber])
 
