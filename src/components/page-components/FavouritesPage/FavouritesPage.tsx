@@ -30,20 +30,18 @@ export default function FavouritesPage() {
     setIsEditing(previous => !previous)
   }
 
-  const handlePopupRemove = async givenId => {
-    const updatedFavourites = favouritesList.filter(
-      favourite => favourite.id !== givenId
-    )
-
+  const handlePopupRemove = async (givenId: number) => {
     const { error }: { error: string | null } =
       await sendToBackground({
         name: "updateUserDetails",
-        body: { favourites: updatedFavourites }
+        body: {
+          favourites: {
+            disconnect: givenId
+          }
+        }
       })
 
     if (error) return showBoundary(error)
-
-    setFavouritesList(updatedFavourites)
   }
 
   useEffect(() => {
@@ -97,7 +95,7 @@ export default function FavouritesPage() {
     }
 
     getFavourites()
-  }, [setFavouritesList, pageNumber])
+  }, [setFavouritesList, pageNumber, handlePopupRemove])
 
   return (
     <div className="page favourites-page">
