@@ -68,10 +68,12 @@ export default function FavouritesPage() {
         return showBoundary(
           "Something went wrong. Please try again later."
         )
+      if (favouritesData.favourites.length === 0) return
 
       const targetArray: number[] = favouritesData.favourites.map(
         favourite => favourite.id
       )
+
       const {
         data: popupData,
         error: popupError,
@@ -89,13 +91,14 @@ export default function FavouritesPage() {
       })
 
       if (popupError) return showBoundary(popupError)
+      if (meta.pagination.pageCount !== 1)
+        setPageCount(meta.pagination.pageCount)
 
-      setPageCount(meta.pagination.pageCount)
       setFavouritesList(popupData)
     }
-
+    console.log("use effect")
     getFavourites()
-  }, [setFavouritesList, pageNumber, handlePopupRemove])
+  }, [setFavouritesList, pageNumber])
 
   return (
     <div className="page favourites-page">
