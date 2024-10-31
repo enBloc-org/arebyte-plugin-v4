@@ -133,7 +133,12 @@ export default function BurgerMenu() {
             </a>
           </div>
           <div>
-            <button className="button--secondary bold">ABOUT</button>
+            <button
+              className="button--secondary bold"
+              onClick={() => navigateTo("about")}
+            >
+              ABOUT
+            </button>
             <button className="button--secondary bold">
               CONTACT
             </button>

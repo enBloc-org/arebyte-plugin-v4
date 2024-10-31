@@ -1,0 +1,29 @@
+.about-page {
+  animation-name: slideRight;
+  background-color: var(--base);
+  padding-top: 20px;
+}
+
+.about-page--content {
+  grid-column: 1/3;
+}
+
+.about-page--credits {
+  grid-column: 1/3;
+}
+
+.about-page-enter {
+  z-index: 3;
+}
+
+.about-page-enter-active {
+  z-index: 3;
+}
+
+.about-page-exit {
+  z-index: 1;
+}
+
+.about-page-exit-active {
+  z-index: 1;
+}
