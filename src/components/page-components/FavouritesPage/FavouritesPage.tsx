@@ -119,7 +119,7 @@ export default function FavouritesPage() {
           favourites
         </p>
 
-        {favouritesList && (
+        {favouritesList.length > 0 ? (
           <div className="favourites-page--favourites-grid">
             {favouritesList.map(favourite => (
               <div key={favourite.id}>
@@ -133,6 +133,11 @@ export default function FavouritesPage() {
               </div>
             ))}
           </div>
+        ) : (
+          <p className="bold text-lg favourites-page--message__no-favourites">
+            There are no favourites available. You can mark a pop-up
+            as a favourite during your next scheduled event.
+          </p>
         )}
       </main>
       <PaginationNav
