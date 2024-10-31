@@ -44,6 +44,7 @@ const ExploreProjectPage = () => {
               project.cover_image.formats.small.url
             }
             alt={project.cover_image.alternativeText || project.title}
+            className="explore-project-image"
           />
           <div className="grid project-details__container">
             <ProjectDetails project={project} />

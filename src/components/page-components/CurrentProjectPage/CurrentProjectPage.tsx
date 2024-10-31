@@ -23,6 +23,7 @@ const CurrentProjectPage = () => {
             currentProject.cover_image.alternativeText ||
             "Project image thumbnail"
           }
+          className="current-project--image"
         />
         <div className="grid project-details__container">
           <ProjectDetails project={currentProject} />
