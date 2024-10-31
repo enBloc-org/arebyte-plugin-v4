@@ -14,7 +14,7 @@ import { useStorage } from "@plasmohq/storage/hook"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PasswordInput from "~components/Forms/PasswordInput/PasswordInput/PasswordInput"
 import useStore from "~store/store"
-import { User, UserSession } from "~types/userTypes"
+import { AuthData, UserSession } from "~types/userTypes"
 
 const SignUpPage = () => {
   const navigateTo = useStore.use.navigateTo()
@@ -75,10 +75,9 @@ const SignUpPage = () => {
             setIsLoading(true)
             setErrorMessage("")
             const {
-              jwt,
-              user,
+              data,
               error
-            }: { jwt: string; user: User; error: string | null } =
+            }: { data: AuthData; error: string | null } =
               await sendToBackground({
                 name: "createNewUser",
                 body: values
@@ -91,11 +90,11 @@ const SignUpPage = () => {
             }
 
             const userSession: UserSession = {
-              id: user.id,
-              project_id: user.project_id,
-              event_time: user.event_time,
-              current_index: user.current_index,
-              jwt
+              id: data.user.id,
+              project_id: data.user.project_id,
+              event_time: data.user.event_time,
+              current_index: data.user.current_index,
+              jwt: data.jwt
             }
 
             setUserSession(userSession)
