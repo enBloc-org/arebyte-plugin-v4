@@ -61,7 +61,7 @@ export default function HomePage() {
               <p className="container-label">UP NEXT</p>
               <div className="stack home-up-next-description">
                 <h2 className="text-lg">
-                  {currentProject.events[current_index].title}
+                  {currentProject.sequence[current_index].title}
                 </h2>
                 <table>
                   <tbody>
@@ -77,7 +77,7 @@ export default function HomePage() {
                       <td>Day:</td>
                       <td>
                         {current_index + 1} of{" "}
-                        {currentProject.events.length}
+                        {currentProject.sequence.length}
                       </td>
                     </tr>
                   </tbody>

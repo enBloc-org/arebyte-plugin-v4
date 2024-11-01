@@ -30,20 +30,22 @@ export default function FavouritesPage() {
     setIsEditing(previous => !previous)
   }
 
-  const handlePopupRemove = async givenId => {
-    const updatedFavourites = favouritesList.filter(
-      favourite => favourite.id !== givenId
-    )
-
+  const handlePopupRemove = async (givenId: number) => {
     const { error }: { error: string | null } =
       await sendToBackground({
         name: "updateUserDetails",
-        body: { favourites: updatedFavourites }
+        body: {
+          favourites: {
+            disconnect: givenId
+          }
+        }
       })
 
     if (error) return showBoundary(error)
 
-    setFavouritesList(updatedFavourites)
+    setFavouritesList(previous =>
+      previous.filter(favourite => favourite.id !== givenId)
+    )
   }
 
   useEffect(() => {
@@ -70,10 +72,12 @@ export default function FavouritesPage() {
         return showBoundary(
           "Something went wrong. Please try again later."
         )
+      if (favouritesData.favourites.length === 0) return
 
       const targetArray: number[] = favouritesData.favourites.map(
         favourite => favourite.id
       )
+
       const {
         data: popupData,
         error: popupError,
@@ -91,8 +95,9 @@ export default function FavouritesPage() {
       })
 
       if (popupError) return showBoundary(popupError)
+      if (meta.pagination.pageCount !== 1)
+        setPageCount(meta.pagination.pageCount)
 
-      setPageCount(meta.pagination.pageCount)
       setFavouritesList(popupData)
     }
 
@@ -114,7 +119,7 @@ export default function FavouritesPage() {
           favourites
         </p>
 
-        {favouritesList && (
+        {favouritesList.length > 0 ? (
           <div className="favourites-page--favourites-grid">
             {favouritesList.map(favourite => (
               <div key={favourite.id}>
@@ -128,6 +133,11 @@ export default function FavouritesPage() {
               </div>
             ))}
           </div>
+        ) : (
+          <p className="bold text-lg favourites-page--message__no-favourites">
+            There are no favourites available. You can mark a pop-up
+            as a favourite during your next scheduled event.
+          </p>
         )}
       </main>
       <PaginationNav

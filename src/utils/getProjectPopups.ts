@@ -16,7 +16,7 @@ export default async function getProjectPopups(
   const currentProject = await fetchStrapiContent<ProjectData>(
     `api/projects/${projectId}?${projectQueryString}`
   )
-  const currentEventId = currentProject.data.events[currentIndex].id
+  const currentEventId = currentProject.data.sequence[currentIndex].id
   const {
     data: { pop_ups }
   } = await fetchStrapiContent<EventData>(
@@ -25,6 +25,6 @@ export default async function getProjectPopups(
 
   return {
     pop_ups: pop_ups,
-    numberOfEvents: currentProject.data.events.length
+    numberOfEvents: currentProject.data.sequence.length
   }
 }

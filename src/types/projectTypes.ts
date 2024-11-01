@@ -17,7 +17,7 @@ export interface ProjectData {
   description: BlocksContent
   cover_image: ImageResponse
   launch_date: string
-  events: Omit<EventData, "pop_ups">[]
+  sequence: Omit<EventData, "pop_ups">[]
   content_creator: ContentCreator
 }
 

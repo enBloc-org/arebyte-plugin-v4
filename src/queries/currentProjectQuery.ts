@@ -9,14 +9,14 @@ const currentProjectQuery = {
         cover_image: {
           fields: ["*"]
         },
-        events: {
+        sequence: {
           fields: ["*"]
         },
         content_creator: {
           fields: ["curator_name", "curator_organisation", "bio"],
           populate: {
             organisation_logo: {
-              fields: ["*"],
+              fields: ["*"]
             },
             upcoming_events: {
               fields: ["*"]
