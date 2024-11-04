@@ -67,7 +67,7 @@
   "manifest": {
     "homepage_url": "$PLASMO_PUBLIC_SITE_URL",
     "host_permissions": [
-      "https://arebyte-plugin-cms-4dlfr.ondigitalocean.app/*"
+      "$PLASMO_PUBLIC_SITE_URL/*"
     ],
     "permissions": [
       "alarms",
