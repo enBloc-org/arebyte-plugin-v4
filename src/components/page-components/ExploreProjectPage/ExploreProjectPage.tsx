@@ -12,6 +12,7 @@ import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
 import SelectProjectButton from "~components/SelectProjectButton/SelectProjectButton"
 import useStore from "~store/store"
 import type { ProjectData } from "~types/projectTypes"
+import determineImgSrc from "~utils/determineImgSrc"
 
 const ExploreProjectPage = () => {
   const [project, setProject] = useState<ProjectData>()
@@ -39,10 +40,9 @@ const ExploreProjectPage = () => {
         <main className="explore-project page">
           <BackButton className="explore-project__back-button" />
           <img
-            src={
-              process.env.PLASMO_PUBLIC_API_URL +
+            src={determineImgSrc(
               project.cover_image.formats.small.url
-            }
+            )}
             alt={project.cover_image.alternativeText || project.title}
             className="explore-project-image"
           />

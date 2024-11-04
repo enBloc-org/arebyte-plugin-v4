@@ -3,6 +3,7 @@ import type { ProjectData } from "~types/projectTypes"
 import "./ProjectCard.css"
 
 import useStore from "~store/store"
+import determineImgSrc from "~utils/determineImgSrc"
 import formatDate from "~utils/formatDate"
 
 const ProjectCard = ({
@@ -23,10 +24,9 @@ const ProjectCard = ({
   return (
     <button className="project-card" onClick={clickHandler}>
       <img
-        src={
-          process.env.PLASMO_PUBLIC_API_URL +
+        src={determineImgSrc(
           project.cover_image.formats.thumbnail.url
-        }
+        )}
         alt={project.cover_image.alternativeText}
         className="shadow"
       />

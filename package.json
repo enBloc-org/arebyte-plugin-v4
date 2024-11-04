@@ -67,7 +67,7 @@
   "manifest": {
     "homepage_url": "$PLASMO_PUBLIC_SITE_URL",
     "host_permissions": [
-      "https://*/*"
+      "$PLASMO_PUBLIC_SITE_URL/*"
     ],
     "permissions": [
       "alarms",

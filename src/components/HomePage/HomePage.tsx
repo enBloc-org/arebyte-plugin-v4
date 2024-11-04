@@ -13,6 +13,7 @@ import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
 import { CurrentProjectData, ProjectData } from "~types/projectTypes"
 import formatDate from "~utils/formatDate"
+import determineImgSrc from "~utils/determineImgSrc"
 
 export default function HomePage() {
   const { event_time, project_id, current_index } =
@@ -92,10 +93,9 @@ export default function HomePage() {
                 onClick={() => navigateTo("current-project")}
               >
                 <img
-                  src={
-                    process.env.PLASMO_PUBLIC_API_URL +
-                    currentProject.cover_image.formats.thumbnail.url
-                  }
+                  src={determineImgSrc(
+                    currentProject.cover_image.formats.small.url
+                  )}
                   alt={currentProject.cover_image.alternativeText}
                 />
                 <div className="home-project-thumbnail-description stack">
