@@ -8,6 +8,7 @@ import Browser from "webextension-polyfill"
 
 import PopupInfo from "~components/popup-components/PopupInfo/PopupInfo"
 import { SlimPopup } from "~types/eventTypes"
+import determineImgSrc from "~utils/determineImgSrc"
 
 const NewTab = () => {
   const params = new URLSearchParams(window.location.search)
@@ -61,11 +62,7 @@ const NewTab = () => {
                   INFO
                 </button>
                 <img
-                  src={
-                    process.env.NODE_ENV === "development"
-                      ? "http://localhost:1337" + popup.url
-                      : popup.url
-                  }
+                  src={determineImgSrc(popup.url)}
                   alt={popup.alt}
                   onError={e => {
                     e.currentTarget.src = arebyte
@@ -89,11 +86,7 @@ const NewTab = () => {
                 INFO
               </button>
               <video
-                src={
-                  process.env.NODE_ENV === "development"
-                    ? "http://localhost:1337" + popup.url
-                    : popup.url
-                }
+                src={determineImgSrc(popup.url)}
                 muted
                 controls
                 onError={e => {

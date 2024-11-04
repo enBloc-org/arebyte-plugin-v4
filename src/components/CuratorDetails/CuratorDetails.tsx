@@ -6,6 +6,7 @@ import formatDate from "~utils/formatDate"
 import "./CuratorDetails.css"
 
 import type { ContentCreator } from "~types/userTypes"
+import determineImgSrc from "~utils/determineImgSrc"
 
 const CuratorDetails = ({ curator }: { curator: ContentCreator }) => {
   return (
@@ -19,10 +20,9 @@ const CuratorDetails = ({ curator }: { curator: ContentCreator }) => {
           )}
           {curator.organisation_logo && (
             <img
-              src={
-                process.env.PLASMO_PUBLIC_API_URL +
+              src={determineImgSrc(
                 curator.organisation_logo.formats.thumbnail.url
-              }
+              )}
               alt={curator.organisation_logo.alternativeText}
               style={{
                 width:

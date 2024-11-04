@@ -8,6 +8,7 @@ import { useErrorBoundary } from "react-error-boundary"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
+import determineImgSrc from "~utils/determineImgSrc"
 import displayPopup from "~utils/popup-utils/displayPopup"
 
 export default function PopupCard({
@@ -20,11 +21,8 @@ export default function PopupCard({
   removeButtonHandler: () => void
 }) {
   const { showBoundary } = useErrorBoundary()
-  const [sourceString, setSourceString] = useState<string>(
-    process.env.NODE_ENV === "development"
-      ? process.env.PLASMO_PUBLIC_API_URL +
-          popup.thumbnail_image.formats.thumbnail.url
-      : popup.thumbnail_image.formats.thumbnail.url
+  const [sourceString, setSourceString] = useState<string>(() =>
+    determineImgSrc(popup.thumbnail_image.formats.thumbnail.url)
   )
 
   const setToDefault = () => {

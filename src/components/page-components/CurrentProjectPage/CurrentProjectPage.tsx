@@ -6,6 +6,7 @@ import BackButton from "~components/BackButton/BackButton"
 import CuratorDetails from "~components/CuratorDetails/CuratorDetails"
 import Footer from "~components/Footer/Footer"
 import ProjectDetails from "~components/ProjectDetails/ProjectDetails"
+import determineImgSrc from "~utils/determineImgSrc"
 
 const CurrentProjectPage = () => {
   const currentProject = useStore.use.currentProject()
@@ -15,10 +16,7 @@ const CurrentProjectPage = () => {
       <main className="current-project page">
         <BackButton className="current-project__back-button" />
         <img
-          src={
-            process.env.PLASMO_PUBLIC_API_URL +
-            currentProject.cover_image.formats.small.url
-          }
+          src={determineImgSrc(currentProject.cover_image.url)}
           alt={
             currentProject.cover_image.alternativeText ||
             "Project image thumbnail"
