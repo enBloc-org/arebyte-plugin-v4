@@ -67,7 +67,8 @@
   "manifest": {
     "homepage_url": "$PLASMO_PUBLIC_SITE_URL",
     "host_permissions": [
-      "$PLASMO_PUBLIC_SITE_URL/*"
+      "$PLASMO_PUBLIC_SITE_URL/*",
+      "https://arebyte-plugin-space.lon1.digitaloceanspaces.com/*"
     ],
     "permissions": [
       "alarms",

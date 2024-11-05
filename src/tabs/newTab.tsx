@@ -86,7 +86,7 @@ const NewTab = () => {
                 INFO
               </button>
               <video
-                src={determineImgSrc(popup.url)}
+                src={"https://" + determineImgSrc(popup.url)}
                 muted
                 controls
                 onError={e => {
