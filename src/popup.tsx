@@ -26,15 +26,25 @@ function IndexPopup() {
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
   const updateUser = useStore.use.updateUser()
+  const updateCurrentIndex = useStore.use.updateCurrentIndex()
 
   const [userSession] = useStorage<UserSession>({
     key: "arebyte-audience-session",
     instance: newStorage()
   })
+  const [publicIndex] = useStorage<number>({
+    key: "arebyte-public-index",
+    instance: newStorage()
+  })
 
   useEffect(() => {
-    if (userSession) updateUser(userSession)
-  }, [userSession])
+    if (userSession) {
+      updateUser(userSession)
+    } else {
+      console.log(publicIndex)
+      updateCurrentIndex(publicIndex)
+    }
+  }, [userSession, publicIndex])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
