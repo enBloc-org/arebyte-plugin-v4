@@ -30,6 +30,7 @@ interface Actions {
   resetStore: () => void
   updateExploreProjectId: (id: number) => void
   updateIsPaused: (newStatus: boolean) => void
+  updateCurrentIndex: (newIndex: number) => void
 }
 
 const initialState: State = {
@@ -95,6 +96,13 @@ const baseStore = create<State & Actions>(set => {
         user: {
           ...state.user,
           is_paused: newStatus
+        }
+      })),
+    updateCurrentIndex: newIndex =>
+      set(state => ({
+        user: {
+          ...state.user,
+          current_index: newIndex
         }
       }))
   }
