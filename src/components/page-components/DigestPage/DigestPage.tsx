@@ -21,14 +21,14 @@ export default function DigestPage() {
       const {
         data,
         error
-      }: { data: FullProject; error: string | null } =
+      }: { data: FullProject["sequence"]; error: string | null } =
         await sendToBackground({
           name: "fetchProjectDigest"
         })
 
       if (error) showBoundary(error)
 
-      setEvents(data.sequence)
+      setEvents(data)
     }
 
     getEvents()
@@ -40,7 +40,10 @@ export default function DigestPage() {
       <main className="digest-page--main grid">
         {events &&
           events.map(event => (
-            <EventCard key={event.id} event={event} />
+            <>
+              <EventCard key={event.id} event={event} />
+              <p>{event.title}</p>
+            </>
           ))}
       </main>
       <Footer />

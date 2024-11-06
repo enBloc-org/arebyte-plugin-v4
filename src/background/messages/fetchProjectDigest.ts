@@ -1,5 +1,6 @@
 import type { PlasmoMessaging } from "@plasmohq/messaging"
 
+import { eventDigestQueryString } from "~queries/eventDigestQuery"
 import { projectDigestQueryString } from "~queries/projectDigestQuery"
 import { CurrentProjectData, FullProject } from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
@@ -12,7 +13,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     "arebyte-audience-session"
   )
 
-  if (!userSession || userSession.project_id === 0) {
+  if (userSession.project_id === 0) {
     const currentProjectResponse =
       await fetchStrapiContent<CurrentProjectData>(
         `api/current-project`
@@ -30,18 +31,22 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       console.error(response.error)
       res.send(response)
     }
-    console.log(response.data)
     res.send(response)
   }
 
+  const newQuery = eventDigestQueryString(
+    1,
+    2,
+    userSession.project_id
+  )
+
   const response = await fetchStrapiContent<FullProject>(
-    `api/projects/${userSession.project_id}?${projectDigestQueryString}`
+    `api/events?${newQuery}`
   )
   if (response.error) {
     console.error(response.error)
     res.send(response)
   }
-  console.log(response.data)
   res.send(response)
 }
 
