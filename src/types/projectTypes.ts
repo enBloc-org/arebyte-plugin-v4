@@ -1,6 +1,6 @@
 import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
-import type { EventData } from "./eventTypes"
+import type { EventData, Favourite } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 import type { ContentCreator } from "./userTypes"
 
@@ -30,4 +30,11 @@ export interface CurrentProjectData {
 export interface TagData {
   id: number
   name: string
+}
+
+export interface FullProject extends Omit<ProjectData, "sequence"> {
+  sequence: {
+    title: string
+    pop_ups: Favourite[]
+  }
 }
