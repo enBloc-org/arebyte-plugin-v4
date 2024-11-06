@@ -1,4 +1,4 @@
-import { FullProject } from "~types/projectTypes"
+import { DigestedEvent } from "~types/projectTypes"
 import determineImgSrc from "~utils/determineImgSrc"
 
 import "./EventCard.css"
@@ -6,7 +6,7 @@ import "./EventCard.css"
 export default function EventCard({
   event
 }: {
-  event: FullProject["sequence"]
+  event: DigestedEvent
 }) {
   return (
     <div className="stack">
