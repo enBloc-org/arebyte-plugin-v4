@@ -58,14 +58,16 @@ export default function ExplorePage() {
               ))}
             </div>
           )}
-          <PaginationNav
-            pageNumber={pageNumber}
-            pageCount={pageCount}
-            setterFunction={setPageNumber}
-          />
         </div>
       </main>
-      <Footer />
+      <div>
+        <PaginationNav
+          pageNumber={pageNumber}
+          pageCount={pageCount}
+          setterFunction={setPageNumber}
+        />
+        <Footer />
+      </div>
     </div>
   )
 }
