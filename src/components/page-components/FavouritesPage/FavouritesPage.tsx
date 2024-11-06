@@ -105,7 +105,7 @@ export default function FavouritesPage() {
   }, [setFavouritesList, pageNumber])
 
   return (
-    <div className="page favourites-page">
+    <div className="favourites-page page">
       <BurgerMenu />
       <main className="grid">
         <div className="favourites-page--toggle-pair">
@@ -140,12 +140,14 @@ export default function FavouritesPage() {
           </p>
         )}
       </main>
-      <PaginationNav
-        pageNumber={pageNumber}
-        pageCount={pageCount}
-        setterFunction={setPageNumber}
-      />
-      <Footer />
+     <div>
+       <PaginationNav
+         pageNumber={pageNumber}
+         pageCount={pageCount}
+         setterFunction={setPageNumber}
+       />
+       <Footer />
+     </div>
     </div>
   )
 }
