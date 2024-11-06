@@ -4,7 +4,7 @@
 }
 
 .explore-main {
-    padding: .625rem;
+    padding: 1.25rem;
 }
 
 .explore-page--card-container {
@@ -29,7 +29,6 @@
 }
 
 .explore-section {
-  grid-row: 2/4;
   margin-top: 1.25rem;
 }
 
