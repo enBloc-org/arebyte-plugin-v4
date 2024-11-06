@@ -33,8 +33,11 @@ export interface TagData {
 }
 
 export interface FullProject extends Omit<ProjectData, "sequence"> {
-  sequence: {
-    title: string
-    pop_ups: Favourite[]
-  }
+  sequence: DigestedEvent[]
+}
+
+export interface DigestedEvent {
+  id: number
+  title: string
+  pop_ups: Favourite[]
 }
