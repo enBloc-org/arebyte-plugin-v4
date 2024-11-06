@@ -21,6 +21,7 @@ interface State {
     | "explore-project"
     | "favourites"
     | "about"
+    | "digest"
 }
 
 interface Actions {
