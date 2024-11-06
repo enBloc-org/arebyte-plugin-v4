@@ -1,15 +1,27 @@
-import { DigestedEvent } from "~types/projectTypes"
+import { DigestedEvent } from "~types/eventTypes"
 import determineImgSrc from "~utils/determineImgSrc"
 
 import "./EventCard.css"
+
+import { sendToBackground } from "@plasmohq/messaging"
 
 export default function EventCard({
   event
 }: {
   event: DigestedEvent
 }) {
+  const handleEventCardClick = async () => {
+    await sendToBackground({
+      name: "triggerPopup",
+      body: { id: event.id }
+    })
+  }
+
   return (
-    <div className="event-card stack">
+    <button
+      className="event-card stack"
+      onClick={handleEventCardClick}
+    >
       <img
         className="event-card--image shadow"
         src={determineImgSrc(
@@ -17,6 +29,6 @@ export default function EventCard({
         )}
       />
       <p className="bold text-md">{event.title}</p>
-    </div>
+    </button>
   )
 }
