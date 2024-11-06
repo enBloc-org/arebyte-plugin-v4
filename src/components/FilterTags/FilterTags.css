@@ -1,6 +1,7 @@
 .tags-container {
   flex-wrap: wrap;
   align-items: center;
+  position: relative;
   gap: 0.625rem;
   grid-row: 1/2;
   width: 340px;
@@ -25,4 +26,6 @@
 
 .button--clear {
   align-self: flex-end;
+  position: absolute;
+  top: 180px;
 }
