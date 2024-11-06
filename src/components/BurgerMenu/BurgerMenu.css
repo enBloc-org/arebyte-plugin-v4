@@ -1,4 +1,4 @@
-*:has(.burger--logo__active) {
+.page:has(.burger--logo__active) {
   overflow: hidden;
 }
 
@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px;
+  width: 380px;
 }
 
 .burger--heading img {
