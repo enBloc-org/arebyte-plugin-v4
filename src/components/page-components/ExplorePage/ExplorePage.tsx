@@ -44,7 +44,7 @@ export default function ExplorePage() {
   return (
     <div className="explore-page page">
       <BurgerMenu />
-      <main className="grid">
+      <main className="explore-main">
         <FilterTags
           activeTags={activeTags}
           setActiveTags={setActiveTags}

@@ -3,6 +3,10 @@
   animation-name: slideDown;
 }
 
+.explore-main {
+    padding: .625rem;
+}
+
 .explore-page--card-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -25,7 +29,8 @@
 }
 
 .explore-section {
-  grid-row: 3/4;
+  grid-row: 2/4;
+  margin-top: 1.25rem;
 }
 
 .explore-card-container {
