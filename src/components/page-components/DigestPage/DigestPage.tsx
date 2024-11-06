@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useErrorBoundary } from "react-error-boundary"
 
+import "./DigestPage.css"
+
 import { sendToBackground } from "@plasmohq/messaging"
 
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
@@ -35,7 +37,7 @@ export default function DigestPage() {
   return (
     <div className="digest-page page">
       <BurgerMenu />
-      <main className="grid">
+      <main className="digest-page--main grid">
         {events &&
           events.map(event => (
             <EventCard key={event.id} event={event} />

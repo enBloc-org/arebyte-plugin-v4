@@ -9,7 +9,7 @@ export default function EventCard({
   event: DigestedEvent
 }) {
   return (
-    <div className="stack">
+    <div className="event-card stack">
       <img
         className="event-card--image shadow"
         src={determineImgSrc(
