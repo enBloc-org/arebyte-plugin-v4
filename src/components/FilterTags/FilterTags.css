@@ -27,5 +27,5 @@
 .button--clear {
   align-self: flex-end;
   position: absolute;
-  top: 180px;
+  bottom: -25px;
 }
