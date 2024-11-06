@@ -23,7 +23,7 @@ export default function DigestPage() {
         error
       }: { data: FullProject; error: string | null } =
         await sendToBackground({
-          name: "fetchListForDigest"
+          name: "fetchProjectDigest"
         })
 
       if (error) showBoundary(error)
