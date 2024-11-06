@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
+import { sendToBackground } from "@plasmohq/messaging"
 import { useStorage } from "@plasmohq/storage/hook"
 
 import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
@@ -20,7 +21,7 @@ import LoginPage from "~components/page-components/LoginPage/LoginPage"
 import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
-import { UserSession } from "~types/userTypes"
+import type { User, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
 
 function IndexPopup() {
@@ -39,12 +40,18 @@ function IndexPopup() {
   })
 
   useEffect(() => {
-    if (userSession) {
-      updateUser(userSession)
-    } else {
-      console.log(publicIndex)
-      updateCurrentIndex(publicIndex)
+    const fetchUserProfile = async () => {
+      if (userSession) {
+        const { data, error }: { data: User; error: string | null } =
+          await sendToBackground({
+            name: "fetchUserProfile",
+            body: { jwt: userSession.jwt, id: userSession.id }
+          })
+        if (error) console.error(error)
+        updateUser(data)
+      }
     }
+    fetchUserProfile()
   }, [userSession, publicIndex])
 
   return (
