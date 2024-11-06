@@ -1,6 +1,6 @@
 import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
-import type { EventData, Favourite } from "./eventTypes"
+import type { DigestedEvent, EventData, Favourite } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 import type { ContentCreator } from "./userTypes"
 
@@ -36,8 +36,3 @@ export interface FullProject extends Omit<ProjectData, "sequence"> {
   sequence: DigestedEvent[]
 }
 
-export interface DigestedEvent {
-  id: number
-  title: string
-  pop_ups: Favourite[]
-}

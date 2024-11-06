@@ -71,3 +71,9 @@ export interface SlimPopup {
   description: BlocksContent
   text_content?: BlocksContent
 }
+
+export interface DigestedEvent {
+  id: number
+  title: string
+  pop_ups: Favourite[]
+}
