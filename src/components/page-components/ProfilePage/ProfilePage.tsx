@@ -1,13 +1,11 @@
 import { Form, Formik } from "formik"
-import { useErrorBoundary } from "react-error-boundary"
 import * as Yup from "yup"
 
 import useStore from "~store/store"
 import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
-
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
 
@@ -15,7 +13,7 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
-import type { User, UserSession } from "~types/userTypes"
+import type { User } from "~types/userTypes"
 import formatTimeString from "~utils/formatTimeString"
 
 export default function ProfilePage() {
@@ -25,32 +23,10 @@ export default function ProfilePage() {
   const userInfo = useStore.use.user()
   const { is_paused: isPaused } = useStore.use.user()
   const updatedIsPaused = useStore.use.updateIsPaused()
-  const updateUser = useStore.use.updateUser()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [pausedStateError, setPausedStateError] = useState<string>("")
-  const { showBoundary } = useErrorBoundary()
-
-  useEffect(() => {
-    const getUserDetails = async () => {
-      const userSession: UserSession = await storage.get(
-        "arebyte-audience-session"
-      )
-      const { data, error }: { data: User; error: string | null } =
-        await sendToBackground({
-          name: "fetchUserProfile",
-          body: { jwt: userSession.jwt, id: userSession.id }
-        })
-
-      if (error) showBoundary(error)
-      updateUser(data)
-    }
-
-    if (userInfo.username === undefined) {
-      getUserDetails()
-    }
-  }, [])
 
   const handlePausedSwitchClick = async () => {
     const { data, error }: { data: User; error: string | null } =
