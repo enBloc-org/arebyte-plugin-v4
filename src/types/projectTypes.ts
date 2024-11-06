@@ -1,6 +1,6 @@
 import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
-import type { DigestedEvent, EventData, Favourite } from "./eventTypes"
+import type { DigestedEvent, EventData } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 import type { ContentCreator } from "./userTypes"
 
