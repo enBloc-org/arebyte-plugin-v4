@@ -27,9 +27,14 @@ function IndexPopup() {
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
   const updateUser = useStore.use.updateUser()
+  const updateCurrentIndex = useStore.use.updateCurrentIndex()
 
   const [userSession] = useStorage<UserSession>({
     key: "arebyte-audience-session",
+    instance: newStorage()
+  })
+  const [publicIndex] = useStorage<number>({
+    key: "arebyte-public-index",
     instance: newStorage()
   })
 
@@ -41,13 +46,12 @@ function IndexPopup() {
             name: "fetchUserProfile",
             body: { jwt: userSession.jwt, id: userSession.id }
           })
-        console.log(data)
         if (error) console.error(error)
         updateUser(data)
       }
     }
     fetchUserProfile()
-  }, [userSession])
+  }, [userSession, publicIndex])
 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
