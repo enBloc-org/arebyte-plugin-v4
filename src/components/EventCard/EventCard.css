@@ -1,0 +1,7 @@
+.event-card--image {
+  height: 113px;
+  width: 345px;
+  object-fit: cover;
+  border: 2px solid var(--highlight);
+  border-radius: 7px;
+}
