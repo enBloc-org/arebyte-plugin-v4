@@ -234,6 +234,10 @@ button:disabled {
   font-weight: bold;
 }
 
-.uppercase{
+.uppercase {
   text-transform: uppercase;
+}
+
+.relative {
+  position: relative;
 }
