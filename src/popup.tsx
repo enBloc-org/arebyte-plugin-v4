@@ -1,7 +1,7 @@
 import "./components/normalize.css"
 import "~components/globals.css"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
@@ -22,12 +22,13 @@ import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
 import type { User, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
+import LoadingSpinner from "~components/LoadingSpinner/LoadingSpinner"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
   const updateUser = useStore.use.updateUser()
-  const updateCurrentIndex = useStore.use.updateCurrentIndex()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const [userSession] = useStorage<UserSession>({
     key: "arebyte-audience-session",
@@ -40,6 +41,7 @@ function IndexPopup() {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
+      setIsLoading(true)
       if (userSession) {
         const { data, error }: { data: User; error: string | null } =
           await sendToBackground({
@@ -49,10 +51,12 @@ function IndexPopup() {
         if (error) console.error(error)
         updateUser(data)
       }
+      setIsLoading(false)
     }
     fetchUserProfile()
   }, [userSession, publicIndex])
 
+  if (isLoading) return <LoadingSpinner />
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
