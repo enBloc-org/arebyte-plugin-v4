@@ -36,7 +36,7 @@ export function eventDigestQueryString(
       }
     }
   }
-  console.log(projectId)
+
   const queryString = qs.stringify(eventDigestQuery, {
     encodedValuesOnly: true
   })

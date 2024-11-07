@@ -12,28 +12,32 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const userSession: UserSession = await storage.get(
     "arebyte-audience-session"
   )
+  const digestDayCount: number = await storage.get(
+    "arebyte-digest-count"
+  )
 
-  if (userSession.project_id === 0) {
-    const currentProjectResponse =
-      await fetchStrapiContent<CurrentProjectData>(
-        `api/current-project`
-      )
+  // if (userSession.project_id === 0) {
+  //   const currentProjectResponse =
+  //     await fetchStrapiContent<CurrentProjectData>(
+  //       `api/current-project`
+  //     )
 
-    if (currentProjectResponse.error) {
-      console.error(currentProjectResponse.error)
-      res.send(currentProjectResponse)
-    }
+  //   if (currentProjectResponse.error) {
+  //     console.error(currentProjectResponse.error)
+  //     res.send(currentProjectResponse)
+  //   }
 
-    const response = await fetchStrapiContent<FullProject>(
-      `api/projects/${currentProjectResponse.data.id}?${projectDigestQueryString}`
-    )
-    if (response.error) {
-      console.error(response.error)
-      res.send(response)
-    }
-    res.send(response)
-  }
+  //   const response = await fetchStrapiContent<FullProject>(
+  //     `api/projects/${currentProjectResponse.data.id}?${projectDigestQueryString}`
+  //   )
+  //   if (response.error) {
+  //     console.error(response.error)
+  //     res.send(response)
+  //   }
+  //   res.send(response)
+  // }
 
+  console.log(digestDayCount)
   const newQuery = eventDigestQueryString(
     1,
     2,
@@ -47,7 +51,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     console.error(response.error)
     res.send(response)
   }
-  console.log(response)
+  
   res.send(response)
 }
 
