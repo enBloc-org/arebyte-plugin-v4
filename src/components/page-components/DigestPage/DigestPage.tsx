@@ -38,13 +38,12 @@ export default function DigestPage() {
     <div className="digest-page page">
       <BurgerMenu />
       <main className="digest-page--main grid">
-        {events &&
-          events.map(event => (
-            <>
+        <div className="flex flex-column">
+          {events &&
+            events.map(event => (
               <EventCard key={event.id} event={event} />
-              <p>{event.title}</p>
-            </>
-          ))}
+            ))}
+        </div>
       </main>
       <Footer />
     </div>
