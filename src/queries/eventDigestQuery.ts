@@ -28,13 +28,15 @@ export function eventDigestQueryString(
       page: pageNumber,
       pageSize: pageSize
     },
-    filter: {
+    filters: {
       in_project: {
-        $eq: projectId
+        id: {
+          $eq: projectId
+        }
       }
     }
   }
-
+  console.log(projectId)
   const queryString = qs.stringify(eventDigestQuery, {
     encodedValuesOnly: true
   })
