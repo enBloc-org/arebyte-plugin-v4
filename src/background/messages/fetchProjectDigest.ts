@@ -37,10 +37,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   //   res.send(response)
   // }
 
-  console.log(digestDayCount)
   const newQuery = eventDigestQueryString(
-    1,
-    2,
+    Math.floor(digestDayCount / 7),
     userSession.project_id
   )
 
@@ -51,7 +49,7 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     console.error(response.error)
     res.send(response)
   }
-  
+
   res.send(response)
 }
 

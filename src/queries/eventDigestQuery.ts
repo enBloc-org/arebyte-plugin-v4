@@ -2,7 +2,6 @@ import qs from "qs"
 
 export function eventDigestQueryString(
   pageNumber: number,
-  pageSize: number,
   projectId: number
 ) {
   const eventDigestQuery = {
@@ -26,7 +25,7 @@ export function eventDigestQueryString(
     },
     pagination: {
       page: pageNumber,
-      pageSize: pageSize
+      pageSize: 7
     },
     filters: {
       in_project: {
