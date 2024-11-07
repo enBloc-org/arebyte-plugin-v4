@@ -38,4 +38,10 @@ describe("generatePagination", () => {
     expect(number2).toBe(2)
     expect(size2).toBe(7)
   })
+
+  describe("returns a page size of '1' if the given number is 0", () => {
+    const { pageSize } = generatePagination(0)
+
+    expect(pageSize).toBe(1)
+  })
 })
