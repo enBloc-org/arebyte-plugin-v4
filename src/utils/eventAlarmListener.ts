@@ -13,6 +13,9 @@ export default async function eventAlarmListener(alarm) {
   const userSession: UserSession = await storage.get(
     "arebyte-audience-session"
   )
+  const digestCount: number = await storage.get(
+    "arebyte-digest-count"
+  )
 
   if (userSession) {
     const projectId = userSession.project_id
@@ -30,6 +33,10 @@ export default async function eventAlarmListener(alarm) {
       ...(newIndex === 0 && { project_id: 0 })
     })
     await storage.set("arebyte-audience-session", updatedSession)
+    await storage.set(
+      "arebyte-digest-count",
+      newIndex === 0 ? 0 : digestCount + 1
+    )
   } else {
     const publicIndex: number = await storage.get(
       "arebyte-public-index"
@@ -41,5 +48,9 @@ export default async function eventAlarmListener(alarm) {
 
     const newPublicIndex = iterateIndex(numberOfEvents, publicIndex)
     await storage.set("arebyte-public-index", newPublicIndex)
+    await storage.set(
+      "arebyte-digest-count",
+      newPublicIndex === 0 ? 0 : digestCount + 1
+    )
   }
 }
