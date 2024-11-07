@@ -5,6 +5,7 @@ import { FullProject } from "~types/projectTypes"
 import { UserSession } from "~types/userTypes"
 import determineActiveProjectId from "~utils/determineActiveProjectId"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
+import generatePagination from "~utils/generatePagination"
 import newStorage from "~utils/newStorage"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
@@ -20,8 +21,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     userSession.project_id
   )
 
+  const { pageNumber, pageSize } = generatePagination(digestDayCount)
   const newQuery = eventDigestQueryString(
-    Math.floor(digestDayCount / 7),
+    pageNumber,
+    pageSize,
     activeProjectId
   )
 
