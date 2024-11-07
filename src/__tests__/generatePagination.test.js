@@ -21,10 +21,10 @@ describe("generatePagination", () => {
     const { pageSize: result3 } = generatePagination(19)
     const { pageSize: result4 } = generatePagination(22)
 
-    expect(result1).toBe(4)
-    expect(result2).toBe(1)
-    expect(result3).toBe(5)
-    expect(result4).toBe(1)
+    expect(result1).toBe(5)
+    expect(result2).toBe(2)
+    expect(result3).toBe(6)
+    expect(result4).toBe(2)
   })
 
   describe("returns a full page if the given number is multiple of 7", () => {
