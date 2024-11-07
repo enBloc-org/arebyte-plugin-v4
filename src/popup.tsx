@@ -22,7 +22,6 @@ import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
 import type { User, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
-import LoadingSpinner from "~components/LoadingSpinner/LoadingSpinner"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
@@ -54,9 +53,9 @@ function IndexPopup() {
       setIsLoading(false)
     }
     fetchUserProfile()
-  }, [userSession, publicIndex])
+  }, [userSession])
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return 
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
