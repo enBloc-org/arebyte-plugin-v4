@@ -17,13 +17,12 @@ export default async function getCurrentProjectPopups(
   )
   const currentEventId =
     currentProject.data.project.sequence[currentIndex].id
-  const {
-    data: { pop_ups }
-  } = await fetchStrapiContent<EventData>(
+  const { data } = await fetchStrapiContent<EventData>(
     `api/events/${currentEventId}?${eventPopupQueryString}`
   )
   return {
-    pop_ups: pop_ups,
-    numberOfEvents: currentProject.data.project.sequence.length
+    pop_ups: data.pop_ups,
+    numberOfEvents: currentProject.data.project.sequence.length,
+    timeDelay: data.time_delay
   }
 }
