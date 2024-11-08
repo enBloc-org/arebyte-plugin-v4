@@ -25,37 +25,45 @@ import newStorage from "~utils/newStorage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
+  const logInUser = useStore.use.logInUser()
   const isLoggedIn = useStore.use.isLoggedIn()
   const updateUser = useStore.use.updateUser()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const storage = newStorage()
 
   const [userSession] = useStorage<UserSession>({
     key: "arebyte-audience-session",
-    instance: newStorage()
-  })
-  const [publicIndex] = useStorage<number>({
-    key: "arebyte-public-index",
     instance: newStorage()
   })
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       setIsLoading(true)
-      if (userSession) {
-        const { data, error }: { data: User; error: string | null } =
-          await sendToBackground({
-            name: "fetchUserProfile",
-            body: { jwt: userSession.jwt, id: userSession.id }
-          })
-        if (error) console.error(error)
-        updateUser(data)
+      if (!userSession) {
+        const publicIndex: number = await storage.get(
+          "arebyte-public-index"
+        )
+        updateUser({
+          current_index: publicIndex,
+          project_id: 0
+        })
+        return setIsLoading(false)
       }
+
+      const { data, error }: { data: User; error: string | null } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: userSession.jwt, id: userSession.id }
+        })
+      if (error) console.error(error)
+      updateUser(data)
+      logInUser()
       setIsLoading(false)
     }
     fetchUserProfile()
   }, [userSession])
 
-  if (isLoading) return 
+  if (isLoading) return
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>
