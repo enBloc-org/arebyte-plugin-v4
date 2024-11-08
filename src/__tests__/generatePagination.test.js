@@ -27,16 +27,16 @@ describe("generatePagination", () => {
     expect(result4).toBe(2)
   })
 
-  describe("returns a full page if the given number is multiple of 7", () => {
+  describe("returns a new page if the given number is multiple of 7", () => {
     const { pageNumber: number1, pageSize: size1 } =
       generatePagination(7)
     const { pageNumber: number2, pageSize: size2 } =
       generatePagination(14)
 
-    expect(number1).toBe(1)
-    expect(size1).toBe(7)
-    expect(number2).toBe(2)
-    expect(size2).toBe(7)
+    expect(number1).toBe(2)
+    expect(size1).toBe(1)
+    expect(number2).toBe(3)
+    expect(size2).toBe(1)
   })
 
   describe("returns a page size of '1' if the given number is 0", () => {

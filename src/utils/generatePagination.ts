@@ -4,8 +4,8 @@ export default function generatePagination(givenNumber: number) {
   const quotient = Math.floor(givenNumber / 7)
   const remainder = givenNumber - quotient * 7 + 1
 
-  const pageNumber = givenNumber % 7 === 0 ? quotient : quotient + 1
-  const pageSize = givenNumber % 7 === 0 ? 7 : remainder
+  const pageNumber = quotient + 1
+  const pageSize = remainder
 
   return { pageNumber, pageSize }
 }
