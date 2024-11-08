@@ -19,7 +19,8 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
       userSession.jwt,
       JSON.stringify({
         project_id: selectedProjectId,
-        current_index: 0
+        current_index: 0,
+        digest_counter: 0
       })
     )
   if (error) {

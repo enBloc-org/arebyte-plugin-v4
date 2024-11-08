@@ -12,9 +12,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const userSession: UserSession = await storage.get(
     "arebyte-audience-session"
   )
-  const digestDayCount: number = await storage.get(
-    "arebyte-digest-count"
-  )
 
   const {
     data: userData,
@@ -28,7 +25,9 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     console.error(error)
   }
 
-  const { pageNumber, pageSize } = generatePagination(digestDayCount)
+  const { pageNumber, pageSize } = generatePagination(
+    userData.digest_counter
+  )
   const newQuery = eventDigestQueryString(
     pageNumber,
     pageSize,
