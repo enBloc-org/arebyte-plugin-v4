@@ -7,6 +7,7 @@ export interface EventData {
   title: string
   createdAt: string
   updatedAt: string
+  time_delay: number
   pop_ups: Popup[]
 }
 
