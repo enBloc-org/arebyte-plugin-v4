@@ -59,9 +59,6 @@ export default function LoginPage() {
 
             const userSession: UserSession = {
               id: data.user.id,
-              project_id: data.user.project_id,
-              event_time: data.user.event_time,
-              current_index: data.user.current_index,
               jwt: data.jwt
             }
             setUserSession(userSession)
