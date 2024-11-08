@@ -18,12 +18,12 @@ export default async function eventAlarmListener(alarm) {
     const projectId = userSession.project_id
     const currentIndex = userSession.current_index
 
-    const { pop_ups, numberOfEvents, timeDelay } =
+    const { popUps, numberOfEvents, timeDelay } =
       projectId === 0
         ? await getCurrentProjectPopups(currentIndex)
         : await getProjectPopups(projectId, currentIndex)
 
-    await backgroundPopupCreate(pop_ups, timeDelay)
+    await backgroundPopupCreate(popUps, timeDelay)
     const newIndex = iterateIndex(numberOfEvents, currentIndex)
     const updatedSession = updateStorage(userSession, {
       current_index: newIndex,
@@ -35,9 +35,9 @@ export default async function eventAlarmListener(alarm) {
       "arebyte-public-index"
     )
 
-    const { pop_ups, numberOfEvents, timeDelay } =
+    const { popUps, numberOfEvents, timeDelay } =
       await getCurrentProjectPopups(publicIndex)
-    await backgroundPopupCreate(pop_ups, timeDelay)
+    await backgroundPopupCreate(popUps, timeDelay)
 
     const newPublicIndex = iterateIndex(numberOfEvents, publicIndex)
     await storage.set("arebyte-public-index", newPublicIndex)
