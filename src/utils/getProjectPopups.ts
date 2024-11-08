@@ -8,6 +8,8 @@ import { fetchStrapiContent } from "./fetchStrapiContent"
 /**
  *
  * @description fetches an array of popups from the project with the given Id
+ * @returns an object with the full array of popups, the total number of events in the project and the time_delay set for the event
+ * @example const { popUps, numberOfEvents, timeDelay } = getProjectPopups(projectId, currentIndex)
  */
 export default async function getProjectPopups(
   projectId: number,
@@ -22,7 +24,7 @@ export default async function getProjectPopups(
   )
 
   return {
-    pop_ups: data.pop_ups,
+    popUps: data.pop_ups,
     numberOfEvents: currentProject.data.sequence.length,
     timeDelay: data.time_delay
   }
