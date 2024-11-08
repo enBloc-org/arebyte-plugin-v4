@@ -6,7 +6,6 @@ import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
 import { sendToBackground } from "@plasmohq/messaging"
-import { useStorage } from "@plasmohq/storage/hook"
 
 import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
