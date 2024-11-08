@@ -14,16 +14,17 @@ export default async function eventAlarmListener(alarm) {
   const userSession: UserSession = await storage.get(
     "arebyte-audience-session"
   )
-  const digestCount: number = await storage.get(
-    "arebyte-digest-count"
-  )
 
   if (userSession) {
-    const { data: user, error } = await fetchStrapiContent<User>(
-      `api/users/${userSession.id}?${userQueryString}`,
-      "GET",
-      userSession.jwt
-    )
+    const {
+      data: user,
+      error
+    }: { data: User; error: string | null } =
+      await fetchStrapiContent<User>(
+        `api/users/${userSession.id}?${userQueryString}`,
+        "GET",
+        userSession.jwt
+      )
     if (error) console.error(error)
 
     const { pop_ups, numberOfEvents } =
@@ -40,7 +41,8 @@ export default async function eventAlarmListener(alarm) {
       userSession.jwt,
       JSON.stringify({
         current_index: newIndex,
-        ...(newIndex === 0 && { project_id: 0 })
+        ...(newIndex === 0 && { project_id: 0 }),
+        digest_counter: newIndex === 0 ? 0 : user.digest_counter + 1
       })
     )
     if (response.error) console.error(response.error)
@@ -55,9 +57,5 @@ export default async function eventAlarmListener(alarm) {
 
     const newPublicIndex = iterateIndex(numberOfEvents, publicIndex)
     await storage.set("arebyte-public-index", newPublicIndex)
-    await storage.set(
-      "arebyte-digest-count",
-      newPublicIndex === 0 ? 0 : digestCount + 1
-    )
   }
 }
