@@ -77,7 +77,6 @@ const baseStore = create<State & Actions>(set => {
           ...state.user,
           ...newUser
         }
-        // isLoggedIn: true
       }))
     },
     resetStore: () =>
