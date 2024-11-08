@@ -8,6 +8,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import EventCard from "~components/EventCard/EventCard"
 import Footer from "~components/Footer/Footer"
+import useStore from "~store/store"
 import type { FullProject } from "~types/projectTypes"
 
 export default function DigestPage() {
@@ -15,6 +16,8 @@ export default function DigestPage() {
     FullProject["sequence"] | null
   >(null)
   const { showBoundary } = useErrorBoundary()
+  const { digest_counter } = useStore.use.user()
+  const currentProject = useStore.use.currentProject()
 
   useEffect(() => {
     const getEvents = async () => {
@@ -23,7 +26,11 @@ export default function DigestPage() {
         error
       }: { data: FullProject["sequence"]; error: string | null } =
         await sendToBackground({
-          name: "fetchProjectDigest"
+          name: "fetchProjectDigest",
+          body: {
+            digestCounter: digest_counter,
+            projectId: currentProject.id
+          }
         })
 
       if (error) showBoundary(error)
