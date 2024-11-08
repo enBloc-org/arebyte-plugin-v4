@@ -41,7 +41,7 @@ const initialState: State = {
     birth_date: undefined,
     location: undefined,
     is_paused: false,
-    project_id: undefined,
+    project_id: 0,
     current_index: 0,
     event_time: "12:00:00.000"
   },
