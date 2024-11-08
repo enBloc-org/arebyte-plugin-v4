@@ -12,7 +12,10 @@ import determineFormat from "./determineFormat"
 import parseImageSize from "./parseImageSize"
 import parseWindowSize from "./parseWindowSize"
 
-const backgroundPopupCreate = async (popups: Popup[]) => {
+const backgroundPopupCreate = async (
+  popups: Popup[],
+  timeDelay: number
+) => {
   // Get system widow size
   const screenDimensions = await Browser.tabs
     .query({ active: true, currentWindow: true })
@@ -156,7 +159,7 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
           popup.left
         )
         resolve(window)
-      }, 1000)
+      }, timeDelay * 100)
     })
   }
 }
