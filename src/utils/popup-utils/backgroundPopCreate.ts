@@ -145,15 +145,20 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
   await Browser.storage.session.set({ arebytePopups: slimPopups })
 
   // Create windows
-  slimPopups.forEach(async popup => {
-    await createWindow(
-      popup.index,
-      popup.width,
-      popup.height,
-      popup.top,
-      popup.left
-    )
-  })
+  for (const popup of slimPopups) {
+    await new Promise(resolve => {
+      setTimeout(async () => {
+        const window = await createWindow(
+          popup.index,
+          popup.width,
+          popup.height,
+          popup.top,
+          popup.left
+        )
+        resolve(window)
+      }, 1000)
+    })
+  }
 }
 
 export default backgroundPopupCreate
