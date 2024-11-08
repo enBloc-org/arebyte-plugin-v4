@@ -47,11 +47,7 @@ export interface AuthData {
   jwt: string
 }
 
-export interface UserSession
-  extends Pick<
-    User,
-    "event_time" | "project_id" | "current_index" | "id"
-  > {
+export interface UserSession extends Pick<User, "id"> {
   jwt: string
 }
 

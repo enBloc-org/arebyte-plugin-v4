@@ -21,6 +21,7 @@ export default function ProfilePage() {
   const navigateTo = useStore.use.navigateTo()
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
+  const updateUser = useStore.use.updateUser()
   const { is_paused: isPaused } = useStore.use.user()
   const updatedIsPaused = useStore.use.updateIsPaused()
   const [isOpen, setIsOpen] = useState<boolean>(false)
@@ -128,7 +129,13 @@ export default function ProfilePage() {
                     })
                   if (alarmError) setErrorMessage(alarmError)
                 }
-
+                updateUser({
+                  username: data.username,
+                  email: data.email,
+                  birth_date: data.birth_date,
+                  location: data.location,
+                  event_time: data.event_time
+                })
                 setIsLoading(false)
                 setIsOpen(false)
                 return actions.setSubmitting(false)

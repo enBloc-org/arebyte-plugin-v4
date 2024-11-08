@@ -10,6 +10,7 @@ export default function SelectProjectButton() {
   const { project_id: currentProjectId } = useStore.use.user()
   const isLoggedIn = useStore.use.isLoggedIn()
   const navigateTo = useStore.use.navigateTo()
+  const updateUser = useStore.use.updateUser()
   const exploreProjectId = useStore.use.exploreProjectId()
   const [isShowingAlarm, setIsShowingAlarm] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -22,7 +23,7 @@ export default function SelectProjectButton() {
       name: "selectNewActiveProject",
       body: { selectedProjectId: exploreProjectId }
     })
-
+    updateUser({ ...result})
     if (result) setIsLoading(false)
   }
 
