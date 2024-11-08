@@ -1,7 +1,7 @@
 import "./components/normalize.css"
 import "~components/globals.css"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
@@ -26,34 +26,44 @@ import newStorage from "~utils/newStorage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
+  const logInUser = useStore.use.logInUser()
   const isLoggedIn = useStore.use.isLoggedIn()
   const updateUser = useStore.use.updateUser()
-  const updateCurrentIndex = useStore.use.updateCurrentIndex()
-
-  const [userSession] = useStorage<UserSession>({
-    key: "arebyte-audience-session",
-    instance: newStorage()
-  })
-  const [publicIndex] = useStorage<number>({
-    key: "arebyte-public-index",
-    instance: newStorage()
-  })
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const storage = newStorage()
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      if (userSession) {
-        const { data, error }: { data: User; error: string | null } =
-          await sendToBackground({
-            name: "fetchUserProfile",
-            body: { jwt: userSession.jwt, id: userSession.id }
-          })
-        if (error) console.error(error)
-        updateUser(data)
+      setIsLoading(true)
+      const userSession: UserSession = await storage.get(
+        "arebyte-audience-session"
+      )
+      
+      if (!userSession) {
+        const publicIndex: number = await storage.get(
+          "arebyte-public-index"
+        )
+        updateUser({
+          current_index: publicIndex,
+          project_id: 0
+        })
+        return setIsLoading(false)
       }
+
+      const { data, error }: { data: User; error: string | null } =
+        await sendToBackground({
+          name: "fetchUserProfile",
+          body: { jwt: userSession.jwt, id: userSession.id }
+        })
+      if (error) console.error(error)
+      updateUser(data)
+      logInUser()
+      setIsLoading(false)
     }
     fetchUserProfile()
-  }, [userSession, publicIndex])
+  }, [isLoggedIn])
 
+  if (isLoading) return
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <Layout theme={isLoggedIn ? "logged-in" : "logged-out"}>

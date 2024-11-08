@@ -4,6 +4,7 @@
   align-items: center;
   min-height: 60px;
   width: 100%;
+  max-width: 380px;
   padding: 0 1.25rem;
   margin-top: .5rem;
 }

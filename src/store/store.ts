@@ -32,6 +32,7 @@ interface Actions {
   updateExploreProjectId: (id: number) => void
   updateIsPaused: (newStatus: boolean) => void
   updateCurrentIndex: (newIndex: number) => void
+  logInUser: () => void
 }
 
 const initialState: State = {
@@ -42,7 +43,7 @@ const initialState: State = {
     birth_date: undefined,
     location: undefined,
     is_paused: false,
-    project_id: 0,
+    project_id: undefined,
     current_index: 0,
     event_time: "12:00:00.000"
   },
@@ -76,8 +77,7 @@ const baseStore = create<State & Actions>(set => {
         user: {
           ...state.user,
           ...newUser
-        },
-        isLoggedIn: true
+        }
       }))
     },
     resetStore: () =>
@@ -105,6 +105,11 @@ const baseStore = create<State & Actions>(set => {
           ...state.user,
           current_index: newIndex
         }
+      })),
+    logInUser: () =>
+      set(state => ({
+        ...state,
+        isLoggedIn: true
       }))
   }
 })

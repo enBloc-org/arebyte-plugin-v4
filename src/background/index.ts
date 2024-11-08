@@ -19,7 +19,7 @@ if (process.env.NODE_ENV === "production") {
 
 Browser.runtime.onInstalled.addListener(async () => {
   const storage = newStorage()
-  storage.set("arebyte-public-index", 0)
+  await storage.set("arebyte-public-index", 0)
   
   const currentProject =
     await fetchStrapiContent<CurrentProjectData>(

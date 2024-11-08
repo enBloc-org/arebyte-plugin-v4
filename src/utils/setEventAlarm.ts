@@ -15,13 +15,13 @@ export default async function setEventAlarm(
   eventMinute: number
 ) {
   await browser.alarms.clear("sequence-alarm")
-  await browser.alarms.onAlarm.removeListener(eventAlarmListener)
+  browser.alarms.onAlarm.removeListener(eventAlarmListener)
 
-  await browser.alarms.create("sequence-alarm", {
+  browser.alarms.create("sequence-alarm", {
     periodInMinutes: 1440,
     when: calculateCountDown(eventHour, eventMinute)
   })
-  await browser.alarms.onAlarm.addListener(eventAlarmListener)
+  browser.alarms.onAlarm.addListener(eventAlarmListener)
   try {
     const newAlarm = await browser.alarms.get("sequence-alarm")
 

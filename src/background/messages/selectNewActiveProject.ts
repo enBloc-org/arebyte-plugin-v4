@@ -3,7 +3,6 @@ import type { PlasmoMessaging } from "@plasmohq/messaging"
 import { User, UserSession } from "~types/userTypes"
 import { fetchStrapiContent } from "~utils/fetchStrapiContent"
 import newStorage from "~utils/newStorage"
-import updateStorage from "~utils/updateStorage"
 
 const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
   const storage = newStorage()
@@ -28,12 +27,10 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
     res.send(false)
   }
 
-  const newSession = updateStorage(userSession, {
+  res.send({
     project_id: data.project_id,
     current_index: data.current_index
   })
-  await storage.set("arebyte-audience-session", newSession)
-  res.send(true)
 }
 
 export default handler
