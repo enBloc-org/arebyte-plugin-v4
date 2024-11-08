@@ -18,6 +18,7 @@ import { AuthData, UserSession } from "~types/userTypes"
 
 const SignUpPage = () => {
   const navigateTo = useStore.use.navigateTo()
+  const logInUser = useStore.use.logInUser()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
@@ -96,6 +97,7 @@ const SignUpPage = () => {
 
             setUserSession(userSession)
             actions.setSubmitting(false)
+            logInUser()
             setIsLoading(false)
             navigateTo("home")
           }}

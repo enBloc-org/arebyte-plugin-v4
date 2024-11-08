@@ -19,6 +19,7 @@ import { AuthData, UserSession } from "~types/userTypes"
 
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
+  const logInUser = useStore.use.logInUser()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
@@ -62,6 +63,7 @@ export default function LoginPage() {
               jwt: data.jwt
             }
             setUserSession(userSession)
+            logInUser()
             navigateTo("home")
             return actions.setSubmitting(false)
           }}
