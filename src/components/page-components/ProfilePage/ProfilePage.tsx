@@ -60,7 +60,7 @@ export default function ProfilePage() {
     userInfo && (
       <div className="profile-page page background__stripped">
         <BurgerMenu />
-        <main className="grid profile-page--main">
+        <main className="profile-page--main">
           <div className="content-box shadow profile-page--user-details">
             <h3 className="profile-page--user-name">
               {userInfo.username}

@@ -45,7 +45,7 @@ const FilterTags: React.FC<FilterTagsProps> = ({
   }
 
   return (
-    <div className="flex flex-column gap">
+    <div className="flex flex-column relative">
       <div className="flex tags-container">
         {tags &&
           tags.map(tag => {
