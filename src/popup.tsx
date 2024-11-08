@@ -31,14 +31,13 @@ function IndexPopup() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const storage = newStorage()
 
-  const [userSession] = useStorage<UserSession>({
-    key: "arebyte-audience-session",
-    instance: newStorage()
-  })
-
   useEffect(() => {
     const fetchUserProfile = async () => {
       setIsLoading(true)
+      const userSession: UserSession = await storage.get(
+        "arebyte-audience-session"
+      )
+      
       if (!userSession) {
         const publicIndex: number = await storage.get(
           "arebyte-public-index"
@@ -61,7 +60,7 @@ function IndexPopup() {
       setIsLoading(false)
     }
     fetchUserProfile()
-  }, [userSession])
+  }, [isLoggedIn])
 
   if (isLoading) return
   return (
