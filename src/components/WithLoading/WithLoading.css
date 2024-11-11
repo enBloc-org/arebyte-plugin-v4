@@ -1,5 +1,11 @@
+.with-loading--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
 .with-loading__loading {
-  height: 100px;
   width: 300px;
   animation: blink 3s ease-in-out infinite;
 }

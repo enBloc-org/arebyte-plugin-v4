@@ -14,7 +14,11 @@ export default function WithLoading({
   isLoading: boolean
 }) {
   if (isLoading)
-    return <img className="with-loading__loading" src={logo} />
+    return (
+      <div className="with-loading--container">
+        <img className="with-loading__loading" src={logo} />
+      </div>
+    )
 
   return <div>{children}</div>
 }
