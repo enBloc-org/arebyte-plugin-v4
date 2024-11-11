@@ -43,13 +43,13 @@ export default function FavouritesPage() {
 
     if (error) return showBoundary(error)
 
-    setFavouritesList(previous =>
-      previous.filter(favourite => favourite.id !== givenId)
+    const newFavourites = favouritesList.filter(
+      favourite => favourite.id !== givenId
     )
-    if (favouritesList.length % 6 === 0) {
-      setPageNumber(1)
-      setPageCount(previous => previous - 1)
-    }
+    if (newFavourites.length === 0)
+      setPageNumber(previous => previous - 1)
+
+    setFavouritesList(newFavourites)
   }
 
   useEffect(() => {
@@ -99,14 +99,14 @@ export default function FavouritesPage() {
       })
 
       if (popupError) return showBoundary(popupError)
-      if (meta.pagination.pageCount !== 1)
+      if (meta.pagination.pageCount !== pageCount)
         setPageCount(meta.pagination.pageCount)
 
       setFavouritesList(popupData)
     }
 
     getFavourites()
-  }, [setFavouritesList, pageNumber, favouritesList.length % 6 === 0])
+  }, [setFavouritesList, pageNumber])
 
   return (
     <div className="favourites-page page">
