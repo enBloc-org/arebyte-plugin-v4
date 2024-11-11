@@ -68,7 +68,7 @@ export default function LoginPage() {
             return actions.setSubmitting(false)
           }}
         >
-          <Form className="form--container stack">
+          <Form className="form--container">
             <legend className="bold">LOGIN</legend>
             <FormInput
               name="identifier"
