@@ -23,12 +23,12 @@ export default async function eventAlarmListener(alarm) {
     )
     if (error) console.error(error)
 
-    const { pop_ups, numberOfEvents } =
+    const { popUps, numberOfEvents, timeDelay } =
       user.project_id === 0
         ? await getCurrentProjectPopups(user.current_index)
         : await getProjectPopups(user.project_id, user.current_index)
 
-    await backgroundPopupCreate(pop_ups)
+    await backgroundPopupCreate(popUps, timeDelay)
     const newIndex = iterateIndex(numberOfEvents, user.current_index)
 
     const response = await fetchStrapiContent<User>(
@@ -46,9 +46,9 @@ export default async function eventAlarmListener(alarm) {
       "arebyte-public-index"
     )
 
-    const { pop_ups, numberOfEvents } =
+    const { popUps, numberOfEvents, timeDelay } =
       await getCurrentProjectPopups(publicIndex)
-    await backgroundPopupCreate(pop_ups)
+    await backgroundPopupCreate(popUps, timeDelay)
 
     const newPublicIndex = iterateIndex(numberOfEvents, publicIndex)
     await storage.set("arebyte-public-index", newPublicIndex)

@@ -8,6 +8,8 @@ import { fetchStrapiContent } from "./fetchStrapiContent"
 /**
  *
  * @description fetches an array of pop ups from the unique type Current_Project
+ * @returns an object with the array of pop_ups, the total number of events in the project and the time_delay value set for the event
+ * @example const { popUps, numberOfEvents, timeDelay } = getCurrentProjectPopups(currentIndex)
  */
 export default async function getCurrentProjectPopups(
   currentIndex: number
@@ -17,13 +19,12 @@ export default async function getCurrentProjectPopups(
   )
   const currentEventId =
     currentProject.data.project.sequence[currentIndex].id
-  const {
-    data: { pop_ups }
-  } = await fetchStrapiContent<EventData>(
+  const { data } = await fetchStrapiContent<EventData>(
     `api/events/${currentEventId}?${eventPopupQueryString}`
   )
   return {
-    pop_ups: pop_ups,
-    numberOfEvents: currentProject.data.project.sequence.length
+    popUps: data.pop_ups,
+    numberOfEvents: currentProject.data.project.sequence.length,
+    timeDelay: data.time_delay
   }
 }

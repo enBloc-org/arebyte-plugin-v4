@@ -12,7 +12,10 @@ import determineFormat from "./determineFormat"
 import parseImageSize from "./parseImageSize"
 import parseWindowSize from "./parseWindowSize"
 
-const backgroundPopupCreate = async (popups: Popup[]) => {
+const backgroundPopupCreate = async (
+  popups: Popup[],
+  timeDelay: number
+) => {
   // Get system widow size
   const screenDimensions = await Browser.tabs
     .query({ active: true, currentWindow: true })
@@ -145,15 +148,20 @@ const backgroundPopupCreate = async (popups: Popup[]) => {
   await Browser.storage.session.set({ arebytePopups: slimPopups })
 
   // Create windows
-  slimPopups.forEach(async popup => {
-    await createWindow(
-      popup.index,
-      popup.width,
-      popup.height,
-      popup.top,
-      popup.left
-    )
-  })
+  for (const popup of slimPopups) {
+    await new Promise(resolve => {
+      setTimeout(async () => {
+        const window = await createWindow(
+          popup.index,
+          popup.width,
+          popup.height,
+          popup.top,
+          popup.left
+        )
+        resolve(window)
+      }, timeDelay * 100)
+    })
+  }
 }
 
 export default backgroundPopupCreate
