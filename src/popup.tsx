@@ -6,7 +6,6 @@ import { ErrorBoundary } from "react-error-boundary"
 import { CSSTransition } from "react-transition-group"
 
 import { sendToBackground } from "@plasmohq/messaging"
-import { useStorage } from "@plasmohq/storage/hook"
 
 import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
@@ -17,6 +16,7 @@ import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import FavouritesPage from "~components/page-components/FavouritesPage/FavouritesPage"
 import LoginPage from "~components/page-components/LoginPage/LoginPage"
+import PasswordResetPage from "~components/page-components/PasswordResetPage/PasswordResetPage"
 import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
@@ -37,7 +37,7 @@ function IndexPopup() {
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
-      
+
       if (!userSession) {
         const publicIndex: number = await storage.get(
           "arebyte-public-index"
@@ -145,6 +145,14 @@ function IndexPopup() {
           unmountOnExit
         >
           <AboutPage />
+        </CSSTransition>
+        <CSSTransition
+          in={currentPage === "password-reset"}
+          timeout={500}
+          classNames="password-reset-page"
+          unmountOnExit
+        >
+          <PasswordResetPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
