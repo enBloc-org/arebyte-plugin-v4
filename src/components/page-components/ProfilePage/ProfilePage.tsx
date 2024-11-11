@@ -5,6 +5,7 @@ import useStore from "~store/store"
 import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
+
 import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
@@ -35,7 +36,10 @@ export default function ProfilePage() {
         name: "updateUserDetails",
         body: { is_paused: !isPaused }
       })
-    if (error) setPausedStateError("Something went wrong. Please try again later.")
+    if (error)
+      setPausedStateError(
+        "Something went wrong. Please try again later."
+      )
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
@@ -45,7 +49,10 @@ export default function ProfilePage() {
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
       })
-      if (error) setPausedStateError("Something went wrong. Please try again later.")
+      if (error)
+        setPausedStateError(
+          "Something went wrong. Please try again later."
+        )
     } else {
       await sendToBackground({ name: "removeEventAlarm" })
     }
@@ -217,9 +224,12 @@ export default function ProfilePage() {
               </button>
 
               {isOpen && (
-                <button type="button" onClick={handleLogOff}>
-                  Log me out
-                </button>
+                <div className="flex flex-column gap center">
+                  <button type="button" onClick={handleLogOff}>
+                    Log me out
+                  </button>
+                  <button type="button" onClick={() => navigateTo('password-reset')}>Reset Password</button>
+                </div>
               )}
             </div>
           </div>
