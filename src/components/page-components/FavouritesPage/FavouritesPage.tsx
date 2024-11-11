@@ -11,6 +11,7 @@ import Footer from "~components/Footer/Footer"
 import PaginationNav from "~components/PaginationNav/PaginationNav"
 import PopupCard from "~components/PopupCard/PopupCard"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
+import WithLoading from "~components/WithLoading/WithLoading"
 import { Meta } from "~types/baseTypes"
 import type { Favourite } from "~types/eventTypes"
 import type { UserFavourites, UserSession } from "~types/userTypes"
@@ -24,6 +25,7 @@ export default function FavouritesPage() {
   >([])
   const [pageNumber, setPageNumber] = useState<number>(1)
   const [pageCount, setPageCount] = useState<number>(1)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const storage = newStorage()
 
   const handleToggleSwitch = () => {
@@ -50,6 +52,7 @@ export default function FavouritesPage() {
 
   useEffect(() => {
     const getFavourites = async () => {
+      setIsLoading(true)
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
@@ -99,6 +102,7 @@ export default function FavouritesPage() {
         setPageCount(meta.pagination.pageCount)
 
       setFavouritesList(popupData)
+      setIsLoading(false)
     }
 
     getFavourites()
@@ -115,31 +119,34 @@ export default function FavouritesPage() {
           />
           <p className="bold uppercase">edit favourites</p>
         </div>
-        <section>
-          <h2 className="bold uppercase favourites-page--title">
-            favourites
-          </h2>
-          {favouritesList.length > 0 ? (
-            <div className="favourites-page--favourites-grid">
-              {favouritesList.map(favourite => (
-                <div key={favourite.id}>
-                  <PopupCard
-                    popup={favourite}
-                    isEditing={isEditing}
-                    removeButtonHandler={() =>
-                      handlePopupRemove(favourite.id)
-                    }
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-lg favourites-page--message__no-favourites">
-              There are no favourites available. You can mark a pop-up
-              as a favourite during your next scheduled event.
-            </p>
-          )}
-        </section>
+        <WithLoading isLoading={isLoading}>
+          <section>
+            <h2 className="bold uppercase favourites-page--title">
+              favourites
+            </h2>
+            {favouritesList.length > 0 ? (
+              <div className="favourites-page--favourites-grid">
+                {favouritesList.map(favourite => (
+                  <div key={favourite.id}>
+                    <PopupCard
+                      popup={favourite}
+                      isEditing={isEditing}
+                      removeButtonHandler={() =>
+                        handlePopupRemove(favourite.id)
+                      }
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-lg favourites-page--message__no-favourites">
+                There are no favourites available. You can mark a
+                pop-up as a favourite during your next scheduled
+                event.
+              </p>
+            )}
+          </section>
+        </WithLoading>
       </main>
       <div>
         <PaginationNav
