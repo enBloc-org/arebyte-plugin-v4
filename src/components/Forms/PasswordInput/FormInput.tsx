@@ -12,7 +12,7 @@ const FormInput = ({
   isDisabled?: boolean
 }) => {
   return (
-    <>
+    <div className="form-input--container">
       <Field
         name={name}
         type={type}
@@ -20,8 +20,12 @@ const FormInput = ({
         className="content-box shadow form--input"
         disabled={isDisabled}
       />
-      <ErrorMessage name={name} className="margin-top-sm" />
-    </>
+      <ErrorMessage name={name} className="margin-top-sm">
+        {msg => (
+          <p className="input-message__error">{msg.toUpperCase()}</p>
+        )}
+      </ErrorMessage>
+    </div>
   )
 }
 

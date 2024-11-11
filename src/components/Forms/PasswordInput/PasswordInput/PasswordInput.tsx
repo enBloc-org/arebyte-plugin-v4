@@ -16,7 +16,7 @@ const PasswordInput = ({
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <div className="password-input-container">
+    <div className="form-input--container">
       <Field
         name={name}
         type={showPassword ? "text" : "password"}
@@ -36,7 +36,7 @@ const PasswordInput = ({
         )}
       </button>
       <ErrorMessage name={name}>
-        {msg => <div>{msg}</div>}
+        {msg => <p className="input-message__error">{msg.toUpperCase()}</p>}
       </ErrorMessage>
     </div>
   )
