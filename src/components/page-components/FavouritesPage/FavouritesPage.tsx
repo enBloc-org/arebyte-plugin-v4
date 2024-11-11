@@ -46,6 +46,10 @@ export default function FavouritesPage() {
     setFavouritesList(previous =>
       previous.filter(favourite => favourite.id !== givenId)
     )
+    if (favouritesList.length % 6 === 0) {
+      setPageNumber(1)
+      setPageCount(previous => previous - 1)
+    }
   }
 
   useEffect(() => {
@@ -102,7 +106,7 @@ export default function FavouritesPage() {
     }
 
     getFavourites()
-  }, [setFavouritesList, pageNumber])
+  }, [setFavouritesList, pageNumber, favouritesList.length % 6 === 0])
 
   return (
     <div className="favourites-page page">
