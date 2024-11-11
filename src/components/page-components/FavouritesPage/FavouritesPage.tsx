@@ -106,7 +106,7 @@ export default function FavouritesPage() {
     }
 
     getFavourites()
-  }, [setFavouritesList, pageNumber])
+  }, [setFavouritesList, pageNumber, favouritesList.length % 6 === 0])
 
   return (
     <div className="favourites-page page">
