@@ -32,8 +32,29 @@ export default async function eventAlarmListener(alarm) {
         ? await getCurrentProjectPopups(user.current_index)
         : await getProjectPopups(user.project_id, user.current_index)
 
+    if (user.is_paused) {
+      const newCounter = iterateIndex(
+        numberOfEvents,
+        user.digest_counter
+      )
+      const response = await fetchStrapiContent<User>(
+        `api/users/${userSession.id}`,
+        "PUT",
+        userSession.jwt,
+        JSON.stringify({
+          digest_counter: newCounter
+        })
+      )
+      if (response.error) console.error(response.error)
+      return
+    }
+
     await backgroundPopupCreate(popUps, timeDelay)
     const newIndex = iterateIndex(numberOfEvents, user.current_index)
+    const newCounter = iterateIndex(
+      numberOfEvents,
+      user.digest_counter
+    )
 
     const response = await fetchStrapiContent<User>(
       `api/users/${userSession.id}`,
@@ -42,7 +63,7 @@ export default async function eventAlarmListener(alarm) {
       JSON.stringify({
         current_index: newIndex,
         ...(newIndex === 0 && { project_id: 0 }),
-        digest_counter: newIndex === 0 ? 0 : user.digest_counter + 1
+        digest_counter: newCounter
       })
     )
     if (response.error) console.error(response.error)
