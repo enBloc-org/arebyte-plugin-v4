@@ -105,9 +105,9 @@ export default function FavouritesPage() {
   }, [setFavouritesList, pageNumber])
 
   return (
-    <div className="page favourites-page">
+    <div className="favourites-page page">
       <BurgerMenu />
-      <main className="grid">
+      <main className="favourites-main">
         <div className="favourites-page--toggle-pair">
           <ToggleSwitch
             clickHandler={handleToggleSwitch}
@@ -115,37 +115,40 @@ export default function FavouritesPage() {
           />
           <p className="bold uppercase">edit favourites</p>
         </div>
-        <p className="bold uppercase favourites-page--title">
-          favourites
-        </p>
-
-        {favouritesList.length > 0 ? (
-          <div className="favourites-page--favourites-grid">
-            {favouritesList.map(favourite => (
-              <div key={favourite.id}>
-                <PopupCard
-                  popup={favourite}
-                  isEditing={isEditing}
-                  removeButtonHandler={() =>
-                    handlePopupRemove(favourite.id)
-                  }
-                />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <p className="bold text-lg favourites-page--message__no-favourites">
-            There are no favourites available. You can mark a pop-up
-            as a favourite during your next scheduled event.
-          </p>
-        )}
+        <section>
+          <h2 className="bold uppercase favourites-page--title">
+            favourites
+          </h2>
+          {favouritesList.length > 0 ? (
+            <div className="favourites-page--favourites-grid">
+              {favouritesList.map(favourite => (
+                <div key={favourite.id}>
+                  <PopupCard
+                    popup={favourite}
+                    isEditing={isEditing}
+                    removeButtonHandler={() =>
+                      handlePopupRemove(favourite.id)
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-lg favourites-page--message__no-favourites">
+              There are no favourites available. You can mark a pop-up
+              as a favourite during your next scheduled event.
+            </p>
+          )}
+        </section>
       </main>
-      <PaginationNav
-        pageNumber={pageNumber}
-        pageCount={pageCount}
-        setterFunction={setPageNumber}
-      />
-      <Footer />
+      <div>
+        <PaginationNav
+          pageNumber={pageNumber}
+          pageCount={pageCount}
+          setterFunction={setPageNumber}
+        />
+        <Footer />
+      </div>
     </div>
   )
 }

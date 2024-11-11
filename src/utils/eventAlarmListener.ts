@@ -1,11 +1,12 @@
-import type { UserSession } from "~types/userTypes"
+import { userQueryString } from "~queries/userQuery"
+import type { User, UserSession } from "~types/userTypes"
 
+import { fetchStrapiContent } from "./fetchStrapiContent"
 import getCurrentProjectPopups from "./getCurrentProjectPopups"
 import getProjectPopups from "./getProjectPopups"
 import iterateIndex from "./iterateIndex"
 import newStorage from "./newStorage"
 import backgroundPopupCreate from "./popup-utils/backgroundPopCreate"
-import updateStorage from "./updateStorage"
 
 export default async function eventAlarmListener(alarm) {
   if (alarm.name !== "sequence-alarm") return
@@ -15,21 +16,31 @@ export default async function eventAlarmListener(alarm) {
   )
 
   if (userSession) {
-    const projectId = userSession.project_id
-    const currentIndex = userSession.current_index
+    const { data: user, error } = await fetchStrapiContent<User>(
+      `api/users/${userSession.id}?${userQueryString}`,
+      "GET",
+      userSession.jwt
+    )
+    if (error) console.error(error)
 
     const { popUps, numberOfEvents, timeDelay } =
-      projectId === 0
-        ? await getCurrentProjectPopups(currentIndex)
-        : await getProjectPopups(projectId, currentIndex)
+      user.project_id === 0
+        ? await getCurrentProjectPopups(user.current_index)
+        : await getProjectPopups(user.project_id, user.current_index)
 
     await backgroundPopupCreate(popUps, timeDelay)
-    const newIndex = iterateIndex(numberOfEvents, currentIndex)
-    const updatedSession = updateStorage(userSession, {
-      current_index: newIndex,
-      ...(newIndex === 0 && { project_id: 0 })
-    })
-    await storage.set("arebyte-audience-session", updatedSession)
+    const newIndex = iterateIndex(numberOfEvents, user.current_index)
+
+    const response = await fetchStrapiContent<User>(
+      `api/users/${userSession.id}`,
+      "PUT",
+      userSession.jwt,
+      JSON.stringify({
+        current_index: newIndex,
+        ...(newIndex === 0 && { project_id: 0 })
+      })
+    )
+    if (response.error) console.error(response.error)
   } else {
     const publicIndex: number = await storage.get(
       "arebyte-public-index"

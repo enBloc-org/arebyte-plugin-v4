@@ -28,9 +28,6 @@ const handler: PlasmoMessaging.MessageHandler = async (req, res) => {
 
   const newSession = updateStorage(userSession, {
     id: response.data.id,
-    event_time: response.data.event_time,
-    project_id: response.data.project_id,
-    current_index: response.data.current_index
   })
   await storage.set("arebyte-audience-session", newSession)
   res.send(response)

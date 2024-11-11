@@ -24,7 +24,7 @@ export default function HomePage() {
   const { showBoundary } = useErrorBoundary()
 
   useEffect(() => {
-    const getUserSession = async () => {
+    const fetchProjectData = async () => {
       if (project_id === 0) {
         const {
           data,
@@ -48,7 +48,7 @@ export default function HomePage() {
         updateCurrentProject(data)
       }
     }
-    getUserSession()
+    fetchProjectData()
   }, [project_id, current_index])
 
   return (
@@ -75,7 +75,7 @@ export default function HomePage() {
                       <td>{event_time.slice(0, -4)}</td>
                     </tr>
                     <tr>
-                      <td>Day:</td>
+                      <td>Sequence:</td>
                       <td>
                         {current_index + 1} of{" "}
                         {currentProject.sequence.length}
