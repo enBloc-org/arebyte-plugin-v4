@@ -68,7 +68,7 @@ export default function LoginPage() {
             return actions.setSubmitting(false)
           }}
         >
-          <Form className="form--container stack">
+          <Form className="form--container">
             <legend className="bold">LOGIN</legend>
             <FormInput
               name="identifier"
@@ -97,7 +97,7 @@ export default function LoginPage() {
           <span className="message text-lg">Loading ...</span>
         )}
         {errorMessage && (
-          <p className="message message__error text-lg">
+          <p className="message message__error text-lg margin-top-lg">
             {errorMessage}
           </p>
         )}
