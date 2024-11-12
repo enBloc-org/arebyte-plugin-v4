@@ -22,19 +22,19 @@ export default function PaginationNav({
   return (
     <div className="pagination-nav">
       <button
-        className="button--secondary"
+        className="button--secondary text-md"
         onClick={navigateToPrevious}
         disabled={pageNumber === 1}
       >
-        previous
+        {"<<<"}
       </button>
-      <p className="bold">{`${pageNumber} of ${pageCount}`}</p>
+      <p className="bold text-lg">{`${pageNumber} of ${pageCount}`}</p>
       <button
-        className="button--secondary"
+        className="button--secondary text-md"
         onClick={navigateToNext}
         disabled={pageNumber === pageCount}
       >
-        next
+        {">>>"}
       </button>
     </div>
   )
