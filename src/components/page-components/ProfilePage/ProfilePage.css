@@ -27,6 +27,15 @@
   transition: all 0.3s ease-in-out;
 }
 
+.profile-page--input-pair {
+  margin: 7px 0;
+}
+
+.profile-page--form .input-message__error {
+  margin-left: 10px;
+  margin-top: 3px;
+}
+
 .profile-page--form label {
   margin-left: 10px;
 }
@@ -37,7 +46,7 @@
   opacity: 0;
 }
 
-.profile-page--form > input {
+.profile-page--form input {
   width: 318px;
   height: 36px;
   color: black;
@@ -50,6 +59,10 @@
   justify-content: space-between;
   align-items: center;
   grid-row: 3;
+}
+
+.profile-page--button__submit {
+  margin: 7px 0;
 }
 
 .profile-page--controls {
