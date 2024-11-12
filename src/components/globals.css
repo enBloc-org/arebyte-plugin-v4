@@ -59,6 +59,9 @@ button {
   cursor: pointer;
   color: inherit;
   font-size: inherit;
+  padding: 0;
+  margin: 0;
+  border-radius: inherit;
 }
 
 button:disabled {
