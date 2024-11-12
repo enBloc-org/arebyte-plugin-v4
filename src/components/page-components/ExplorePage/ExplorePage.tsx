@@ -11,6 +11,7 @@ import FilterTags from "~components/FilterTags/FilterTags"
 import Footer from "~components/Footer/Footer"
 import PaginationNav from "~components/PaginationNav/PaginationNav"
 import ProjectCard from "~components/ProjectCards/ProjectCard"
+import WithLoading from "~components/WithLoading/WithLoading"
 import type { Meta } from "~types/baseTypes"
 import { TagData, type ProjectData } from "~types/projectTypes"
 
@@ -20,9 +21,11 @@ export default function ExplorePage() {
   const [pageCount, setPageCount] = useState<number>(1)
   const { showBoundary } = useErrorBoundary()
   const [activeTags, setActiveTags] = useState<TagData[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
     const fetchAllProjects = async () => {
+      setIsLoading(true)
       const {
         data,
         error,
@@ -37,6 +40,7 @@ export default function ExplorePage() {
 
       setPageCount(meta.pagination.pageCount)
       setProjects(data)
+      setIsLoading(false)
     }
     fetchAllProjects()
   }, [pageNumber, activeTags, setActiveTags])
@@ -49,16 +53,18 @@ export default function ExplorePage() {
           activeTags={activeTags}
           setActiveTags={setActiveTags}
         />
-        <div className="explore-section">
-          <h2 className="text-lg">EXPLORE</h2>
-          {projects && (
-            <div className="gap margin-top-sm explore-page--card-container">
-              {projects.map(project => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </div>
-          )}
-        </div>
+        <WithLoading isLoading={isLoading}>
+          <div className="explore-section">
+            <h2 className="text-lg">EXPLORE</h2>
+            {projects && (
+              <div className="gap margin-top-sm explore-page--card-container">
+                {projects.map(project => (
+                  <ProjectCard key={project.id} project={project} />
+                ))}
+              </div>
+            )}
+          </div>
+        </WithLoading>
       </main>
       <div>
         <PaginationNav
