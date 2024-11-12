@@ -71,6 +71,12 @@ export default function BurgerMenu() {
               >
                 favourites
               </button>
+              <button
+                className="button--secondary text-xl"
+                onClick={() => handleNavigate("digest")}
+              >
+                digest
+              </button>
             </>
           ) : (
             <button

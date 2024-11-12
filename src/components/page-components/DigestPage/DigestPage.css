@@ -1,0 +1,29 @@
+.digest-page {
+  background-color: var(--base);
+  animation-name: slideRight;
+}
+
+.digest-page--main {
+  height: 460px;
+  overflow: auto;
+}
+
+.digest-page--main > .event-card {
+  grid-column: 1/3;
+}
+
+.digest-page-enter {
+  z-index: 3;
+}
+
+.digest-page-enter-active {
+  z-index: 3;
+}
+
+.digest-page-exit {
+  z-index: 1;
+}
+
+.digest-page-exit-active {
+  z-index: 1;
+}

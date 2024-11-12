@@ -21,6 +21,7 @@ interface State {
     | "explore-project"
     | "favourites"
     | "about"
+    | "digest"
 }
 
 interface Actions {
@@ -37,6 +38,7 @@ interface Actions {
 const initialState: State = {
   user: {
     id: undefined,
+    digest_counter: 0,
     username: undefined,
     email: undefined,
     birth_date: undefined,
