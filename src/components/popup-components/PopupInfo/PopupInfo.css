@@ -12,6 +12,11 @@ button {
   font-size: inherit;
 }
 
+button:focus {
+  outline-offset: 4px;
+  transition: none;
+}
+
 .info-panel__inactive {
   display: none;
   transform: translateX(200%);

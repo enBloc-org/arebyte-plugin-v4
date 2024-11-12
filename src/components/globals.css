@@ -68,6 +68,11 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button:focus {
+  outline-offset: 4px;
+  transition: none;
+}
+
 /*------------------------------------*\
   Components
 \*------------------------------------*/
