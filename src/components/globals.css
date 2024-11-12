@@ -53,8 +53,12 @@
 \*------------------------------------*/
 
 button {
-  all: unset;
+  border: none;
+  background: none;
+  text-align: left;
   cursor: pointer;
+  color: inherit;
+  font-size: inherit;
 }
 
 button:disabled {
