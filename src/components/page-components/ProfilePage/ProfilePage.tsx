@@ -5,6 +5,7 @@ import useStore from "~store/store"
 import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
+
 import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
@@ -35,7 +36,10 @@ export default function ProfilePage() {
         name: "updateUserDetails",
         body: { is_paused: !isPaused }
       })
-    if (error) setPausedStateError("Something went wrong. Please try again later.")
+    if (error)
+      setPausedStateError(
+        "Something went wrong. Please try again later."
+      )
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
@@ -45,7 +49,10 @@ export default function ProfilePage() {
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
       })
-      if (error) setPausedStateError("Something went wrong. Please try again later.")
+      if (error)
+        setPausedStateError(
+          "Something went wrong. Please try again later."
+        )
     } else {
       await sendToBackground({ name: "removeEventAlarm" })
     }
@@ -164,7 +171,9 @@ export default function ProfilePage() {
                   name="birth_date"
                   type="date"
                 />
-                <label htmlFor="location">Location</label>
+                <label htmlFor="location">
+                  Location (where you live)
+                </label>
                 <FormInput
                   placeholder={userInfo.location}
                   name="location"
@@ -197,7 +206,7 @@ export default function ProfilePage() {
             </Formik>
             <div className="profile-page--modal-buttons">
               <button
-                className={`${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
+                className={`bold ${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
                 aria-controls="account-settings"
                 onClick={() => setIsOpen(previous => !previous)}
               >
@@ -217,7 +226,11 @@ export default function ProfilePage() {
               </button>
 
               {isOpen && (
-                <button type="button" onClick={handleLogOff}>
+                <button
+                  type="button"
+                  onClick={handleLogOff}
+                  className="bold"
+                >
                   Log me out
                 </button>
               )}
