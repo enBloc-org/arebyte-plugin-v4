@@ -5,6 +5,7 @@ import useStore from "~store/store"
 import newStorage from "~utils/newStorage"
 
 import "./ProfilePage.css"
+
 import { useState } from "react"
 
 import { sendToBackground } from "@plasmohq/messaging"
@@ -35,7 +36,10 @@ export default function ProfilePage() {
         name: "updateUserDetails",
         body: { is_paused: !isPaused }
       })
-    if (error) setPausedStateError("Something went wrong. Please try again later.")
+    if (error)
+      setPausedStateError(
+        "Something went wrong. Please try again later."
+      )
     updatedIsPaused(!isPaused)
 
     if (!isPaused) {
@@ -45,7 +49,10 @@ export default function ProfilePage() {
         name: "updateEventAlarm",
         body: { eventHour: selectedHour, eventMinute: selectedMinute }
       })
-      if (error) setPausedStateError("Something went wrong. Please try again later.")
+      if (error)
+        setPausedStateError(
+          "Something went wrong. Please try again later."
+        )
     } else {
       await sendToBackground({ name: "removeEventAlarm" })
     }
@@ -78,11 +85,11 @@ export default function ProfilePage() {
               enableReinitialize={true}
               validationSchema={Yup.object({
                 username: Yup.string()
-                  .min(3, "Must be longer then 3 characters")
+                  .min(3, "Must be longer than 3 characters")
                   .max(15, "Must be 15 characters or less")
                   .required("Required"),
                 email: Yup.string()
-                  .min(6, "Must be longer then 6 characters")
+                  .min(6, "Must be longer than 6 characters")
                   .email("Invalid email address")
                   .required("Required"),
                 location: Yup.string()
@@ -146,43 +153,55 @@ export default function ProfilePage() {
                 className="profile-page--form flex flex-column"
                 aria-hidden={!isOpen}
               >
-                <label htmlFor="username">Username</label>
-                <FormInput
-                  placeholder={userInfo.username}
-                  name="username"
-                  type="text"
-                />
-                <label htmlFor="email">Email address</label>
-                <FormInput
-                  placeholder={userInfo.email}
-                  name="email"
-                  type="email"
-                />
-                <label htmlFor="birth_date">Date of birth</label>
-                <FormInput
-                  placeholder={userInfo.birth_date}
-                  name="birth_date"
-                  type="date"
-                />
-                <label htmlFor="location">Location</label>
-                <FormInput
-                  placeholder={userInfo.location}
-                  name="location"
-                  type="text"
-                />
-                <label htmlFor="event_time">
-                  Your preferred time to receive popups
-                </label>
-                <FormInput
-                  placeholder={userInfo.event_time}
-                  name="event_time"
-                  type="time"
-                  isDisabled={userInfo.is_paused}
-                />
+                <div className="profile-page--input-pair">
+                  <label htmlFor="username">Username</label>
+                  <FormInput
+                    placeholder={userInfo.username}
+                    name="username"
+                    type="text"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="email">Email address</label>
+                  <FormInput
+                    placeholder={userInfo.email}
+                    name="email"
+                    type="email"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="birth_date">Date of birth</label>
+                  <FormInput
+                    placeholder={userInfo.birth_date}
+                    name="birth_date"
+                    type="date"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="location">
+                    Location (where you live)
+                  </label>
+                  <FormInput
+                    placeholder={userInfo.location}
+                    name="location"
+                    type="text"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="event_time">
+                    Your preferred time to receive popups
+                  </label>
+                  <FormInput
+                    placeholder={userInfo.event_time}
+                    name="event_time"
+                    type="time"
+                    isDisabled={userInfo.is_paused}
+                  />
+                </div>
                 <div className="flex gap">
                   <button
                     type="submit"
-                    className="button--primary"
+                    className="button--primary profile-page--button__submit"
                     disabled={isLoading}
                   >
                     submit
@@ -197,7 +216,7 @@ export default function ProfilePage() {
             </Formik>
             <div className="profile-page--modal-buttons">
               <button
-                className={`${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
+                className={`bold ${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
                 aria-controls="account-settings"
                 onClick={() => setIsOpen(previous => !previous)}
               >
@@ -217,7 +236,11 @@ export default function ProfilePage() {
               </button>
 
               {isOpen && (
-                <button type="button" onClick={handleLogOff}>
+                <button
+                  type="button"
+                  onClick={handleLogOff}
+                  className="bold"
+                >
                   Log me out
                 </button>
               )}
