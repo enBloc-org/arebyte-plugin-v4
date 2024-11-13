@@ -1,10 +1,9 @@
 .back-button {
-  width: 25px;
-  height: 5px;
+    width: 45px;
+    height: 25px;
   background-color: var(--base);
   cursor: pointer;
   padding: 0;
-  line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;

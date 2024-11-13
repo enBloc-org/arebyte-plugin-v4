@@ -131,15 +131,16 @@ export default function FavouritesPage() {
             {favouritesList.length > 0 ? (
               <div className="favourites-page--favourites-grid">
                 {favouritesList.map(favourite => (
-                  <div key={favourite.id}>
+                  <>
                     <PopupCard
                       popup={favourite}
                       isEditing={isEditing}
+                      key={favourite.id}
                       removeButtonHandler={() =>
                         handlePopupRemove(favourite.id)
                       }
                     />
-                  </div>
+                  </>
                 ))}
               </div>
             ) : (

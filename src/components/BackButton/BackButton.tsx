@@ -12,7 +12,7 @@ export default function BackButton({
 
   return (
     <button
-      className={`back-button text-xl content-box ${className}`}
+      className={`back-button content-box ${className}`}
       onClick={() => navigateTo(previousPage)}
     >
       <svg
