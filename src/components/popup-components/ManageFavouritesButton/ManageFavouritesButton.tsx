@@ -31,11 +31,8 @@ const ManageFavouritesButton = ({ popupId }) => {
 
       if (error) {
         console.error(error)
-        return
+        return setStatus("rejected")
       }
-      console.log(data)
-      console.log(popupId)
-      console.log(data.favourites.some(fav => fav.id === popupId))
       setIsFavourite(data.favourites.some(fav => fav.id === popupId))
     }
 
@@ -55,7 +52,7 @@ const ManageFavouritesButton = ({ popupId }) => {
 
     if (error) {
       console.error(error)
-      setStatus("rejected")
+      return setStatus("rejected")
     }
 
     setIsFavourite(!isFavourite)
