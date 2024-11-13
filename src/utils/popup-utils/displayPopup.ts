@@ -32,6 +32,7 @@ export default async function displayPopup(popup: Popup) {
       type: "text",
       index: 0,
       popupInfo: {
+        id: popup.id,
         artist_name: popup.artist_name,
         medium: popup.medium,
         work_title: popup.work_title,
@@ -99,6 +100,7 @@ export default async function displayPopup(popup: Popup) {
           type: "video",
           index: 0,
           popupInfo: {
+            id: popup.id,
             artist_name: popup.artist_name,
             medium: popup.medium,
             work_title: popup.work_title,
