@@ -13,6 +13,7 @@ export interface EventData {
 
 export interface MediaContent {
   id: number
+  aspect_ratio: "square (4:3)" | "rectangular (16:9)"
   __component: "piece.piece"
   description: BlocksContent
   media: ImageResponse | VideoResponse

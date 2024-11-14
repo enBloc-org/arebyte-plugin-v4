@@ -86,7 +86,8 @@ export default async function displayPopup(popup: Popup) {
       case "video": {
         const { width, height } = parseWindowSize(
           popup.popup_size,
-          screenWidth
+          screenWidth,
+          popup.popup_content[0].aspect_ratio
         )
         const { top, left } = calculatePopupCoordinates(
           popup,
