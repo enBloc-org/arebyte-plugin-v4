@@ -2,7 +2,7 @@ import { describe, expect, it } from "@jest/globals"
 
 import parseWindowSize from "~utils/popup-utils/parseWindowSize"
 
-describe("parseWindoSize", () => {
+describe("parseWindowSize", () => {
   const SCREEN_WIDTH = 1920
   it("should return a width and height for small (.3 ratio) value in a 16/9 aspect ratio", () => {
     const smallResult = parseWindowSize("small", SCREEN_WIDTH)
@@ -20,7 +20,11 @@ describe("parseWindoSize", () => {
   })
 
   it("should return a costume aspect ratio", () => {
-    const customResult = parseWindowSize("small", SCREEN_WIDTH, 4 / 3)
+    const customResult = parseWindowSize(
+      "small",
+      SCREEN_WIDTH,
+      "square (4:3)"
+    )
     expect(customResult).toEqual({ width: 576, height: 432 })
   })
 

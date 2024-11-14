@@ -1,3 +1,5 @@
+import parseAspectRatio from "./parseAspectRatio"
+
 /**
  * @description Parse the size of a window
  * @param {string} size - the size of the window
@@ -5,15 +7,16 @@
  * @param {number} aspectRatio - the aspect ratio of the window, default to 16/9
  * @returns {object} - the width and height of the window
  */
-
 const parseWindowSize = (
   size: string,
   screenWidth: number,
-  aspectRatio: number = 16 / 9
+  aspectRatio: string = "rectangular (16:9)"
 ): { width: number; height: number } => {
+  const ratio = parseAspectRatio(aspectRatio)
+
   const calculateDimensions = (factor: number) => {
     const width = Math.floor(screenWidth * factor)
-    const height = Math.floor(width / aspectRatio)
+    const height = Math.floor(width / ratio)
     return { width, height }
   }
 
@@ -27,7 +30,7 @@ const parseWindowSize = (
     default:
       return {
         width: 600,
-        height: Math.floor(600 / aspectRatio)
+        height: Math.floor(600 / ratio)
       }
   }
 }
