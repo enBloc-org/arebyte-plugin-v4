@@ -65,18 +65,6 @@ export default function BurgerMenu() {
               >
                 my account
               </button>
-              <button
-                className="button--secondary text-xl"
-                onClick={() => handleNavigate("favourites")}
-              >
-                favourites
-              </button>
-              <button
-                className="button--secondary text-xl"
-                onClick={() => handleNavigate("digest")}
-              >
-                digest
-              </button>
             </>
           ) : (
             <button
@@ -86,6 +74,22 @@ export default function BurgerMenu() {
               LOGIN
             </button>
           )}
+          <button
+            className="button--secondary text-xl"
+            onClick={() =>
+              handleNavigate(isLoggedIn ? "favourites" : "login")
+            }
+          >
+            favourites
+          </button>
+          <button
+            className="button--secondary text-xl"
+            onClick={() =>
+              handleNavigate(isLoggedIn ? "digest" : "login")
+            }
+          >
+            digest
+          </button>
         </div>
         <div className="burger--contact">
           <div>
