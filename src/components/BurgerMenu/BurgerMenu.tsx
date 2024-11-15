@@ -76,15 +76,17 @@ export default function BurgerMenu() {
           )}
           <button
             className="button--secondary text-xl"
-            onClick={() => handleNavigate("favourites")}
-            disabled={!isLoggedIn}
+            onClick={() =>
+              handleNavigate(isLoggedIn ? "favourites" : "login")
+            }
           >
             favourites
           </button>
           <button
             className="button--secondary text-xl"
-            onClick={() => handleNavigate("digest")}
-            disabled={!isLoggedIn}
+            onClick={() =>
+              handleNavigate(isLoggedIn ? "digest" : "login")
+            }
           >
             digest
           </button>
