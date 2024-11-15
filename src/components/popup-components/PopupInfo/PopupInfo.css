@@ -118,7 +118,7 @@ button:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 250px;
+  width: 275px;
 }
 
 /* Styles for buttons controls in info panel */

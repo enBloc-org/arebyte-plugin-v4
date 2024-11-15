@@ -7,6 +7,7 @@ import newStorage from "~utils/newStorage"
 
 const ManageFavouritesButton = ({ popupId }) => {
   const storage = newStorage()
+  const [hasUserSession, setHasUserSession] = useState<boolean>(false)
   const [status, setStatus] = useState<
     "idle" | "loading" | "rejected"
   >("idle")
@@ -17,6 +18,11 @@ const ManageFavouritesButton = ({ popupId }) => {
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
+      if (!userSession) {
+        setHasUserSession(false)
+        return
+      }
+      setHasUserSession(true)
       const {
         data,
         error
@@ -31,7 +37,8 @@ const ManageFavouritesButton = ({ popupId }) => {
 
       if (error) {
         console.error(error)
-        return setStatus("rejected")
+        setStatus("rejected")
+        return
       }
       setIsFavourite(data.favourites.some(fav => fav.id === popupId))
     }
@@ -60,20 +67,26 @@ const ManageFavouritesButton = ({ popupId }) => {
   }
 
   return (
-    <div className="controls-button--container">
-      <button
-        className="info--button"
-        disabled={status === "loading"}
-        onClick={clickHandler}
-      >
-        {isFavourite ? "REMOVE FROM FAVOURITES" : "ADD TO FAVOURITES"}
-      </button>
-      {status === "rejected" && (
-        <p className="controls-message__error">
-          Something went wrong, try again.
-        </p>
+    <>
+      {hasUserSession && (
+        <div className="controls-button--container">
+          <button
+            className="info--button"
+            disabled={status === "loading"}
+            onClick={clickHandler}
+          >
+            {isFavourite
+              ? "REMOVE FROM FAVOURITES"
+              : "ADD TO FAVOURITES"}
+          </button>
+          {status === "rejected" && (
+            <p className="controls-message__error">
+              Something went wrong, try again.
+            </p>
+          )}
+        </div>
       )}
-    </div>
+    </>
   )
 }
 
