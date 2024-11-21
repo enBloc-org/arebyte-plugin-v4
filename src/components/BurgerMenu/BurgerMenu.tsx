@@ -11,6 +11,7 @@ export default function BurgerMenu() {
   const navigateTo = useStore.use.navigateTo()
   const currentPage = useStore.use.currentPage()
   const isLoggedIn = useStore.use.isLoggedIn()
+  const setLoginPrompt = useStore.use.setLoginPrompt()
 
   const handleModal = () => setIsOpen(previous => !previous)
 
@@ -58,17 +59,19 @@ export default function BurgerMenu() {
           </button>
           <button
             className="button--secondary text-xl"
-            onClick={() =>
+            onClick={() => {
+              setLoginPrompt(true)
               handleNavigate(isLoggedIn ? "digest" : "login")
-            }
+            }}
           >
             digest
           </button>
           <button
             className="button--secondary text-xl"
-            onClick={() =>
+            onClick={() => {
+              setLoginPrompt(true)
               handleNavigate(isLoggedIn ? "favourites" : "login")
-            }
+            }}
           >
             favourites
           </button>
@@ -148,7 +151,12 @@ export default function BurgerMenu() {
             </a>
           </div>
           <div>
-            <a href="mailto:hello@arebtye.com" className="button--secondary bold">contact us</a>
+            <a
+              href="mailto:hello@arebtye.com"
+              className="button--secondary bold"
+            >
+              contact us
+            </a>
           </div>
         </div>
       </div>
