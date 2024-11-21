@@ -267,6 +267,10 @@ button:focus {
   font-weight: bold;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .uppercase {
   text-transform: uppercase;
 }
