@@ -48,39 +48,13 @@ export default function BurgerMenu() {
             className="text-xl button--secondary"
             onClick={() => handleNavigate("home")}
           >
-            HOME
+            home
           </button>
           <button
             className="text-xl button--secondary"
             onClick={() => handleNavigate("explore")}
           >
-            EXPLORE
-          </button>
-
-          {isLoggedIn ? (
-            <>
-              <button
-                className="button--secondary text-xl"
-                onClick={() => handleNavigate("profile")}
-              >
-                my account
-              </button>
-            </>
-          ) : (
-            <button
-              className="text-xl button--secondary"
-              onClick={() => handleNavigate("login")}
-            >
-              LOGIN
-            </button>
-          )}
-          <button
-            className="button--secondary text-xl"
-            onClick={() =>
-              handleNavigate(isLoggedIn ? "favourites" : "login")
-            }
-          >
-            favourites
+            explore
           </button>
           <button
             className="button--secondary text-xl"
@@ -89,6 +63,37 @@ export default function BurgerMenu() {
             }
           >
             digest
+          </button>
+          <button
+            className="button--secondary text-xl"
+            onClick={() =>
+              handleNavigate(isLoggedIn ? "favourites" : "login")
+            }
+          >
+            favourites
+          </button>
+          {isLoggedIn ? (
+            <>
+              <button
+                className="button--secondary text-xl"
+                onClick={() => handleNavigate("profile")}
+              >
+                settings
+              </button>
+            </>
+          ) : (
+            <button
+              className="text-xl button--secondary"
+              onClick={() => handleNavigate("login")}
+            >
+              login
+            </button>
+          )}
+          <button
+            className="text-xl button--secondary"
+            onClick={() => navigateTo("about")}
+          >
+            ABOUT
           </button>
         </div>
         <div className="burger--contact">
@@ -143,15 +148,7 @@ export default function BurgerMenu() {
             </a>
           </div>
           <div>
-            <button
-              className="button--secondary bold"
-              onClick={() => navigateTo("about")}
-            >
-              ABOUT
-            </button>
-            <button className="button--secondary bold">
-              CONTACT
-            </button>
+            <a href="mailto:hello@arebtye.com" className="button--secondary bold">contact us</a>
           </div>
         </div>
       </div>
