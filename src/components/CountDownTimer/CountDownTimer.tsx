@@ -4,6 +4,8 @@ import useStore from "~store/store"
 
 import "./CountDownTimer.css"
 
+import PauseSwitch from "~components/PauseSwitch/PauseSwitch"
+
 export default function CountDownTimer() {
   const [tHours, setTHours] = useState(0)
   const [tMinutes, setTMinutes] = useState(0)
@@ -60,6 +62,7 @@ export default function CountDownTimer() {
           </h2>
         )}
       </div>
+      <PauseSwitch showlabel={false} className="timer__pause-switch" />
     </div>
   )
 }
