@@ -13,6 +13,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
+import PauseSwitch from "~components/PauseSwitch/PauseSwitch"
 import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import type { User } from "~types/userTypes"
 import formatTimeString from "~utils/formatTimeString"
@@ -23,40 +24,9 @@ export default function ProfilePage() {
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
   const updateUser = useStore.use.updateUser()
-  const { is_paused: isPaused } = useStore.use.user()
-  const updatedIsPaused = useStore.use.updateIsPaused()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
-  const [pausedStateError, setPausedStateError] = useState<string>("")
-
-  const handlePausedSwitchClick = async () => {
-    const { data, error }: { data: User; error: string | null } =
-      await sendToBackground({
-        name: "updateUserDetails",
-        body: { is_paused: !isPaused }
-      })
-    if (error)
-      setPausedStateError(
-        "Something went wrong. Please try again later."
-      )
-    updatedIsPaused(!isPaused)
-
-    if (!isPaused) {
-      const [selectedHour, selectedMinute] =
-        data.event_time.split(":")
-      const { error } = await sendToBackground({
-        name: "updateEventAlarm",
-        body: { eventHour: selectedHour, eventMinute: selectedMinute }
-      })
-      if (error)
-        setPausedStateError(
-          "Something went wrong. Please try again later."
-        )
-    } else {
-      await sendToBackground({ name: "removeEventAlarm" })
-    }
-  }
 
   const handleLogOff = async () => {
     await storage.remove("arebyte-audience-session")
@@ -251,17 +221,7 @@ export default function ProfilePage() {
             className="profile-page--controls flex flex-column start"
             aria-hidden={isOpen}
           >
-            <div className="profile-page--toggle-pair">
-              <ToggleSwitch
-                isChecked={isPaused}
-                clickHandler={handlePausedSwitchClick}
-              />
-              <p>pause</p>
-            </div>
-            <p>
-              {pausedStateError ??
-                "This turns off the plugin so you will not receive daily popups"}
-            </p>
+            <PauseSwitch />
           </div>
         </main>
         <div className="profile-page--footer">
