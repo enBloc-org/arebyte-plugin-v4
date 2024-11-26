@@ -27,8 +27,15 @@
   transition: all 0.3s ease-in-out;
 }
 
-.profile-page--input-pair {
-  margin: 7px 0;
+.profile-page--input-pair input {
+  margin-top: 5px;
+}
+
+.profile-settings--container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .profile-page--form .input-message__error {
@@ -70,7 +77,7 @@
   height: 65px;
   justify-content: space-evenly;
   transition: all 0.3s ease-out;
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .profile-page--controls[aria-hidden="true"] {
