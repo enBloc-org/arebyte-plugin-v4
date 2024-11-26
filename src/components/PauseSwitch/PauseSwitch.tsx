@@ -8,7 +8,13 @@ import { User } from "~types/userTypes"
 
 import "./PauseSwitch.css"
 
-const PauseSwitch = ({ showlabel = true, className  }: { showlabel: boolean, className?:string }) => {
+const PauseSwitch = ({
+  showlabel = true,
+  className
+}: {
+  showlabel?: boolean
+  className?: string
+}) => {
   const [pausedStateError, setPausedStateError] = useState<
     string | undefined
   >()
@@ -44,6 +50,12 @@ const PauseSwitch = ({ showlabel = true, className  }: { showlabel: boolean, cla
 
   return (
     <>
+      {showlabel && (
+        <p>
+          {pausedStateError ??
+            "This turns off the plugin so you will not receive daily popups"}
+        </p>
+      )}
       <div className={`profile-page--toggle-pair ${className}`}>
         <ToggleSwitch
           isChecked={isPaused}
@@ -51,12 +63,6 @@ const PauseSwitch = ({ showlabel = true, className  }: { showlabel: boolean, cla
         />
         <p>pause</p>
       </div>
-      {showlabel && (
-        <p>
-          {pausedStateError ??
-            "This turns off the plugin so you will not receive daily popups"}
-        </p>
-      )}
     </>
   )
 }
