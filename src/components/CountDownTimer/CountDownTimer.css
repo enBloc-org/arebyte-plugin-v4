@@ -14,7 +14,8 @@
   margin: 0;
 }
 
-.timer__pause-switch {
-  align-self: flex-end;
-  margin-top: 15px;
+.timer__controls {
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 10px;
 }
