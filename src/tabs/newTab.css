@@ -55,7 +55,8 @@ body {
   background-color: #0017f8;
   color: #fff;
   opacity: 0.65;
-  padding: 0.5rem;
+  padding: 0.65rem;
+  font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.1rem;
   transform: rotate(-90deg);
