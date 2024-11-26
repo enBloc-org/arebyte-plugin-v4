@@ -14,7 +14,6 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
 import PauseSwitch from "~components/PauseSwitch/PauseSwitch"
-import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
 import type { User } from "~types/userTypes"
 import formatTimeString from "~utils/formatTimeString"
 
@@ -72,8 +71,6 @@ export default function ProfilePage() {
               })}
               onSubmit={async (values, actions) => {
                 setIsLoading(true)
-                const eventTime = formatTimeString(values.event_time)
-
                 const {
                   data,
                   error: userError
@@ -84,8 +81,7 @@ export default function ProfilePage() {
                       username: values.username,
                       email: values.email,
                       birth_date: values.birth_date,
-                      location: values.location,
-                      event_time: eventTime
+                      location: values.location
                     }
                   })
                 if (userError) {
@@ -93,25 +89,11 @@ export default function ProfilePage() {
                   setIsLoading(false)
                   return actions.setSubmitting(false)
                 }
-                if (data.event_time !== userInfo.event_time) {
-                  const [selectedHour, selectedMinute] =
-                    data.event_time.split(":")
-                  const { error: alarmError } =
-                    await sendToBackground({
-                      name: "updateEventAlarm",
-                      body: {
-                        eventHour: parseInt(selectedHour),
-                        eventMinute: parseInt(selectedMinute)
-                      }
-                    })
-                  if (alarmError) setErrorMessage(alarmError)
-                }
                 updateUser({
                   username: data.username,
                   email: data.email,
                   birth_date: data.birth_date,
-                  location: data.location,
-                  event_time: data.event_time
+                  location: data.location
                 })
                 setIsLoading(false)
                 setIsOpen(false)
@@ -157,24 +139,13 @@ export default function ProfilePage() {
                     type="text"
                   />
                 </div>
-                <div className="profile-page--input-pair">
-                  <label htmlFor="event_time">
-                    Your preferred time to receive popups
-                  </label>
-                  <FormInput
-                    placeholder={userInfo.event_time}
-                    name="event_time"
-                    type="time"
-                    isDisabled={userInfo.is_paused}
-                  />
-                </div>
                 <div className="flex gap">
                   <button
                     type="submit"
                     className="button--primary profile-page--button__submit"
                     disabled={isLoading}
                   >
-                    submit
+                    save changes
                   </button>
                   {errorMessage && (
                     <p className="message__error margin-top-sm text-lg">
@@ -222,6 +193,83 @@ export default function ProfilePage() {
             aria-hidden={isOpen}
           >
             <PauseSwitch />
+            <Formik
+              initialValues={{
+                event_time: userInfo.event_time
+              }}
+              enableReinitialize={true}
+              validationSchema={Yup.object({
+                event_time: Yup.string().required(
+                  "Please select a preferred time for your popups"
+                )
+              })}
+              onSubmit={async (values, actions) => {
+                setIsLoading(true)
+                const eventTime = formatTimeString(values.event_time)
+
+                const {
+                  data,
+                  error: userError
+                }: { data: User; error: string | null } =
+                  await sendToBackground({
+                    name: "updateUserDetails",
+                    body: {
+                      event_time: eventTime
+                    }
+                  })
+                if (userError) {
+                  setErrorMessage(userError)
+                  setIsLoading(false)
+                  return actions.setSubmitting(false)
+                }
+                if (data.event_time !== userInfo.event_time) {
+                  const [selectedHour, selectedMinute] =
+                    data.event_time.split(":")
+                  const { error: alarmError } =
+                    await sendToBackground({
+                      name: "updateEventAlarm",
+                      body: {
+                        eventHour: parseInt(selectedHour),
+                        eventMinute: parseInt(selectedMinute)
+                      }
+                    })
+                  if (alarmError) setErrorMessage(alarmError)
+                }
+                updateUser({
+                  event_time: data.event_time
+                })
+                setIsLoading(false)
+                setIsOpen(false)
+                return actions.setSubmitting(false)
+              }}
+            >
+              {({ dirty }) => (
+                <Form>
+                  <div className="profile-settings--container">
+                    <div className="profile-page--input-pair margin-top-md">
+                      <label htmlFor="event_time">
+                        Your preferred time to receive popups
+                      </label>
+                      <FormInput
+                        placeholder={userInfo.event_time}
+                        name="event_time"
+                        type="time"
+                        isDisabled={userInfo.is_paused}
+                      />
+                    </div>
+                    {dirty && (
+                      <button
+                        type="submit"
+                        className="button--primary profile-page--button__submit margin-top-md"
+                        disabled={isLoading}
+                      >
+                        save changes
+                      </button>
+                    )}
+                  </div>
+                </Form>
+              )}
+            </Formik>
           </div>
         </main>
         <div className="profile-page--footer">
