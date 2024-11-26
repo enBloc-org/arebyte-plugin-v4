@@ -247,6 +247,10 @@ button:focus {
   margin-top: 0.625rem;
 }
 
+.margin-top-md {
+  margin-top: 1.25rem;
+}
+
 .margin-top-lg {
   margin-top: 2.5rem;
 }
