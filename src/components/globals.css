@@ -38,6 +38,7 @@
   font-family: var(--primary-font);
   color: var(--highlight);
   box-sizing: border-box;
+  letter-spacing: .7px;
 }
 
 [data-theme="logged-in"] {

@@ -260,10 +260,10 @@ export default function ProfilePage() {
                     {dirty && (
                       <button
                         type="submit"
-                        className="button--primary profile-page--button__submit margin-top-md"
+                        className="button--primary profile-page--button__submit margin-top-lg"
                         disabled={isLoading}
                       >
-                        save changes
+                        save change
                       </button>
                     )}
                   </div>
