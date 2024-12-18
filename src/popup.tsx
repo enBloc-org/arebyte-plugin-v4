@@ -22,6 +22,7 @@ import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
 import type { User, UserSession } from "~types/userTypes"
 import newStorage from "~utils/newStorage"
+import PasswordRecoveryPage from "~components/page-components/PasswordRecoveryPage/PasswordRecoveryPage"
 
 function IndexPopup() {
   const currentPage = useStore.use.currentPage()
@@ -128,6 +129,15 @@ function IndexPopup() {
         >
           <SignUpPage />
         </CSSTransition>
+        
+        <CSSTransition
+          in={currentPage === "password-recovery"}
+          timeout={500}
+          classNames="password-recovery-page"
+          unmountOnExit
+        >
+          <PasswordRecoveryPage />
+        </CSSTransition>
 
         <CSSTransition
           in={currentPage === "favourites"}
@@ -155,6 +165,7 @@ function IndexPopup() {
         >
           <DigestPage />
         </CSSTransition>
+        
       </Layout>
     </ErrorBoundary>
   )

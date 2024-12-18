@@ -23,6 +23,7 @@ interface State {
     | "favourites"
     | "about"
     | "digest"
+    | "password-recovery"
 }
 
 interface Actions {
