@@ -88,7 +88,9 @@ export default function LoginPage() {
                 submit
               </button>
               <div className="login--account-options">
-                <button>Password Recovery</button>
+                <button onClick={() => navigateTo("password-recovery")}>
+                  Password Recovery
+                </button>
                 <button onClick={() => navigateTo("sign-up")}>
                   No account yet? Register here
                 </button>
