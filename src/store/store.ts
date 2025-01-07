@@ -22,6 +22,7 @@ interface State {
     | "explore-project"
     | "favourites"
     | "about"
+    | "change-password"
     | "digest"
 }
 

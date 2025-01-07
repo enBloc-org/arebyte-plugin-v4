@@ -1,9 +1,12 @@
 .profile-page {
   animation-name: slideRight;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .profile-page--main {
   padding: 0 1.25rem;
+  max-height: 625px;
 }
 
 .profile-page--user-details {
@@ -21,7 +24,7 @@
 }
 
 .profile-page--form {
-  height: 400px;
+  height: 375px;
   align-items: start;
   justify-content: space-evenly;
   transition: all 0.3s ease-in-out;
@@ -32,10 +35,10 @@
 }
 
 .profile-settings--container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .profile-page--form .input-message__error {

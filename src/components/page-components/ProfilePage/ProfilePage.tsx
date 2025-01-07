@@ -177,13 +177,17 @@ export default function ProfilePage() {
               </button>
 
               {isOpen && (
-                <button
-                  type="button"
-                  onClick={handleLogOff}
-                  className="bold"
-                >
-                  Log me out
-                </button>
+                   <div className="flex flex-column gap center">
+                   <button type="button" onClick={handleLogOff}>
+                     Log me out
+                   </button>
+                   <button
+                     type="button"
+                     onClick={() => navigateTo("change-password")}
+                   >
+                     Reset Password
+                   </button>
+                 </div>
               )}
             </div>
           </div>

@@ -11,6 +11,7 @@ import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
 import AboutPage from "~components/page-components/AboutPage/AboutPage"
+import ChangePasswordPage from "~components/page-components/ChangePasswordPage/ChangePasswordPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import DigestPage from "~components/page-components/DigestPage/DigestPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
@@ -37,7 +38,7 @@ function IndexPopup() {
       const userSession: UserSession = await storage.get(
         "arebyte-audience-session"
       )
-      
+
       if (!userSession) {
         const publicIndex: number = await storage.get(
           "arebyte-public-index"
@@ -146,7 +147,14 @@ function IndexPopup() {
         >
           <AboutPage />
         </CSSTransition>
-
+        <CSSTransition
+          in={currentPage === "change-password"}
+          timeout={500}
+          classNames="change-password-page"
+          unmountOnExit
+        >
+          <ChangePasswordPage />
+        </CSSTransition>
         <CSSTransition
           in={currentPage === "digest"}
           timeout={500}
