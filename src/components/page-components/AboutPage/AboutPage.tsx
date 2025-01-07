@@ -41,8 +41,8 @@ export default function AboutPage() {
         {content && (
           <div className="about-page--content content-box shadow stack">
             <section>
-              <p className="bold text-md">About</p>
-              <p className="bold text-md">{content.abstract}</p>
+              <p className="bold text-md">About:</p>
+              <p className="italic text-md">{content.abstract}</p>
             </section>
             <section>
               <BlocksRenderer content={content.description} />
@@ -50,7 +50,7 @@ export default function AboutPage() {
           </div>
         )}
         <div className="about-page--credits content-box shadow stack">
-          <p className="bold">Credits</p>
+          <p className="bold">Credits:</p>
           <p className="bold">
             Powered by <a href="https://www.arebyte.com/">arebyte</a>,
             2024

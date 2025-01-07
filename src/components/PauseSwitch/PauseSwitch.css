@@ -1,0 +1,13 @@
+.profile-page--toggle-pair {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.profile-page--toggle-pair p {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.7rem;
+  text-align: left;
+  margin-left: 10px;
+}

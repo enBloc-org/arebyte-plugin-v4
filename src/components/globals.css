@@ -38,6 +38,7 @@
   font-family: var(--primary-font);
   color: var(--highlight);
   box-sizing: border-box;
+  letter-spacing: .7px;
 }
 
 [data-theme="logged-in"] {
@@ -247,6 +248,10 @@ button:focus {
   margin-top: 0.625rem;
 }
 
+.margin-top-md {
+  margin-top: 1.25rem;
+}
+
 .margin-top-lg {
   margin-top: 2.5rem;
 }
@@ -265,6 +270,10 @@ button:focus {
 
 .bold {
   font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .uppercase {

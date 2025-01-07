@@ -20,6 +20,8 @@ import { AuthData, UserSession } from "~types/userTypes"
 export default function LoginPage() {
   const navigateTo = useStore.use.navigateTo()
   const logInUser = useStore.use.logInUser()
+  const loginPrompt = useStore.use.loginPrompt()
+  const setLoginPrompt = useStore.use.setLoginPrompt()
   const [errorMessage, setErrorMessage] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [, setUserSession] = useStorage("arebyte-audience-session")
@@ -42,6 +44,7 @@ export default function LoginPage() {
           })}
           onSubmit={async (values, actions) => {
             setErrorMessage("")
+            setLoginPrompt(false)
             setIsLoading(true)
             const {
               data,
@@ -99,6 +102,11 @@ export default function LoginPage() {
         {errorMessage && (
           <p className="message message__error text-lg margin-top-lg">
             {errorMessage}
+          </p>
+        )}
+        {loginPrompt && (
+          <p className="message message__error text-lg margin-top-lg">
+            Please login to see this feature
           </p>
         )}
       </main>

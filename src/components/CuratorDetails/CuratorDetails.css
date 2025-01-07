@@ -12,7 +12,15 @@
   font-size: 0.9rem;
 }
 
-.organisation-details {
+.curator-details {
   justify-content: space-between;
   align-items: center;
+}
+
+.organisation-details {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1rem;
 }

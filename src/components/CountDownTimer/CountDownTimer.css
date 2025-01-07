@@ -1,7 +1,9 @@
 .timer-container {
   grid-column: 1 / 2;
   width: 340px;
-  height: 112px;
+  height: 135px;
+  display: flex;
+  flex-direction: column;
 }
 
 .timer-container h2 {
@@ -10,4 +12,10 @@
   font-weight: 200;
   padding-top: 0.25rem;
   margin: 0;
+}
+
+.timer__controls {
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 10px;
 }
