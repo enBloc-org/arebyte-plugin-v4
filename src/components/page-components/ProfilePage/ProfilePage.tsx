@@ -228,7 +228,12 @@ export default function ProfilePage() {
                   <button type="button" onClick={handleLogOff}>
                     Log me out
                   </button>
-                  <button type="button" onClick={() => navigateTo('password-reset')}>Reset Password</button>
+                  <button
+                    type="button"
+                    onClick={() => navigateTo("change-password")}
+                  >
+                    Reset Password
+                  </button>
                 </div>
               )}
             </div>
