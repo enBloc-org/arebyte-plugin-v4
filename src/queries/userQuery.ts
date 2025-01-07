@@ -11,6 +11,7 @@ const userQuery = {
     "is_paused",
     "birth_date",
     "location",
+    "digest_counter"
   ],
   populate: {
     favourites: {

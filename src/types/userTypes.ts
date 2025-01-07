@@ -14,6 +14,7 @@ export interface User {
   birth_date: string | null
   location: string | null
   favourites: Popup[]
+  digest_counter: number
 }
 
 export interface ContentCreator {

@@ -13,7 +13,7 @@ import { sendToBackground } from "@plasmohq/messaging"
 import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import FormInput from "~components/Forms/PasswordInput/FormInput"
-import ToggleSwitch from "~components/ToggleSwitch/ToggleSwitch"
+import PauseSwitch from "~components/PauseSwitch/PauseSwitch"
 import type { User } from "~types/userTypes"
 import formatTimeString from "~utils/formatTimeString"
 
@@ -23,40 +23,9 @@ export default function ProfilePage() {
   const resetStore = useStore.use.resetStore()
   const userInfo = useStore.use.user()
   const updateUser = useStore.use.updateUser()
-  const { is_paused: isPaused } = useStore.use.user()
-  const updatedIsPaused = useStore.use.updateIsPaused()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
-  const [pausedStateError, setPausedStateError] = useState<string>("")
-
-  const handlePausedSwitchClick = async () => {
-    const { data, error }: { data: User; error: string | null } =
-      await sendToBackground({
-        name: "updateUserDetails",
-        body: { is_paused: !isPaused }
-      })
-    if (error)
-      setPausedStateError(
-        "Something went wrong. Please try again later."
-      )
-    updatedIsPaused(!isPaused)
-
-    if (!isPaused) {
-      const [selectedHour, selectedMinute] =
-        data.event_time.split(":")
-      const { error } = await sendToBackground({
-        name: "updateEventAlarm",
-        body: { eventHour: selectedHour, eventMinute: selectedMinute }
-      })
-      if (error)
-        setPausedStateError(
-          "Something went wrong. Please try again later."
-        )
-    } else {
-      await sendToBackground({ name: "removeEventAlarm" })
-    }
-  }
 
   const handleLogOff = async () => {
     await storage.remove("arebyte-audience-session")
@@ -85,17 +54,155 @@ export default function ProfilePage() {
               enableReinitialize={true}
               validationSchema={Yup.object({
                 username: Yup.string()
-                  .min(3, "Must be longer then 3 characters")
+                  .min(3, "Must be longer than 3 characters")
                   .max(15, "Must be 15 characters or less")
                   .required("Required"),
                 email: Yup.string()
-                  .min(6, "Must be longer then 6 characters")
+                  .min(6, "Must be longer than 6 characters")
                   .email("Invalid email address")
                   .required("Required"),
                 location: Yup.string()
                   .min(5, "Location entry is too short")
                   .matches(/[^\W|(0-9)]{3}/gi, "Location is invalid")
                   .required("Please enter your location"),
+                event_time: Yup.string().required(
+                  "Please select a preferred time for your popups"
+                )
+              })}
+              onSubmit={async (values, actions) => {
+                setIsLoading(true)
+                const {
+                  data,
+                  error: userError
+                }: { data: User; error: string | null } =
+                  await sendToBackground({
+                    name: "updateUserDetails",
+                    body: {
+                      username: values.username,
+                      email: values.email,
+                      birth_date: values.birth_date,
+                      location: values.location
+                    }
+                  })
+                if (userError) {
+                  setErrorMessage(userError)
+                  setIsLoading(false)
+                  return actions.setSubmitting(false)
+                }
+                updateUser({
+                  username: data.username,
+                  email: data.email,
+                  birth_date: data.birth_date,
+                  location: data.location
+                })
+                setIsLoading(false)
+                setIsOpen(false)
+                return actions.setSubmitting(false)
+              }}
+            >
+              <Form
+                id="account-settings"
+                className="profile-page--form flex flex-column"
+                aria-hidden={!isOpen}
+              >
+                <div className="profile-page--input-pair">
+                  <label htmlFor="username">Username</label>
+                  <FormInput
+                    placeholder={userInfo.username}
+                    name="username"
+                    type="text"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="email">Email address</label>
+                  <FormInput
+                    placeholder={userInfo.email}
+                    name="email"
+                    type="email"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="birth_date">Date of birth</label>
+                  <FormInput
+                    placeholder={userInfo.birth_date}
+                    name="birth_date"
+                    type="date"
+                  />
+                </div>
+                <div className="profile-page--input-pair">
+                  <label htmlFor="location">
+                    Location (where you live)
+                  </label>
+                  <FormInput
+                    placeholder={userInfo.location}
+                    name="location"
+                    type="text"
+                  />
+                </div>
+                <div className="flex gap">
+                  <button
+                    type="submit"
+                    className="button--primary profile-page--button__submit"
+                    disabled={isLoading}
+                  >
+                    save changes
+                  </button>
+                  {errorMessage && (
+                    <p className="message__error margin-top-sm text-lg">
+                      {errorMessage}
+                    </p>
+                  )}
+                </div>
+              </Form>
+            </Formik>
+            <div className="profile-page--modal-buttons">
+              <button
+                className={`bold ${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
+                aria-controls="account-settings"
+                onClick={() => setIsOpen(previous => !previous)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="0.8em"
+                  height="0.8em"
+                  viewBox="0 0 32 32"
+                  className="profile-page--arrow-icon"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M3 2.98c0-.569.477-.978 1-.98c.163 0 .33.039.489.125l23.986 13.02c.344.186.525.52.525.855s-.181.67-.525.856L4.49 29.876A1 1 0 0 1 4 30c-.523-.002-1-.411-1-.98z"
+                  />
+                </svg>
+                Account Settings
+              </button>
+
+              {isOpen && (
+                   <div className="flex flex-column gap center">
+                   <button type="button" onClick={handleLogOff}>
+                     Log me out
+                   </button>
+                   <button
+                     type="button"
+                     onClick={() => navigateTo("change-password")}
+                   >
+                     Reset Password
+                   </button>
+                 </div>
+              )}
+            </div>
+          </div>
+
+          <div
+            className="profile-page--controls flex flex-column start"
+            aria-hidden={isOpen}
+          >
+            <PauseSwitch />
+            <Formik
+              initialValues={{
+                event_time: userInfo.event_time
+              }}
+              enableReinitialize={true}
+              validationSchema={Yup.object({
                 event_time: Yup.string().required(
                   "Please select a preferred time for your popups"
                 )
@@ -111,10 +218,6 @@ export default function ProfilePage() {
                   await sendToBackground({
                     name: "updateUserDetails",
                     body: {
-                      username: values.username,
-                      email: values.email,
-                      birth_date: values.birth_date,
-                      location: values.location,
                       event_time: eventTime
                     }
                   })
@@ -137,10 +240,6 @@ export default function ProfilePage() {
                   if (alarmError) setErrorMessage(alarmError)
                 }
                 updateUser({
-                  username: data.username,
-                  email: data.email,
-                  birth_date: data.birth_date,
-                  location: data.location,
                   event_time: data.event_time
                 })
                 setIsLoading(false)
@@ -148,112 +247,33 @@ export default function ProfilePage() {
                 return actions.setSubmitting(false)
               }}
             >
-              <Form
-                id="account-settings"
-                className="profile-page--form flex flex-column"
-                aria-hidden={!isOpen}
-              >
-                <label htmlFor="username">Username</label>
-                <FormInput
-                  placeholder={userInfo.username}
-                  name="username"
-                  type="text"
-                />
-                <label htmlFor="email">Email address</label>
-                <FormInput
-                  placeholder={userInfo.email}
-                  name="email"
-                  type="email"
-                />
-                <label htmlFor="birth_date">Date of birth</label>
-                <FormInput
-                  placeholder={userInfo.birth_date}
-                  name="birth_date"
-                  type="date"
-                />
-                <label htmlFor="location">Location</label>
-                <FormInput
-                  placeholder={userInfo.location}
-                  name="location"
-                  type="text"
-                />
-                <label htmlFor="event_time">
-                  Your preferred time to receive popups
-                </label>
-                <FormInput
-                  placeholder={userInfo.event_time}
-                  name="event_time"
-                  type="time"
-                  isDisabled={userInfo.is_paused}
-                />
-                <div className="flex gap">
-                  <button
-                    type="submit"
-                    className="button--primary"
-                    disabled={isLoading}
-                  >
-                    submit
-                  </button>
-                  {errorMessage && (
-                    <p className="message__error margin-top-sm text-lg">
-                      {errorMessage}
-                    </p>
-                  )}
-                </div>
-              </Form>
-            </Formik>
-            <div className="profile-page--modal-buttons">
-              <button
-                className={`${isOpen ? "profile-page--arrow-button__open" : "profile-page--arrow-button"}`}
-                aria-controls="account-settings"
-                onClick={() => setIsOpen(previous => !previous)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="0.8em"
-                  height="0.8em"
-                  viewBox="0 0 32 32"
-                  className="profile-page--arrow-icon"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M3 2.98c0-.569.477-.978 1-.98c.163 0 .33.039.489.125l23.986 13.02c.344.186.525.52.525.855s-.181.67-.525.856L4.49 29.876A1 1 0 0 1 4 30c-.523-.002-1-.411-1-.98z"
-                  />
-                </svg>
-                Account Settings
-              </button>
-
-              {isOpen && (
-                <div className="flex flex-column gap center">
-                  <button type="button" onClick={handleLogOff}>
-                    Log me out
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => navigateTo("change-password")}
-                  >
-                    Reset Password
-                  </button>
-                </div>
+              {({ dirty }) => (
+                <Form>
+                  <div className="profile-settings--container">
+                    <div className="profile-page--input-pair margin-top-md">
+                      <label htmlFor="event_time">
+                        Your preferred time to receive popups
+                      </label>
+                      <FormInput
+                        placeholder={userInfo.event_time}
+                        name="event_time"
+                        type="time"
+                        isDisabled={userInfo.is_paused}
+                      />
+                    </div>
+                    {dirty && (
+                      <button
+                        type="submit"
+                        className="button--primary profile-page--button__submit margin-top-lg"
+                        disabled={isLoading}
+                      >
+                        save change
+                      </button>
+                    )}
+                  </div>
+                </Form>
               )}
-            </div>
-          </div>
-
-          <div
-            className="profile-page--controls flex flex-column start"
-            aria-hidden={isOpen}
-          >
-            <div className="profile-page--toggle-pair">
-              <ToggleSwitch
-                isChecked={isPaused}
-                clickHandler={handlePausedSwitchClick}
-              />
-              <p>pause</p>
-            </div>
-            <p>
-              {pausedStateError ??
-                "This turns off the plugin so you will not receive daily popups"}
-            </p>
+            </Formik>
           </div>
         </main>
         <div className="profile-page--footer">

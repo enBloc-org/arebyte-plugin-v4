@@ -1,6 +1,6 @@
 import type { BlocksContent } from "@strapi/blocks-react-renderer"
 
-import type { EventData } from "./eventTypes"
+import type { DigestedEvent, EventData } from "./eventTypes"
 import type { ImageResponse } from "./imageTypes"
 import type { ContentCreator } from "./userTypes"
 
@@ -31,3 +31,8 @@ export interface TagData {
   id: number
   name: string
 }
+
+export interface FullProject extends Omit<ProjectData, "sequence"> {
+  sequence: DigestedEvent[]
+}
+

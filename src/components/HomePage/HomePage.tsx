@@ -12,8 +12,8 @@ import BurgerMenu from "~components/BurgerMenu/BurgerMenu"
 import Footer from "~components/Footer/Footer"
 import useStore from "~store/store"
 import { CurrentProjectData, ProjectData } from "~types/projectTypes"
-import formatDate from "~utils/formatDate"
 import determineImgSrc from "~utils/determineImgSrc"
+import formatDate from "~utils/formatDate"
 
 export default function HomePage() {
   const { event_time, project_id, current_index } =
@@ -72,7 +72,7 @@ export default function HomePage() {
                     </tr>
                     <tr>
                       <td>Start Time:</td>
-                      <td>{event_time.slice(0, -4)}</td>
+                      <td>{event_time.slice(0, -7)}</td>
                     </tr>
                     <tr>
                       <td>Sequence:</td>

@@ -9,6 +9,7 @@ interface State {
   user: Omit<User, "favourites">
   currentProject: ProjectData
   isLoggedIn: boolean
+  loginPrompt: boolean
   exploreProjectId: number
   previousPage: State["currentPage"]
   currentPage:
@@ -22,6 +23,7 @@ interface State {
     | "favourites"
     | "about"
     | "change-password"
+    | "digest"
 }
 
 interface Actions {
@@ -33,11 +35,13 @@ interface Actions {
   updateIsPaused: (newStatus: boolean) => void
   updateCurrentIndex: (newIndex: number) => void
   logInUser: () => void
+  setLoginPrompt: (value: boolean) => void
 }
 
 const initialState: State = {
   user: {
     id: undefined,
+    digest_counter: 0,
     username: undefined,
     email: undefined,
     birth_date: undefined,
@@ -48,6 +52,7 @@ const initialState: State = {
     event_time: "12:00:00.000"
   },
   isLoggedIn: false,
+  loginPrompt: false,
   currentPage: "home",
   previousPage: "home",
   exploreProjectId: undefined,
@@ -71,7 +76,6 @@ const baseStore = create<State & Actions>(set => {
           }
         }
       }),
-
     updateUser: newUser => {
       set(state => ({
         user: {
@@ -110,6 +114,11 @@ const baseStore = create<State & Actions>(set => {
       set(state => ({
         ...state,
         isLoggedIn: true
+      })),
+    setLoginPrompt: value =>
+      set(state => ({
+        ...state,
+        loginPrompt: value
       }))
   }
 })

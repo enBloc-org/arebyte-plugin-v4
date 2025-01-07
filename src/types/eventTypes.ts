@@ -13,6 +13,7 @@ export interface EventData {
 
 export interface MediaContent {
   id: number
+  aspect_ratio: "square (4:3)" | "rectangular (16:9)"
   __component: "piece.piece"
   description: BlocksContent
   media: ImageResponse | VideoResponse
@@ -71,4 +72,10 @@ export interface SlimPopup {
   alt?: string
   description: BlocksContent
   text_content?: BlocksContent
+}
+
+export interface DigestedEvent {
+  id: number
+  title: string
+  pop_ups: Favourite[]
 }

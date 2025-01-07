@@ -13,6 +13,7 @@ import Layout from "~components/Layout/Layout"
 import AboutPage from "~components/page-components/AboutPage/AboutPage"
 import ChangePasswordPage from "~components/page-components/ChangePasswordPage/ChangePasswordPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
+import DigestPage from "~components/page-components/DigestPage/DigestPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import FavouritesPage from "~components/page-components/FavouritesPage/FavouritesPage"
@@ -153,6 +154,14 @@ function IndexPopup() {
           unmountOnExit
         >
           <ChangePasswordPage />
+        </CSSTransition>
+        <CSSTransition
+          in={currentPage === "digest"}
+          timeout={500}
+          classNames="digest-page"
+          unmountOnExit
+        >
+          <DigestPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>

@@ -102,7 +102,7 @@ const SignUpPage = () => {
             navigateTo("home")
           }}
         >
-          <Form className="form--container stack">
+          <Form className="form--container">
             <legend className="bold">SIGN UP</legend>
             <FormInput
               name="username"
