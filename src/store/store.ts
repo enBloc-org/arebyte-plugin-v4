@@ -21,7 +21,7 @@ interface State {
     | "explore-project"
     | "favourites"
     | "about"
-    | "password-reset"
+    | "change-password"
 }
 
 interface Actions {

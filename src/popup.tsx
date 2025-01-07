@@ -11,12 +11,12 @@ import ErrorFallback from "~components/ErrorFallback/ErrorFallback"
 import HomePage from "~components/HomePage/HomePage"
 import Layout from "~components/Layout/Layout"
 import AboutPage from "~components/page-components/AboutPage/AboutPage"
+import ChangePasswordPage from "~components/page-components/ChangePasswordPage/ChangePasswordPage"
 import CurrentProjectPage from "~components/page-components/CurrentProjectPage/CurrentProjectPage"
 import ExplorePage from "~components/page-components/ExplorePage/ExplorePage"
 import ExploreProjectPage from "~components/page-components/ExploreProjectPage/ExploreProjectPage"
 import FavouritesPage from "~components/page-components/FavouritesPage/FavouritesPage"
 import LoginPage from "~components/page-components/LoginPage/LoginPage"
-import PasswordResetPage from "~components/page-components/PasswordResetPage/PasswordResetPage"
 import ProfilePage from "~components/page-components/ProfilePage/ProfilePage"
 import SignUpPage from "~components/page-components/SignUpPage/SignUpPage"
 import useStore from "~store/store"
@@ -147,12 +147,12 @@ function IndexPopup() {
           <AboutPage />
         </CSSTransition>
         <CSSTransition
-          in={currentPage === "password-reset"}
+          in={currentPage === "change-password"}
           timeout={500}
-          classNames="password-reset-page"
+          classNames="change-password-page"
           unmountOnExit
         >
-          <PasswordResetPage />
+          <ChangePasswordPage />
         </CSSTransition>
       </Layout>
     </ErrorBoundary>
